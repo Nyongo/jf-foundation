@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Muli';
+    src: url('/assets/fonts/Muli-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @layer base {
+    html {
+      margin: 0;
+      font-family: "Muli",  sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  }
+  body {
+    font-family: 'Muli', sans-serif;
+  }
+  .dot {
+    height: 4px;
+    width: 5px;
+    background-color: #0C3EB9;
+    border-radius: 40%;
+    display: inline-block;
+  }
+  .dot-line {
+    height: 4px;
+    width: 20px;
+    background-color: #0C3EB9;
+    border-radius: 30%;
+    display: inline-block;
+  }
+    

@@ -1,0 +1,236 @@
+<div class="w-screen grid grid-cols-1">
+ 
+
+  <div class="flex items-center justify-center gap-4 px-2 bg-dark-blue relative">
+    
+  
+  <div class="relative w-11/12 overflow-hidden mx-auto">
+    <!-- Slider Container -->
+    <div
+    class="flex transition-transform duration-500 ease-out"
+    [ngStyle]="{ transform: 'translateX(' + (-currentSlide * 100) + '%)' }"
+  >
+    <div *ngFor="let slide of slides" class="relative w-full flex-shrink-0">
+      <!-- Image -->
+      <img [src]="slide.image" class="w-3/4 h-4/5 object-cover mx-auto" alt="Slide" />
+  
+      <!-- Text Overlay -->
+      <div class="absolute inset-0 right-24 pr-64 flex flex-col justify-start items-center text-white top-4">
+        <span class="text-sm mb-1 w-1/2 text-slate-50">{{ slide.subTitle }}</span>
+        <span class="text-6xl font-extrabold mb-4 w-1/2">{{ slide.title }}</span>
+        <span class="text-sm w-1/2">{{ slide.description }}</span>
+        <span class="text-sm pt-12 w-1/2">
+          <button class="w-40 h-10 bg-white hover:bg-blue-700 text-dark-blue font-sm py-2 px-2 rounded flex justify-center items-center gap-4">
+           <span>Talk to us</span> 
+          <img src="assets/images/svg/arrow-right.svg" alt="right" width="16px"   />
+          </button>
+        </span>
+        
+      </div>
+    </div>
+  </div>
+  
+    <!-- Banner -->
+    <div class="absolute inset-0 flex justify-between items-center px-4">
+      <button
+      class="text-grey hover:bg-gray-400 rounded-full px-24"
+        (click)="prevSlide()"
+      >
+      <img src="assets/images/svg/arrow-prev.svg" alt="prev" width="36px" />
+      </button>
+      <button
+        class="text-grey hover:bg-gray-400 rounded-full px-24"
+        (click)="nextSlide()"
+      >
+        <img src="assets/images/svg/arrow-next.png" alt="next" width="36px"  />
+      </button>
+    </div>
+  
+   
+  </div>
+   
+  <div class="absolute -bottom-12 mx-auto flex gap-4">
+    <div class="w-64 h-28 bg-white rounded-sm p-4 flex justify-start gap-4 shadow-lg">
+     <img src="assets/images/svg/statistics.png" alt="Logo" class="h-8" />
+     <div class="flex flex-col">
+      <span class="text-dark-blue text-sm font-bold">Voice</span>
+      <span class="text-xs text-gray-950">
+        Get unlimited talktime across all networks within East Africa
+      </span>
+     </div>
+    </div>
+  
+    <div class="w-64 h-28 bg-blue rounded-sm p-4 flex justify-start gap-4 shadow-lg">
+      <img src="assets/images/svg/search-engine.png" alt="Logo" class="h-8" />
+      <div class="flex flex-col">
+       <span class="text-white text-sm font-bold">Developer Community</span>
+       <span class="text-xs text-white">
+        Access all our developer resources and integrations swiftly
+       </span>
+      </div>
+     </div>
+  
+     <div class="w-64 h-28 bg-white rounded-sm p-4 flex justify-start gap-4 shadow-lg">
+      <img src="assets/images/svg/cloud-computing.png" alt="Logo" class="h-8" />
+      <div class="flex flex-col">
+       <span class="text-dark-blue text-sm font-bold">Electronic Payment</span>
+       <span class="text-xs text-gray-950">
+        Quick response payments for all your online payment and POS
+       </span>
+      </div>
+     </div>
+  </div>
+  
+  </div>
+  <div class="w-full">
+    <div class="flex justify-center items-center pt-24 mx-auto w-6/12 relative">
+      <div class="w-2/5 pr-4">
+        <img src="assets/images/home/pos.png" alt="pos"  class=" h-84" />
+      </div>
+      <div class="w-3/5 flex flex-col">
+        <span class="text-xs font-bold text-blue uppercase flex items-center">
+            <span class="dot mr-1"></span>
+            <span class="dot-line mr-2"></span>
+             <span>Who we are </span>
+        </span>
+        <span class="text-2xl font-bold">Your Partner for Exceptional Payment Solutions</span>
+        <span class="text-xs pt-2 text-gray-950">
+          We offer a diverse range of communication and payments API products, providing you with all the tools necessary to construct highly effective mobile engagement solutions.
+        </span>
+        <div class="flex items-center pt-4">
+          <img src="assets/images/svg/play-circle.svg" alt="Play"  class="h-12" />
+          <span class="text-xs text-blue-700 font-bold pl-2">How We Work</span>
+        </div>
+        <div class="flex items-center pt-6">
+          <img src="assets/images/svg/support.png" alt="Support"  class="h-4" />
+          <div class="flex flex-col">
+            <span class="text-sm font-bold pl-2">24/7 Client Support</span>
+            <span class="text-xs text-gray-950 pl-2">
+              But I must explain to you how all this mistaken idea of ncing pleasure and praising pain was.
+            </span>
+          </div>
+         
+        </div>
+      </div>
+      <div class="absolute -left-32 mx-auto flex flex-col justify-center gap-4 items-center w-48 h-48 bg-white rounded-sm p-4 shadow-lg">
+        <img src="assets/images/svg/database.png" alt="Db"  class="h-10" />
+        <span class="text-gray-900  text-sm">Payment Gateway</span>
+        <button class="w-28 h-8 bg-transparent hover:bg-blue-700 text-blue border text-xs py-2 px-2 rounded flex items-center">
+          <span class="uppercase mr-2">Read More</span> 
+          <img src="assets/images/svg/arrow-right.svg" alt="right" width="8px"   />
+          </button>
+      </div>
+    </div>
+  </div>
+  <div class="w-full bg-slate-100 mb-12">
+    <div class="flex justify-center items-center flex-col py-8">
+      <span class="text-xs font-bold text-blue uppercase flex items-center">
+          <span class="dot mr-1"></span>
+          <span class="dot-line mr-2"></span>
+           <span>Our Services </span>
+      </span>
+      <span class="text-3xl font-semibold w-3/3 text-center text-gray-1000">More than 500+ Customers <br/> join with us</span> 
+    </div>
+    <div class="flex justify-center items-center pt-4 mx-auto w-6/12">
+      <div class="grid grid-cols-3 justify-center items-start shadow-lg">
+        <div class="mx-auto flex flex-col justify-start gap-4 w-60 h-64 bg-white rounded-sm p-4 border">
+          <div class="flex justify-between items-center w-full">
+            <img src="assets/images/svg/database.png" alt="Db"  class="h-10" />
+            <span class="ring-2 ring-gray-100 rounded-full w-6 h-6 flex items-center justify-center" >
+              <img src="assets/images/svg/arrow-right.svg" alt="right" width="12px" />
+            </span>
+          </div>
+          <span class="text-gray-900  text-normal">Messaging Services</span>
+          <span class="overflow-hidden text-xs text-gray-950">
+            We redefine the landscape of communication with our comprehensive Messaging Services both locally and internationally. We provide seamless integration, high delivery rates, and comprehensive analytics to track your campaigns’ performance. We pride in our 24/7 customer support and competitive pricing.
+          </span>
+          <button class="w-28 h-8 bg-transparent hover:bg-blue-700 text-blue border text-xs py-2 px-2 rounded flex items-center">
+            <span class="uppercase mr-2">Read More</span> 
+            <img src="assets/images/svg/arrow-right.svg" alt="right" width="8px"   />
+            </button>
+        </div>
+        <div class="mx-auto flex flex-col justify-start gap-4 w-60 h-64 bg-blue rounded-sm p-4 border text-white">
+          <div class="flex justify-between items-center w-full">
+            <img src="assets/images/svg/database.png" alt="Db"  class="h-10" />
+            <span class="ring-2 ring-gray-100 rounded-full w-6 h-6 flex items-center justify-center bg-white" >
+              <img src="assets/images/svg/arrow-right.svg" alt="right" width="12px" />
+            </span>
+          </div>
+          <span class="text-white text-normal">Sender ID Services</span>
+          <span class="overflow-hidden text-xs text-white">
+            We empower you to make a lasting impression with our advanced SMS Sender ID Service. Dive into the intricacies of our service as we break down its features and showcase how it can elevate your messaging strategy:
+             </span>
+          <button class="w-28 h-8 bg-transparent hover:bg-blue-700 text-white border text-xs py-2 px-2 rounded flex items-center border-0">
+            <span class="uppercase mr-2">Read More</span> 
+            <img src="assets/images/svg/arrow-right.svg" alt="right" width="8px"   />
+            </button>
+        </div>
+        <div class="mx-auto flex flex-col justify-start gap-4 w-60 h-64 bg-white rounded-sm p-4 border">
+          <div class="flex justify-between items-center w-full">
+            <img src="assets/images/svg/emails.png" alt="Db"  class="h-10" />
+            <span class="ring-2 ring-gray-100 rounded-full w-6 h-6 flex items-center justify-center" >
+              <img src="assets/images/svg/arrow-right.svg" alt="right" width="12px" />
+            </span>
+          </div>
+          <span class="text-gray-900  text-normal">Emails</span>
+          <span class="overflow-hidden text-xs text-gray-950">
+            We understand that effective communication is at the heart of every successful business. Explore the diverse possibilities of our Bulk Campaigns, Single Emails, and Scheduling Emails features, and elevate your communication game to new heights. Dive into a world of precision, personalization, and unparalleled reach as we present a breakdown of our services:
+            </span>
+          <button class="w-28 h-8 bg-transparent hover:bg-blue-700 text-blue border text-xs py-2 px-2 rounded flex items-center">
+            <span class="uppercase mr-2">Read More</span> 
+            <img src="assets/images/svg/arrow-right.svg" alt="right" width="8px"   />
+            </button>
+        </div>
+        <div class="mx-auto flex flex-col justify-start gap-4 w-60 h-64 bg-white rounded-sm p-4 border-b border-l">
+          <div class="flex justify-between items-center w-full">
+            <img src="assets/images/svg/statistics.png" alt="Db"  class="h-10" />
+            <span class="ring-2 ring-gray-100 rounded-full w-6 h-6 flex items-center justify-center" >
+              <img src="assets/images/svg/arrow-right.svg" alt="right" width="12px" />
+            </span>
+          </div>
+          <span class="text-gray-900  text-normal">USSD</span>
+          <span class="overflow-hidden text-xs text-gray-950">
+            At Kentapay, we bring you the next frontier in interactive communication with our USSD Service. Delve into the richness of our USSD offerings as we dissect and showcase the myriad capabilities that make this service a game-changer in the realm of mobile interaction:
+            </span>
+          <button class="w-28 h-8 bg-transparent hover:bg-blue-700 text-blue border text-xs py-2 px-2 rounded flex items-center">
+            <span class="uppercase mr-2">Read More</span> 
+            <img src="assets/images/svg/arrow-right.svg" alt="right" width="8px"   />
+            </button>
+        </div>
+        <div class="mx-auto flex flex-col justify-start gap-4 w-60 h-64 bg-white rounded-sm p-4 border-b">
+          <div class="flex justify-between items-center w-full">
+            <img src="assets/images/svg/paytv.png" alt="Db"  class="h-10" />
+            <span class="ring-2 ring-gray-100 rounded-full w-6 h-6 flex items-center justify-center" >
+              <img src="assets/images/svg/arrow-right.svg" alt="right" width="12px" />
+            </span>
+          </div>
+          <span class="text-gray-900  text-normal">Pay TV</span>
+          <span class="overflow-hidden text-xs text-gray-950">
+            Our smooth integration with the world’s leading Pay TV services enables us to offer a quick and easy way to pay for your monthly subscriptions. With our platform, you can pay for and manage all of your preferred Pay TV services from a single, safe interface. No matter where you are, you may always have unrestricted access to your favorite entertainment thanks to our global network. Take advantage of our dependable transaction processing, prompt payment confirmations, and committed customer service to make managing your Pay TV subscription simple and hassle-free.
+            </span>
+          <button class="w-28 h-8 bg-transparent hover:bg-blue-700 text-blue border text-xs py-2 px-2 rounded flex items-center">
+            <span class="uppercase mr-2">Read More</span> 
+            <img src="assets/images/svg/arrow-right.svg" alt="right" width="8px"   />
+            </button>
+        </div>
+        <div class="mx-auto flex flex-col justify-start gap-4 w-60 h-64 bg-white rounded-sm p-4 border-b border-r">
+          <div class="flex justify-between items-center w-full">
+            <img src="assets/images/svg/internet_sub.png" alt="Db"  class="h-10" />
+            <span class="ring-2 ring-gray-100 rounded-full w-6 h-6 flex items-center justify-center" >
+              <img src="assets/images/svg/arrow-right.svg" alt="right" width="12px" />
+            </span>
+          </div>
+          <span class="text-gray-900  text-normal">Internet Subscription</span>
+          <span class="overflow-hidden text-xs text-gray-950">
+            We provide a smooth interface with top internet subscription services across the globe, making it simple for you to keep track of and pay for your monthly subscriptions. Our platform makes paying easier and offers a safe, practical solution to maintain the continuous operation of your internet services. With real-time payment confirmations and worldwide access, you can keep in touch from anywhere. Savor the convenience of conveniently handling all of your internet subscriptions in one location, supported by our dependable transaction processing and committed customer service.
+          </span>
+          <button class="w-28 h-8 bg-transparent hover:bg-blue-700 text-blue border text-xs py-2 px-2 rounded flex items-center">
+            <span class="uppercase mr-2">Read More</span> 
+            <img src="assets/images/svg/arrow-right.svg" alt="right" width="8px"   />
+            </button>
+        </div>
+      </div>
+    </div>
+  
+    </div>
+    </div>

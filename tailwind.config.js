@@ -1,0 +1,70 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{html,ts}",
+  ],
+  theme: {
+    colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      'white': '#ffffff',
+      'purple': '#3f3cbb',
+      'dark-blue': '#000D6E',
+      'blue': '#0C3EB9',  
+      'light-blue': '#008AFF', 
+      'metal': '#565584',
+      'tahiti': '#3ab7bf',
+      'silver': '#ecebff',
+      'bubble-gum': '#ff77e9',
+      'bermuda': '#78dcca',
+      'black': '#000000',
+      'light-grey': '#EDEADE',
+      'alabaster': '#FF000',
+      "gray": {
+        '50': '#f9fafb', 
+        '100': '#f3f4f6',
+        '200': '#e5e7eb',
+        '300': '#d1d5db',
+        '400': '#9ca3af',
+        '500': '#6b7280',
+        '600': '#4b5563',
+        '700': '#374151',
+        '800': '#1f2937',
+        '900': '#111827',
+        '950': '#626262',
+        '1000': '#232323',
+        '1100': '#FCFDFE'
+      },
+      "slate": {
+        '50': '#f8fafc',
+        '100': '#f1f5f9',
+        '200': '#e2e8f0',
+        '300': '#cbd5e1',
+        '400': '#94a3b8',
+        '500': '#64748b',
+        '600': '#475569',
+        '700': '#334155',
+        '800': '#1e293b',
+        '900': '#0f172a',
+      },
+    },
+    extend:{
+      animation: {
+        marquee: 'marquee 40s linear infinite',
+        marquee2: 'marquee2 40s linear infinite',
+      },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+        marquee2: {
+          '0%': { transform: 'translateX(100%)' },
+          '100%': { transform: 'translateX(0%)' },
+        },
+      },
+    }
+    //fontFamily: {},
+  },
+}
+
