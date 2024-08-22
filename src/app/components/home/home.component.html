@@ -579,8 +579,8 @@
                 <!-- Tab Header -->
                 <div class="flex justify-center items-start border mt-4 mb-2 w-full cursor-pointer" 
                 [ngClass]="{
-                  'bg-white': activeTab?.id === tab.id, 
-                  'bg-gray-200': activeTab?.id !== tab.id  
+                  'bg-white': activeTab.id === tab.id, 
+                  'bg-gray-200': activeTab.id !== tab.id  
                 }"
                 (click)="setActiveTab(tab)">
                   <span class="w-14 h-14 p-2">
