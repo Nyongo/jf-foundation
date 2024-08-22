@@ -1,6 +1,7 @@
 {
   "routes": [
     "/home",
-    "/messaging-services"
+    "/messaging-services",
+    "/ussd-services"
   ]
 }
