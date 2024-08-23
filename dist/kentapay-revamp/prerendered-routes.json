@@ -1,9 +1,15 @@
 {
   "routes": [
+    "/company",
+    "/company/certifications",
+    "/company/clients",
+    "/company/team",
+    "/contact-us",
     "/home",
-    "/messaging-services",
-    "/payment-services",
-    "/security",
-    "/ussd-services"
+    "/home/messaging-services",
+    "/home/ussd-services",
+    "/payments",
+    "/payments/cards",
+    "/security"
   ]
 }
