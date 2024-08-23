@@ -8,6 +8,7 @@ module.exports = {
       transparent: 'transparent',
       current: 'currentColor',
       'white': '#ffffff',
+      'kt-white': '#E5E5E5',
       'purple': '#3f3cbb',
       'dark-blue': '#000D6E',
       'blue': '#0C3EB9',  
@@ -43,6 +44,7 @@ module.exports = {
         '1200': '#00164C',
         '1300': '#C2C2C2',
         '1400': '#666666',
+        '1500': '#F4F9FC',
       },
       "slate": {
         '50': '#f8fafc',

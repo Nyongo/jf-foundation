@@ -11,22 +11,64 @@
         <span class="flex flex-col justify-between text-base tracking-normal cursor-pointer h-16">
           <span></span>
           <span class="text-white text-sm font-normal leading-5 tracking-normal">KentaPay Services</span>
-          <span class="self-stretch border-b-4 rounded-r rounded-l border-white w-2/5"></span>
+          <span class="self-stretch border-b-4 rounded-r rounded-l border-transparent w-2/5 group-hover:border-white"></span>
         </span>
-  
-        <!-- Full-Width Dropdown Menu -->
-      <div class="hidden group-hover:block absolute top-full min-w-60 bg-white text-dark-blue py-4 shadow-lg z-50 border rounded-lg"> 
-         <div class="flex flex-col items-start space-y-2 p-2">
+      <div class="hidden group-hover:block absolute top-full min-w-60 bg-white text-black py-4 shadow-lg z-50 border rounded-lg"> 
+         <div class="flex flex-col items-start space-y-1 px-4">
             <span class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue" (click)="goTo('ussd-services')">USSD Services</span>
             <span class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue" (click)="goTo('paytv-services')">PayTv Services</span>
+            <span class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue" (click)="goTo('paytv-services')">Internet Subscription Services</span>
+            <span class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue" (click)="goTo('paytv-services')">Electricity Bill Services</span>
+            <span class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue" (click)="goTo('paytv-services')">Water Utility Services</span>
+            <span class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue" (click)="goTo('paytv-services')">KYC Services</span>
+            <span class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue" (click)="goTo('paytv-services')">CRB Services</span>
+            <span class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue" (click)="goTo('paytv-services')">Government Collection Services</span>
+            <span class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue" (click)="goTo('paytv-services')">Cards (MasterCard, VISA, Union)</span>
+            <span class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue" (click)="goTo('paytv-services')">FraudGuard</span>
+            <span class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue" (click)="goTo('paytv-services')">SMS (Short Messaging Services)</span>
+            <span class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue" (click)="goTo('paytv-services')">SMS (Short Sender ID Service)</span>
+            <span class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue" (click)="goTo('paytv-services')">Email ID Service</span>
+         </div>
+      </div>
+      </div>
+
+      <div class="group">
+        <span class="flex flex-col justify-between text-base tracking-normal cursor-pointer h-16">
+          <span></span>
+          <span class="text-white text-sm font-normal leading-5 tracking-normal">Payment</span>
+          <span class="self-stretch border-b-4 rounded-r rounded-l border-transparent w-2/5 group-hover:border-white"></span>
+        </span>
+      <div class="hidden group-hover:block absolute top-full min-w-60 bg-white text-black py-4 shadow-lg z-50 border rounded-lg"> 
+         <div class="flex flex-col items-start space-y-1 px-4">
+            <span class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue" (click)="goTo('payment-services')">Cards (MasterCard, VISA, Union)</span>
+            <span class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue" (click)="goTo('paytv-services')">3D Verification</span>
+            <span class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue" (click)="goTo('paytv-services')">Tokenisation</span>
+            <span class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue" (click)="goTo('paytv-services')">Checkout Page</span>
+            <span class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue" (click)="goTo('paytv-services')">Safaricom MPESA</span>
+            <span class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue" (click)="goTo('paytv-services')">Airtime Money</span>
+            <span class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue" (click)="goTo('paytv-services')">Tkash</span>
          </div>
       </div>
       </div>
   
-      <span class="flex items-center text-base tracking-normal cursor-pointer text-white text-sm font-normal leading-5 tracking-normal">Payment</span>
-      <span class="flex items-center text-base tracking-normal cursor-pointer text-white text-sm font-normal leading-5 tracking-normal">Security</span>
-      <span class="flex items-center text-base tracking-normal cursor-pointer text-white text-sm font-normal leading-5 tracking-normal" (click)="goToLogin()">Developers</span>
-      <span class="flex items-center text-base tracking-normal cursor-pointer text-white text-sm font-normal leading-5 tracking-normal">Company</span>
+
+      <span class="flex flex-col justify-between text-base tracking-normal cursor-pointer h-16 group">
+        <span></span>
+        <span class="text-white text-sm font-normal leading-5 tracking-normal" (click)="goTo('security')">Security</span>
+        <span class="self-stretch border-b-4 rounded-r rounded-l border-transparent w-2/5 group-hover:border-white"></span>
+      </span>
+     
+      <span class="flex flex-col justify-between text-base tracking-normal cursor-pointer h-16 group" (click)="goToLogin()">
+        <span></span>
+        <span class="text-white text-sm font-normal leading-5 tracking-normal">Developers</span>
+        <span class="self-stretch border-b-4 rounded-r rounded-l border-transparent w-2/5 group-hover:border-white"></span>
+      </span>
+      <span class="flex flex-col justify-between text-base tracking-normal cursor-pointer h-16 group">
+        <span></span>
+        <span class="text-white text-sm font-normal leading-5 tracking-normal">Company</span>
+        <span class="self-stretch border-b-4 rounded-r rounded-l border-transparent w-2/5 group-hover:border-white"></span>
+      </span>
+      
       <button class="w-40 h-10 bg-white hover:bg-blue-700 text-dark-blue text-sm py-2 px-4 rounded">
         Talk to us
       </button>
