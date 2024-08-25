@@ -77,7 +77,7 @@ export class HomeComponent {
     {
       key: 2,
       image: 'assets/images/carousel/slide5.png',
-      title: 'Embed payment on your platforms',
+      title: 'Embed payment on your platform',
       subTitle: 'We Are a payment gateway solution',
       description:
         '"KentaPay is the trusted choice for hundreds of companies in Africa, ranging from innovative startups to industry-leading companies. Our cutting-edge software and APIs empower businesses to seamlessly handle a spectrum of financial transactions, from accepting payments to facilitating secure payouts. With KentaPay, companies efficiently manage and grow their operations in the dynamic landscape of online business"',
