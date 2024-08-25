@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { ServiceHeaderComponent } from '../service-header/service-header.component';
 
 @Component({
-  selector: 'app-paytv-services',
+  selector: 'app-sender-id-services',
   standalone: true,
   imports: [ServiceHeaderComponent],
-  templateUrl: './paytv-services.component.html',
-  styleUrl: './paytv-services.component.scss',
+  templateUrl: './sender-id-services.component.html',
+  styleUrl: './sender-id-services.component.scss',
 })
-export class PaytvServicesComponent {}
+export class SenderIdServicesComponent {}

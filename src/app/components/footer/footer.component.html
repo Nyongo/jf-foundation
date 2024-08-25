@@ -2,9 +2,9 @@
 <div class="w-full flex flex-col bg-slate-100">
     <div class="flex justify-between items-center w-3/5 mx-auto my-16">
     <span class="text-3xl font-bold">Ready to take the next step?</span>
-    <button class="w-36 h-10 bg-blue hover:bg-blue-700 text-white border text-sm py-2 px-4 rounded flex items-center">
+    <button class="w-36 h-10 bg-blue hover:bg-blue-700 text-white border text-sm py-2 px-4 rounded flex items-center" routerLink="/contact-us">
      <span class="mr-2">Talk To Us</span> 
-     <img src="assets/images/svg/arrow-right.svg" alt="right" width="8px"   />
+     <i class='bx bx-right-arrow-alt text-white'></i>
      </button>
     </div>
    </div>
@@ -38,23 +38,23 @@
       <div class="flex justify-between items-start w-3/5 mx-auto pt-8  pb-2 text-slate-50">
        <div class="flex flex-col items-start justify-start gap-1">
          <img src="assets/images/logos/KentaPay_white.png" alt="Login" class="h-16" />
-         <span class="text-xs ml-4">About KentaPay</span>
-         <span class="text-xs ml-4">Mission & Vision</span>
-         <span class="text-xs ml-4 mt-12">Discover More</span>
+         <span class="text-xs ml-4 cursor-pointer" routerLink="/company">About KentaPay</span>
+         <span class="text-xs ml-4 cursor-pointer"routerLink="/company" >Mission & Vision</span>
+         <span class="text-xs ml-4 mt-12 cursor-pointer" routerLink="/company">Discover More</span>
        </div>
  
        <div class="flex flex-col items-start justify-start gap-1 pt-4">
-         <span class="text-lg ml-4 mb-2">PAYMENTS</span>
-         <span class="text-xs ml-4">Card Payments</span>
-         <span class="text-xs ml-4">Mobile Payments</span>
-         <span class="text-xs ml-4">Fraud Guard</span>
+         <span class="text-lg ml-4 mb-2 cursor-pointer" routerLink="/company">PAYMENTS</span>
+         <span class="text-xs ml-4 cursor-pointer" routerLink="/company">Card Payments</span>
+         <span class="text-xs ml-4 cursor-pointer" routerLink="/payments">Mobile Payments</span>
+         <span class="text-xs ml-4 cursor-pointer" routerLink="/home/fraud-guard">Fraud Guard</span>
        </div>
  
        <div class="flex flex-col items-start justify-start gap-1 pt-4">
-         <span class="text-lg ml-4 mb-2">PRODUCTS</span>
-         <span class="text-xs ml-4">SMS</span>
-         <span class="text-xs ml-4">USSD</span>
-         <span class="text-xs ml-4">Airtime</span>
+         <span class="text-lg ml-4 mb-2" routerLink="/company">PRODUCTS</span>
+         <span class="text-xs ml-4 cursor-pointer" routerLink="/home/sms-services">SMS</span>
+         <span class="text-xs ml-4 cursor-pointer" routerLink="/home/ussd-services">USSD</span>
+         <span class="text-xs ml-4 cursor-pointer" routerLink="/company">Airtime</span>
        </div>
          
        <div class="flex flex-col items-start justify-start gap-1 w-64 pt-4">
