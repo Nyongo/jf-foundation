@@ -19,6 +19,8 @@ module.exports = {
       'bubble-gum': '#ff77e9',
       'bermuda': '#78dcca',
       'black': '#000000',
+      'black-2': '#333333',
+      'black-3': '#3E3E3E',
       'light-grey': '#EDEADE',
       'alabaster': '#FF000',
       'pink': {
@@ -45,6 +47,8 @@ module.exports = {
         '1300': '#C2C2C2',
         '1400': '#666666',
         '1500': '#F4F9FC',
+        '1600': '#F2F2F2',
+        '1700': '#F5F5F5',
       },
       "slate": {
         '50': '#f8fafc',
