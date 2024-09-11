@@ -1,0 +1,27 @@
+{
+  "routes": [
+    "/company",
+    "/company/certifications",
+    "/company/clients",
+    "/company/team",
+    "/contact-us",
+    "/home",
+    "/home/card-payment-services",
+    "/home/crb-services",
+    "/home/electricity-services",
+    "/home/email-services",
+    "/home/fraud-guard",
+    "/home/government-services",
+    "/home/internet-services",
+    "/home/kyc-services",
+    "/home/paytv-services",
+    "/home/sender-id-services",
+    "/home/sms-services",
+    "/home/ticketing-services",
+    "/home/ussd-services",
+    "/home/water-services",
+    "/payments",
+    "/payments/cards",
+    "/security"
+  ]
+}

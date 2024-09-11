@@ -1,16 +1,13 @@
 <div class="w-screen grid grid-cols-1">
   <div class="flex items-center justify-center px-2 relative">
     <div class="w-11/12 mx-auto overflow-hidden bg-blue rounded-2xl">
-      <!-- Slider Container -->
       <div
         class="flex transition-transform duration-500 ease-out"
         [ngStyle]="{ transform: 'translateX(' + -currentSlide * 100 + '%)' }"
       >
         <div *ngFor="let slide of slides" class="relative w-full flex-shrink-0">
-          <!-- Image -->
           <img [src]="slide.image" class="w-full h-auto mx-auto" alt="Slide" />
 
-          <!-- Text Overlay -->
           <div
             class="absolute inset-0 right-24 pr-80 flex flex-col justify-start items-center text-white top-16 text-left"
           >
@@ -49,7 +46,6 @@
         </button>
       </div>
 
-      <!-- Navigation Buttons -->
       <div class="absolute bottom-3 left-24 flex gap-2">
         <button
           class="w-5 h-5 p-0.5 bg-transparent border border-white rounded-full focus:outline-none hover:bg-yellow-950"
@@ -323,8 +319,6 @@
 
   <!-- Why Kentapay-->
   <div class="w-full bg-slate-100 pb-8">
-    <div class="absolute inset-0 bg-center bg-no-repeat opacity-70"></div>
-
     <div class="flex justify-center items-center flex-col py-8">
       <span class="text-xs font-bold text-blue uppercase flex items-center">
         <span class="dot mr-1"></span>
@@ -467,7 +461,6 @@
   </div>
   <!-- Blog Start-->
   <div class="w-full bg-white pb-32 relative">
-    <!-- Background Image -->
     <div
       class="absolute inset-0 bg-center bg-no-repeat opacity-70"
       style="background-image: url('assets/images/home/map.png')"
