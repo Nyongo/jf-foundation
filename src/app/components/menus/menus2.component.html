@@ -1,18 +1,18 @@
-<div class="w-3/4 h-16 my-8 bg-white flex items-center justify-between relative mx-auto">
+<div class="w-full h-16 bg-dark-blue flex items-center justify-between px-32 text-white relative">
     <!-- Logo and Navigation Links -->
    
-    <div class="flex items-center justify-center  cursor-pointer pl-4"  [routerLink]="'/'">
-      <img src="assets/images/logos/kenta_blue.png" alt="Logo" class="h-7" />
+    <div class="flex items-center justify-center  cursor-pointer pl-8"  [routerLink]="'/'">
+      <img src="assets/images/logos/KentaPay_white2x.png" alt="Logo" class="h-14" />
     </div>
   
     <!-- Menu Links -->
-    <div class="flex items-center gap-6 px-2"> 
+    <div class="flex items-center gap-4 px-2"> 
       <div class="group">
-        <span class="flex flex-col justify-between text-dark-blue text-base tracking-normal cursor-pointer h-16" (click)="goTo('home')">
+        <span class="flex flex-col justify-between text-base tracking-normal cursor-pointer h-16" (click)="goTo('home')">
         <span></span>
-        <span class="text-sm font-semibold leading-5 tracking-normal">KentaPay Services</span>
+        <span class="text-white text-sm font-normal leading-5 tracking-normal">KentaPay Services</span>
         <!-- Conditional Bottom Border -->
-        <span class="self-stretch border-b-4 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue" [ngClass]="{'border-dark-blue': isActive('/home')}"></span>
+        <span class="self-stretch border-b-4 rounded-r rounded-l border-transparent w-2/5 group-hover:border-white" [ngClass]="{'border-white': isActive('/home')}"></span>
       </span>
       <div class="hidden group-hover:block absolute top-full min-w-60 bg-white text-black py-4 shadow-lg z-50 border rounded-lg"> 
          <div class="flex flex-col items-start space-y-1 px-4">
@@ -35,11 +35,11 @@
       </div>
 
       <div class="group">
-        <span class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer h-16" (click)="goTo('payments')">
+        <span class="flex flex-col justify-between text-base tracking-normal cursor-pointer h-16" (click)="goTo('payments')">
           <span></span>
-          <span class="text-sm font-semibold leading-5 tracking-normal">Payment</span>
+          <span class="text-white text-sm font-normal leading-5 tracking-normal">Payment</span>
           <!-- Conditional Bottom Border -->
-          <span class="self-stretch border-b-4 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue" [ngClass]="{'border-dark-blue': isActive('/payments')}"></span>
+          <span class="self-stretch border-b-4 rounded-r rounded-l border-transparent w-2/5 group-hover:border-white" [ngClass]="{'border-white': isActive('/payments')}"></span>
         </span>
       <div class="hidden group-hover:block absolute top-full min-w-60 bg-white text-black py-4 shadow-lg z-50 border rounded-lg"> 
          <div class="flex flex-col items-start space-y-1 px-4">
@@ -55,20 +55,20 @@
       </div>
   
 
-      <span class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer h-16 group" (click)="goTo('security')">
+      <span class="flex flex-col justify-between text-base tracking-normal cursor-pointer h-16 group" (click)="goTo('security')">
         <span></span>
-        <span class="text-sm font-semibold leading-5 tracking-normal">Security</span>
+        <span class="text-white text-sm font-normal leading-5 tracking-normal">Security</span>
         <!-- Conditional Bottom Border -->
-        <span class="self-stretch border-b-4 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue" [ngClass]="{'border-bg-dark-blue': isActive('/security')}"></span>
+        <span class="self-stretch border-b-4 rounded-r rounded-l border-transparent w-2/5 group-hover:border-white" [ngClass]="{'border-white': isActive('/security')}"></span>
       </span>
 
 
       <div class="group">
-        <span class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer h-16" (click)="goTo('company')">
+        <span class="flex flex-col justify-between text-base tracking-normal cursor-pointer h-16" (click)="goTo('company')">
           <span></span>
-          <span class="text-sm font-semibold leading-5 tracking-normal">Company</span>
+          <span class="text-white text-sm font-normal leading-5 tracking-normal">Company</span>
           <!-- Conditional Bottom Border -->
-          <span class="self-stretch border-b-4 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue" [ngClass]="{'border-bg-dark-blue': isActive('/company')}"></span>
+          <span class="self-stretch border-b-4 rounded-r rounded-l border-transparent w-2/5 group-hover:border-white" [ngClass]="{'border-white': isActive('/company')}"></span>
         </span>
       <div class="hidden group-hover:block absolute top-full min-w-60 bg-white text-black py-4 shadow-lg z-50 border rounded-lg"> 
          <div class="flex flex-col items-start space-y-1 px-4">
@@ -79,19 +79,19 @@
       </div>
       </div>
      
-      <span class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer h-16 group" (click)="goToLogin()">
+      <span class="flex flex-col justify-between text-base tracking-normal cursor-pointer h-16 group" (click)="goToLogin()">
         <span></span>
-        <span class="text-sm font-semibold leading-5 tracking-normal">Developers</span>
-        <span class="self-stretch border-b-4 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"></span>
+        <span class="text-white text-sm font-normal leading-5 tracking-normal">Developers</span>
+        <span class="self-stretch border-b-4 rounded-r rounded-l border-transparent w-2/5 group-hover:border-white"></span>
       </span>
      
       
-      <button class="w-32 h-10 bg-dark-blue hover:bg-blue-700 text-white text-sm py-2 px-4 ml-8 rounded" (click)="goTo('contact-us')">
+      <button class="w-40 h-10 bg-white hover:bg-blue-700 text-dark-blue text-sm py-2 px-4 rounded" (click)="goTo('contact-us')">
         Talk to us
       </button>
     </div>
   </div>  
-
+  <hr class="border-t border-slate-700 border-t-[.1px] bg-transparent border-0">
 
 
    

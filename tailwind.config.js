@@ -28,6 +28,7 @@ module.exports = {
       },
       'yellow': {
         '900': '#F59E02',
+        '950': '#F99F1B',
       },
       "gray": {  
         '50': '#f9fafb', 
@@ -65,8 +66,8 @@ module.exports = {
     },
     extend:{
       animation: {
-        marquee: 'marquee 40s linear infinite',
-        marquee2: 'marquee2 40s linear infinite',
+        marquee: 'marquee 20s linear infinite',
+        marquee2: 'marquee2 20s linear infinite',
       },
       keyframes: {
         marquee: {

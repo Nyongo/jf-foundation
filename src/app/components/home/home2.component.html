@@ -1,10 +1,10 @@
 <div class="w-screen grid grid-cols-1">
  
 
-  <div class="flex items-center justify-center  px-2  relative">
+  <div class="flex items-center justify-center  bg-dark-blue gap-4 px-2 bg-white relative">
     
   
-  <div class="w-11/12 mx-auto overflow-hidden bg-blue  rounded-2xl">
+  <div class="w-11/12 mx-auto overflow-hidden  bg-dark-blue rounded-2xl">
     <!-- Slider Container -->
     <div
     class="flex transition-transform duration-500 ease-out"
@@ -12,15 +12,15 @@
   >
     <div *ngFor="let slide of slides" class="relative w-full flex-shrink-0">
       <!-- Image -->
-      <img [src]="slide.image" class="w-full h-auto mx-auto" alt="Slide" />
+      <img [src]="slide.image" class="w-3/4 h-4/5 object-cover mx-auto" alt="Slide" />
   
       <!-- Text Overlay -->
-      <div class="absolute inset-0 right-24 pr-80 flex flex-col justify-start items-center text-white top-16  text-left">
-      <span class="text-xl mb-1 w-5/6 text-white tracking-tighter">{{ slide.subTitle }}</span>
-      <span class="text-7xl font-extrabold mb-4 mt-1 w-5/6 pr-24 text-whit tracking-wider z-50">{{ slide.title }}</span>
-      <span class="text-base text-white w-5/6 pr-24 tracking-tight z-50">{{ slide.description }}</span>
-      <span class="text-sm pt-12 w-5/6">
-        <button class="w-36 h-12 bg-white hover:bg-blue hover:text-white text-dark-blue font-sm  px-4 rounded flex justify-center items-center gap-4 z-50 tracking-wide"  (click)="goTo('/contact-us')">
+      <div class="absolute inset-0 right-24 pr-64 flex flex-col justify-start items-center text-white top-4">
+      <span class="text-sm mb-1 w-1/2 text-slate-50">{{ slide.subTitle }}</span>
+      <span class="text-6xl font-extrabold mb-4 w-1/2">{{ slide.title }}</span>
+      <span class="text-sm w-1/2">{{ slide.description }}</span>
+      <span class="text-sm pt-12 w-1/2">
+        <button class="w-40 h-10 bg-white hover:bg-blue hover:text-white text-dark-blue font-sm py-2 px-2 rounded flex justify-center items-center gap-4 z-50"  (click)="goTo('/contact-us')">
          <span>Talk to us</span> 
          <i class='bx bx-right-arrow-alt text-blue'></i>
         </button>
@@ -30,65 +30,22 @@
     </div>
   </div>
 
-    <div class="absolute top-1/2 left-1 transform -translate-y-1/2 px-4">
+    <div class="absolute top-1/3 left-32 transform -translate-y-1/2 px-4">
       <button class="text-grey rounded-full" (click)="prevSlide()">
-        <img src="assets/images/svg/arrow-pre.svg" alt="prev" width="44px" />
+        <img src="assets/images/svg/arrow-prev.svg" alt="prev" width="36px" />
       </button>
     </div>
-    <div class="absolute top-1/2 right-0 transform -translate-y-1/2 px-4">
+    <div class="absolute top-1/3 right-32 transform -translate-y-1/2 px-4">
       <button class="text-grey rounded-full" (click)="nextSlide()">
-        <img src="assets/images/svg/arrow-nex.svg" alt="next" width="44px" />
+        <img src="assets/images/svg/arrow-next.png" alt="next" width="36px" />
       </button>
     </div>
   
-<!-- Navigation Buttons -->
-<div class="absolute bottom-3 left-24 flex gap-2">
-  <button
-    class="w-5 h-5 p-0.5 bg-transparent border border-white rounded-full focus:outline-none hover:bg-yellow-950"
-    (click)="currentSlide = 0"
-    aria-label="Go to slide 1"
-  >
-    <div
-      class="w-full h-full bg-transparent rounded-full"
-      [ngClass]="{ 'bg-yellow-950': currentSlide === 0 }"
-    ></div>
-  </button>
-  <button
-    class="w-5 h-5 p-0.5 bg-transparent border border-white rounded-full focus:outline-none hover:bg-yellow-950"
-    (click)="currentSlide = 1"
-    aria-label="Go to slide 2"
-  >
-    <div
-      class="w-full h-full bg-transparent rounded-full"
-      [ngClass]="{ 'bg-yellow-950': currentSlide === 1 }"
-    ></div>
-  </button>
-  <button
-    class="w-5 h-5 p-0.5 bg-transparent border border-white rounded-full focus:outline-none hover:bg-yellow-950"
-    (click)="currentSlide = 2"
-    aria-label="Go to slide 3"
-  >
-    <div
-      class="w-full h-full bg-transparent rounded-full"
-      [ngClass]="{ 'bg-yellow-950': currentSlide === 2 }"
-    ></div>
-  </button>
-</div>
-
+   
   </div>
-  
-  <div class="absolute -bottom-32 mx-auto flex gap-2">
-    <div class="w-64 h-auto bg-white rounded-sm p-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue">
-      <img src="assets/images/svg/statistics.png" alt="Logo" class="h-8" />
-      <div class="flex flex-col">
-       <span class="text-dark-blue text-sm font-bold hover:text-white">Global Payment</span>
-       <span class="text-xs text-gray-950  hover:text-white">
-        The combined power of our expert payments people, innovative modular technology and unrelenting drive for ROI has earned the trust of thousands of customers. Here are just a few:
-       </span>
-      </div>
-     </div>
-
-    <div class="w-64 h-auto bg-white rounded-sm p-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue">
+   
+  <div class="absolute -bottom-12 mx-auto flex gap-4">
+    <div class="w-64 h-28 bg-white rounded-sm p-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue">
      <img src="assets/images/svg/statistics.png" alt="Logo" class="h-8" />
      <div class="flex flex-col">
       <span class="text-dark-blue text-sm font-bold hover:text-white">Voice</span>
@@ -98,7 +55,7 @@
      </div>
     </div>
   
-    <div class="w-64 h-auto bg-white rounded-sm p-4 flex justify-start gap-4 shadow-lg hover:bg-blue">
+    <div class="w-64 h-28 bg-white rounded-sm p-4 flex justify-start gap-4 shadow-lg hover:bg-blue">
       <img src="assets/images/svg/search-engine-blue.png" alt="Logo" class="h-8" />
       <div class="flex flex-col">
        <span class="text-dark-blue  text-sm font-bold hover:text-white">Developer Community</span>
@@ -108,7 +65,7 @@
       </div>
      </div>
   
-     <div class="w-64 h-auto bg-white rounded-sm p-4 flex justify-start gap-4 shadow-lg hover:bg-blue">
+     <div class="w-64 h-28 bg-white rounded-sm p-4 flex justify-start gap-4 shadow-lg hover:bg-blue">
       <img src="assets/images/svg/cloud-computing.png" alt="Logo" class="h-8" />
       <div class="flex flex-col">
        <span class="text-dark-blue text-sm font-bold">Electronic Payment</span>
@@ -120,102 +77,9 @@
   </div>
   
   </div>
-  <!-- Clients Marqueu Begins-->
-   <div class="mt-32">
-    <app-clients-marqueue></app-clients-marqueue>
-   </div>
-  <!-- Clients Marqueu Ends-->
-     <!-- Working Process Start-->
-     <div class="w-full  bg-slate-100 mb-12 mt-4 py-12">
-      <div class="w-8/12 flex justify-center items-start flex-col py-4 mx-auto">
-        <span class="text-xs font-semibold text-blue flex items-center">
-            <span class="dot mr-1"></span>
-            <span class="dot-line mr-2"></span>
-             <span>Working Process </span>
-        </span>
-        <div class="flex justify-between gap-8">
-          <div class="w-full flex flex-col">
-          <span class="text-2xl font-semibold text-gray-1000 text-left mt-4">
-            We are trusted across Africa,<br> with over 15 years experience
-          </span> 
-          <span class="text-xs text-gray-1000 text-left pt-2 leading-5 tracking-normal w-3/4">
-          In the contemporary business landscape, ensuring an exceptional customer experience is paramount for setting your enterprise apart and fostering unwavering loyalty among your clientele.
-          </span>
-          <div class="pt-4 flex flex-col gap-4">
-            <div class="w-full flex justify-start items-center">
-            <img src="assets/images/svg/kenya.svg" alt="Kenya Flag" class="w-5 h-4 mr-2" />
-            <div class="flex flex-col justify-center">
-            <div class="flex mb-1 w-full">
-              <span class="text-xs text-blue">(1.5 Million)&nbsp;-&nbsp;</span>
-              <span class="text-xs font-normal text-gray-1000 tracking-tighter">Monthly Transactions</span>
-            </div>
-            <div class="w-80 bg-gray-200 h-1 rounded">
-              <div class="bg-blue h-1 rounded" style="width: 73%;"></div>
-            </div>
-          </div>
-        </div>
-        <div class="w-full flex justify-start items-center">
-          <img src="assets/images/svg/botswana.svg" alt="Kenya Flag" class="w-5 h-4 mr-2" />
-          <div class="flex flex-col justify-center">
-          <div class="flex mb-1 w-full">
-            <span class="text-xs text-blue">(USD 50 Million)&nbsp;-&nbsp;</span>
-            <span class="text-xs font-normal text-gray-1000 tracking-tighter">Monthly Transactions</span>
-          </div>
-          <div class="w-80 bg-gray-200 h-1 rounded">
-            <div class="bg-blue h-1 rounded" style="width: 88%;"></div>
-          </div>
-        </div>
-      </div>
-      <div class="w-full flex justify-start items-center">
-        <img src="assets/images/svg/namibia.svg" alt="Kenya Flag" class="w-5 h-4 mr-2" />
-        <div class="flex flex-col justify-center">
-        <div class="flex mb-1 w-full">
-          <span class="text-xs text-blue">(27)&nbsp;-&nbsp;</span>
-          <span class="text-xs font-normal text-gray-1000 tracking-tighter">Monthly Transactions</span>
-        </div>
-        <div class="w-80 bg-gray-200 h-1 rounded">
-          <div class="bg-blue h-1 rounded" style="width: 60%;"></div>
-        </div>
-      </div>
-    </div>
-    <div class="w-full flex justify-start items-center">
-      <img src="assets/images/svg/angola.svg" alt="Kenya Flag" class="w-5 h-4 mr-2" />
-      <div class="flex flex-col justify-center">
-      <div class="flex mb-1 w-full">
-        <span class="text-xs text-blue">(13)&nbsp;-&nbsp;</span>
-        <span class="text-xs font-normal text-gray-1000 tracking-tighter">Monthly Transactions</span>
-      </div>
-      <div class="w-80 bg-gray-200 h-1 rounded">
-        <div class="bg-blue h-1 rounded" style="width: 65%;"></div>
-      </div>
-    </div>
-  </div>
-  <div class="w-full flex justify-start items-center">
-    <img src="assets/images/svg/uganda.svg" alt="Kenya Flag" class="w-5 h-4 mr-2" />
-    <div class="flex flex-col justify-center">
-    <div class="flex mb-1 w-full">
-      <span class="text-xs text-blue">(13)&nbsp;-&nbsp;</span>
-      <span class="text-xs font-normal text-gray-1000 tracking-tighter">Monthly Transactions</span>
-    </div>
-    <div class="w-80 bg-gray-200 h-1 rounded">
-      <div class="bg-blue h-1 rounded" style="width: 65%;"></div>
-    </div>
-  </div>
-</div>
-        </div>
-          
-          
-          </div>
-            <img src="assets/images/home/africa.svg" alt="Africa" class="w-3/5" />
-            
-        </div>
-
-      </div>
-      </div>
-<!-- Working Process End-->
   <!-- Who We Are Begins-->
-  <div class="w-full bg-blue">
-    <div class="flex justify-center items-center pt-48 mx-auto w-6/12 relative">
+  <div class="w-full">
+    <div class="flex justify-center items-center pt-24 mx-auto w-6/12 relative">
       <div class="w-2/5 pr-4">
         <img src="assets/images/home/pos.png" alt="pos"  class=" h-84" />
       </div>
@@ -367,7 +231,81 @@
     </div>
     </div>
   <!-- Our Services  End-->
+  <!-- Working Process Start-->
+    <div class="w-full bg-white mb-12">
+      <div class="w-6/12 flex justify-center items-start flex-col py-4 mx-auto">
+        <span class="text-xs font-semibold text-blue uppercase flex items-center">
+            <span class="dot mr-1"></span>
+            <span class="dot-line mr-2"></span>
+             <span>Working Process </span>
+        </span>
+        <div class="flex justify-between gap-8">
+          <div class="w-3/5 flex flex-col">
+          <span class="text-2xl font-semibold text-gray-1000 text-left">
+            We are trusted across Africa, with over 15 years experience
+          </span> 
+          <span class="text-sm text-gray-950 text-left pt-2 leading-5 tracking-tighter">
+          In the contemporary business landscape, ensuring an exceptional customer experience is paramount for setting your enterprise apart and fostering unwavering loyalty among your clientele.
+          </span>
+          <div class="flex flex-col mt-2">
+            <div class="flex mb-1">
+              <span class="text-xs text-blue">(73%)&nbsp;-&nbsp;</span>
+              <span class="text-xs text-black">Development</span>
+            </div>
+            <div class="w-full bg-gray-200 h-1 rounded">
+              <div class="bg-blue h-1 rounded" style="width: 73%;"></div>
+            </div>
+          </div>
+          <div class="flex flex-col mt-4">
+            <div class="flex mb-1">
+              <span class="text-xs text-blue">(82%)&nbsp;-&nbsp;</span>
+              <span class="text-xs text-black">Design</span>
+            </div>
+            <div class="w-full bg-gray-200 h-1 rounded">
+              <div class="bg-blue h-1 rounded" style="width: 82%;"></div>
+            </div>
+          </div>
+          <div class="flex flex-col mt-4">
+            <div class="flex mb-1">
+              <span class="text-xs text-blue">(60%)&nbsp;-&nbsp;</span>
+              <span class="text-xs text-black">Payment Solutions</span>
+            </div>
+            <div class="w-full bg-gray-200 h-1 rounded">
+              <div class="bg-blue h-1 rounded" style="width: 60%;"></div>
+            </div>
+          </div>
 
+          <div class="flex flex-col mt-4">
+            <div class="flex mb-1">
+              <span class="text-xs text-blue">(65%)&nbsp;-&nbsp;</span>
+              <span class="text-xs text-black">Support</span>
+            </div>
+            <div class="w-full bg-gray-200 h-1 rounded">
+              <div class="bg-blue h-1 rounded" style="width: 65%;"></div>
+            </div>
+          </div>
+      
+          
+          
+          </div>
+          <div class="w-2/5">
+            <div class="relative w-64 h-64 rounded-full bg-white">
+              <div class="absolute top-0 left-0 w-full h-full rounded-full bg-transparent" style="background: conic-gradient(blue 0% 100%, gray 25% 100%);"></div>
+              <div class="absolute top-0 left-0 w-40 h-40 rounded-full bg-gray-200 m-auto inset-0"></div>
+              <div class="absolute -right-14 top-12 mx-auto flex flex-col justify-center items-center w-28 h-28 bg-white rounded-sm p-4 shadow-lg">
+                
+                <span class="text-blue text-2xl font-bold">92%</span>
+                <span class="text-gray-900 text-xs text-center font-medium">Working Total Rating</span>
+                
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+      </div>
+      </div>
+<!-- Working Process End-->
       <!-- Case Studies Start-->
   <div class="w-full bg-slate-100 pb-32">
     <div class="flex justify-center items-center flex-col py-8">

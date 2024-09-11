@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ClientsMarqueueComponent } from '../clients-marqueue/clients-marqueue.component';
 export interface TabItem {
   id: number;
   title: string;
@@ -12,7 +13,7 @@ export interface TabItem {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
+  imports: [RouterOutlet, CommonModule, ClientsMarqueueComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -68,7 +69,7 @@ export class HomeComponent {
   slides = [
     {
       key: 1,
-      image: 'assets/images/carousel/slide4.png',
+      image: 'assets/images/carousel/slide1.png',
       title: 'Embed payment on your platform',
       subTitle: 'We Are a payment gateway solution',
       description:
@@ -76,7 +77,7 @@ export class HomeComponent {
     },
     {
       key: 2,
-      image: 'assets/images/carousel/slide5.png',
+      image: 'assets/images/carousel/slide1.png',
       title: 'Embed payment on your platform',
       subTitle: 'We Are a payment gateway solution',
       description:
@@ -84,7 +85,7 @@ export class HomeComponent {
     },
     {
       key: 3,
-      image: 'assets/images/carousel/slide4.png',
+      image: 'assets/images/carousel/slide1.png',
       title: 'Embed payment on your platform',
       subTitle: 'We Are a payment gateway solution',
       description:
