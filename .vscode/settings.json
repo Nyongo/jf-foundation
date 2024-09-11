@@ -1,39 +1,11 @@
 {
-  // Format with Prettier
-  "editor.formatOnPaste": false,
-  "editor.formatOnType": false,
-  "editor.formatOnSave": true,
-  "editor.formatOnSaveMode": "file",
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  
-
-  // Prettier Config
-  "prettier.enableDebugLogs": true,
-  "prettier.requireConfig": true,
-
-  // Typescript
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true,
-
-  // Sonarlint
-  "sonarlint.connectedMode.project": {
-    "connectionId": "shara-inc",
-    "projectKey": "shara-inc_freebank-crm"
-  },
-  "sonarlint.output.showVerboseLogs": true,
-  "sonarlint.output.showAnalyzerLogs": true,
-  "sonarlint.disableTelemetry": true,
-  "sonarlint.focusOnNewCode": true,
-  "editor.inlineSuggest.showToolbar": "onHover",
+"editor.formatOnSave": true,
+"[typescript]": {
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+},
+"[typescriptreact]": {
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+},
+"prettier.requireConfig": true,
+"prettier.ignorePath": ".gitignore",
 }

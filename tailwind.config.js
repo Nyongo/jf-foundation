@@ -1,8 +1,10 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     "./src/**/*.{html,ts}",
   ],
+
   theme: {
     colors: {
       transparent: 'transparent',
@@ -82,5 +84,6 @@ module.exports = {
     }
     //fontFamily: {},
   },
+  
 }
 

@@ -1,777 +1,552 @@
 <div class="w-screen grid grid-cols-1">
- 
+  <div class="flex items-center justify-center px-2 relative">
+    <div class="w-11/12 mx-auto overflow-hidden bg-blue rounded-2xl">
+      <!-- Slider Container -->
+      <div
+        class="flex transition-transform duration-500 ease-out"
+        [ngStyle]="{ transform: 'translateX(' + -currentSlide * 100 + '%)' }"
+      >
+        <div *ngFor="let slide of slides" class="relative w-full flex-shrink-0">
+          <!-- Image -->
+          <img [src]="slide.image" class="w-full h-auto mx-auto" alt="Slide" />
 
-  <div class="flex items-center justify-center  px-2  relative">
-    
-  
-  <div class="w-11/12 mx-auto overflow-hidden bg-blue  rounded-2xl">
-    <!-- Slider Container -->
-    <div
-    class="flex transition-transform duration-500 ease-out"
-    [ngStyle]="{ transform: 'translateX(' + (-currentSlide * 100) + '%)' }"
-  >
-    <div *ngFor="let slide of slides" class="relative w-full flex-shrink-0">
-      <!-- Image -->
-      <img [src]="slide.image" class="w-full h-auto mx-auto" alt="Slide" />
-  
-      <!-- Text Overlay -->
-      <div class="absolute inset-0 right-24 pr-80 flex flex-col justify-start items-center text-white top-16  text-left">
-      <span class="text-xl mb-1 w-5/6 text-white tracking-tighter">{{ slide.subTitle }}</span>
-      <span class="text-7xl font-extrabold mb-4 mt-1 w-5/6 pr-24 text-whit tracking-wider z-50">{{ slide.title }}</span>
-      <span class="text-base text-white w-5/6 pr-24 tracking-tight z-50">{{ slide.description }}</span>
-      <span class="text-sm pt-12 w-5/6">
-        <button class="w-36 h-12 bg-white hover:bg-blue hover:text-white text-dark-blue font-sm  px-4 rounded flex justify-center items-center gap-4 z-50 tracking-wide"  (click)="goTo('/contact-us')">
-         <span>Talk to us</span> 
-         <i class='bx bx-right-arrow-alt text-blue'></i>
+          <!-- Text Overlay -->
+          <div
+            class="absolute inset-0 right-24 pr-80 flex flex-col justify-start items-center text-white top-16 text-left"
+          >
+            <span class="text-xl mb-1 w-5/6 text-white tracking-tighter">{{
+              slide.subTitle
+            }}</span>
+            <span
+              class="text-7xl font-extrabold mb-4 mt-1 w-5/6 pr-24 text-whit tracking-wider z-50"
+              >{{ slide.title }}</span
+            >
+            <span
+              class="text-base text-white w-5/6 pr-24 tracking-tight z-50"
+              >{{ slide.description }}</span
+            >
+            <span class="text-sm pt-12 w-5/6">
+              <button
+                class="w-36 h-12 bg-white hover:bg-blue hover:text-white text-dark-blue font-sm px-4 rounded flex justify-center items-center gap-4 z-50 tracking-wide"
+                (click)="goTo('/contact-us')"
+              >
+                <span>Talk to us</span>
+                <i class="bx bx-right-arrow-alt text-blue"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="absolute top-1/2 left-1 transform -translate-y-1/2 px-4">
+        <button class="text-grey rounded-full" (click)="prevSlide()">
+          <img src="assets/images/svg/arrow-pre.svg" alt="prev" width="44px" />
         </button>
-      </span>
-  </div>
- 
-    </div>
-  </div>
-
-    <div class="absolute top-1/2 left-1 transform -translate-y-1/2 px-4">
-      <button class="text-grey rounded-full" (click)="prevSlide()">
-        <img src="assets/images/svg/arrow-pre.svg" alt="prev" width="44px" />
-      </button>
-    </div>
-    <div class="absolute top-1/2 right-0 transform -translate-y-1/2 px-4">
-      <button class="text-grey rounded-full" (click)="nextSlide()">
-        <img src="assets/images/svg/arrow-nex.svg" alt="next" width="44px" />
-      </button>
-    </div>
-  
-<!-- Navigation Buttons -->
-<div class="absolute bottom-3 left-24 flex gap-2">
-  <button
-    class="w-5 h-5 p-0.5 bg-transparent border border-white rounded-full focus:outline-none hover:bg-yellow-950"
-    (click)="currentSlide = 0"
-    aria-label="Go to slide 1"
-  >
-    <div
-      class="w-full h-full bg-transparent rounded-full"
-      [ngClass]="{ 'bg-yellow-950': currentSlide === 0 }"
-    ></div>
-  </button>
-  <button
-    class="w-5 h-5 p-0.5 bg-transparent border border-white rounded-full focus:outline-none hover:bg-yellow-950"
-    (click)="currentSlide = 1"
-    aria-label="Go to slide 2"
-  >
-    <div
-      class="w-full h-full bg-transparent rounded-full"
-      [ngClass]="{ 'bg-yellow-950': currentSlide === 1 }"
-    ></div>
-  </button>
-  <button
-    class="w-5 h-5 p-0.5 bg-transparent border border-white rounded-full focus:outline-none hover:bg-yellow-950"
-    (click)="currentSlide = 2"
-    aria-label="Go to slide 3"
-  >
-    <div
-      class="w-full h-full bg-transparent rounded-full"
-      [ngClass]="{ 'bg-yellow-950': currentSlide === 2 }"
-    ></div>
-  </button>
-</div>
-
-  </div>
-  
-  <div class="absolute -bottom-32 mx-auto flex gap-2">
-    <div class="w-64 h-auto bg-white rounded-sm p-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue">
-      <img src="assets/images/svg/statistics.png" alt="Logo" class="h-8" />
-      <div class="flex flex-col">
-       <span class="text-dark-blue text-sm font-bold hover:text-white">Global Payment</span>
-       <span class="text-xs text-gray-950  hover:text-white">
-        The combined power of our expert payments people, innovative modular technology and unrelenting drive for ROI has earned the trust of thousands of customers. Here are just a few:
-       </span>
       </div>
-     </div>
+      <div class="absolute top-1/2 right-0 transform -translate-y-1/2 px-4">
+        <button class="text-grey rounded-full" (click)="nextSlide()">
+          <img src="assets/images/svg/arrow-nex.svg" alt="next" width="44px" />
+        </button>
+      </div>
 
-    <div class="w-64 h-auto bg-white rounded-sm p-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue">
-     <img src="assets/images/svg/statistics.png" alt="Logo" class="h-8" />
-     <div class="flex flex-col">
-      <span class="text-dark-blue text-sm font-bold hover:text-white">Voice</span>
-      <span class="text-xs text-gray-950  hover:text-white">
-        Get unlimited talktime across all networks within East Africa
-      </span>
-     </div>
+      <!-- Navigation Buttons -->
+      <div class="absolute bottom-3 left-24 flex gap-2">
+        <button
+          class="w-5 h-5 p-0.5 bg-transparent border border-white rounded-full focus:outline-none hover:bg-yellow-950"
+          (click)="currentSlide = 0"
+          aria-label="Go to slide 1"
+        >
+          <div
+            class="w-full h-full bg-transparent rounded-full"
+            [ngClass]="{ 'bg-yellow-950': currentSlide === 0 }"
+          ></div>
+        </button>
+        <button
+          class="w-5 h-5 p-0.5 bg-transparent border border-white rounded-full focus:outline-none hover:bg-yellow-950"
+          (click)="currentSlide = 1"
+          aria-label="Go to slide 2"
+        >
+          <div
+            class="w-full h-full bg-transparent rounded-full"
+            [ngClass]="{ 'bg-yellow-950': currentSlide === 1 }"
+          ></div>
+        </button>
+        <button
+          class="w-5 h-5 p-0.5 bg-transparent border border-white rounded-full focus:outline-none hover:bg-yellow-950"
+          (click)="currentSlide = 2"
+          aria-label="Go to slide 3"
+        >
+          <div
+            class="w-full h-full bg-transparent rounded-full"
+            [ngClass]="{ 'bg-yellow-950': currentSlide === 2 }"
+          ></div>
+        </button>
+      </div>
     </div>
-  
-    <div class="w-64 h-auto bg-white rounded-sm p-4 flex justify-start gap-4 shadow-lg hover:bg-blue">
-      <img src="assets/images/svg/search-engine-blue.png" alt="Logo" class="h-8" />
-      <div class="flex flex-col">
-       <span class="text-dark-blue  text-sm font-bold hover:text-white">Developer Community</span>
-       <span class="text-xs text-gray-950 hover:text-white">
-        Access all our developer resources and integrations swiftly
-       </span>
+    <div class="absolute -bottom-32 mx-auto flex gap-2">
+      <div
+        class="w-64 h-auto bg-white rounded-sm p-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue"
+      >
+        <img src="assets/images/svg/statistics.png" alt="Logo" class="h-8" />
+        <div class="flex flex-col">
+          <span class="text-dark-blue text-sm font-bold hover:text-white"
+            >Global Payment</span
+          >
+          <span class="text-xs text-gray-950 hover:text-white">
+            The combined power of our expert payments people, innovative modular
+            technology and unrelenting drive for ROI has earned the trust of
+            thousands of customers. Here are just a few:
+          </span>
+        </div>
       </div>
-     </div>
-  
-     <div class="w-64 h-auto bg-white rounded-sm p-4 flex justify-start gap-4 shadow-lg hover:bg-blue">
-      <img src="assets/images/svg/cloud-computing.png" alt="Logo" class="h-8" />
-      <div class="flex flex-col">
-       <span class="text-dark-blue text-sm font-bold">Electronic Payment</span>
-       <span class="text-xs text-gray-950 hover:text-white">
-        Quick response payments for all your online payment and POS
-       </span>
+
+      <div
+        class="w-64 h-auto bg-white rounded-sm p-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue"
+      >
+        <img src="assets/images/svg/statistics.png" alt="Logo" class="h-8" />
+        <div class="flex flex-col">
+          <span class="text-dark-blue text-sm font-bold hover:text-white"
+            >Voice</span
+          >
+          <span class="text-xs text-gray-950 hover:text-white">
+            Get unlimited talktime across all networks within East Africa
+          </span>
+        </div>
       </div>
-     </div>
-  </div>
-  
+
+      <div
+        class="w-64 h-auto bg-white rounded-sm p-4 flex justify-start gap-4 shadow-lg hover:bg-blue"
+      >
+        <img
+          src="assets/images/svg/search-engine-blue.png"
+          alt="Logo"
+          class="h-8"
+        />
+        <div class="flex flex-col">
+          <span class="text-dark-blue text-sm font-bold hover:text-white"
+            >Developer Community</span
+          >
+          <span class="text-xs text-gray-950 hover:text-white">
+            Access all our developer resources and integrations swiftly
+          </span>
+        </div>
+      </div>
+
+      <div
+        class="w-64 h-auto bg-white rounded-sm p-4 flex justify-start gap-4 shadow-lg hover:bg-blue"
+      >
+        <img
+          src="assets/images/svg/cloud-computing.png"
+          alt="Logo"
+          class="h-8"
+        />
+        <div class="flex flex-col">
+          <span class="text-dark-blue text-sm font-bold"
+            >Electronic Payment</span
+          >
+          <span class="text-xs text-gray-950 hover:text-white">
+            Quick response payments for all your online payment and POS
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
   <!-- Clients Marqueu Begins-->
-   <div class="mt-32">
+  <div class="mt-32">
     <app-clients-marqueue></app-clients-marqueue>
-   </div>
+  </div>
   <!-- Clients Marqueu Ends-->
-     <!-- Working Process Start-->
-     <div class="w-full  bg-slate-100 mb-12 mt-4 py-12">
-      <div class="w-8/12 flex justify-center items-start flex-col py-4 mx-auto">
-        <span class="text-xs font-semibold text-blue flex items-center">
-            <span class="dot mr-1"></span>
-            <span class="dot-line mr-2"></span>
-             <span>Working Process </span>
-        </span>
-        <div class="flex justify-between gap-8">
-          <div class="w-full flex flex-col">
+  <!-- Working Process Start-->
+  <div class="w-full bg-slate-100 mb-12 mt-4 py-12">
+    <div class="w-8/12 flex justify-center items-start flex-col py-4 mx-auto">
+      <span class="text-xs font-semibold text-blue flex items-center">
+        <span class="dot mr-1"></span>
+        <span class="dot-line mr-2"></span>
+        <span>Working Process </span>
+      </span>
+      <div class="flex justify-between gap-8">
+        <div class="w-full flex flex-col">
           <span class="text-2xl font-semibold text-gray-1000 text-left mt-4">
-            We are trusted across Africa,<br> with over 15 years experience
-          </span> 
-          <span class="text-xs text-gray-1000 text-left pt-2 leading-5 tracking-normal w-3/4">
-          In the contemporary business landscape, ensuring an exceptional customer experience is paramount for setting your enterprise apart and fostering unwavering loyalty among your clientele.
+            We are trusted across Africa,<br />
+            with over 15 years experience
+          </span>
+          <span
+            class="text-xs text-gray-1000 text-left pt-2 leading-5 tracking-normal w-3/4"
+          >
+            In the contemporary business landscape, ensuring an exceptional
+            customer experience is paramount for setting your enterprise apart
+            and fostering unwavering loyalty among your clientele.
           </span>
           <div class="pt-4 flex flex-col gap-4">
             <div class="w-full flex justify-start items-center">
-            <img src="assets/images/svg/kenya.svg" alt="Kenya Flag" class="w-5 h-4 mr-2" />
-            <div class="flex flex-col justify-center">
-            <div class="flex mb-1 w-full">
-              <span class="text-xs text-blue">(1.5 Million)&nbsp;-&nbsp;</span>
-              <span class="text-xs font-normal text-gray-1000 tracking-tighter">Monthly Transactions</span>
+              <img
+                src="assets/images/svg/kenya.svg"
+                alt="Kenya Flag"
+                class="w-5 h-4 mr-2"
+              />
+              <div class="flex flex-col justify-center">
+                <div class="flex mb-1 w-full">
+                  <span class="text-xs text-blue"
+                    >(1.5 Million)&nbsp;-&nbsp;</span
+                  >
+                  <span
+                    class="text-xs font-normal text-gray-1000 tracking-tighter"
+                    >Monthly Transactions</span
+                  >
+                </div>
+                <div class="w-80 bg-gray-200 h-1 rounded">
+                  <div class="bg-blue h-1 rounded" style="width: 73%"></div>
+                </div>
+              </div>
             </div>
-            <div class="w-80 bg-gray-200 h-1 rounded">
-              <div class="bg-blue h-1 rounded" style="width: 73%;"></div>
+            <div class="w-full flex justify-start items-center">
+              <img
+                src="assets/images/svg/botswana.svg"
+                alt="Kenya Flag"
+                class="w-5 h-4 mr-2"
+              />
+              <div class="flex flex-col justify-center">
+                <div class="flex mb-1 w-full">
+                  <span class="text-xs text-blue"
+                    >(USD 50 Million)&nbsp;-&nbsp;</span
+                  >
+                  <span
+                    class="text-xs font-normal text-gray-1000 tracking-tighter"
+                    >Monthly Transactions</span
+                  >
+                </div>
+                <div class="w-80 bg-gray-200 h-1 rounded">
+                  <div class="bg-blue h-1 rounded" style="width: 88%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="w-full flex justify-start items-center">
+              <img
+                src="assets/images/svg/namibia.svg"
+                alt="Kenya Flag"
+                class="w-5 h-4 mr-2"
+              />
+              <div class="flex flex-col justify-center">
+                <div class="flex mb-1 w-full">
+                  <span class="text-xs text-blue">(27)&nbsp;-&nbsp;</span>
+                  <span
+                    class="text-xs font-normal text-gray-1000 tracking-tighter"
+                    >Monthly Transactions</span
+                  >
+                </div>
+                <div class="w-80 bg-gray-200 h-1 rounded">
+                  <div class="bg-blue h-1 rounded" style="width: 60%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="w-full flex justify-start items-center">
+              <img
+                src="assets/images/svg/angola.svg"
+                alt="Kenya Flag"
+                class="w-5 h-4 mr-2"
+              />
+              <div class="flex flex-col justify-center">
+                <div class="flex mb-1 w-full">
+                  <span class="text-xs text-blue">(13)&nbsp;-&nbsp;</span>
+                  <span
+                    class="text-xs font-normal text-gray-1000 tracking-tighter"
+                    >Monthly Transactions</span
+                  >
+                </div>
+                <div class="w-80 bg-gray-200 h-1 rounded">
+                  <div class="bg-blue h-1 rounded" style="width: 65%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="w-full flex justify-start items-center">
+              <img
+                src="assets/images/svg/uganda.svg"
+                alt="Kenya Flag"
+                class="w-5 h-4 mr-2"
+              />
+              <div class="flex flex-col justify-center">
+                <div class="flex mb-1 w-full">
+                  <span class="text-xs text-blue">(13)&nbsp;-&nbsp;</span>
+                  <span
+                    class="text-xs font-normal text-gray-1000 tracking-tighter"
+                    >Monthly Transactions</span
+                  >
+                </div>
+                <div class="w-80 bg-gray-200 h-1 rounded">
+                  <div class="bg-blue h-1 rounded" style="width: 65%"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="w-full flex justify-start items-center">
-          <img src="assets/images/svg/botswana.svg" alt="Kenya Flag" class="w-5 h-4 mr-2" />
-          <div class="flex flex-col justify-center">
-          <div class="flex mb-1 w-full">
-            <span class="text-xs text-blue">(USD 50 Million)&nbsp;-&nbsp;</span>
-            <span class="text-xs font-normal text-gray-1000 tracking-tighter">Monthly Transactions</span>
-          </div>
-          <div class="w-80 bg-gray-200 h-1 rounded">
-            <div class="bg-blue h-1 rounded" style="width: 88%;"></div>
-          </div>
-        </div>
-      </div>
-      <div class="w-full flex justify-start items-center">
-        <img src="assets/images/svg/namibia.svg" alt="Kenya Flag" class="w-5 h-4 mr-2" />
-        <div class="flex flex-col justify-center">
-        <div class="flex mb-1 w-full">
-          <span class="text-xs text-blue">(27)&nbsp;-&nbsp;</span>
-          <span class="text-xs font-normal text-gray-1000 tracking-tighter">Monthly Transactions</span>
-        </div>
-        <div class="w-80 bg-gray-200 h-1 rounded">
-          <div class="bg-blue h-1 rounded" style="width: 60%;"></div>
-        </div>
-      </div>
-    </div>
-    <div class="w-full flex justify-start items-center">
-      <img src="assets/images/svg/angola.svg" alt="Kenya Flag" class="w-5 h-4 mr-2" />
-      <div class="flex flex-col justify-center">
-      <div class="flex mb-1 w-full">
-        <span class="text-xs text-blue">(13)&nbsp;-&nbsp;</span>
-        <span class="text-xs font-normal text-gray-1000 tracking-tighter">Monthly Transactions</span>
-      </div>
-      <div class="w-80 bg-gray-200 h-1 rounded">
-        <div class="bg-blue h-1 rounded" style="width: 65%;"></div>
+        <img src="assets/images/home/africa.svg" alt="Africa" class="w-3/5" />
       </div>
     </div>
   </div>
-  <div class="w-full flex justify-start items-center">
-    <img src="assets/images/svg/uganda.svg" alt="Kenya Flag" class="w-5 h-4 mr-2" />
-    <div class="flex flex-col justify-center">
-    <div class="flex mb-1 w-full">
-      <span class="text-xs text-blue">(13)&nbsp;-&nbsp;</span>
-      <span class="text-xs font-normal text-gray-1000 tracking-tighter">Monthly Transactions</span>
+  <!-- Working Process End-->
+  <!-- Designed for Devs starts-->
+  <div class="w-full bg-white mb-12 mt-0 py-0">
+    <div class="w-8/12 flex justify-center items-start flex-col py-4 mx-auto">
+      <span class="text-xs font-semibold text-blue flex items-center">
+        <span class="dot mr-1"></span>
+        <span class="dot-line mr-2"></span>
+        <span>Designed for developers </span>
+      </span>
+      <div class="flex justify-between gap-16">
+        <div class="w-2/5 flex flex-col">
+          <span class="text-2xl font-semibold text-gray-1000 text-left mt-4">
+            Ship more quickly with powerful and easy-to-use APIs
+          </span>
+          <span
+            class="text-xs text-gray-1000 text-left pt-2 leading-5 tracking-normal w-full"
+          >
+            Save engineering time with unified payments functionality. We obsess
+            over the maze of gateways, payments rails, and financial
+            institutions that make up the global economic landscape so that your
+            teams can build what you need on one platform.
+          </span>
+          <button
+            class="mt-8 w-40 h-12 bg-blue hover:bg-dark-blue hover:text-white text-white text-xs font-thin px-4 rounded flex justify-center items-center gap-4 z-50 tracking-wide"
+            (click)="goTo('/contact-us')"
+          >
+            <span>Read Docs</span>
+            <i class="bx bx-right-arrow-alt text-white"></i>
+          </button>
+        </div>
+        <div class="w-3/5">
+          <img src="assets/images/home/coder.png" alt="Africa" class="w-5/6" />
+        </div>
+      </div>
     </div>
-    <div class="w-80 bg-gray-200 h-1 rounded">
-      <div class="bg-blue h-1 rounded" style="width: 65%;"></div>
+  </div>
+  <!-- Designed for Devs ends-->
+
+  <!-- Why Kentapay-->
+  <div class="w-full bg-slate-100 pb-8">
+    <div class="absolute inset-0 bg-center bg-no-repeat opacity-70"></div>
+
+    <div class="flex justify-center items-center flex-col py-8">
+      <span class="text-xs font-bold text-blue uppercase flex items-center">
+        <span class="dot mr-1"></span>
+        <span class="dot-line mr-2"></span>
+        <span> </span>
+      </span>
+      <span class="text-2xl font-semibold w-3/3 text-center text-gray-1000"
+        >Why do business with Kentapay</span
+      >
+      <span class="text-xs font-normal w-3/3 text-center text-gray-950 pt-6">
+        Cross-border payments can get complicated but we’ve made it our mission
+        to uncomplicate them.
+      </span>
+    </div>
+    <div class="flex justify-center items-center pt-4 mx-auto w-8/12 gap-4">
+      <div
+        class="w-1/4 bg-white flex flex-col items-start justify-start z-10 shadow-lg px-4 py-8"
+      >
+        <div class="flex justify-center items-center relative">
+          <img
+            src="assets/images/stats/clients.png"
+            alt="clients"
+            class="h-8"
+          />
+          <span
+            class="flex w-7 h-7 rounded-full border absolute left-4 backdrop-opacity-10 backdrop-invert bg-blue/10 opacity-25"
+          ></span>
+          <span
+            class="flex w-4 h-4 rounded-full border absolute left-8 -top-3 backdrop-opacity-10 backdrop-invert bg-blue/10 opacity-25"
+          ></span>
+        </div>
+        <div class="text-xs leading-5 pt-2 text-gray-1000 tracking-tighter">
+          Keep more of what you earn
+        </div>
+        <div
+          class="text-xs leading-5 pt-2 text-gray-1000 tracking-tighter h-32 overflow-scroll"
+        >
+          He development of reliable and scalable software soluti any OS,
+          browser and device. We bring together deepin expertise and the latest
+          advan.
+        </div>
+      </div>
+
+      <div
+        class="w-1/4 bg-white flex flex-col items-start justify-start z-10 shadow-lg px-4 py-8"
+      >
+        <div class="flex justify-center items-center relative">
+          <img
+            src="assets/images/stats/clients.png"
+            alt="clients"
+            class="h-8"
+          />
+          <span
+            class="flex w-7 h-7 rounded-full border absolute left-4 backdrop-opacity-10 backdrop-invert bg-blue/10 opacity-25"
+          ></span>
+          <span
+            class="flex w-4 h-4 rounded-full border absolute left-8 -top-3 backdrop-opacity-10 backdrop-invert bg-blue/10 opacity-25"
+          ></span>
+        </div>
+        <div class="text-xs leading-5 pt-2 text-gray-1000 tracking-tighter">
+          Join the network
+        </div>
+        <div
+          class="text-xs leading-5 pt-2 text-gray-1000 tracking-tighter h-32 overflow-scroll"
+        >
+          Our smooth integration with the world’s leading Pay TV services
+          enables us to offer a quick and easy way to pay for your monthly
+          subscriptions. With our platform, you can pay for and manage all of
+          your preferred Pay TV services from a single, safe interface. No
+          matter where you are, you may always have unrestricted access to your
+          favorite entertainment thanks to our global network. Take advantage of
+          our dependable transaction processing, prompt payment confirmations,
+          and committed customer service to make managing your Pay TV
+          subscription simple and hassle-free.
+        </div>
+      </div>
+
+      <div
+        class="w-1/4 bg-white flex flex-col items-start justify-start z-10 shadow-lg px-4 py-8"
+      >
+        <div class="flex justify-center items-center relative">
+          <img
+            src="assets/images/stats/clients.png"
+            alt="clients"
+            class="h-8"
+          />
+          <span
+            class="flex w-7 h-7 rounded-full border absolute left-4 backdrop-opacity-10 backdrop-invert bg-blue/10 opacity-25"
+          ></span>
+          <span
+            class="flex w-4 h-4 rounded-full border absolute left-8 -top-3 backdrop-opacity-10 backdrop-invert bg-blue/10 opacity-25"
+          ></span>
+        </div>
+        <div class="text-xs leading-5 pt-2 text-gray-1000 tracking-tighter">
+          Join the market
+        </div>
+        <div
+          class="text-xs leading-5 pt-2 text-gray-1000 tracking-tighter h-32 overflow-scroll"
+        >
+          Our smooth integration with the world’s leading Pay TV services
+          enables us to offer a quick and easy way to pay for your monthly
+          subscriptions. With our platform, you can pay for and manage all of
+          your preferred Pay TV services from a single, safe interface. No
+          matter where you are, you may always have unrestricted access to your
+          favorite entertainment thanks to our global network. Take advantage of
+          our dependable transaction processing, prompt payment confirmations,
+          and committed customer service to make managing your Pay TV
+          subscription simple and hassle-free.
+        </div>
+      </div>
+
+      <div
+        class="w-1/4 bg-white flex flex-col items-start justify-start z-10 shadow-lg px-4 py-8"
+      >
+        <div class="flex justify-center items-center relative">
+          <img
+            src="assets/images/stats/clients.png"
+            alt="clients"
+            class="h-8"
+          />
+          <span
+            class="flex w-7 h-7 rounded-full border absolute left-4 backdrop-opacity-10 backdrop-invert bg-blue/10 opacity-25"
+          ></span>
+          <span
+            class="flex w-4 h-4 rounded-full border absolute left-8 -top-3 backdrop-opacity-10 backdrop-invert bg-blue/10 opacity-25"
+          ></span>
+        </div>
+        <div class="text-xs leading-5 pt-2 text-gray-1000 tracking-tighter">
+          Keep more of what you earn
+        </div>
+        <div
+          class="text-xs leading-5 pt-2 text-gray-1000 tracking-tighter h-32 overflow-scroll"
+        >
+          He development of reliable and scalable software soluti any OS,
+          browser and device. We bring together deepin expertise and the latest
+          advan.
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Blog Start-->
+  <div class="w-full bg-white pb-32 relative">
+    <!-- Background Image -->
+    <div
+      class="absolute inset-0 bg-center bg-no-repeat opacity-70"
+      style="background-image: url('assets/images/home/map.png')"
+    ></div>
+
+    <div class="flex justify-center items-center flex-col py-8">
+      <span class="text-xs font-bold text-blue uppercase flex items-center">
+        <span class="dot mr-1"></span>
+        <span class="dot-line mr-2"></span>
+        <span>TESTIMONIAL </span>
+      </span>
+      <span class="text-2xl font-semibold w-3/3 text-center text-gray-1000"
+        >Who are our customers ?</span
+      >
+    </div>
+    <div class="grid grid-cols-2 w-8/12 gap-12 mx-auto">
+      <div
+        class="bg-white flex flex-col items-start justify-start z-10 shadow-lg py-4 px-2 h-40 overflow-hidden"
+      >
+        <div class="flex justify-center items-center pl-4">
+          <span class="flex w-8 h-8 bg-gray-1300 rounded-full border"></span>
+          <div class="flex flex-col m-4">
+            <span>Freelancers</span>
+          </div>
+        </div>
+        <div class="text-xs leading-5 p-2 font-sm text-gray-950">
+          Freelance opportunities are everywhere, so you need a payment solution
+          that is truly global. The Payoneer account lets you save time and
+          effort as you get paid, make payments, access earnings, and manage
+          your money.
+        </div>
+      </div>
+      <div
+        class="bg-white flex flex-col items-start justify-start z-10 shadow-lg py-4 px-2 h-40 overflow-hidden"
+      >
+        <div class="flex justify-center items-center pl-4">
+          <span class="flex w-8 h-8 bg-gray-1300 rounded-full border"></span>
+          <div class="flex flex-col m-4">
+            <span>Businesses</span>
+          </div>
+        </div>
+        <div class="text-xs leading-5 p-2 font-sm text-gray-950">
+          He development of reliable and scalable software soluti any OS,
+          browser and device. We bring together deepin expertise and the latest
+          advan.
+        </div>
+      </div>
+
+      <div
+        class="bg-white flex flex-col items-start justify-start z-10 shadow-lg py-4 px-2 h-40 overflow-hidden"
+      >
+        <div class="flex justify-center items-center pl-4">
+          <span class="flex w-8 h-8 bg-gray-1300 rounded-full border"></span>
+          <div class="flex flex-col m-4">
+            <span>Businesses</span>
+          </div>
+        </div>
+        <div class="text-xs leading-5 p-2 font-sm text-gray-950">
+          He development of reliable and scalable software soluti any OS,
+          browser and device. We bring together deepin expertise and the latest
+          advan.
+        </div>
+      </div>
+
+      <div
+        class="bg-white flex flex-col items-start justify-start z-10 shadow-lg py-4 px-2 h-40 overflow-hidden"
+      >
+        <div class="flex justify-center items-center pl-4">
+          <span class="flex w-8 h-8 bg-gray-1300 rounded-full border"></span>
+          <div class="flex flex-col m-4">
+            <span>Businesses</span>
+          </div>
+        </div>
+        <div class="text-xs leading-5 p-2 font-sm text-gray-950">
+          He development of reliable and scalable software soluti any OS,
+          browser and device. We bring together deepin expertise and the latest
+          advan.
+        </div>
+      </div>
     </div>
   </div>
 </div>
-        </div>
-          
-          
-          </div>
-            <img src="assets/images/home/africa.svg" alt="Africa" class="w-3/5" />
-            
-        </div>
-
-      </div>
-      </div>
-<!-- Working Process End-->
-  <!-- Who We Are Begins-->
-  <div class="w-full bg-blue">
-    <div class="flex justify-center items-center pt-48 mx-auto w-6/12 relative">
-      <div class="w-2/5 pr-4">
-        <img src="assets/images/home/pos.png" alt="pos"  class=" h-84" />
-      </div>
-      <div class="w-3/5 flex flex-col">
-        <span class="text-xs font-bold text-blue uppercase flex items-center">
-            <span class="dot mr-1"></span>
-            <span class="dot-line mr-2"></span>
-             <span>Who we are </span>
-        </span>
-        <span class="text-2xl font-bold">Your Partner for Exceptional Payment Solutions</span>
-        <span class="text-xs pt-2 text-gray-950">
-          We offer a diverse range of communication and payments API products, providing you with all the tools necessary to construct highly effective mobile engagement solutions.
-        </span>
-        <div class="flex items-center pt-4">
-          <img src="assets/images/svg/play-circle.svg" alt="Play"  class="h-12" />
-          <span class="text-xs text-blue-700 font-bold pl-2">How We Work</span>
-        </div>
-        <div class="flex items-center pt-6">
-          <img src="assets/images/svg/support.png" alt="Support"  class="h-4" />
-          <div class="flex flex-col">
-            <span class="text-sm font-bold pl-2">24/7 Client Support</span>
-            <span class="text-xs text-gray-950 pl-2">
-              But I must explain to you how all this mistaken idea of ncing pleasure and praising pain was.
-            </span>
-          </div>
-         
-        </div>
-      </div>
-      <div class="absolute -left-32 mx-auto flex flex-col justify-center gap-4 items-center w-48 h-48 bg-white rounded-sm p-4 shadow-lg">
-        <img src="assets/images/svg/database.png" alt="Db"  class="h-10" />
-        <span class="text-gray-900  text-sm">Payment Gateway</span>
-        <button class="w-28 h-8 bg-transparent hover:bg-blue-700 text-blue border text-xs py-2 px-2 rounded flex items-center">
-          <span class="uppercase mr-2">Read More</span> 
-          <img src="assets/images/svg/arrow-right.svg" alt="right" width="8px"   />
-          </button>
-      </div>
-    </div>
-  </div>
-    <!-- Who We Are Ends-->
-  <!-- Our Services Start-->
-  <div class="w-full bg-slate-100 pb-12">
-    <div class="flex justify-center items-center flex-col py-8">
-      <span class="text-xs font-bold text-blue uppercase flex items-center">
-          <span class="dot mr-1"></span>
-          <span class="dot-line mr-2"></span>
-           <span>Our Services </span>
-      </span>
-      <span class="text-3xl font-semibold w-3/3 text-center text-gray-1000">More than 500+ Customers <br/> join with us</span> 
-    </div>
-    <div class="flex justify-center items-center pt-4 mx-auto w-6/12">
-      <div class="grid grid-cols-3 justify-center items-start shadow-lg">
-        <div class="mx-auto flex flex-col justify-start gap-4 w-60 h-64 bg-white rounded-sm p-4 border">
-          <div class="flex justify-between items-center w-full">
-            <img src="assets/images/svg/database.png" alt="Db"  class="h-10" />
-            <span class="ring-2 ring-gray-100 rounded-full w-6 h-6 flex items-center justify-center" >
-              <img src="assets/images/svg/arrow-right.svg" alt="right" width="12px" />
-            </span>
-          </div>
-          <span class="text-gray-900  text-normal">Messaging Services</span>
-          <span class="overflow-hidden text-xs text-gray-950">
-            We redefine the landscape of communication with our comprehensive Messaging Services both locally and internationally. We provide seamless integration, high delivery rates, and comprehensive analytics to track your campaigns’ performance. We pride in our 24/7 customer support and competitive pricing.
-          </span>
-          <button class="w-28 h-8 bg-transparent hover:bg-blue-700 text-blue border text-xs py-2 px-2 rounded flex items-center">
-            <span class="uppercase mr-2">Read More</span> 
-            <img src="assets/images/svg/arrow-right.svg" alt="right" width="8px"   />
-            </button>
-        </div>
-        <div class="mx-auto flex flex-col justify-start gap-4 w-60 h-64 bg-blue rounded-sm p-4 border text-white">
-          <div class="flex justify-between items-center w-full">
-            <img src="assets/images/svg/database.png" alt="Db"  class="h-10" />
-            <span class="ring-2 ring-gray-100 rounded-full w-6 h-6 flex items-center justify-center bg-white" >
-              <img src="assets/images/svg/arrow-right.svg" alt="right" width="12px" />
-            </span>
-          </div>
-          <span class="text-white text-normal">Sender ID Services</span>
-          <span class="overflow-hidden text-xs text-white">
-            We empower you to make a lasting impression with our advanced SMS Sender ID Service. Dive into the intricacies of our service as we break down its features and showcase how it can elevate your messaging strategy:
-             </span>
-          <button class="w-28 h-8 bg-transparent hover:bg-blue-700 text-white border text-xs py-2 px-2 rounded flex items-center border-0">
-            <span class="uppercase mr-2">Read More</span> 
-            <img src="assets/images/svg/arrow-right.svg" alt="right" width="8px"   />
-            </button>
-        </div>
-        <div class="mx-auto flex flex-col justify-start gap-4 w-60 h-64 bg-white rounded-sm p-4 border">
-          <div class="flex justify-between items-center w-full">
-            <img src="assets/images/svg/emails.png" alt="Db"  class="h-10" />
-            <span class="ring-2 ring-gray-100 rounded-full w-6 h-6 flex items-center justify-center" >
-              <img src="assets/images/svg/arrow-right.svg" alt="right" width="12px" />
-            </span>
-          </div>
-          <span class="text-gray-900  text-normal">Emails</span>
-          <span class="overflow-hidden text-xs text-gray-950">
-            We understand that effective communication is at the heart of every successful business. Explore the diverse possibilities of our Bulk Campaigns, Single Emails, and Scheduling Emails features, and elevate your communication game to new heights. Dive into a world of precision, personalization, and unparalleled reach as we present a breakdown of our services:
-            </span>
-          <button class="w-28 h-8 bg-transparent hover:bg-blue-700 text-blue border text-xs py-2 px-2 rounded flex items-center">
-            <span class="uppercase mr-2">Read More</span> 
-            <img src="assets/images/svg/arrow-right.svg" alt="right" width="8px"   />
-            </button>
-        </div>
-        <div class="mx-auto flex flex-col justify-start gap-4 w-60 h-64 bg-white rounded-sm p-4 border-b border-l">
-          <div class="flex justify-between items-center w-full">
-            <img src="assets/images/svg/statistics.png" alt="Db"  class="h-10" />
-            <span class="ring-2 ring-gray-100 rounded-full w-6 h-6 flex items-center justify-center" >
-              <img src="assets/images/svg/arrow-right.svg" alt="right" width="12px" />
-            </span>
-          </div>
-          <span class="text-gray-900  text-normal">USSD</span>
-          <span class="overflow-hidden text-xs text-gray-950">
-            At Kentapay, we bring you the next frontier in interactive communication with our USSD Service. Delve into the richness of our USSD offerings as we dissect and showcase the myriad capabilities that make this service a game-changer in the realm of mobile interaction:
-            </span>
-          <button class="w-28 h-8 bg-transparent hover:bg-blue-700 text-blue border text-xs py-2 px-2 rounded flex items-center">
-            <span class="uppercase mr-2">Read More</span> 
-            <img src="assets/images/svg/arrow-right.svg" alt="right" width="8px"   />
-            </button>
-        </div>
-        <div class="mx-auto flex flex-col justify-start gap-4 w-60 h-64 bg-white rounded-sm p-4 border-b">
-          <div class="flex justify-between items-center w-full">
-            <img src="assets/images/svg/paytv.png" alt="Db"  class="h-10" />
-            <span class="ring-2 ring-gray-100 rounded-full w-6 h-6 flex items-center justify-center" >
-              <img src="assets/images/svg/arrow-right.svg" alt="right" width="12px" />
-            </span>
-          </div>
-          <span class="text-gray-900  text-normal">Pay TV</span>
-          <span class="overflow-hidden text-xs text-gray-950">
-            Our smooth integration with the world’s leading Pay TV services enables us to offer a quick and easy way to pay for your monthly subscriptions. With our platform, you can pay for and manage all of your preferred Pay TV services from a single, safe interface. No matter where you are, you may always have unrestricted access to your favorite entertainment thanks to our global network. Take advantage of our dependable transaction processing, prompt payment confirmations, and committed customer service to make managing your Pay TV subscription simple and hassle-free.
-            </span>
-          <button class="w-28 h-8 bg-transparent hover:bg-blue-700 text-blue border text-xs py-2 px-2 rounded flex items-center">
-            <span class="uppercase mr-2">Read More</span> 
-            <img src="assets/images/svg/arrow-right.svg" alt="right" width="8px"   />
-            </button>
-        </div>
-        <div class="mx-auto flex flex-col justify-start gap-4 w-60 h-64 bg-white rounded-sm p-4 border-b border-r">
-          <div class="flex justify-between items-center w-full">
-            <img src="assets/images/svg/internet_sub.png" alt="Db"  class="h-10" />
-            <span class="ring-2 ring-gray-100 rounded-full w-6 h-6 flex items-center justify-center" >
-              <img src="assets/images/svg/arrow-right.svg" alt="right" width="12px" />
-            </span>
-          </div>
-          <span class="text-gray-900  text-normal">Internet Subscription</span>
-          <span class="overflow-hidden text-xs text-gray-950">
-            We provide a smooth interface with top internet subscription services across the globe, making it simple for you to keep track of and pay for your monthly subscriptions. Our platform makes paying easier and offers a safe, practical solution to maintain the continuous operation of your internet services. With real-time payment confirmations and worldwide access, you can keep in touch from anywhere. Savor the convenience of conveniently handling all of your internet subscriptions in one location, supported by our dependable transaction processing and committed customer service.
-          </span>
-          <button class="w-28 h-8 bg-transparent hover:bg-blue-700 text-blue border text-xs py-2 px-2 rounded flex items-center">
-            <span class="uppercase mr-2">Read More</span> 
-            <img src="assets/images/svg/arrow-right.svg" alt="right" width="8px"   />
-            </button>
-        </div>
-      </div>
-    </div>
-    </div>
-  <!-- Our Services  End-->
-
-      <!-- Case Studies Start-->
-  <div class="w-full bg-slate-100 pb-32">
-    <div class="flex justify-center items-center flex-col py-8">
-      <span class="text-xs font-bold text-blue uppercase flex items-center">
-          <span class="dot mr-1"></span>
-          <span class="dot-line mr-2"></span>
-           <span>OUR PROJECTS </span>
-      </span>
-      <span class="text-3xl font-semibold w-3/3 text-center text-gray-1000">Our Latest Case Studies</span> 
-    </div>
-    <div class="flex justify-center items-center pt-4 mx-auto w-6/12 gap-4">
-      <div class="w-60 h-48 bg-white relative">
-        <img src="assets/images/case-studies/dev.png" alt="Development" class="w-full h-full object-cover" />
-        <div class="absolute -bottom-12 left-4 mx-auto flex flex-col justify-center items-start w-40 h-24 bg-white rounded-sm p-1 shadow-lg gap-2">
-          <span class="text-blue  text-sm text-left">Voice</span>
-          <span class="text-black text-xs text-left">Lorem Ipsum</span>
-        </div>
-      </div>
-      <div class="w-60 h-48 bg-white relative">
-        <img src="assets/images/case-studies/voice.png" alt="Development" class="w-full h-full object-cover" />
-        <div class="absolute -bottom-12 left-4 mx-auto flex flex-col justify-center items-start w-40 h-24 bg-white rounded-sm p-1 shadow-lg gap-2">
-          <span class="text-blue  text-sm text-left">Development</span>
-          <span class="text-black text-xs text-left">Lorem Ipsum</span>
-          <button class="w-28 h-8 bg-blue text-white hover:bg-blue-700 text-blue border text-xs py-2 px-2 rounded flex items-center">
-            <span class="uppercase mr-2">Read More</span> 
-            <span> <i class='bx bx-right-arrow-alt'></i></span>
-            </button>
-        </div>
-      </div>
-      <div class="w-60 h-48 bg-white relative">
-        <img src="assets/images/case-studies/payment.png" alt="Development" class="w-full h-full object-cover" />
-        <div class="absolute -bottom-12 left-4 mx-auto flex flex-col justify-center items-start w-40 h-24 bg-white rounded-sm p-1 shadow-lg gap-2">
-          <span class="text-blue  text-sm text-left">Electronic Payment</span>
-          <span class="text-black text-xs text-left">Lorem Ipsum</span>
-         
-        </div>
-      </div>
-    </div>
-    </div>
-  <!-- Case Studies  End-->
-
-    <!-- Team Members Start-->
-    <div class="w-full bg-white mb-12">
-      <div class="w-6/12 flex justify-center items-start flex-col py-4 mx-auto">
-        <span class="text-xs font-semibold text-blue uppercase flex items-center">
-            <span class="dot mr-1"></span>
-            <span class="dot-line mr-2"></span>
-             <span>Our Team Members</span>
-        </span>
-        <div class="flex justify-between gap-8">
-          <div class="w-full flex flex-col">
-            <div class="flex">
-              <span class="text-2xl font-semibold text-gray-1000 text-left">
-                More than 7+ years we provide payment solutions
-              </span> 
-              <div class="flex flex-col gap-1 text-sm text-gray-950 text-left pt-2 leading-5 tracking-tighter">
-                <span>We are privileged to work with hundreds of future-thinking businesses, includin brands.</span>
-                <button class="w-28 h-8 bg-transparent text-blue hover:bg-blue-700 text-blue border-none text-xs py-2 px-2 rounded flex items-center">
-                  <span class="uppercase mr-2">Read More</span> 
-                  <span> <i class='bx bx-right-arrow-alt'></i></span>
-                  </button>
-              </div>
-            </div>
-            <div class="flex justify-center items-center pt-4 mx-auto w-full gap-4">
-              <div class="w-60 h-64 bg-white relative">
-                <img src="assets/images/team/hod.png" alt="Development" class="w-full h-full object-cover" />
-                <div class="absolute -bottom-8 left-4 mx-auto flex justify-center items-start w-52 h-18 bg-white rounded-sm p-1 shadow-lg gap-2">
-                  <div class="flex justify-between items-center gap-12">
-                    <span class="text-black text-sm text-left flex flex-col justify-start">
-                      <span class="text-sm leading-5">James Mutua</span> 
-                      <span class="flex justify-between items-start">
-                        <i class='bx bx-right-arrow-alt text-blue'></i>
-                        <span class="text-xs font-thin text-grey-950 leading-5">Head of department</span>
-           
-                      </span>
-                    </span>
-                    <span class="text-blue text-xs text-right ring-2 ring-gray-100 rounded-full w-6 h-6 flex items-center justify-center">
-                      <i class='bx bx-right-arrow-alt'></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div class="w-60 h-64 bg-white relative">
-                <img src="assets/images/team/dhod.png" alt="Development" class="w-full h-full object-cover" />
-                <div class="absolute -bottom-8 left-4 mx-auto flex justify-center items-start w-52 h-18 bg-white rounded-sm p-1 shadow-lg gap-2">
-                  <div class="flex justify-between items-center gap-12">
-                    <span class="text-black text-sm text-left flex flex-col justify-start">
-                      <span class="text-sm leading-5">Happines Maasai</span> 
-                      <span class="flex justify-between items-start">
-                        <i class='bx bx-right-arrow-alt text-blue'></i>
-                        <span class="text-xs font-thin text-grey-950 leading-5">Deputy HOD</span>
-           
-                      </span>
-                    </span>
-                    <span class="text-blue text-xs text-right ring-2 ring-gray-100 rounded-full w-6 h-6 flex items-center justify-center">
-                      <i class='bx bx-right-arrow-alt'></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div class="w-60 h-64 bg-white relative">
-                <img src="assets/images/team/pm.png" alt="Development" class="w-full h-full object-cover" />
-                <div class="absolute -bottom-8 left-4 mx-auto flex justify-center items-start w-52 h-18 bg-white rounded-sm p-1 shadow-lg gap-2">
-                  <div class="flex justify-between items-center gap-12">
-                    <span class="text-black text-sm text-left flex flex-col justify-start">
-                      <span class="text-sm leading-5">Hattie Hattie</span> 
-                      <span class="flex justify-between items-start">
-                        <i class='bx bx-right-arrow-alt text-blue'></i>
-                        <span class="text-xs font-thin text-grey-950 leading-5">Project Manager</span>
-           
-                      </span>
-                    </span>
-                    <span class="text-blue text-xs text-right ring-2 ring-gray-100 rounded-full w-6 h-6 flex items-center justify-center">
-                      <i class='bx bx-right-arrow-alt'></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="flex justify-between gap-4 bg-white mt-20 shadow-lg rounded">
-              <div class="flex justify-between gap-2 p-8">
-                  <div>
-                   <img src="assets/images/stats/clients.png" alt="Clients" />
-                  </div>
-                  <div class="flex flex-col">
-                     <span class="text-2xl font-semibold leading-1">25K<sub>+</sub></span>
-                     <span class="text-xs leading-5">Happy Clients</span>
-                  </div>
-              </div>
-         
-            <div class="flex justify-between gap-2 p-8">
-              <div>
-               <img src="assets/images/stats/projects.png" alt="Projects"  />
-              </div>
-              <div class="flex flex-col">
-                 <span class="text-2xl font-semibold leading-1">796<sub>+</sub></span>
-                 <span class="text-xs leading-5">projects Completed</span>
-              </div>
-          </div>
-          <div class="flex justify-between gap-2 p-8">
-            <div>
-             <img src="assets/images/stats/partners.png" alt="Clients"  />
-            </div>
-            <div class="flex flex-col">
-               <span class="text-2xl font-semibold leading-1">85<sub>+</sub></span>
-               <span class="text-xs leading-5">Business Partners</span>
-            </div>
-        </div>
-        <div class="flex justify-between gap-2 p-8">
-          <div>
-           <img src="assets/images/stats/medal.png" alt="Clients"  />
-          </div>
-          <div class="flex flex-col">
-             <span class="text-2xl font-semibold leading-1">75<sub>+</sub></span>
-             <span class="text-xs leading-5">Awards Winning</span>
-          </div>
-      </div>
-           </div>
-        
-      
-          
-          
-          </div>
-        
-        </div>
-
-      </div>
-      </div>
-<!-- Team Members End-->
-      <!-- Video Section Starts-->
-      <div class="w-full bg-gray-1200 pb-20">
-        <div class="flex justify-center items-center flex-col py-8">
-          <span class="text-xs font-bold text-white uppercase flex items-center">
-              <span class="dot mr-1"></span>
-              <span class="dot-line mr-2"></span>
-               <span>Working Video</span>
-          </span>
-          <span class="text-3xl font-semibold w-3/3 text-center text-white">We embed payment on Platform</span> 
-        </div>
-        <div class="flex justify-center items-center pt-4 mx-auto w-6/12 gap-4">
-          
-            <i class='bx bx-play-circle bx-lg text-white border rounded-full p-4' ></i>
-        </div>
-        </div>
-      <!-- Video Section  End-->
-
-      <!-- Case Studies Start-->
-      <div class="w-full bg-white pb-32">
-        <div class="flex justify-center items-center flex-col py-8">
-          <span class="text-xs font-bold text-blue uppercase flex items-center">
-              <span class="dot mr-1"></span>
-              <span class="dot-line mr-2"></span>
-               <span>CASE STUDIES </span>
-          </span>
-          <span class="text-3xl font-semibold w-3/3 text-center text-gray-1000">Proud Projects Make</span> 
-        </div>
-        <div class="flex justify-center items-center pt-4 mx-auto w-6/12 gap-4">
-          <div class="w-60 h-48 bg-white">
-            <img src="assets/images/projects/1.png" alt="Development" class="w-full h-full object-cover" />
-            <div class="flex gap-2 p-2 border-b mb-2">
-               <img src="assets/images/svg/database.png" alt="Db"  class="h-6" />
-               <div class="flex flex-col">
-                <span class="text-blue text-xs">Team Meeting</span>
-                <span class="text-black text-base">Marketing Strategy</span>
-               </div>
-            </div>
-            <button class="w-full h-8 bg-transparent text-blue hover:bg-blue hover:text-white border-none text-xs py-2 px-2 rounded flex justify-center items-end">
-              <span class="mr-2">View Case Study</span> 
-              <span> <i class='bx bx-right-arrow-alt'></i></span>
-              </button>
-          </div>
-          <div class="w-60 h-48 bg-white">
-            <img src="assets/images/projects/2.png" alt="Development" class="w-full h-full object-cover" />
-            <div class="flex gap-2 p-2 border-b mb-2">
-               <img src="assets/images/svg/database.png" alt="Db"  class="h-6" />
-               <div class="flex flex-col">
-                <span class="text-blue text-xs">Business Plan</span>
-                <span class="text-black text-base">Request a Meeting</span>
-               </div>
-            </div>
-            <button class="w-full h-8 bg-transparent text-blue hover:bg-blue hover:text-white border-none text-xs py-2 px-2 rounded flex justify-center items-end">
-              <span class="mr-2">View Case Study</span> 
-              <span> <i class='bx bx-right-arrow-alt'></i></span>
-              </button>
-          </div>
-          <div class="w-60 h-48 bg-white">
-            <img src="assets/images/projects/3.png" alt="Development" class="w-full h-full object-cover" />
-            <div class="flex gap-2 p-2 border-b mb-2">
-               <img src="assets/images/svg/database.png" alt="Db"  class="h-6" />
-               <div class="flex flex-col">
-                <span class="text-blue text-xs">Payment Solution</span>
-                <span class="text-black text-base">Choose a Service</span>
-               </div>
-            </div>
-            <button class="w-full h-8 bg-transparent text-blue hover:bg-blue hover:text-white border-none text-xs py-2 px-2 rounded flex justify-center items-end">
-              <span class="mr-2">View Case Study</span> 
-              <span> <i class='bx bx-right-arrow-alt'></i></span>
-              </button>
-          </div>
-       
-        </div>
-        </div>
-      <!-- Case Studies  End-->
-
-
-         <!-- What we serve-->
-    <div class="w-full bg-slate-100 mb-12 mt-8 pt-8">
-      <div class="w-6/12 flex justify-center items-start flex-col py-4 mx-auto">
-        <span class="text-xs font-semibold text-blue uppercase flex items-center">
-            <span class="dot mr-1"></span>
-            <span class="dot-line mr-2"></span>
-             <span class="uppercase">What we serve</span>
-        </span>
-        <div class="flex justify-between gap-8 w-full">
-          <div class="w-full flex flex-col">
-            <div class="flex gap-4">
-              <span class="text-2xl font-semibold text-gray-1000 text-left">
-                Best Practices from Industry Expert
-              </span> 
-              <span class="text-sm text-gray-950 text-left pt-2 leading-5 tracking-tighter">
-               We are privileged to work with hundreds of future-thinkings, includin brands.Integrio deep industry xpertise enables global brands to hit the ground running.
-              </span>
-            </div>
-            <div class="flex justify-between gap-4 bg-transparent mt-4 rounded w-full"> 
-              <div *ngFor="let tab of tabs" class="w-full relative">
-                <!-- Tab Header -->
-                <div class="flex justify-center items-start border mt-4 mb-2 w-full cursor-pointer" 
-                [ngClass]="{
-                  'bg-white': activeTab.id === tab.id, 
-                  'bg-gray-200': activeTab.id !== tab.id  
-                }"
-                (click)="setActiveTab(tab)">
-                  <span class="w-14 h-14 p-2">
-                    <img [src]="tab.iconImage" alt="{{tab.title}}" class="object-cover"/>
-                  </span> 
-                  <div class="text-sm leading-5 text-black mt-2"
-                >{{tab.title}}</div>
-                </div>
-              </div>   
-           </div>
-           <div  class="w-full mt-2 text-black  shadow-lg z-10">
-            <div class="flex justify-start items-start w-full p-4">
-              <img [src]="activeTab.image" alt="{{activeTab.title}}" class="w-48 h-48 object-cover"/>
-              <div class="ml-4 flex  flex-col justify-start items-start">
-                <span class="text-black text-xl font-semibold text-left">{{activeTab.title}}</span>
-                <span class="text-blue text-sm font-semibold text-left">{{activeTab.subtitle}}</span>
-                <div class="text-grey-950 text-xs leading-5 text-left">
-                  {{activeTab.content}}
-                </div>
-                <button class="w-full h-8 bg-transparent text-blue  hover:text-black border-none text-xs py-2 px-2 rounded flex justify-start items-start">
-                  <span class="mr-2">VIEW DETAILS</span> 
-                  <span> <i class='bx bx-right-arrow-alt'></i></span>
-                  </button>
-              </div>
-           
-            </div>
-          </div>
-          </div>
-        </div>
-
-      </div>
-      </div>
-       <!-- What we serve End-->
-        <!-- Working Process End-->
-      <!-- Blog Start-->
-  <div class="w-full bg-white pb-32">
-    <div class="flex justify-center items-center flex-col py-8">
-      <span class="text-xs font-bold text-blue uppercase flex items-center">
-          <span class="dot mr-1"></span>
-          <span class="dot-line mr-2"></span>
-           <span>OUR ARTICLES </span>
-      </span>
-      <span class="text-3xl font-semibold w-3/3 text-center text-gray-1000">Latest Blog Update</span> 
-    </div>
-    <div class="flex justify-center items-center pt-4 mx-auto w-6/12 gap-4">
-      <div class="w-60 h-48 bg-white">
-        <img src="assets/images/blog/1.png" alt="Development" class="w-full h-full object-cover" />
-        <div class="flex gap-2 p-2 border-b mb-2">
-           <div class="flex flex-col">
-            <span class="text-black text-sm">Protecting your company from Fraud payment</span>
-            <span class="text-grey-950 text-xs flex justify-start items-center gap-2 pt-2">
-             <span>Edith Joy</span>
-             <span class="h-1 w-1 bg-black "></span>
-             <span>Jun 1 2024</span>
-            </span>
-            
-           </div>
-        </div>
-      </div>
-
-      <div class="w-60 h-48 bg-white">
-        <img src="assets/images/blog/2.png" alt="Development" class="w-full h-full object-cover" />
-        <div class="flex gap-2 p-2 border-b mb-2">
-           <div class="flex flex-col">
-            <span class="text-black text-sm">Protecting your company from Fraud payment</span>
-            <span class="text-grey-950 text-xs flex justify-start items-center gap-2 pt-2">
-             <span>Edith Joy</span>
-             <span class="h-1 w-1 bg-black "></span>
-             <span>Jun 1 2024</span>
-            </span>
-            
-           </div>
-        </div>
-      </div>
-   
-      <div class="w-60 h-48 bg-white">
-        <img src="assets/images/blog/3.png" alt="Development" class="w-full h-full object-cover" />
-        <div class="flex gap-2 p-2 border-b mb-2">
-           <div class="flex flex-col">
-            <span class="text-black text-sm">Carousel of Colours in Cinq Terre Beach</span>
-            <span class="text-grey-950 text-xs flex justify-start items-center gap-2 pt-2">
-             <span>Edith Joy</span>
-             <span class="h-1 w-1 bg-black "></span>
-             <span>Jun 1 2024</span>
-            </span>
-            
-           </div>
-        </div>
-      </div>
-    </div>
-    </div>
-  <!-- Blog  End-->
-     <!-- Blog Start-->
-  <div class="w-full bg-white pb-32 relative">
-     <!-- Background Image -->
-  <div class="absolute inset-0  bg-center bg-no-repeat opacity-70" style="background-image: url('assets/images/home/map.png');"></div>
- 
-    <div class="flex justify-center items-center flex-col py-8">
-      <span class="text-xs font-bold text-blue uppercase flex items-center">
-          <span class="dot mr-1"></span>
-          <span class="dot-line mr-2"></span>
-           <span>TESTIMONIAL </span>
-      </span>
-      <span class="text-3xl font-semibold w-3/3 text-center text-gray-1000">What Our Clients Say ?</span> 
-    </div>
-    <div class="flex justify-center items-center pt-4 mx-auto w-6/12 gap-4">
-   
-      <div class="w-1/2 bg-white flex flex-col items-start justify-start z-10 shadow-lg">
-        <div class="text-xs leading-5 p-2">
-          He development of reliable and scalable software soluti any OS, browser and device. We bring together deepin expertise and the latest advan.
-        </div>
-          <div class="flex justify-center items-center pl-4" >
-            <span class="flex  w-8 h-8 bg-gray-1300 rounded-full border"></span>
-            <div class="flex flex-col m-4">
-              <span>Rameli Andrea</span>
-              <span class="text-xs text-gray-950"> CEO & Founder</span>
-            </div>
-          </div>
-      </div>
-      <div class="w-1/2 bg-white flex flex-col items-start justify-start z-10 shadow-lg">
-        <div class="text-xs leading-5 p-2">
-          He development of reliable and scalable software soluti any OS, browser and device. We bring together deepin expertise and the latest advan.
-        </div>
-          <div class="flex justify-center items-center pl-4" >
-            <span class="flex  w-8 h-8 bg-gray-1300 rounded-full border"></span>
-            <div class="flex flex-col m-4">
-              <span>Abbie Ferguson</span>
-              <span class="text-xs text-gray-950"> CEO & Founder</span>
-            </div>
-          </div>
-      </div>
-   
-    </div>
-    </div>
-  <!-- Blog  End-->
-<!-- Team Members End-->
-    </div>
