@@ -1,5 +1,5 @@
-<div class="flex items-center justify-center px-2 relative">
-  <div class="w-11/12 mx-auto overflow-hidden bg-blue rounded-2xl">
+<div class="flex flex-col items-center justify-center px-2 relative">
+  <div class="w-full md:w-10/12 mx-auto overflow-hidden bg-blue rounded-2xl">
     <!-- Slider Wrapper -->
     <div
       class="flex transition-transform duration-500 ease-out"
@@ -8,27 +8,27 @@
       <div *ngFor="let slide of slides" class="relative w-full flex-shrink-0">
         <img
           [src]="slide.image"
-          class="w-full h-auto mx-auto"
+          class="w-full h-72 md:h-auto mx-auto"
           alt="Slide"
           loading="lazy"
         />
         <div
-          class="absolute inset-0 right-24 pr-80 flex flex-col justify-start items-start text-white top-16 pl-32"
+          class="absolute inset-0 md:right-24 pr-4 md:pr-80 flex flex-col justify-start items-start text-white top-4 md:top-16 pl-4 md:pl-20"
         >
           <!-- <span class="text-xl mb-1 w-5/6 text-white tracking-tighter">{{
             slide.subTitle
           }}</span> -->
           <span
-            class="font-sans leading-snug text-5xl font-extrabold mb-4 mt-1 w-5/6 tracking-wider z-50"
+            class="font-sans leading-snug text-lg md:text-4xl font-extrabold mb-2 md:mb-4 mt-1 w-full md:w-3/4 md:tracking-wider z-50"
             >{{ slide.title }}</span
           >
           <span
-            class="font-sans leading-loose text-base text-white w-5/6 tracking-tight z-50 mt-4"
+            class="leading-relaxed text-xs md:text-sm text-white w-full md:w-3/4 tracking-tight z-50 mt-0 md:mt-4"
             >{{ slide.description }}</span
           >
-          <span class="text-sm pt-14 w-5/6">
+          <span class="text-sm pt-6 md:pt-14 w-full md:w-5/6">
             <button
-              class="w-36 h-12 bg-white hover:bg-blue hover:text-white text-dark-blue font-sm px-4 rounded flex justify-center items-center gap-4 z-50 tracking-wide"
+              class="w-full md:w-36 h-10 md:h-10 bg-white hover:bg-blue hover:text-white text-dark-blue font-sm px-4 rounded flex justify-center items-center gap-2 md:gap-4 z-50 tracking-wide"
               (click)="goTo('/contact-us')"
             >
               <span>Talk to us</span>
@@ -40,7 +40,8 @@
     </div>
 
     <!-- Slider Controls -->
-    <!-- <div class="absolute top-1/2 left-1 transform -translate-y-1/2 px-4">
+    <!-- Uncomment the controls and update as needed for responsiveness
+    <div class="absolute top-1/2 left-1 transform -translate-y-1/2 px-4">
       <button class="text-grey rounded-full" (click)="prevSlide()">
         <img src="assets/images/svg/arrow-pre.svg" alt="prev" width="44px" />
       </button>
@@ -49,10 +50,12 @@
       <button class="text-grey rounded-full" (click)="nextSlide()">
         <img src="assets/images/svg/arrow-nex.svg" alt="next" width="44px" />
       </button>
-    </div> -->
+    </div>
+    -->
 
     <!-- Slider Indicators -->
-    <!-- <div class="absolute bottom-3 left-24 flex gap-2">
+    <!-- Uncomment the indicators and update as needed for responsiveness
+    <div class="absolute bottom-3 left-24 flex gap-2">
       <button
         *ngFor="let slide of slides; let i = index"
         class="w-5 h-5 p-0.5 bg-transparent border border-white rounded-full focus:outline-none hover:bg-yellow-950"
@@ -64,11 +67,16 @@
           [ngClass]="{ 'bg-yellow-950': currentSlide === i }"
         ></div>
       </button>
-    </div> -->
+    </div>
+    -->
   </div>
-  <div class="absolute -bottom-96 mx-auto flex gap-2 mb-40">
+
+  <!-- Responsive Cards Section -->
+  <div
+    class="flex flex-wrap justify-center gap-2 mt-8 relative lg:absolute lg:-bottom-56"
+  >
     <div
-      class="relative h-70 w-64 overflow-hidden bg-white rounded-sm py-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue hover:text-white"
+      class="relative h-auto w-64 overflow-hidden bg-white rounded-sm py-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue hover:text-white"
     >
       <div class="flex flex-col pt-2 px-4">
         <div class="flex justify-start items-center gap-2 mb-4">
@@ -90,15 +98,13 @@
           100+ currencies and various payment methods. One simple integration
           unlocks global access…
         </span>
-        <a
-          href="/"
-          class="text-sm text-blue font-thin hover:text-white mt-4 absolute bottom-4 right-4"
+        <a href="/" class="text-sm text-blue font-thin hover:text-white mt-4"
           >Read more</a
         >
       </div>
     </div>
     <div
-      class="relative h-72 w-64 overflow-hidden bg-white rounded-sm py-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue hover:text-white"
+      class="relative h-auto w-64 overflow-hidden bg-white rounded-sm py-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue hover:text-white"
     >
       <div class="flex flex-col pt-2 px-4">
         <div class="flex justify-start items-center gap-1 mb-4">
@@ -121,15 +127,13 @@
           platforms through a single interface, delivering tailored, contextual
           interactions.
         </span>
-        <a
-          href="/"
-          class="text-sm text-blue font-thin hover:text-white mt-4 absolute bottom-4 right-4"
+        <a href="/" class="text-sm text-blue font-thin hover:text-white mt-4"
           >Read more</a
         >
       </div>
     </div>
     <div
-      class="relative h-72 w-64 overflow-hidden bg-white rounded-sm py-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue hover:text-white"
+      class="relative h-auto w-64 overflow-hidden bg-white rounded-sm py-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue hover:text-white"
     >
       <div class="flex flex-col pt-2 px-1">
         <div class="flex justify-start items-center gap-1 mb-4">
@@ -156,15 +160,13 @@
           insights, from invoicing to reporting. Empower your business,
           regardless of size.
         </span>
-        <a
-          href="/"
-          class="text-sm text-blue font-thin hover:text-white mt-4 absolute bottom-4 right-4"
+        <a href="/" class="text-sm text-blue font-thin hover:text-white mt-4"
           >Read more</a
         >
       </div>
     </div>
     <div
-      class="relative h-70 w-64 overflow-hidden bg-white rounded-sm py-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue hover:text-white"
+      class="relative h-auto w-64 overflow-hidden bg-white rounded-sm py-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue hover:text-white"
     >
       <div class="flex flex-col pt-2 px-4">
         <div class="flex justify-start items-center gap-1 mb-4">
@@ -191,9 +193,7 @@
           transactions, identifies suspicious activities, and mitigates risks in
           real-time.
         </span>
-        <a
-          href="/"
-          class="text-sm text-blue font-thin hover:text-white mt-4 absolute bottom-4 right-4"
+        <a href="/" class="text-sm text-blue font-thin hover:text-white mt-4"
           >Read more</a
         >
       </div>

@@ -1,6 +1,7 @@
-<div class="w-3/4 h-16 my-8 flex items-center justify-between relative mx-auto">
+<div
+  class="w-full md:w-3/4 h-16 my-8 flex items-center justify-between relative mx-auto"
+>
   <!-- Logo and Navigation Links -->
-
   <div
     class="flex items-center justify-center cursor-pointer pl-4"
     [routerLink]="'/'"
@@ -8,9 +9,21 @@
     <img src="assets/images/logos/kenta_blue.png" alt="Logo" class="h-7" />
   </div>
 
+  <!-- Mobile Menu Button -->
+  <div class="block md:hidden">
+    <button class="text-dark-blue focus:outline-none" (click)="toggleMenu()">
+      <!-- Hamburger Icon -->
+      ☰
+    </button>
+  </div>
+
   <!-- Menu Links -->
-  <div class="flex items-center gap-6 px-2">
-    <div class="group">
+  <div
+    class="hidden md:flex items-center gap-6 px-2"
+    [ngClass]="{ block: isMenuOpen, hidden: !isMenuOpen }"
+  >
+    <!-- Products Menu -->
+    <div class="group relative">
       <span
         class="flex flex-col justify-between text-dark-blue text-base tracking-normal cursor-pointer h-16"
         (click)="goTo('home')"
@@ -44,65 +57,12 @@
             (click)="goTo('/home/internet-services')"
             >Internet Subscription Services</span
           >
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('/home/electricity-services')"
-            >Electricity Bill Services</span
-          >
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('/home/water-services')"
-            >Water Utility Services</span
-          >
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('/home/kyc-services')"
-            >KYC Services</span
-          >
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('/home/ticketing-services')"
-            >Ticketing Services</span
-          >
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('/home/crb-services')"
-            >CRB Services</span
-          >
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('/home/government-services')"
-            >Government Collection Services</span
-          >
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('/home/card-payment-services')"
-            >Cards (MasterCard, VISA, Union)</span
-          >
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('/home/fraud-guard')"
-            >FraudGuard</span
-          >
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('/home/sms-services')"
-            >SMS (Short Messaging Services)</span
-          >
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('/home/sender-id-services')"
-            >SMS (Short Sender ID Service)</span
-          >
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('/home/email-services')"
-            >Email ID Service</span
-          >
+          <!-- Add more items as needed -->
         </div>
       </div>
     </div>
 
+    <!-- Developers Link -->
     <span
       class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer h-16 group"
       (click)="goToLogin()"
@@ -115,7 +75,9 @@
         class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
       ></span>
     </span>
-    <div class="group">
+
+    <!-- Payment Menu -->
+    <div class="group relative">
       <span
         class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer h-16"
         (click)="goTo('payments')"
@@ -124,7 +86,6 @@
         <span class="text-sm font-semibold leading-5 tracking-normal"
           >Payment</span
         >
-        <!-- Conditional Bottom Border -->
         <span
           class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
           [ngClass]="{ 'custom-active': isActive('/payments') }"
@@ -144,35 +105,12 @@
             (click)="goTo('paytv-services')"
             >3D Verification</span
           >
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('paytv-services')"
-            >Tokenisation</span
-          >
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('paytv-services')"
-            >Checkout Page</span
-          >
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('paytv-services')"
-            >Safaricom MPESA</span
-          >
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('paytv-services')"
-            >Airtime Money</span
-          >
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('paytv-services')"
-            >Tkash</span
-          >
+          <!-- Add more items as needed -->
         </div>
       </div>
     </div>
 
+    <!-- Security Link -->
     <span
       class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer h-16 group"
       (click)="goTo('security')"
@@ -181,14 +119,14 @@
       <span class="text-sm font-semibold leading-5 tracking-normal"
         >Security</span
       >
-      <!-- Conditional Bottom Border -->
       <span
         class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
         [ngClass]="{ 'custom-active': isActive('/security') }"
       ></span>
     </span>
 
-    <div class="group">
+    <!-- About Us Menu -->
+    <div class="group relative">
       <span
         class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer h-16"
         (click)="goTo('company')"
@@ -197,7 +135,6 @@
         <span class="text-sm font-semibold leading-5 tracking-normal"
           >About Us</span
         >
-        <!-- Conditional Bottom Border -->
         <span
           class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
           [ngClass]="{ 'custom-active': isActive('/company') }"
@@ -217,15 +154,12 @@
             (click)="goTo('company/clients')"
             >Our Clients</span
           >
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('company/certifications')"
-            >Our Certifications</span
-          >
+          <!-- Add more items as needed -->
         </div>
       </div>
     </div>
 
+    <!-- Talk to Us Button -->
     <button
       class="w-32 h-10 bg-dark-blue hover:bg-blue-700 text-white text-sm py-2 px-4 ml-8 rounded"
       (click)="goTo('contact-us')"

@@ -11,6 +11,11 @@ import { Router, RouterModule } from '@angular/router'
 })
 export class MenusComponent {
   constructor(private router: Router) {}
+  isMenuOpen = false
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen
+  }
   goTo(url: string) {
     this.router.navigate([url])
   }
