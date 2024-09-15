@@ -3,6 +3,10 @@ import { RouterOutlet, Router } from '@angular/router'
 import { CommonModule } from '@angular/common'
 import { ClientsMarqueueComponent } from '../clients-marqueue/clients-marqueue.component'
 import { SliderComponent } from '../slider/slider.component'
+import { WorkingProcessComponent } from './working-process/working-process.component'
+import { DevelopersComponent } from './developers/developers.component'
+import { PartnerWithUsComponent } from './partner-with-us/partner-with-us.component'
+import { WhoWeServeComponent } from './who-we-serve/who-we-serve.component'
 export interface TabItem {
   id: number
   title: string
@@ -19,6 +23,10 @@ export interface TabItem {
     CommonModule,
     ClientsMarqueueComponent,
     SliderComponent,
+    WorkingProcessComponent,
+    DevelopersComponent,
+    PartnerWithUsComponent,
+    WhoWeServeComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
