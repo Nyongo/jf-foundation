@@ -14,6 +14,7 @@ module.exports = {
       'dark-blue': '#000D6E',
       'blue': '#0C3EB9',  
       'light-blue': '#008AFF', 
+      'bright-blue': '#0097DA',
       'metal': '#565584',
       'tahiti': '#3ab7bf',
       'silver': '#ecebff',
@@ -51,6 +52,7 @@ module.exports = {
         '1500': '#F4F9FC',
         '1600': '#F2F2F2',
         '1700': '#F5F5F5',
+        '1800': '#707070',
       },
       "slate": {
         '50': '#f8fafc',
@@ -67,7 +69,7 @@ module.exports = {
     },
     extend:{
       animation: {
-        marquee: 'marquee 20s linear infinite',
+        marquee: 'marquee 15s linear infinite',
         marquee2: 'marquee2 20s linear infinite',
       },
       keyframes: {

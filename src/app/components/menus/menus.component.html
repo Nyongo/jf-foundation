@@ -17,11 +17,11 @@
       >
         <span></span>
         <span class="text-sm font-semibold leading-5 tracking-normal"
-          >KentaPay Services</span
+          >Products</span
         >
         <!-- Conditional Bottom Border -->
         <span
-          class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-1/5 group-hover:border-dark-blue"
+          class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-3/5 group-hover:border-dark-blue"
           [ngClass]="{ 'custom-active': isActive('/home') }"
         ></span>
       </span>
@@ -103,6 +103,18 @@
       </div>
     </div>
 
+    <span
+      class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer h-16 group"
+      (click)="goToLogin()"
+    >
+      <span></span>
+      <span class="text-sm font-semibold leading-5 tracking-normal"
+        >Developers</span
+      >
+      <span
+        class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
+      ></span>
+    </span>
     <div class="group">
       <span
         class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer h-16"
@@ -183,7 +195,7 @@
       >
         <span></span>
         <span class="text-sm font-semibold leading-5 tracking-normal"
-          >Company</span
+          >About Us</span
         >
         <!-- Conditional Bottom Border -->
         <span
@@ -213,19 +225,6 @@
         </div>
       </div>
     </div>
-
-    <span
-      class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer h-16 group"
-      (click)="goToLogin()"
-    >
-      <span></span>
-      <span class="text-sm font-semibold leading-5 tracking-normal"
-        >Developers</span
-      >
-      <span
-        class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
-      ></span>
-    </span>
 
     <button
       class="w-32 h-10 bg-dark-blue hover:bg-blue-700 text-white text-sm py-2 px-4 ml-8 rounded"

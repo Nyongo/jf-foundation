@@ -13,11 +13,11 @@ export class SliderComponent implements OnInit, OnDestroy {
   slides = [
     {
       key: 1,
-      image: 'assets/images/carousel/slide1.png',
-      title: 'Embed payment on your platform',
+      image: 'assets/images/carousel/slider6@2x.png',
+      title: 'Empower Your Business with Seamless Payments',
       subTitle: 'We Are a payment gateway solution',
       description:
-        '"KentaPay is the trusted choice for hundreds of companies in Africa, ranging from innovative startups to industry-leading companies. Our cutting-edge software and APIs empower businesses to seamlessly handle a spectrum of financial transactions, from accepting payments to facilitating secure payouts. With KentaPay, companies efficiently manage and grow their operations in the dynamic landscape of online business"',
+        'Trusted by hundreds of African companies, from agile startups to industry giants, our Payment Solution revolutionizes financial transactions. Our state-of-the-art platform and APIs enable businesses to securely accept payments and disburse funds. Streamline your operations, fuel growth, and thrive in the digital economy with our comprehensive payment ecosystem.',
     },
     {
       key: 2,
@@ -46,8 +46,7 @@ export class SliderComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log('SliderComponent initialized')
-    this.startSlideShow()
+    //   this.startSlideShow()
   }
 
   startSlideShow(): void {

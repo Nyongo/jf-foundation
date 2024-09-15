@@ -13,19 +13,20 @@
           loading="lazy"
         />
         <div
-          class="absolute inset-0 right-24 pr-80 flex flex-col justify-start items-center text-white top-16 text-left"
+          class="absolute inset-0 right-24 pr-80 flex flex-col justify-start items-start text-white top-16 pl-32"
         >
-          <span class="text-xl mb-1 w-5/6 text-white tracking-tighter">{{
+          <!-- <span class="text-xl mb-1 w-5/6 text-white tracking-tighter">{{
             slide.subTitle
-          }}</span>
+          }}</span> -->
           <span
-            class="text-7xl font-extrabold mb-4 mt-1 w-5/6 pr-24 tracking-wider z-50"
+            class="font-sans leading-snug text-5xl font-extrabold mb-4 mt-1 w-5/6 tracking-wider z-50"
             >{{ slide.title }}</span
           >
-          <span class="text-base text-white w-5/6 pr-24 tracking-tight z-50">{{
-            slide.description
-          }}</span>
-          <span class="text-sm pt-12 w-5/6">
+          <span
+            class="font-sans leading-loose text-base text-white w-5/6 tracking-tight z-50 mt-4"
+            >{{ slide.description }}</span
+          >
+          <span class="text-sm pt-14 w-5/6">
             <button
               class="w-36 h-12 bg-white hover:bg-blue hover:text-white text-dark-blue font-sm px-4 rounded flex justify-center items-center gap-4 z-50 tracking-wide"
               (click)="goTo('/contact-us')"
@@ -39,7 +40,7 @@
     </div>
 
     <!-- Slider Controls -->
-    <div class="absolute top-1/2 left-1 transform -translate-y-1/2 px-4">
+    <!-- <div class="absolute top-1/2 left-1 transform -translate-y-1/2 px-4">
       <button class="text-grey rounded-full" (click)="prevSlide()">
         <img src="assets/images/svg/arrow-pre.svg" alt="prev" width="44px" />
       </button>
@@ -48,10 +49,10 @@
       <button class="text-grey rounded-full" (click)="nextSlide()">
         <img src="assets/images/svg/arrow-nex.svg" alt="next" width="44px" />
       </button>
-    </div>
+    </div> -->
 
     <!-- Slider Indicators -->
-    <div class="absolute bottom-3 left-24 flex gap-2">
+    <!-- <div class="absolute bottom-3 left-24 flex gap-2">
       <button
         *ngFor="let slide of slides; let i = index"
         class="w-5 h-5 p-0.5 bg-transparent border border-white rounded-full focus:outline-none hover:bg-yellow-950"
@@ -63,66 +64,138 @@
           [ngClass]="{ 'bg-yellow-950': currentSlide === i }"
         ></div>
       </button>
-    </div>
+    </div> -->
   </div>
-  <div class="absolute -bottom-32 mx-auto flex gap-2">
+  <div class="absolute -bottom-96 mx-auto flex gap-2 mb-40">
     <div
-      class="w-64 h-auto bg-white rounded-sm p-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue"
+      class="relative h-70 w-64 overflow-hidden bg-white rounded-sm py-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue hover:text-white"
     >
-      <img src="assets/images/svg/statistics.png" alt="Logo" class="h-8" />
-      <div class="flex flex-col">
-        <span class="text-dark-blue text-sm font-bold hover:text-white"
-          >Global Payment</span
+      <div class="flex flex-col pt-2 px-4">
+        <div class="flex justify-start items-center gap-2 mb-4">
+          <div
+            class="bg-blue rounded-full p-2 flex items-center justify-center"
+            style="background-color: rgba(59, 130, 246, 0.1)"
+          >
+            <img src="assets/images/svg/pay.png" alt="Logo" class="h-4 w-4" />
+          </div>
+          <span class="text-gray-1000 text-xs font-bold hover:text-white">
+            Payments Platform
+          </span>
+        </div>
+
+        <span
+          class="text-xs text-gray-950 leading-loose tracking-tight hover:text-white"
         >
-        <span class="text-xs text-gray-950 hover:text-white">
-          The combined power of our expert payments people, innovative modular
-          technology and unrelenting drive for ROI has earned the trust of
-          thousands of customers. Here are just a few:
+          Seamlessly accept payments worldwide from over 200 regions, supporting
+          100+ currencies and various payment methods. One simple integration
+          unlocks global access…
         </span>
+        <a
+          href="/"
+          class="text-sm text-blue font-thin hover:text-white mt-4 absolute bottom-4 right-4"
+          >Read more</a
+        >
       </div>
     </div>
-
     <div
-      class="w-64 h-auto bg-white rounded-sm p-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue"
+      class="relative h-72 w-64 overflow-hidden bg-white rounded-sm py-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue hover:text-white"
     >
-      <img src="assets/images/svg/statistics.png" alt="Logo" class="h-8" />
-      <div class="flex flex-col">
-        <span class="text-dark-blue text-sm font-bold hover:text-white"
-          >Voice</span
+      <div class="flex flex-col pt-2 px-4">
+        <div class="flex justify-start items-center gap-1 mb-4">
+          <div
+            class="bg-blue rounded-full p-2 flex items-center justify-center"
+            style="background-color: rgba(59, 130, 246, 0.1)"
+          >
+            <img src="assets/images/svg/chat.png" alt="Logo" class="h-4 w-4" />
+          </div>
+          <span class="text-gray-1000 text-xs font-bold hover:text-white">
+            Communication Platform
+          </span>
+        </div>
+
+        <span
+          class="text-xs text-gray-950 leading-loose tracking-tight hover:text-white"
         >
-        <span class="text-xs text-gray-950 hover:text-white">
-          Get unlimited talktime across all networks within East Africa
+          Our unified platform and APIs enable seamless communication across
+          multiple messaging channels. Engage customers on their preferred
+          platforms through a single interface, delivering tailored, contextual
+          interactions.
         </span>
+        <a
+          href="/"
+          class="text-sm text-blue font-thin hover:text-white mt-4 absolute bottom-4 right-4"
+          >Read more</a
+        >
       </div>
     </div>
-
     <div
-      class="w-64 h-auto bg-white rounded-sm p-4 flex justify-start gap-4 shadow-lg hover:bg-blue"
+      class="relative h-72 w-64 overflow-hidden bg-white rounded-sm py-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue hover:text-white"
     >
-      <img
-        src="assets/images/svg/search-engine-blue.png"
-        alt="Logo"
-        class="h-8"
-      />
-      <div class="flex flex-col">
-        <span class="text-dark-blue text-sm font-bold hover:text-white"
-          >Developer Community</span
+      <div class="flex flex-col pt-2 px-1">
+        <div class="flex justify-start items-center gap-1 mb-4">
+          <div
+            class="bg-blue rounded-full p-2 flex items-center justify-center"
+            style="background-color: rgba(59, 130, 246, 0.1)"
+          >
+            <img
+              src="assets/images/svg/subscribe.png"
+              alt="Logo"
+              class="h-4 w-4"
+            />
+          </div>
+          <span class="text-gray-1000 text-xs font-bold hover:text-white">
+            Revenue & Finance Solutions
+          </span>
+        </div>
+
+        <span
+          class="text-xs text-gray-950 leading-loose tracking-tight hover:text-white mx-2"
         >
-        <span class="text-xs text-gray-950 hover:text-white">
-          Access all our developer resources and integrations swiftly
+          Streamline your financial operations with our comprehensive toolkit.
+          Our integrated platform automates processes and provides real-time
+          insights, from invoicing to reporting. Empower your business,
+          regardless of size.
         </span>
+        <a
+          href="/"
+          class="text-sm text-blue font-thin hover:text-white mt-4 absolute bottom-4 right-4"
+          >Read more</a
+        >
       </div>
     </div>
-
     <div
-      class="w-64 h-auto bg-white rounded-sm p-4 flex justify-start gap-4 shadow-lg hover:bg-blue"
+      class="relative h-70 w-64 overflow-hidden bg-white rounded-sm py-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue hover:text-white"
     >
-      <img src="assets/images/svg/cloud-computing.png" alt="Logo" class="h-8" />
-      <div class="flex flex-col">
-        <span class="text-dark-blue text-sm font-bold">Electronic Payment</span>
-        <span class="text-xs text-gray-950 hover:text-white">
-          Quick response payments for all your online payment and POS
+      <div class="flex flex-col pt-2 px-4">
+        <div class="flex justify-start items-center gap-1 mb-4">
+          <div
+            class="bg-blue rounded-full p-2 flex items-center justify-center"
+            style="background-color: rgba(59, 130, 246, 0.1)"
+          >
+            <img
+              src="assets/images/svg/agreement.svg"
+              alt="Logo"
+              class="h-4 w-4"
+            />
+          </div>
+          <span class="text-gray-1000 text-xs font-bold hover:text-white">
+            Risk Management Platform
+          </span>
+        </div>
+
+        <span
+          class="text-xs text-gray-950 leading-loose tracking-tight hover:text-white"
+        >
+          Safeguard your business with our cutting-edge fraud detection and
+          prevention system. Our AI-powered platform continuously monitors
+          transactions, identifies suspicious activities, and mitigates risks in
+          real-time.
         </span>
+        <a
+          href="/"
+          class="text-sm text-blue font-thin hover:text-white mt-4 absolute bottom-4 right-4"
+          >Read more</a
+        >
       </div>
     </div>
   </div>
