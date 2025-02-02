@@ -1,125 +1,48 @@
 <div>
-  <!-- Title Section -->
-  <div class="flex justify-center items-center flex-col py-2 px-4">
-    <span class="text-xs font-bold text-blue uppercase flex items-center pb-2">
-      <span class="dot mr-1"></span>
-      <span class="dot-line mr-2"></span>
-      <span> </span>
-    </span>
-    <span
-      class="text-xl md:text-2xl font-semibold w-full text-center text-gray-1000"
-    >
-      Recognised and Accredited by
-    </span>
-  </div>
-
-  <!-- Marquee Section -->
-  <div class="relative flex overflow-x-hidden">
-    <div class="py-4 animate-marquee whitespace-nowrap bg-white flex">
-      <img
-        src="assets/images/clients/cbk.png"
-        alt="right"
-        class="object-cover h-16 md:h-24 p-4"
-      />
-      <img
-        src="assets/images/clients/cbk2.png"
-        alt="right"
-        class="object-cover h-16 md:h-24 p-4"
-      />
-      <img
-        src="assets/images/clients/cak.png"
-        alt="right"
-        class="object-cover h-16 md:h-24 p-4"
-      />
-      <img
-        src="assets/images/clients/pci.png"
-        alt="right"
-        class="object-cover h-16 md:h-24 p-4"
-      />
-      <img
-        src="assets/images/clients/icta.png"
-        alt="right"
-        class="object-cover h-16 md:h-24 p-4"
-      />
-    </div>
-    <div
-      class="absolute top-0 py-4 animate-marquee2 whitespace-nowrap bg-white flex"
-    >
-      <img
-        src="assets/images/clients/cbk.png"
-        alt="right"
-        class="object-cover h-16 md:h-24 p-4"
-      />
-      <img
-        src="assets/images/clients/cbk2.png"
-        alt="right"
-        class="object-cover h-16 md:h-24 p-4"
-      />
-      <img
-        src="assets/images/clients/cak.png"
-        alt="right"
-        class="object-cover h-16 md:h-24 p-4"
-      />
-      <img
-        src="assets/images/clients/pci.png"
-        alt="right"
-        class="object-cover h-16 md:h-24 p-4"
-      />
-      <img
-        src="assets/images/clients/icta.png"
-        alt="right"
-        class="object-cover h-16 md:h-24 p-4"
-      />
-    </div>
-  </div>
-
   <!-- Footer Section -->
-  <div class="w-full bg-black mt-12 px-4 md:px-0">
+  <div class="w-full bg-black-2 mt-12 px-4 md:px-0">
     <div
-      class="hidden md:flex flex-col md:flex-row justify-between items-start w-full md:w-10/12 lg:w-3/5 mx-auto pt-8 pb-2 text-slate-50 gap-8"
+      class="hidden md:flex flex-col md:flex-row justify-between items-start w-full md:w-10/12 lg:w-3/5 mx-auto pt-8 pb-2 text-slate-200 gap-8"
     >
-      <div class="flex flex-col items-start justify-start gap-1">
+      <div class="flex flex-col items-center justify-start gap-1">
         <img
-          src="assets/images/logos/KentaPay_white.png"
-          alt="Login"
-          class="h-16"
+          src="assets/images/logos/logo1.png"
+          alt="Travel Assist"
+          class="h-20 bg-white rounded-lg"
         />
         <span class="text-xs cursor-pointer mt-2" routerLink="/company"
-          >About KentaPay</span
+          >About Travel Assist</span
         >
-        <span class="text-xs cursor-pointer" routerLink="/company"
-          >Mission & Vision</span
-        >
-        <span class="text-xs mt-12 cursor-pointer" routerLink="/company"
+        <span class="text-xs cursor-pointer" routerLink="/company">FAQs</span>
+        <span class="text-xs mt-12 cursor-pointer" routerLink="/"
           >Discover More</span
         >
       </div>
 
       <div class="flex flex-col items-start justify-start gap-1 pt-4">
-        <span class="text-lg mb-2 cursor-pointer" routerLink="/company"
-          >PAYMENTS</span
+        <span class="text-lg mb-2">Services</span>
+        <span class="text-xs cursor-pointer" routerLink="/"
+          >Travel Insurance</span
         >
-        <span class="text-xs cursor-pointer" routerLink="/company"
-          >Card Payments</span
+        <span class="text-xs cursor-pointer" routerLink="/"
+          >Flight Booking</span
         >
-        <span class="text-xs cursor-pointer" routerLink="/payments"
-          >Mobile Payments</span
-        >
-        <span class="text-xs cursor-pointer" routerLink="/home/fraud-guard"
-          >Fraud Guard</span
+        <span class="text-xs cursor-pointer" routerLink="/"
+          >Hotel Accomodation</span
         >
       </div>
 
       <div class="flex flex-col items-start justify-start gap-1 pt-4">
-        <span class="text-lg mb-2" routerLink="/company">PRODUCTS</span>
+        <span class="text-lg mb-2">Quick Links</span>
+        <span class="text-xs cursor-pointer" routerLink="/">Home</span>
         <span class="text-xs cursor-pointer" routerLink="/home/sms-services"
-          >SMS</span
+          >About Travel Assist</span
         >
         <span class="text-xs cursor-pointer" routerLink="/home/ussd-services"
-          >USSD</span
+          >FAQs</span
         >
-        <span class="text-xs cursor-pointer" routerLink="/company"
-          >Airtime</span
+        <span class="text-xs cursor-pointer" routerLink="/home/ussd-services"
+          >Talk To Us</span
         >
       </div>
 
@@ -128,14 +51,14 @@
       >
         <span class="text-lg mb-2">Quick Contact</span>
         <span class="text-xs"
-          >If you have any questions or need help, feel free to contact with our
-          team.</span
+          >If you have any questions or need help, feel free to contact us
+          on.</span
         >
-        <span class="text-xs flex gap-2">
-          <img src="assets/images/svg/support.png" alt="Support" class="h-4" />
-          <span>(+990) 885-69569</span>
+        <span class="flex items-center gap-2">
+          <i class="bx bx-phone-call bx-md bx-tada"></i>
+          <span class="text-lg text-white">(+254) 726 713 011</span>
         </span>
-        <span class="text-xs flex">
+        <!-- <span class="text-xs flex">
           <img
             src="assets/images/svg/location-pin.svg"
             alt="phone"
@@ -144,7 +67,7 @@
           <span
             >3rd Floor, Utumishi Co-op House, Mamlaka Road, Nairobi Kenya</span
           >
-        </span>
+        </span> -->
       </div>
     </div>
     <hr
@@ -154,7 +77,7 @@
       class="w-full md:w-10/12 lg:w-3/5 mx-auto flex flex-col md:flex-row justify-between pb-8 items-center text-center"
     >
       <span class="text-xs text-gray-1100 mb-4 md:mb-0"
-        >© 2024 KentaPay. All Rights Reserved.</span
+        >© 2024 Travel Assist. All Rights Reserved.</span
       >
       <div class="flex gap-4">
         <img src="assets/images/svg/facebook.svg" alt="facebook" />

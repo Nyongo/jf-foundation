@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "kentapay-revamp": {
+    "travel-assist": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/kentapay-revamp",
+            "outputPath": "dist/travel-assist",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -30,7 +30,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/flatpickr/dist/flatpickr.min.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -67,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "kentapay-revamp:build:production"
+              "buildTarget": "travel-assist:build:production"
             },
             "development": {
-              "buildTarget": "kentapay-revamp:build:development"
+              "buildTarget": "travel-assist:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "kentapay-revamp:build"
+            "buildTarget": "travel-assist:build"
           }
         },
         "test": {

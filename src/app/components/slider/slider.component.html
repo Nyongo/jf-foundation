@@ -1,5 +1,7 @@
 <div class="flex flex-col items-center justify-center px-2 relative">
-  <div class="w-full md:w-10/12 mx-auto overflow-hidden bg-blue rounded-2xl">
+  <div
+    class="w-full md:w-10/12 mx-auto overflow-hidden bg-blue rounded-2xl mt-4"
+  >
     <!-- Slider Wrapper -->
     <div
       class="flex transition-transform duration-500 ease-out"
@@ -13,17 +15,17 @@
           loading="lazy"
         />
         <div
-          class="absolute inset-0 md:right-24 pr-4 md:pr-80 flex flex-col justify-start items-start text-white top-4 md:top-16 pl-4 md:pl-20"
+          class="absolute inset-0 md:right-24 pr-4 md:pr-80 flex flex-col justify-start items-start text-white top-4 md:top-2 pl-4 md:pl-20"
         >
-          <!-- <span class="text-xl mb-1 w-5/6 text-white tracking-tighter">{{
+          <span class="text-xl w-5/6 text-white tracking-tighter mt-2">{{
             slide.subTitle
-          }}</span> -->
+          }}</span>
           <span
-            class="font-sans leading-snug text-lg md:text-4xl font-extrabold mb-2 md:mb-4 mt-1 w-full md:w-3/4 md:tracking-wider z-50"
+            class="font-sans leading-snug text-lg text-white md:text-4xl font-extrabold mb-2 md:mb-2 w-full md:w-3/4 md:tracking-wider z-50"
             >{{ slide.title }}</span
           >
           <span
-            class="leading-relaxed text-xs md:text-sm text-white w-full md:w-3/4 tracking-tight z-50 mt-0 md:mt-4"
+            class="leading-tighter md:leading-relaxed text-xs md:text-sm text-white bg-black-3 rounded-2xl p-4 md:w-3/4 tracking-wider z-50 mt-0 md:mt-4"
             >{{ slide.description }}</span
           >
           <span class="text-sm pt-6 md:pt-14 w-full md:w-5/6">
@@ -31,7 +33,7 @@
               class="w-full md:w-36 h-10 md:h-10 bg-white hover:bg-blue hover:text-white text-dark-blue font-sm px-4 rounded flex justify-center items-center gap-2 md:gap-4 z-50 tracking-wide"
               (click)="goTo('/contact-us')"
             >
-              <span>Talk to us</span>
+              <span class="text-blue font-bold">Talk to us</span>
               <i class="bx bx-right-arrow-alt text-blue"></i>
             </button>
           </span>
@@ -73,111 +75,12 @@
 
   <!-- Responsive Cards Section -->
   <div
-    class="flex flex-wrap justify-center gap-2 mt-8 relative lg:absolute lg:-bottom-56"
+    class="flex flex-wrap w-full sm:w-96 justify-center gap-2 mt-8 relative lg:absolute lg:-top-3 lg:right-32"
   >
     <div
-      class="relative h-auto w-64 overflow-hidden bg-white rounded-sm py-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue hover:text-white"
+      class="relative h-auto w-full overflow-hidden bg-white rounded-lg py-4 flex justify-start gap-4 shadow-lg cursor-pointer"
     >
-      <div class="flex flex-col pt-2 px-4 h-full">
-        <div class="flex justify-start items-center gap-2 mb-4">
-          <div
-            class="bg-blue rounded-full p-2 flex items-center justify-center"
-            style="background-color: rgba(59, 130, 246, 0.1)"
-          >
-            <img src="assets/images/svg/pay.png" alt="Logo" class="h-4 w-4" />
-          </div>
-          <span class="text-gray-1000 text-xs font-bold hover:text-white">
-            Payments Platform
-          </span>
-        </div>
-
-        <span
-          class="text-xs text-gray-950 leading-loose tracking-tight hover:text-white flex-grow"
-        >
-          Seamlessly accept payments worldwide from over 200 regions, supporting
-          100+ currencies and various payment methods. One simple integration
-          unlocks global access…
-        </span>
-
-        <a
-          href="/"
-          class="text-sm text-blue font-thin hover:text-white mt-4 self-end"
-          >Read more</a
-        >
-      </div>
-    </div>
-    <div
-      class="relative h-auto w-64 overflow-hidden bg-white rounded-sm py-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue hover:text-white"
-    >
-      <div class="flex flex-col pt-2 px-4 h-full">
-        <div class="flex justify-start items-center gap-2 mb-4">
-          <div
-            class="bg-blue rounded-full p-2 flex items-center justify-center"
-            style="background-color: rgba(59, 130, 246, 0.1)"
-          >
-            <img src="assets/images/svg/chat.png" alt="Logo" class="h-4 w-4" />
-          </div>
-          <span class="text-gray-1000 text-xs font-bold hover:text-white">
-            Communication Platform
-          </span>
-        </div>
-
-        <span
-          class="text-xs text-gray-950 leading-loose tracking-tight hover:text-white flex-grow"
-        >
-          Our unified platform and APIs enable seamless communication across
-          multiple messaging channels. Engage customers on their preferred
-          platforms through a single interface, delivering tailored, contextual
-          interactions.
-        </span>
-
-        <a
-          href="/"
-          class="text-sm text-blue font-thin hover:text-white mt-4 self-end"
-          >Read more</a
-        >
-      </div>
-    </div>
-    <div
-      class="relative h-auto w-64 overflow-hidden bg-white rounded-sm py-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue hover:text-white"
-    >
-      <div class="flex flex-col pt-2 px-4 h-full">
-        <div class="flex justify-start items-center gap-2 mb-4">
-          <div
-            class="bg-blue rounded-full p-2 flex items-center justify-center"
-            style="background-color: rgba(59, 130, 246, 0.1)"
-          >
-            <img
-              src="assets/images/svg/subscribe.png"
-              alt="Logo"
-              class="h-4 w-4"
-            />
-          </div>
-          <span class="text-gray-1000 text-xs font-bold hover:text-white">
-            Revenue & Finance Solutions
-          </span>
-        </div>
-
-        <span
-          class="text-xs text-gray-950 leading-loose tracking-tight hover:text-white mx-2 flex-grow"
-        >
-          Streamline your financial operations with our comprehensive toolkit.
-          Our integrated platform automates processes and provides real-time
-          insights, from invoicing to reporting. Empower your business,
-          regardless of size.
-        </span>
-
-        <a
-          href="/"
-          class="text-sm text-blue font-thin hover:text-white mt-4 self-end"
-          >Read more</a
-        >
-      </div>
-    </div>
-    <div
-      class="relative h-auto w-64 overflow-hidden bg-white rounded-sm py-4 flex justify-start gap-4 shadow-lg cursor-pointer hover:bg-blue hover:text-white"
-    >
-      <div class="flex flex-col pt-2 px-4 h-full">
+      <div class="flex flex-col pt-2 px-4 h-full w-full">
         <div class="flex justify-start items-center gap-2 mb-4">
           <div
             class="bg-blue rounded-full p-2 flex items-center justify-center"
@@ -189,25 +92,275 @@
               class="h-4 w-4"
             />
           </div>
-          <span class="text-gray-1000 text-xs font-bold hover:text-white">
-            Risk Management Platform
+          <span class="text-gray-1000 text-sm font-bold hover:text-white">
+            Get Travel Insurance Now...
           </span>
         </div>
 
-        <span
-          class="text-xs text-gray-950 leading-loose tracking-tight hover:text-white flex-grow"
+        <form
+          [formGroup]="form"
+          (ngSubmit)="onSubmit()"
+          class="bg-transparent flex flex-col"
         >
-          Safeguard your business with our cutting-edge fraud detection and
-          prevention system. Our AI-powered platform continuously monitors
-          transactions, identifies suspicious activities, and mitigates risks in
-          real-time.
-        </span>
+          <!-- Family Name -->
+          <div class="mb-2 flex justify-between items-center w-full">
+            <label
+              class="block text-gray-700 text-xs font-bold mb-2 pr-1 w-1/2 uppercase"
+              for="familyName"
+            >
+              Family Name
+            </label>
+            <div class="w-full">
+              <input
+                formControlName="familyName"
+                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:shadow-outline"
+                id="familyName"
+                type="text"
+                placeholder="Full Name"
+              />
+              <div
+                *ngIf="f['familyName'].touched && f['familyName'].invalid"
+                class="text-red-200 text-xs italic w-full"
+              >
+                <span *ngIf="f['familyName'].errors?.['required']"
+                  >Family name is required.</span
+                >
+                <span *ngIf="f['familyName'].errors?.['minlength']"
+                  >Family name must be at least 2 characters long.</span
+                >
+              </div>
+            </div>
+          </div>
 
-        <a
-          href="/"
-          class="text-sm text-blue font-thin hover:text-white mt-4 self-end"
-          >Read more</a
-        >
+          <!-- Other Names -->
+          <div class="mb-2 flex justify-between items-center w-full">
+            <label
+              class="block text-gray-700 text-xs font-bold mb-2 pr-1 w-1/2 uppercase"
+              for="fullname"
+            >
+              Other Names
+            </label>
+            <div class="w-full">
+              <input
+                formControlName="fullname"
+                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:shadow-outline"
+                id="fullname"
+                type="text"
+                placeholder="Other Names"
+              />
+              <div
+                *ngIf="f['fullname'].touched && f['fullname'].invalid"
+                class="text-red-200 text-xs italic w-full"
+              >
+                <span *ngIf="f['fullname'].errors?.['required']"
+                  >Other names are required.</span
+                >
+                <span *ngIf="f['fullname'].errors?.['minlength']"
+                  >Other names must be at least 2 characters long.</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="mb-2 flex justify-between items-center w-full">
+            <label
+              class="block text-gray-700 text-xs font-bold mb-2 pr-1 w-1/2 uppercase"
+              for="email"
+            >
+              Email
+            </label>
+            <div class="w-full">
+              <input
+                formControlName="email"
+                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:shadow-outline"
+                id="email"
+                type="email"
+                placeholder="Email Address"
+              />
+              <div
+                *ngIf="f['email'].touched && f['email'].invalid"
+                class="text-red-200 text-xs italic w-full"
+              >
+                <span *ngIf="f['email'].errors?.['required']"
+                  >Email is required.</span
+                >
+                <span *ngIf="f['email'].errors?.['email']"
+                  >Invalid email format.</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone -->
+          <div class="mb-2 flex justify-between items-center w-full">
+            <label
+              class="block text-gray-700 text-xs font-bold mb-2 pr-1 w-1/2 uppercase"
+              for="phone"
+            >
+              Phone
+            </label>
+            <div class="w-full">
+              <input
+                formControlName="phone"
+                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:shadow-outline"
+                id="phone"
+                type="text"
+                placeholder="Phone Number"
+              />
+              <div
+                *ngIf="f['phone'].touched && f['phone'].invalid"
+                class="text-red-200 text-xs italic w-full"
+              >
+                <span *ngIf="f['phone'].errors?.['required']"
+                  >Phone number is required.</span
+                >
+                <span *ngIf="f['phone'].errors?.['invalidPhoneNumber']"
+                  >Invalid phone number format. Use country code (e.g.,
+                  +254...).</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Date of Birth -->
+          <div class="mb-2 flex justify-between items-center w-full">
+            <label
+              class="block text-gray-700 text-xs font-bold mb-2 pr-1 w-1/2 uppercase"
+              for="dob"
+            >
+              Date Of Birth
+            </label>
+            <div class="w-full">
+              <app-datepicker formControlName="dob"></app-datepicker>
+              <div
+                *ngIf="f['dob'].touched && f['dob'].invalid"
+                class="text-red-200 text-xs italic w-full"
+              >
+                <span *ngIf="f['dob'].errors?.['required']"
+                  >Date of birth is required.</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Country Of Origin -->
+          <div class="mb-2 flex justify-between items-center w-full">
+            <label
+              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pr-1 w-1/2 uppercase"
+              for="grid-state"
+            >
+              Country Of Origin
+            </label>
+            <div class="relative w-full">
+              <select
+                formControlName="country"
+                class="block appearance-none w-full bg-white border border-gray-200 text-gray-700 text-sm leading-tight py-2.5 px-4 rounded focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-state"
+              >
+                <option value="">Select your country</option>
+                <option>Kenya</option>
+                <option>Tanzania</option>
+                <option>Uganda</option>
+              </select>
+              <div
+                *ngIf="f['country'].touched && f['country'].invalid"
+                class="text-red-200 text-xs italic w-full"
+              >
+                <span *ngIf="f['country'].errors?.['required']"
+                  >Country of origin is required.</span
+                >
+              </div>
+              <div
+                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+              >
+                <svg
+                  class="fill-current h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Departure Date -->
+          <div class="mb-2 flex justify-between items-center w-full">
+            <label
+              class="block text-gray-700 text-xs font-bold mb-2 pr-1 w-1/2 uppercase"
+              for="departure-date"
+            >
+              Departure Date
+            </label>
+            <div class="w-full">
+              <app-datepicker
+                formControlName="departureDate"
+                [minDate]="today"
+              ></app-datepicker>
+              <div
+                *ngIf="f['departureDate'].touched && f['departureDate'].invalid"
+                class="text-red-200 text-xs italic w-full"
+              >
+                <span *ngIf="f['departureDate'].errors?.['required']"
+                  >Departure date is required.</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Destination -->
+          <div class="mb-2 flex justify-between items-center w-full">
+            <label
+              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pr-1 w-1/2 uppercase"
+              for="destination"
+            >
+              Destination
+            </label>
+            <div class="relative w-full">
+              <select
+                formControlName="destination"
+                class="block appearance-none w-full bg-white border border-gray-200 text-gray-700 text-sm leading-tight py-2.5 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="destination"
+              >
+                <option value="">Select your destination</option>
+                <option>Kenya</option>
+                <option>Tanzania</option>
+                <option>Uganda</option>
+              </select>
+              <div
+                *ngIf="f['destination'].touched && f['destination'].invalid"
+                class="text-red-200 text-xs italic w-full"
+              >
+                <span *ngIf="f['destination'].errors?.['required']"
+                  >Destination is required.</span
+                >
+              </div>
+              <div
+                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+              >
+                <svg
+                  class="fill-current h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="mt-4 bg-black-3 text-white hover:text-blue rounded py-2 px-4"
+          >
+            Submit
+          </button>
+        </form>
       </div>
     </div>
   </div>

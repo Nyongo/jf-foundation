@@ -3,6 +3,7 @@
 module.exports = {
   content: [
     "./src/**/*.{html,ts}",
+     "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js"
   ],
   theme: {
     colors: {
@@ -12,7 +13,7 @@ module.exports = {
       'kt-white': '#E5E5E5',
       'purple': '#3f3cbb',
       'dark-blue': '#000D6E',
-      'blue': '#0C3EB9',  
+      'blue': '#6581FE',  
       'light-blue': '#008AFF', 
       'bright-blue': '#0097DA',
       'metal': '#565584',
@@ -66,6 +67,10 @@ module.exports = {
         '800': '#1e293b',
         '900': '#0f172a',
       },
+      'red':{
+        '100': '#800000',
+        '200': '#BF0000'
+      }
     },
     extend:{
       animation: {

@@ -3,17 +3,21 @@
 >
   <!-- Logo and Navigation Links -->
   <div
-    class="flex items-center justify-center cursor-pointer pl-4"
+    class="md:flex items-center justify-center cursor-pointer pl-4"
     [routerLink]="'/'"
   >
-    <img src="assets/images/logos/kenta_blue.png" alt="Logo" class="h-7" />
+    <img
+      src="assets/images/logos/logo1.png"
+      alt="Logo"
+      class="h-34 w-40 md:w-60"
+    />
   </div>
 
   <!-- Mobile Menu Button -->
   <div class="block md:hidden">
     <button class="text-dark-blue focus:outline-none" (click)="toggleMenu()">
       <!-- Hamburger Icon -->
-      ☰
+      <i class="bx bx-menu bx-md"></i>
     </button>
   </div>
 
@@ -22,146 +26,87 @@
     class="hidden md:flex items-center gap-6 px-2"
     [ngClass]="{ block: isMenuOpen, hidden: !isMenuOpen }"
   >
-    <!-- Products Menu -->
-    <div class="group relative">
-      <span
-        class="flex flex-col justify-between text-dark-blue text-base tracking-normal cursor-pointer h-16"
-        (click)="goTo('home')"
-      >
-        <span></span>
-        <span class="text-sm font-semibold leading-5 tracking-normal"
-          >Products</span
-        >
-        <!-- Conditional Bottom Border -->
-        <span
-          class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-3/5 group-hover:border-dark-blue"
-          [ngClass]="{ 'custom-active': isActive('/home') }"
-        ></span>
-      </span>
-      <div
-        class="hidden group-hover:block absolute top-full min-w-60 bg-white text-black py-4 shadow-lg z-50 border rounded-lg"
-      >
-        <div class="flex flex-col items-start space-y-1 px-4">
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('/home/ussd-services')"
-            >USSD Services</span
-          >
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('/home/paytv-services')"
-            >PayTv Services</span
-          >
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('/home/internet-services')"
-            >Internet Subscription Services</span
-          >
-          <!-- Add more items as needed -->
-        </div>
-      </div>
-    </div>
-
-    <!-- Developers Link -->
+    <!-- Home Menu -->
     <span
-      class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer h-16 group"
-      (click)="goToLogin()"
+      class="flex flex-col justify-between text-dark-blue text-base tracking-normal cursor-pointer md:h-16"
+      (click)="goTo('home')"
     >
       <span></span>
-      <span class="text-sm font-semibold leading-5 tracking-normal"
-        >Developers</span
-      >
       <span
-        class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
+        class="text-sm font-semibold leading-5 tracking-normal"
+        [ngClass]="{ 'text-blue': isActive('/home') }"
+        >Home</span
+      >
+      <!-- Conditional Bottom Border -->
+      <span
+        class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-3/5 group-hover:border-dark-blue"
+        [ngClass]="{ 'custom-active': isActive('/home') }"
       ></span>
     </span>
 
-    <!-- Payment Menu -->
-    <div class="group relative">
-      <span
-        class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer h-16"
-        (click)="goTo('payments')"
-      >
-        <span></span>
-        <span class="text-sm font-semibold leading-5 tracking-normal"
-          >Payment</span
-        >
-        <span
-          class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
-          [ngClass]="{ 'custom-active': isActive('/payments') }"
-        ></span>
-      </span>
-      <div
-        class="hidden group-hover:block absolute top-full min-w-60 bg-white text-black py-4 shadow-lg z-50 border rounded-lg"
-      >
-        <div class="flex flex-col items-start space-y-1 px-4">
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('payments/cards')"
-            >Cards (MasterCard, VISA, Union)</span
-          >
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('paytv-services')"
-            >3D Verification</span
-          >
-          <!-- Add more items as needed -->
-        </div>
-      </div>
-    </div>
-
-    <!-- Security Link -->
+    <!-- Travel Insurance -->
     <span
-      class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer h-16 group"
-      (click)="goTo('security')"
+      class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer md:h-16"
+      (click)="goTo('travel-insurance')"
     >
       <span></span>
       <span class="text-sm font-semibold leading-5 tracking-normal"
-        >Security</span
+        >Travel Insurance</span
       >
       <span
         class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
-        [ngClass]="{ 'custom-active': isActive('/security') }"
+        [ngClass]="{ 'custom-active': isActive('/travel-insurance') }"
       ></span>
     </span>
 
-    <!-- About Us Menu -->
-    <div class="group relative">
+    <!-- Flight Booking -->
+    <span
+      class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer md:h-16"
+      (click)="goTo('flight-booking')"
+    >
+      <span></span>
+      <span class="text-sm font-semibold leading-5 tracking-normal"
+        >Flight Booking</span
+      >
       <span
-        class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer h-16"
-        (click)="goTo('company')"
+        class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
+        [ngClass]="{ 'custom-active': isActive('/flight-booking') }"
+      ></span>
+    </span>
+
+    <!-- Hotel Accomodation -->
+    <span
+      class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer md:h-16"
+      (click)="goTo('hotel-accomodation')"
+    >
+      <span></span>
+      <span class="text-sm font-semibold leading-5 tracking-normal"
+        >Hotel Accomodation</span
       >
-        <span></span>
-        <span class="text-sm font-semibold leading-5 tracking-normal"
-          >About Us</span
-        >
-        <span
-          class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
-          [ngClass]="{ 'custom-active': isActive('/company') }"
-        ></span>
-      </span>
-      <div
-        class="hidden group-hover:block absolute top-full min-w-60 bg-white text-black py-4 shadow-lg z-50 border rounded-lg"
+      <span
+        class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
+        [ngClass]="{ 'custom-active': isActive('/flight-booking') }"
+      ></span>
+    </span>
+
+    <!-- About Us -->
+    <span
+      class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer md:h-16"
+      (click)="goTo('about-us')"
+    >
+      <span></span>
+      <span class="text-sm font-semibold leading-5 tracking-normal"
+        >About Us</span
       >
-        <div class="flex flex-col items-start space-y-1 px-4">
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('company/team')"
-            >Our Team</span
-          >
-          <span
-            class="flex items-center text-base tracking-normal cursor-pointer hover:text-blue"
-            (click)="goTo('company/clients')"
-            >Our Clients</span
-          >
-          <!-- Add more items as needed -->
-        </div>
-      </div>
-    </div>
+      <span
+        class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
+        [ngClass]="{ 'custom-active': isActive('/about-us') }"
+      ></span>
+    </span>
 
     <!-- Talk to Us Button -->
     <button
-      class="w-32 h-10 bg-dark-blue hover:bg-blue-700 text-white text-sm py-2 px-4 ml-8 rounded"
+      class="w-32 h-10 bg-blue hover:bg-blue-700 text-white text-sm py-2 px-4 ml-8 rounded hidden md:block"
       (click)="goTo('contact-us')"
     >
       Talk to us
