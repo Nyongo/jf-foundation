@@ -259,9 +259,9 @@
                 id="grid-state"
               >
                 <option value="">Select your country</option>
-                <option>Kenya</option>
-                <option>Tanzania</option>
-                <option>Uganda</option>
+                <option *ngFor="let country of countries" value="country.name">
+                  {{ country.name }}
+                </option>
               </select>
               <div
                 *ngIf="f['country'].touched && f['country'].invalid"
@@ -326,9 +326,9 @@
                 id="destination"
               >
                 <option value="">Select your destination</option>
-                <option>Kenya</option>
-                <option>Tanzania</option>
-                <option>Uganda</option>
+                <option *ngFor="let country of countries" value="country.name">
+                  {{ country.name }}
+                </option>
               </select>
               <div
                 *ngIf="f['destination'].touched && f['destination'].invalid"
