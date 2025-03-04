@@ -9,17 +9,12 @@ import {
   Validators,
 } from '@angular/forms'
 import { phoneNumberValidator } from '../../validators/phone-number.validator'
-import { HttpClient, HttpClientModule } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 
 @Component({
   selector: 'app-slider',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    DatepickerComponent,
-    HttpClientModule,
-  ],
+  imports: [CommonModule, ReactiveFormsModule, DatepickerComponent],
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss'],
 })

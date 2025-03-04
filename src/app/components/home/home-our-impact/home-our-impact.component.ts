@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { HttpClient, HttpClientModule } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 import { Subscription } from 'rxjs'
 import { DecimalPipe } from '@angular/common'
 
 @Component({
   selector: 'app-home-our-impact',
   standalone: true,
-  imports: [HttpClientModule, DecimalPipe],
+  imports: [DecimalPipe],
   templateUrl: './home-our-impact.component.html',
   styleUrl: './home-our-impact.component.scss',
 })
