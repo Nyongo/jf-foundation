@@ -17,4 +17,4 @@ RUN npm run build --configuration=production
 EXPOSE 4000
 
 # Start the Angular Universal server
-CMD ["node", "dist/travel-assist/server/server.mjs"]
+CMD ["node", "dist/website-foundation/server/server.mjs"]

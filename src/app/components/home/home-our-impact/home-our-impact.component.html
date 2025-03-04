@@ -1,0 +1,122 @@
+<div class="w-full bg-slate-100 mb-12 mt-4 py-12">
+  <div
+    class="w-full md:w-10/12 lg:w-9/12 flex flex-col md:flex-row justify-center items-start py-4 mx-auto"
+  >
+    <div class="flex flex-col md:w-7/12 lg:w-1/2 px-4">
+      <span
+        class="text-xl md:text-2xl font-semibold text-gray-1000 text-left mt-4 mb-2 tracking-wide"
+      >
+        Our Impact
+      </span>
+      <span
+        class="text-xs md:text-xs text-gray-950 text-left pt-2 leading-5 tracking-normal w-full md:w-11/12"
+      >
+        Together with our Partners <br />
+        We've managed to positively impact on the lives of many students.
+      </span>
+      <div class="pt-4 flex flex-col gap-2">
+        <!-- Statistics Section -->
+        <div class="w-full flex justify-start items-center">
+          <img
+            src="assets/images/svg/arrow-right-blue.png"
+            alt="Arrow"
+            class="mr-2 w-2"
+          />
+          <div class="flex flex-col justify-center items-center">
+            <div class="flex mb-1 w-full justify-center items-center">
+              <span
+                class="font-sans text-xl md:text-xl text-bright-blue font-extrabold flex items-center"
+                >{{ metrics.totalNoOfSchools | number: '1.0-0' }}
+                <span class="text-sm"> - </span>&nbsp;&nbsp;
+              </span>
+              <span
+                class="text-md md:text-xs font-bold text-black tracking-tighter"
+              >
+                Schools Improved</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="w-full flex justify-start items-center">
+          <img
+            src="assets/images/svg/arrow-right-blue.png"
+            alt="Arrow"
+            class="mr-2 w-2"
+          />
+          <div class="flex flex-col justify-center items-center">
+            <div class="flex mb-1 w-full justify-center items-center">
+              <span
+                class="font-sans text-xl md:text-xl text-bright-blue font-extrabold flex items-center"
+                >{{ metrics.totalEnrolment | number: '1.0-0' }}&nbsp;&nbsp;
+              </span>
+              <span
+                class="text-xs md:text-md font-bold text-black tracking-tighter"
+              >
+                - Students Educated
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full flex justify-start items-center">
+          <img
+            src="assets/images/svg/arrow-right-blue.png"
+            alt="Arrow"
+            class="mr-2 w-2"
+          />
+          <div class="flex flex-col justify-center items-center">
+            <div class="flex mb-1 w-full justify-center items-center">
+              <span
+                class="font-sans text-xl md:text-xl text-bright-blue font-extrabold flex items-center"
+                >{{
+                  metrics.directorsStat.female | number: '1.0-0'
+                }}&nbsp;&nbsp;
+              </span>
+              <span
+                class="text-xs md:text-md font-bold text-black tracking-tighter"
+              >
+                - Female School Directors Empowered
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full flex justify-start items-center">
+          <img
+            src="assets/images/svg/arrow-right-blue.png"
+            alt="Arrow"
+            class="mr-2 w-2"
+          />
+          <div class="flex flex-col justify-center items-center">
+            <div class="flex mb-1 w-full justify-center items-center">
+              <span
+                class="font-sans text-xl md:text-xl text-bright-blue font-extrabold flex items-center"
+                >{{ metrics.totalTeachers | number: '1.0-0' }}&nbsp;&nbsp;
+              </span>
+              <span
+                class="text-xs md:text-md font-bold text-black tracking-tighter"
+              >
+                - Teachers Impacted
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span
+        class="text-xs md:text-xs text-gray-950 text-left pt-2 leading-5 tracking-normal w-full md:w-11/12"
+      >
+        We know that children learn better when their physical, nutritional, and
+        social needs are met too. So we have hand-picked several organizations
+        to partner with that provide additional support to our schools.
+      </span>
+    </div>
+    <!-- Image Section -->
+    <div class="w-full md:w-5/12 lg:w-1/2 mt-8 md:mt-0 px-4">
+      <img
+        src="assets/images/home/africa.svg"
+        alt="Africa"
+        class="w-full h-auto"
+      />
+    </div>
+  </div>
+</div>

@@ -6,11 +6,14 @@
     class="md:flex items-center justify-center cursor-pointer pl-4"
     [routerLink]="'/'"
   >
-    <img
-      src="assets/images/logos/logo1.png"
-      alt="Logo"
-      class="h-34 w-40 md:w-60"
-    />
+    <div class="flex items-center">
+      <img
+        src="assets/images/logos/jf-logo.png"
+        alt="Logo"
+        class="h-28 w-28 md:w-28"
+      />
+      <span class="font-sans text-xl font-black text-blue">FOUNDATION</span>
+    </div>
   </div>
 
   <!-- Mobile Menu Button -->
@@ -34,7 +37,7 @@
       <span></span>
       <span
         class="text-sm font-semibold leading-5 tracking-normal"
-        [ngClass]="{ 'text-blue': isActive('/home') }"
+        [ngClass]="{ 'text-black': isActive('/home') }"
         >Home</span
       >
       <!-- Conditional Bottom Border -->
@@ -44,48 +47,59 @@
       ></span>
     </span>
 
-    <!-- Travel Insurance -->
     <span
       class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer md:h-16"
-      (click)="goTo('travel-insurance')"
+      (click)="goTo('our-impact')"
     >
       <span></span>
       <span class="text-sm font-semibold leading-5 tracking-normal"
-        >Travel Insurance</span
+        >Our Impact</span
       >
       <span
         class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
-        [ngClass]="{ 'custom-active': isActive('/travel-insurance') }"
+        [ngClass]="{ 'custom-active': isActive('/our-impact') }"
       ></span>
     </span>
 
-    <!-- Flight Booking -->
     <span
       class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer md:h-16"
-      (click)="goTo('flight-booking')"
+      (click)="goTo('our-funders')"
     >
       <span></span>
       <span class="text-sm font-semibold leading-5 tracking-normal"
-        >Flight Booking</span
+        >Our Funders</span
       >
       <span
         class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
-        [ngClass]="{ 'custom-active': isActive('/flight-booking') }"
+        [ngClass]="{ 'custom-active': isActive('/our-partners') }"
       ></span>
     </span>
 
-    <!-- Hotel Accomodation -->
     <span
       class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer md:h-16"
-      (click)="goTo('hotel-accomodation')"
+      (click)="goTo('our-partners')"
     >
       <span></span>
       <span class="text-sm font-semibold leading-5 tracking-normal"
-        >Hotel Accomodation</span
+        >Our Partners</span
       >
       <span
         class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
-        [ngClass]="{ 'custom-active': isActive('/flight-booking') }"
+        [ngClass]="{ 'custom-active': isActive('/our-partners') }"
+      ></span>
+    </span>
+
+    <span
+      class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer md:h-16"
+      (click)="goTo('case-studies')"
+    >
+      <span></span>
+      <span class="text-sm font-semibold leading-5 tracking-normal"
+        >Case Studies</span
+      >
+      <span
+        class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
+        [ngClass]="{ 'custom-active': isActive('/case-studies') }"
       ></span>
     </span>
 

@@ -278,11 +278,11 @@ export class SliderComponent implements OnInit, OnDestroy {
   slides = [
     {
       key: 1,
-      image: 'assets/images/carousel/travelinsurance.jpg',
-      title: 'Travel Smart, Travel Easy',
-      subTitle: 'Planning for a trip?',
+      image: 'assets/images/carousel/classroom.jpg',
+      title: 'Every child should have access to an education.',
+      subTitle: 'At JackFruit Foundation we believe that...',
       description:
-        'At Travel Assist, we believe that traveling should be an enriching experience, not a stressful one. That’s why we’re here to streamline your journey from start to finish. With expert planning, personalized recommendations, and real-time support, we take the hassle out of travel so you can focus on enjoying the adventure. Whether it’s navigating new destinations or managing last-minute changes, we’ve got you covered. Travel smarter, stress less, and make the most of every moment with Travel Assist — where exploring the world is made easy.',
+        'It doesn’t matter where they live or how much their family earns, all children have the right to learn. Jackfruit Finance improves children’s access to education by helping schools',
     },
     {
       key: 2,

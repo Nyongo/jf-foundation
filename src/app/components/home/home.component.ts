@@ -7,6 +7,8 @@ import { WorkingProcessComponent } from './working-process/working-process.compo
 import { DevelopersComponent } from './developers/developers.component'
 import { PartnerWithUsComponent } from './partner-with-us/partner-with-us.component'
 import { WhoWeServeComponent } from './who-we-serve/who-we-serve.component'
+import { HomeOurImpactComponent } from './home-our-impact/home-our-impact.component'
+
 export interface TabItem {
   id: number
   title: string
@@ -27,13 +29,15 @@ export interface TabItem {
     DevelopersComponent,
     PartnerWithUsComponent,
     WhoWeServeComponent,
+    HomeOurImpactComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
   constructor(private router: Router) {}
-  title = 'KentaPay'
+
+  title = 'JackFruit Foundation'
   dropdownOpen = false
   tabs: TabItem[] = [
     {

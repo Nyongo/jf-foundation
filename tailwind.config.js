@@ -13,9 +13,10 @@ module.exports = {
       'kt-white': '#E5E5E5',
       'purple': '#3f3cbb',
       'dark-blue': '#000D6E',
-      'blue': '#6581FE',  
+      'blue': '#5EB0BE',  
       'light-blue': '#008AFF', 
       'bright-blue': '#0097DA',
+      
       'metal': '#565584',
       'tahiti': '#3ab7bf',
       'silver': '#ecebff',
@@ -30,7 +31,7 @@ module.exports = {
         '900' : '#B01663',
       },
       'yellow': {
-        '900': '#F59E02',
+        '900': '#FEE200',
         '950': '#F99F1B',
       },
       "gray": {  
