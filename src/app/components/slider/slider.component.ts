@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common'
 import { Component, OnDestroy, OnInit, NgZone } from '@angular/core'
-import { Router } from '@angular/router'
 import { DatepickerComponent } from '../datepicker/datepicker.component'
 import {
   FormBuilder,
@@ -9,8 +8,6 @@ import {
   Validators,
 } from '@angular/forms'
 import { phoneNumberValidator } from '../../validators/phone-number.validator'
-import { HttpClient } from '@angular/common/http'
-
 @Component({
   selector: 'app-slider',
   standalone: true,
@@ -273,7 +270,7 @@ export class SliderComponent implements OnInit, OnDestroy {
   slides = [
     {
       key: 1,
-      image: 'assets/images/carousel/classroom.jpg',
+      image: 'assets/images/carousel/slider1.jpg',
       title: 'Every child should have access to an education.',
       subTitle: 'At JackFruit Foundation we believe that...',
       description:
@@ -281,30 +278,28 @@ export class SliderComponent implements OnInit, OnDestroy {
     },
     {
       key: 2,
-      image: 'assets/images/carousel/slide1.png',
-      title: 'Embed payment on your platform',
-      subTitle: 'We Are a payment gateway solution',
+      image: 'assets/images/carousel/classroom.jpg',
+      title: 'Every child should have access to an education.',
+      subTitle: 'At JackFruit Foundation we believe that...',
       description:
-        '"KentaPay is the trusted choice for hundreds of companies in Africa, ranging from innovative startups to industry-leading companies. Our cutting-edge software and APIs empower businesses to seamlessly handle a spectrum of financial transactions, from accepting payments to facilitating secure payouts. With KentaPay, companies efficiently manage and grow their operations in the dynamic landscape of online business"',
+        'It doesn’t matter where they live or how much their family earns, all children have the right to learn. Jackfruit Finance improves children’s access to education by helping schools',
     },
-    {
-      key: 3,
-      image: 'assets/images/carousel/slide1.png',
-      title: 'Embed payment on your platform',
-      subTitle: 'We Are a payment gateway solution',
-      description:
-        '"KentaPay is the trusted choice for hundreds of companies in Africa, ranging from innovative startups to industry-leading companies. Our cutting-edge software and APIs empower businesses to seamlessly handle a spectrum of financial transactions, from accepting payments to facilitating secure payouts. With KentaPay, companies efficiently manage and grow their operations in the dynamic landscape of online business"',
-    },
+    // {
+    //   key: 3,
+    //   image: 'assets/images/carousel/slide1.png',
+    //   title: 'Embed payment on your platform',
+    //   subTitle: 'We Are a payment gateway solution',
+    //   description:
+    //     '"KentaPay is the trusted choice for hundreds of companies in Africa, ranging from innovative startups to industry-leading companies. Our cutting-edge software and APIs empower businesses to seamlessly handle a spectrum of financial transactions, from accepting payments to facilitating secure payouts. With KentaPay, companies efficiently manage and grow their operations in the dynamic landscape of online business"',
+    // },
   ]
 
   currentSlide = 0
   slideInterval: any
 
   constructor(
-    private router: Router,
     private ngZone: NgZone,
     private fb: FormBuilder,
-    private http: HttpClient,
   ) {
     this.form = this.fb.group({
       familyName: ['', [Validators.required, Validators.minLength(2)]],
@@ -323,22 +318,21 @@ export class SliderComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    if (this.form.valid) {
-      // Handle form submission
-      console.log(this.form.value)
-      const formData = this.form.value
-
-      this.http.post('http://localhost:3000/submit-form', formData).subscribe(
-        (response) => {
-          console.log('Form submitted successfully', response)
-        },
-        (error) => {
-          console.error('Error submitting form', error)
-        },
-      )
-    } else {
-      this.form.markAllAsTouched() // Highlight all fields if the form is invalid
-    }
+    // if (this.form.valid) {
+    //   // Handle form submission
+    //   console.log(this.form.value)
+    //   const formData = this.form.value
+    //   this.http.post('http://localhost:3000/submit-form', formData).subscribe(
+    //     (response) => {
+    //       console.log('Form submitted successfully', response)
+    //     },
+    //     (error) => {
+    //       console.error('Error submitting form', error)
+    //     },
+    //   )
+    // } else {
+    //   this.form.markAllAsTouched() // Highlight all fields if the form is invalid
+    // }
   }
 
   get f() {
@@ -365,11 +359,7 @@ export class SliderComponent implements OnInit, OnDestroy {
     this.stopSlideShow() // Clear interval to avoid memory leaks
   }
 
-  goTo(url: string): void {
-    this.router
-      .navigate([url])
-      .catch((err) => console.error('Navigation error:', err))
-  }
+  goTo(url: string): void {}
 
   prevSlide(): void {
     this.currentSlide =
