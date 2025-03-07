@@ -1,0 +1,22 @@
+{
+  "routes": {
+    "/": {},
+    "/company": {},
+    "/company/certifications": {},
+    "/company/clients": {},
+    "/company/team": {},
+    "/contact-us": {},
+    "/home": {},
+    "/home/crb-services": {},
+    "/home/internet-services": {},
+    "/home/kyc-services": {},
+    "/home/paytv-services": {},
+    "/home/sender-id-services": {},
+    "/home/sms-services": {},
+    "/home/ticketing-services": {},
+    "/home/ussd-services": {},
+    "/payments": {},
+    "/payments/cards": {},
+    "/security": {}
+  }
+}
