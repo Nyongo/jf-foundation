@@ -68,7 +68,7 @@ export class HomeOurImpactComponent implements OnInit, OnDestroy {
     this.apiSubscription = this.http
       .get(
         //  'https://localhost:3000/spreadsheet/read?spreadsheetId=1E5FXJjfQBEj41OzXaJJ1vzwolLnoSe-FiVjIju9UbZA',
-        'https://evzen.duckdns.org//spreadsheet/read?spreadsheetId=1E5FXJjfQBEj41OzXaJJ1vzwolLnoSe-FiVjIju9UbZA',
+        'https://evzen.duckdns.org/spreadsheet/read?spreadsheetId=1E5FXJjfQBEj41OzXaJJ1vzwolLnoSe-FiVjIju9UbZA',
       )
       .subscribe({
         next: (response: any) => {
