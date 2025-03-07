@@ -1,10 +1,13 @@
 import { Component, OnDestroy, OnInit, NgZone } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { phoneNumberValidator } from '../../validators/phone-number.validator'
+import { CommonModule } from '@angular/common'
 @Component({
   selector: 'app-slider',
+  standalone: true,
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss'],
+  imports: [CommonModule]
 })
 export class SliderComponent implements OnInit, OnDestroy {
   form: FormGroup

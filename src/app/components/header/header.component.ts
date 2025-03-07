@@ -1,10 +1,13 @@
 import { Component } from '@angular/core'
 import { Router } from '@angular/router'
+import { MenusComponent } from '../menus/menus.component'
 
 @Component({
   selector: 'app-header',
+  standalone: true,
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
+  imports: [MenusComponent]
 })
 export class HeaderComponent {
   constructor(private router: Router) {}

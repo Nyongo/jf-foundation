@@ -1,5 +1,8 @@
 import { Component, inject } from '@angular/core'
 import { Router } from '@angular/router'
+import { SliderComponent } from '../slider/slider.component'
+import { HomeOurImpactComponent } from './home-our-impact/home-our-impact.component'
+import { HttpClientModule } from '@angular/common/http'
 
 export interface TabItem {
   id: number
@@ -11,8 +14,10 @@ export interface TabItem {
 }
 @Component({
   selector: 'app-root',
+  standalone: true,
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
+  imports: [SliderComponent, HomeOurImpactComponent, HttpClientModule]
 })
 export class HomeComponent {
   private readonly router = inject(Router) // ✅ Inject Router properly

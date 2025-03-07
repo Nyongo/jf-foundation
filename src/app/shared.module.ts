@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common'
 import { ServiceHeaderComponent } from './components/service-header/service-header.component'
 
 @NgModule({
-  declarations: [ServiceHeaderComponent],
-  imports: [CommonModule],
+  imports: [CommonModule,ServiceHeaderComponent],
   exports: [ServiceHeaderComponent], // ✅ Export it for use in other modules
 })
 export class SharedModule {}

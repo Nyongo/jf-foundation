@@ -1,10 +1,13 @@
+import { CommonModule } from '@angular/common'
 import { Component } from '@angular/core'
-import { Router } from '@angular/router'
+import { Router, RouterModule } from '@angular/router'
 
 @Component({
   selector: 'app-menus',
+  standalone: true,
   templateUrl: './menus.component.html',
   styleUrl: './menus.component.scss',
+  imports: [RouterModule, CommonModule]
 })
 export class MenusComponent {
   constructor(private readonly router: Router) {}

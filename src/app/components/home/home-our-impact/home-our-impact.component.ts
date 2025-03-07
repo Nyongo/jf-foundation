@@ -1,12 +1,14 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Subscription } from 'rxjs'
-import { Color, ScaleType } from '@swimlane/ngx-charts'
+import { Color, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts'
 
 @Component({
   selector: 'app-home-our-impact',
+  standalone: true,
   templateUrl: './home-our-impact.component.html',
   styleUrl: './home-our-impact.component.scss',
+  imports: [ NgxChartsModule]
 })
 export class HomeOurImpactComponent implements OnInit, OnDestroy {
   private apiSubscription?: Subscription
