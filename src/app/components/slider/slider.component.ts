@@ -1,17 +1,8 @@
-import { CommonModule } from '@angular/common'
 import { Component, OnDestroy, OnInit, NgZone } from '@angular/core'
-import { DatepickerComponent } from '../datepicker/datepicker.component'
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { phoneNumberValidator } from '../../validators/phone-number.validator'
 @Component({
   selector: 'app-slider',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, DatepickerComponent],
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss'],
 })

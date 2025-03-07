@@ -1,10 +1,7 @@
-import { Component } from '@angular/core';
-import { ServiceHeaderComponent } from '../service-header/service-header.component';
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-payment-services',
-  standalone: true,
-  imports: [ServiceHeaderComponent],
   templateUrl: './payment-services.component.html',
   styleUrl: './payment-services.component.scss',
 })

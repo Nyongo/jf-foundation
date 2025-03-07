@@ -1,13 +1,10 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Subscription } from 'rxjs'
-import { CommonModule, DecimalPipe } from '@angular/common'
-import { NgxChartsModule, Color, ScaleType } from '@swimlane/ngx-charts'
+import { Color, ScaleType } from '@swimlane/ngx-charts'
 
 @Component({
   selector: 'app-home-our-impact',
-  standalone: true,
-  imports: [DecimalPipe, CommonModule, NgxChartsModule],
   templateUrl: './home-our-impact.component.html',
   styleUrl: './home-our-impact.component.scss',
 })

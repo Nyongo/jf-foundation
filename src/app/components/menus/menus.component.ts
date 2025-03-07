@@ -1,16 +1,13 @@
-import { CommonModule } from '@angular/common'
 import { Component } from '@angular/core'
-import { Router, RouterModule } from '@angular/router'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-menus',
-  standalone: true,
-  imports: [RouterModule, CommonModule],
   templateUrl: './menus.component.html',
   styleUrl: './menus.component.scss',
 })
 export class MenusComponent {
-  constructor(private router: Router) {}
+  constructor(private readonly router: Router) {}
   isMenuOpen = false
 
   toggleMenu() {

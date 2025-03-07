@@ -1,10 +1,7 @@
-import { Component } from '@angular/core';
-import { ServiceHeaderComponent } from '../service-header/service-header.component';
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-ussd-services',
-  standalone: true,
-  imports: [ServiceHeaderComponent],
   templateUrl: './ussd-services.component.html',
   styleUrl: './ussd-services.component.scss',
 })

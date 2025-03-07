@@ -1,12 +1,8 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-who-we-serve',
-  standalone: true,
-  imports: [],
   templateUrl: './who-we-serve.component.html',
-  styleUrl: './who-we-serve.component.scss'
+  styleUrl: './who-we-serve.component.scss',
 })
-export class WhoWeServeComponent {
-
-}
+export class WhoWeServeComponent {}

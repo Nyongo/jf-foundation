@@ -1,11 +1,8 @@
-import { CommonModule } from '@angular/common'
 import { Component } from '@angular/core'
-import { Router, RouterOutlet } from '@angular/router'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-developers',
-  standalone: true,
-  imports: [RouterOutlet, CommonModule],
   templateUrl: './developers.component.html',
   styleUrl: './developers.component.scss',
 })

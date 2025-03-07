@@ -1,10 +1,7 @@
-import { Component } from '@angular/core';
-import { ServiceHeaderComponent } from '../service-header/service-header.component';
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-sms-services',
-  standalone: true,
-  imports: [ServiceHeaderComponent],
   templateUrl: './sms-services.component.html',
   styleUrl: './sms-services.component.scss',
 })

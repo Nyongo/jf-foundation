@@ -1,10 +1,7 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-clients-marqueue',
-  standalone: true,
-  imports: [RouterModule],
   templateUrl: './clients-marqueue.component.html',
   styleUrl: './clients-marqueue.component.scss',
 })

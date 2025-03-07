@@ -1,13 +1,5 @@
 import { Component, inject } from '@angular/core'
-import { Router, RouterModule } from '@angular/router'
-import { CommonModule } from '@angular/common'
-import { ClientsMarqueueComponent } from '../clients-marqueue/clients-marqueue.component'
-import { SliderComponent } from '../slider/slider.component'
-import { WorkingProcessComponent } from './working-process/working-process.component'
-import { DevelopersComponent } from './developers/developers.component'
-import { PartnerWithUsComponent } from './partner-with-us/partner-with-us.component'
-import { WhoWeServeComponent } from './who-we-serve/who-we-serve.component'
-import { HomeOurImpactComponent } from './home-our-impact/home-our-impact.component'
+import { Router } from '@angular/router'
 
 export interface TabItem {
   id: number
@@ -19,23 +11,11 @@ export interface TabItem {
 }
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [
-    RouterModule,
-    CommonModule,
-    ClientsMarqueueComponent,
-    SliderComponent,
-    WorkingProcessComponent,
-    DevelopersComponent,
-    PartnerWithUsComponent,
-    WhoWeServeComponent,
-    HomeOurImpactComponent,
-  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  private router = inject(Router) // ✅ Inject Router properly
+  private readonly router = inject(Router) // ✅ Inject Router properly
 
   title = 'JackFruit Foundation'
   dropdownOpen = false

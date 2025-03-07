@@ -1,10 +1,7 @@
-import { Component } from '@angular/core';
-import { ServiceHeaderComponent } from '../service-header/service-header.component';
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-ticketing-services',
-  standalone: true,
-  imports: [ServiceHeaderComponent],
   templateUrl: './ticketing-services.component.html',
   styleUrl: './ticketing-services.component.scss',
 })
