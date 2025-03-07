@@ -67,8 +67,8 @@ export class HomeOurImpactComponent implements OnInit, OnDestroy {
   loadMetrics(): void {
     this.apiSubscription = this.http
       .get(
-        //  'http://localhost:3000/spreadsheet/read?spreadsheetId=1E5FXJjfQBEj41OzXaJJ1vzwolLnoSe-FiVjIju9UbZA',
-        'http://161.35.105.65:3000/spreadsheet/read?spreadsheetId=1E5FXJjfQBEj41OzXaJJ1vzwolLnoSe-FiVjIju9UbZA',
+        //  'https://localhost:3000/spreadsheet/read?spreadsheetId=1E5FXJjfQBEj41OzXaJJ1vzwolLnoSe-FiVjIju9UbZA',
+        'https://161.35.105.65:3000/spreadsheet/read?spreadsheetId=1E5FXJjfQBEj41OzXaJJ1vzwolLnoSe-FiVjIju9UbZA',
       )
       .subscribe({
         next: (response: any) => {
