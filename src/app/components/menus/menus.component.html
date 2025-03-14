@@ -3,17 +3,27 @@
 >
   <!-- Logo and Navigation Links -->
   <div
-    class="md:flex items-center justify-center cursor-pointer pl-4"
+    class="flex flex-col items-center justify-center cursor-pointer pl-2 md:pl-4"
     [routerLink]="'/'"
   >
     <div class="flex items-center">
       <img
         src="assets/images/logos/jf-logo.png"
         alt="Logo"
-        class="h-28 w-28 md:w-28"
+        class="h-16 w-16 md:h-28 md:w-28"
       />
-      <span class="font-sans text-xl font-black text-blue">FOUNDATION</span>
+      <div class="flex flex-col items-start md:items-start ml-0 md:ml-0">
+        <span class="font-sans text-lg md:text-xl font-black text-black"
+          >FIGHAVEN</span
+        >
+        <span class="font-sans text-xs md:text-sm font-black text-blue"
+          >FOUNDATION</span
+        >
+      </div>
     </div>
+    <span class="text-[10px] md:text-xs leading-4 md:leading-6 text-gray-600"
+      >A Subsidiary of JackFruit Group</span
+    >
   </div>
 
   <!-- Mobile Menu Button -->
@@ -63,20 +73,6 @@
 
     <span
       class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer md:h-16"
-      (click)="goTo('our-funders')"
-    >
-      <span></span>
-      <span class="text-sm font-semibold leading-5 tracking-normal"
-        >Our Funders</span
-      >
-      <span
-        class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
-        [ngClass]="{ 'custom-active': isActive('/our-partners') }"
-      ></span>
-    </span>
-
-    <span
-      class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer md:h-16"
       (click)="goTo('our-partners')"
     >
       <span></span>
@@ -103,6 +99,20 @@
       ></span>
     </span>
 
+    <span
+      class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer md:h-16"
+      (click)="goTo('newsletter')"
+    >
+      <span></span>
+      <span class="text-sm font-semibold leading-5 tracking-normal"
+        >News Letters</span
+      >
+      <span
+        class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
+        [ngClass]="{ 'custom-active': isActive('/newsletter') }"
+      ></span>
+    </span>
+
     <!-- About Us -->
     <span
       class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer md:h-16"
@@ -125,5 +135,49 @@
     >
       Talk to us
     </button>
+  </div>
+</div>
+
+<!-- Mobile Menu Overlay -->
+<div *ngIf="isMenuOpen" class="fixed inset-0 bg-white z-50 md:hidden">
+  <div class="flex flex-col h-full">
+    <!-- Mobile Menu Header -->
+    <div class="flex justify-between items-center p-4 border-b">
+      <div class="flex items-center">
+        <img
+          src="assets/images/logos/jf-logo.png"
+          alt="Logo"
+          class="h-16 w-16"
+        />
+        <div class="flex flex-col ml-2">
+          <span class="font-sans text-lg font-black text-black">FIGHAVEN</span>
+          <span class="font-sans text-xs font-black text-blue">FOUNDATION</span>
+        </div>
+      </div>
+      <button class="text-dark-blue focus:outline-none" (click)="toggleMenu()">
+        <i class="bx bx-x bx-md"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Menu Links -->
+    <div class="flex flex-col p-4 space-y-4">
+      <a
+        *ngFor="let item of menuItems"
+        class="text-dark-blue text-base font-semibold py-2"
+        [routerLink]="item.route"
+        (click)="toggleMenu()"
+        [class.text-black]="isActive(item.route)"
+      >
+        {{ item.label }}
+      </a>
+
+      <!-- Mobile Talk to Us Button -->
+      <button
+        class="w-full h-10 bg-blue hover:bg-blue-700 text-white text-sm py-2 px-4 rounded mt-4"
+        (click)="goTo('contact-us'); toggleMenu()"
+      >
+        Talk to us
+      </button>
+    </div>
   </div>
 </div>

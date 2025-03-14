@@ -1,0 +1,85 @@
+<div class="w-full bg-white">
+  <!-- Hero Section -->
+  <div class="w-full bg-blue py-16">
+    <div class="w-full md:w-10/12 mx-auto px-4">
+      <div class="flex flex-col items-center text-center">
+        <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
+          Our Case Studies
+        </h1>
+        <p class="text-white text-lg md:text-xl max-w-2xl">
+          Explore how we're making a difference in education across Sub-Saharan
+          Africa through our various initiatives and programs.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case Studies Grid -->
+  <div class="w-full md:w-10/12 mx-auto px-4 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div
+        *ngFor="let study of caseStudies"
+        class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+      >
+        <!-- Image Container -->
+        <div class="relative h-48 overflow-hidden">
+          <img
+            [src]="study.image"
+            [alt]="study.title"
+            class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+
+        <!-- Content Container -->
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-2">
+            {{ study.title }}
+          </h3>
+          <p class="text-blue font-medium mb-4">{{ study.location }}</p>
+          <p class="text-gray-600 mb-6">{{ study.description }}</p>
+
+          <!-- Impact Metrics -->
+          <div class="grid grid-cols-3 gap-4 border-t pt-4">
+            <div class="text-center">
+              <div class="text-2xl font-bold text-blue">
+                {{ study.impact.students }}
+              </div>
+              <div class="text-sm text-gray-600">Students</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-bold text-blue">
+                {{ study.impact.schools }}
+              </div>
+              <div class="text-sm text-gray-600">Schools</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-bold text-blue">
+                {{ study.impact.teachers }}
+              </div>
+              <div class="text-sm text-gray-600">Teachers</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Call to Action -->
+  <div class="w-full bg-gray-50 py-16">
+    <div class="w-full md:w-10/12 mx-auto px-4 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+        Want to Learn More?
+      </h2>
+      <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+        Discover how we can help transform education in your community through
+        our proven programs and initiatives.
+      </p>
+      <button
+        class="bg-blue text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-300"
+        routerLink="/contact-us"
+      >
+        Get in Touch
+      </button>
+    </div>
+  </div>
+</div>

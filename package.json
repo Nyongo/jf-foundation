@@ -24,6 +24,7 @@
     "@angular/ssr": "^19.2.1",
     "@nrwl/workspace": "^19.7.2",
     "@swimlane/ngx-charts": "^22.0.0-alpha.0",
+    "alpinejs": "^3.14.9",
     "angularx-flatpickr": "^8.0.0",
     "boxicons": "^2.0.1",
     "d3": "^7.9.0",

@@ -1,9 +1,10 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { provideAnimations } from '@angular/platform-browser/animations'; // ✅ Import animations
-import { provideHttpClient } from '@angular/common/http';
-import { provideRouter } from '@angular/router';
-import { AppComponent } from './app/app.component';
-import { routes } from './app/app.routes';
+import { bootstrapApplication } from '@angular/platform-browser'
+import { provideAnimations } from '@angular/platform-browser/animations' // ✅ Import animations
+import { provideHttpClient } from '@angular/common/http'
+import { provideRouter } from '@angular/router'
+import { AppComponent } from './app/app.component'
+import { routes } from './app/app.routes'
+import 'alpinejs'
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -11,4 +12,4 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(),
     provideRouter(routes),
   ],
-}).catch((err) => console.error(err));
+}).catch((err) => console.error(err))

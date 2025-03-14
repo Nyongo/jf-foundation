@@ -16,6 +16,8 @@ import { TicketingServicesComponent } from './components/ticketing-services/tick
 import { CrbServicesComponent } from './components/crb-services/crb-services.component'
 import { SmsServicesComponent } from './components/sms-services/sms-services.component'
 import { SenderIdServicesComponent } from './components/sender-id-services/sender-id-services.component'
+import { CaseStudiesComponent } from './components/case-studies/case-studies.component'
+import { NewsletterComponent } from './components/newsletter/newsletter.component'
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -52,4 +54,6 @@ export const routes: Routes = [
 
   { path: 'security', component: SecurityComponent },
   { path: 'contact-us', component: ContactUsComponent },
+  { path: 'case-studies', component: CaseStudiesComponent },
+  { path: 'newsletter', component: NewsletterComponent },
 ]
