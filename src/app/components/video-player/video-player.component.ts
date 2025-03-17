@@ -16,6 +16,7 @@ export class VideoPlayerComponent {
   volume = 1
   isLoading = false
   countdown = 0
+  isDragging = false
 
   onTimeUpdate(event: any) {
     this.currentTime = event.target.currentTime
@@ -44,6 +45,28 @@ export class VideoPlayerComponent {
         this.isPlaying = true
       }
     }, 1000)
+  }
+
+  seekVideo(event: MouseEvent, video: HTMLVideoElement) {
+    const progressBar = event.currentTarget as HTMLElement
+    const rect = progressBar.getBoundingClientRect()
+    const pos = (event.clientX - rect.left) / progressBar.offsetWidth
+    video.currentTime = pos * video.duration
+  }
+
+  startDragging(event: MouseEvent, video: HTMLVideoElement) {
+    this.isDragging = true
+    this.seekVideo(event, video)
+  }
+
+  onDrag(event: MouseEvent, video: HTMLVideoElement) {
+    if (this.isDragging) {
+      this.seekVideo(event, video)
+    }
+  }
+
+  stopDragging() {
+    this.isDragging = false
   }
 
   onVolumeChange(event: any) {

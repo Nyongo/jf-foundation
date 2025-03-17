@@ -25,7 +25,14 @@
         </span>
       </button>
 
-      <div class="progress-bar">
+      <div
+        class="progress-bar"
+        (click)="seekVideo($event, videoPlayer)"
+        (mousedown)="startDragging($event, videoPlayer)"
+        (mousemove)="onDrag($event, videoPlayer)"
+        (mouseup)="stopDragging()"
+        (mouseleave)="stopDragging()"
+      >
         <div
           class="progress"
           [style.width.%]="(currentTime / duration) * 100"
