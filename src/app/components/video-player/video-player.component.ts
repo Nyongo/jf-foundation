@@ -14,6 +14,8 @@ export class VideoPlayerComponent {
   currentTime = 0
   duration = 0
   volume = 1
+  isLoading = false
+  countdown = 0
 
   onTimeUpdate(event: any) {
     this.currentTime = event.target.currentTime
@@ -26,10 +28,22 @@ export class VideoPlayerComponent {
   togglePlay(video: HTMLVideoElement) {
     if (this.isPlaying) {
       video.pause()
-    } else {
-      video.play()
+      this.isPlaying = false
+      return
     }
-    this.isPlaying = !this.isPlaying
+
+    this.isLoading = true
+    this.countdown = 8
+
+    const countdownInterval = setInterval(() => {
+      this.countdown--
+      if (this.countdown <= 0) {
+        clearInterval(countdownInterval)
+        this.isLoading = false
+        video.play()
+        this.isPlaying = true
+      }
+    }, 1000)
   }
 
   onVolumeChange(event: any) {

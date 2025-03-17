@@ -7,6 +7,9 @@
         class="logo"
       />
     </div>
+    <div *ngIf="isLoading" class="countdown-overlay">
+      <div class="countdown">{{ countdown }}</div>
+    </div>
     <video
       #videoPlayer
       [src]="videoUrl"
