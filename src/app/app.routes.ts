@@ -17,7 +17,11 @@ import { CrbServicesComponent } from './components/crb-services/crb-services.com
 import { SmsServicesComponent } from './components/sms-services/sms-services.component'
 import { SenderIdServicesComponent } from './components/sender-id-services/sender-id-services.component'
 import { CaseStudiesComponent } from './components/case-studies/case-studies.component'
+import { CaseStudyDetailComponent } from './components/case-studies/case-study-detail/case-study-detail.component'
 import { NewsletterComponent } from './components/newsletter/newsletter.component'
+import { NewsletterDetailComponent } from './components/newsletter/newsletter-detail/newsletter-detail.component'
+import { AboutUsComponent } from './components/about-us/about-us.component'
+import { VideoPlayerComponent } from './components/video-player/video-player.component'
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -51,9 +55,12 @@ export const routes: Routes = [
       { path: 'certifications', component: OurCertificationsComponent },
     ],
   },
-
+  { path: 'about-us', component: AboutUsComponent },
   { path: 'security', component: SecurityComponent },
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'case-studies', component: CaseStudiesComponent },
+  { path: 'case-studies/:id', component: CaseStudyDetailComponent },
   { path: 'newsletter', component: NewsletterComponent },
+  { path: 'newsletter/:id', component: NewsletterDetailComponent },
+  { path: 'video', component: VideoPlayerComponent },
 ]

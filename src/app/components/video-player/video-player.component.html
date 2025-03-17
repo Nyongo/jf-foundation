@@ -1,0 +1,49 @@
+<div class="video-container">
+  <div class="video-wrapper">
+    <div class="logo-overlay">
+      <img
+        src="assets/images/logos/jf-logo-full.png"
+        alt="Company Logo"
+        class="logo"
+      />
+    </div>
+    <video
+      #videoPlayer
+      [src]="videoUrl"
+      (timeupdate)="onTimeUpdate($event)"
+      (loadedmetadata)="onLoadedMetadata($event)"
+      class="video-player"
+    ></video>
+
+    <div class="video-controls">
+      <button class="play-pause-btn" (click)="togglePlay(videoPlayer)">
+        <span class="material-icons">
+          {{ isPlaying ? 'pause' : 'play_arrow' }}
+        </span>
+      </button>
+
+      <div class="progress-bar">
+        <div
+          class="progress"
+          [style.width.%]="(currentTime / duration) * 100"
+        ></div>
+      </div>
+
+      <div class="time-display">
+        {{ currentTime | date: 'mm:ss' }} / {{ duration | date: 'mm:ss' }}
+      </div>
+
+      <div class="volume-control">
+        <span class="material-icons">volume_up</span>
+        <input
+          type="range"
+          min="0"
+          max="1"
+          step="0.1"
+          [value]="volume"
+          (input)="onVolumeChange($event)"
+        />
+      </div>
+    </div>
+  </div>
+</div>

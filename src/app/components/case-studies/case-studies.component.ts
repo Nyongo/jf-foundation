@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { RouterModule } from '@angular/router'
+import { RouterModule, Router } from '@angular/router'
 
 @Component({
   selector: 'app-case-studies',
@@ -10,8 +10,11 @@ import { RouterModule } from '@angular/router'
   styleUrl: './case-studies.component.scss',
 })
 export class CaseStudiesComponent {
+  constructor(private router: Router) {}
+
   caseStudies = [
     {
+      id: '1',
       title: 'Digital Learning Initiative',
       location: 'Nairobi, Kenya',
       description:
@@ -24,6 +27,7 @@ export class CaseStudiesComponent {
       },
     },
     {
+      id: '2',
       title: 'Teacher Training Program',
       location: 'Kampala, Uganda',
       description:
@@ -36,6 +40,7 @@ export class CaseStudiesComponent {
       },
     },
     {
+      id: '3',
       title: 'School Infrastructure Development',
       location: 'Dar es Salaam, Tanzania',
       description:
@@ -48,4 +53,8 @@ export class CaseStudiesComponent {
       },
     },
   ]
+
+  viewCaseStudy(id: string) {
+    this.router.navigate(['/case-studies', id])
+  }
 }
