@@ -2,22 +2,22 @@
   "version": 2,
   "builds": [
     {
-      "src": "dist/website-foundation/server/server.mjs",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "dist/website-foundation/browser/**",
-      "use": "@vercel/static"
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist/website-foundation/browser"
+      }
     }
   ],
   "routes": [
     {
-      "src": "/assets/(.*)",
-      "dest": "/dist/website-foundation/browser/assets/$1"
-    },
-    {
       "src": "/(.*)",
-      "dest": "dist/website-foundation/server/server.mjs"
+      "dest": "/index.html"
     }
-  ]
+  ],
+  "build": {
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }
 } 
