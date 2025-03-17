@@ -1,6 +1,8 @@
 {
   "routes": {
     "/": {},
+    "/about-us": {},
+    "/case-studies": {},
     "/company": {},
     "/company/certifications": {},
     "/company/clients": {},
@@ -15,8 +17,10 @@
     "/home/sms-services": {},
     "/home/ticketing-services": {},
     "/home/ussd-services": {},
+    "/newsletter": {},
     "/payments": {},
     "/payments/cards": {},
-    "/security": {}
+    "/security": {},
+    "/video": {}
   }
 }
