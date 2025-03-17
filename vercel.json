@@ -4,9 +4,17 @@
     {
       "src": "dist/website-foundation/server/server.mjs",
       "use": "@vercel/node"
+    },
+    {
+      "src": "dist/website-foundation/browser/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
+    {
+      "src": "/assets/(.*)",
+      "dest": "/dist/website-foundation/browser/assets/$1"
+    },
     {
       "src": "/(.*)",
       "dest": "dist/website-foundation/server/server.mjs"
