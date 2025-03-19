@@ -24,6 +24,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component'
 import { VideoPlayerComponent } from './components/video-player/video-player.component'
 import { CaseStudy1Component } from './components/case-studies/case-study-1/case-study-1.component'
 import { CaseStudy2Component } from './components/case-studies/case-study-2/case-study-2.component'
+import { HomeOurImpactComponent } from './components/home/home-our-impact/home-our-impact.component'
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -56,6 +57,7 @@ export const routes: Routes = [
       { path: 'case-study-2', component: CaseStudy2Component },
     ],
   },
+  { path: 'our-impact', component: HomeOurImpactComponent },
   { path: 'about-us', component: OurCompanyComponent },
   { path: 'security', component: SecurityComponent },
   { path: 'contact-us', component: ContactUsComponent },
