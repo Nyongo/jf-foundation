@@ -22,9 +22,9 @@ export class CaseStudiesComponent {
         'Through participation in the GSF Impact at Scale Labs - Early Years Programme, Jackfruit Finance systematically assessed the viability of lending to ECD providers, making data-based decisions to mitigate risk while expanding financial inclusion.',
       image: 'assets/images/case-studies/1.jpg',
       impact: {
-        students: '5,000+',
-        schools: '10',
-        teachers: '200+',
+        students: '719',
+        schools: '15',
+        teachers: '41',
       },
     },
     {
@@ -35,27 +35,19 @@ export class CaseStudiesComponent {
         'Across Kenya, low-cost private schools face significant challenges in accessing financing to improve infrastructure, teaching quality, and overall learning outcomes. Jackfruit Finance developed a data-driven, results-linked loan model, which offers financial support to schools that meet specific education improvement milestones',
       image: 'assets/images/case-studies/2.jpg',
       impact: {
-        teachers: '150+',
-        schools: '8',
-        students: '3,000+',
+        teachers: '2,000+',
+        schools: '200',
+        students: '75,000+',
       },
     },
-    // {
-    //   id: '3',
-    //   title: 'School Infrastructure Development',
-    //   location: 'Dar es Salaam, Tanzania',
-    //   description:
-    //     'Built and renovated school facilities to create conducive learning environments.',
-    //   image: 'assets/images/case-studies/3.jpg',
-    //   impact: {
-    //     schools: '5',
-    //     students: '2,500+',
-    //     classrooms: '25',
-    //   },
-    // },
   ]
 
   viewCaseStudy(id: string) {
-    this.router.navigate(['/case-studies', id])
+    //this.router.navigate(['/case-studies', id])
+    if (id === '1') {
+      this.router.navigate(['/case-studies/case-study-1'])
+    } else if (id === '2') {
+      this.router.navigate(['/case-studies/case-study-2'])
+    }
   }
 }

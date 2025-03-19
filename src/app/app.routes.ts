@@ -22,6 +22,8 @@ import { NewsletterComponent } from './components/newsletter/newsletter.componen
 import { NewsletterDetailComponent } from './components/newsletter/newsletter-detail/newsletter-detail.component'
 import { AboutUsComponent } from './components/about-us/about-us.component'
 import { VideoPlayerComponent } from './components/video-player/video-player.component'
+import { CaseStudy1Component } from './components/case-studies/case-study-1/case-study-1.component'
+import { CaseStudy2Component } from './components/case-studies/case-study-2/case-study-2.component'
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -46,20 +48,21 @@ export const routes: Routes = [
       { path: 'cards', component: CardPaymentsComponent },
     ],
   },
-  // {
-  //   path: 'company',
-  //   children: [
-  //     { path: '', component: OurCompanyComponent },
-  //     { path: 'team', component: OurTeamComponent },
-  //     { path: 'clients', component: OurClientsComponent },
-  //     { path: 'certifications', component: OurCertificationsComponent },
-  //   ],
-  // },
+  {
+    path: 'case-studies',
+    children: [
+      { path: '', component: CaseStudiesComponent },
+      { path: 'case-study-1', component: CaseStudy1Component },
+      { path: 'case-study-2', component: CaseStudy2Component },
+    ],
+  },
   { path: 'about-us', component: OurCompanyComponent },
   { path: 'security', component: SecurityComponent },
   { path: 'contact-us', component: ContactUsComponent },
-  { path: 'case-studies', component: CaseStudiesComponent },
-  { path: 'case-studies/:id', component: CaseStudyDetailComponent },
+  // { path: 'case-studies', component: CaseStudiesComponent },
+  // { path: 'case-study-1', component: CaseStudy1Component },
+  // { path: 'case-study-2', component: CaseStudy2Component },
+  // { path: 'case-studies/:id', component: CaseStudyDetailComponent },
   { path: 'newsletter', component: NewsletterComponent },
   { path: 'newsletter/:id', component: NewsletterDetailComponent },
   { path: 'video', component: VideoPlayerComponent },
