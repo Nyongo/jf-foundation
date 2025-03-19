@@ -1,5 +1,6 @@
 <div class="flex flex-col items-center justify-center px-2 relative">
   <div
+    #sliderContainer
     class="w-full md:w-10/12 max-h-[600px] mx-auto overflow-hidden bg-blue rounded-2xl mt-2"
   >
     <!-- Slider Wrapper -->
@@ -7,15 +8,36 @@
       class="flex transition-transform duration-500 ease-out"
       [ngStyle]="{ transform: 'translateX(' + -currentSlide * 100 + '%)' }"
     >
-      <div *ngFor="let slide of slides" class="relative w-full flex-shrink-0">
-        <img
-          [src]="slide.image"
-          class="w-full h-[300px] md:h-[500px] object-cover mx-auto"
-          alt="Slide"
-          loading="lazy"
-        />
+      <div
+        *ngFor="let slide of slides; let i = index"
+        class="relative w-full flex-shrink-0"
+      >
+        <ng-container *ngIf="slide.type === 'image'">
+          <img
+            [src]="slide.image"
+            class="w-full h-[300px] md:h-[500px] object-cover mx-auto"
+            alt="Slide"
+            loading="lazy"
+          />
+        </ng-container>
+        <ng-container *ngIf="slide.type === 'video'">
+          <div class="w-full h-[300px] md:h-[500px] relative bg-black">
+            <iframe
+              *ngIf="currentSlide === i"
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/I0iGNUXRLS4?autoplay=1&mute=1&controls=1&rel=0&showinfo=0&playsinline=1&enablejsapi=1&origin=http://localhost:4200"
+              title="Jackfruit Finance: Affordable Financing for Schools"
+              class="w-full h-full absolute top-0 left-0 z-50 object-cover"
+              style="width: 100vw; max-width: 100%"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              #videoFrame
+            ></iframe>
+          </div>
+        </ng-container>
         <div
-          class="absolute inset-0 md:right-24 pr-4 md:pr-80 flex flex-col justify-start items-start text-white top-4 md:top-8 pl-4 md:pl-8"
+          class="absolute inset-0 md:right-24 pr-4 md:pr-80 flex flex-col justify-start items-start text-white top-4 md:top-8 pl-4 md:pl-8 z-40"
         >
           <span
             class="text-lg md:text-xl w-full md:w-5/6 text-white tracking-tighter mt-2"
@@ -26,15 +48,14 @@
             >{{ slide.title }}</span
           >
 
-          <div class="flex flex-col md:flex-row gap-4 md:gap-6 w-full md:w-3/4">
+          <div class="flex flex-col gap-1 md:gap-2 w-full md:w-3/4">
             <div class="w-full md:w-1/2 bg-blue rounded-2xl p-3 md:p-4">
               <span
                 class="leading-tight md:leading-relaxed text-sm md:text-base text-black rounded-2xl tracking-wider z-50"
                 ><span class="font-bold">Our Mission: </span>
                 <span
-                  >Jackfruit Foundation implements social impact projects in
-                  schools that contribute to improved quality education, promote
-                  equity, and drive innovation.
+                  >Advancing equity, innovation, and quality education in
+                  schools.
                 </span>
               </span>
             </div>
@@ -43,15 +64,13 @@
                 class="leading-tight md:leading-relaxed text-sm md:text-base text-black rounded-2xl tracking-wider z-50"
                 ><span class="font-bold">Our Vision: </span>
                 <span
-                  >To improve education across Sub-Saharan Africa by ensuring
-                  access to quality learning, sustainable school development,
-                  and inclusive education solutions.
+                  >Improved quality education for all in Sub-Saharan Africa.
                 </span>
               </span>
             </div>
           </div>
 
-          <span class="text-sm md:text-base pt-6 md:pt-8 w-full md:w-auto">
+          <span class="text-sm md:text-base pt-2 md:pt-2 w-full md:w-auto">
             <button
               class="w-full md:w-auto h-10 bg-white hover:bg-blue hover:text-white text-dark-blue font-sm px-6 rounded flex justify-center items-center gap-2 z-50 tracking-wide transition-all duration-300"
               (click)="goTo('/contact-us')"

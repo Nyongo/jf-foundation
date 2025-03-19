@@ -38,16 +38,14 @@ export class CaseStudyDetailComponent implements OnInit, AfterViewInit {
       '1': {
         title: 'Digital Learning Initiative',
         location: 'Nairobi, Kenya',
-        description:
-          'Implemented digital learning solutions in 10 public schools, reaching over 5,000 students.',
-        fullDescription: `Our Digital Learning Initiative in Nairobi, Kenya, represents a transformative approach to education in underserved communities. By implementing comprehensive digital learning solutions across 10 public schools, we've created an environment where technology enhances learning outcomes and prepares students for the digital age.
-
-The program focused on three key areas:
-1. Infrastructure Development
-2. Teacher Training
-3. Digital Content Integration
-
-Through strategic partnerships with local organizations and global technology providers, we've established sustainable digital learning environments that continue to evolve and improve.`,
+        description: `Access to finance is a critical barrier for Early Childhood Development (ECD) providers in Kenya. Many struggle with financial instability due to irregular payment structures, limited enrollment, and lack of formal financial records—making it difficult to secure loans from traditional lenders. Jackfruit Finance, a pioneering education finance company, has leveraged data and AI-powered credit scoring to refine lending criteria, ensuring that ECD centers can access the funding they need to improve learning environments for Kenya’s youngest learners.
+Through participation in the GSF Impact at Scale Labs - Early Years Programme,
+ Jackfruit Finance systematically assessed the viability of lending to ECD providers,
+  making data-based decisions to mitigate risk while expanding financial inclusion`,
+        fullDescription: `
+        Access to finance is a critical barrier for Early Childhood Development (ECD) providers in Kenya. Many struggle with financial instability due to irregular payment structures, limited enrollment, and lack of formal financial records—making it difficult to secure loans from traditional lenders. Jackfruit Finance, a pioneering education finance company, has leveraged data and AI-powered credit scoring to refine lending criteria, ensuring that ECD centers can access the funding they need to improve learning environments for Kenya’s youngest learners.
+Through participation in the GSF Impact at Scale Labs - Early Years Programme, Jackfruit Finance systematically assessed the viability of lending to ECD providers, making data-based decisions to mitigate risk while expanding financial inclusion
+`,
         image: 'assets/images/case-studies/1.jpg',
         impact: {
           students: '5,000+',

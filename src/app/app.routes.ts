@@ -46,16 +46,16 @@ export const routes: Routes = [
       { path: 'cards', component: CardPaymentsComponent },
     ],
   },
-  {
-    path: 'company',
-    children: [
-      { path: '', component: OurCompanyComponent },
-      { path: 'team', component: OurTeamComponent },
-      { path: 'clients', component: OurClientsComponent },
-      { path: 'certifications', component: OurCertificationsComponent },
-    ],
-  },
-  { path: 'about-us', component: AboutUsComponent },
+  // {
+  //   path: 'company',
+  //   children: [
+  //     { path: '', component: OurCompanyComponent },
+  //     { path: 'team', component: OurTeamComponent },
+  //     { path: 'clients', component: OurClientsComponent },
+  //     { path: 'certifications', component: OurCertificationsComponent },
+  //   ],
+  // },
+  { path: 'about-us', component: OurCompanyComponent },
   { path: 'security', component: SecurityComponent },
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'case-studies', component: CaseStudiesComponent },

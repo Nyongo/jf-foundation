@@ -1,16 +1,31 @@
-import { Component, OnDestroy, OnInit, NgZone } from '@angular/core'
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  NgZone,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+} from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { phoneNumberValidator } from '../../validators/phone-number.validator'
 import { CommonModule } from '@angular/common'
+import { SafeResourceUrl } from '@angular/platform-browser'
+import { Router } from '@angular/router'
 @Component({
   selector: 'app-slider',
   standalone: true,
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss'],
-  imports: [CommonModule]
+  imports: [CommonModule],
 })
-export class SliderComponent implements OnInit, OnDestroy {
+export class SliderComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('videoFrame') videoFrame!: ElementRef
+  @ViewChild('sliderContainer') sliderContainer!: ElementRef
   form: FormGroup
+  window = window
+  private observer: IntersectionObserver | null = null
+  private isVideoVisible = true
   datePickerOptions = {
     enableTime: false,
     dateFormat: 'Y-m-d',
@@ -263,29 +278,29 @@ export class SliderComponent implements OnInit, OnDestroy {
   today = new Date().toISOString().split('T')[0]
   slides = [
     {
-      key: 1,
+      type: 'image',
       image: 'assets/images/carousel/slider1.jpg',
-      title: 'Every child should have access to an education.',
-      subTitle: 'At JackFruit Foundation we believe that...',
-      description:
-        'It doesn’t matter where they live or how much their family earns, all children have the right to learn. Jackfruit Finance improves children’s access to education by helping schools',
+      title: 'Case Study: Education Access Initiative',
+      subTitle: 'Improving Access to Quality Education',
+      id: 'education-access',
+      description: 'How we helped increase student enrollment by 45%',
     },
     {
-      key: 2,
-      image: 'assets/images/carousel/classroom.jpg',
-      title: 'Every child should have access to an education.',
-      subTitle: 'At JackFruit Foundation we believe that...',
-      description:
-        'It doesn’t matter where they live or how much their family earns, all children have the right to learn. Jackfruit Finance improves children’s access to education by helping schools',
+      type: 'video',
+      videoId: 'I0iGNUXRLS4',
+      title: 'Case Study: School Infrastructure',
+      subTitle: 'Building Better Learning Environments',
+      id: 'infrastructure',
+      description: 'Modernizing facilities across 50+ schools',
     },
-    // {
-    //   key: 3,
-    //   image: 'assets/images/carousel/slide1.png',
-    //   title: 'Embed payment on your platform',
-    //   subTitle: 'We Are a payment gateway solution',
-    //   description:
-    //     '"KentaPay is the trusted choice for hundreds of companies in Africa, ranging from innovative startups to industry-leading companies. Our cutting-edge software and APIs empower businesses to seamlessly handle a spectrum of financial transactions, from accepting payments to facilitating secure payouts. With KentaPay, companies efficiently manage and grow their operations in the dynamic landscape of online business"',
-    // },
+    {
+      type: 'image',
+      image: 'assets/images/carousel/classroom.jpg',
+      title: 'Case Study: Teacher Development',
+      subTitle: 'Empowering Educators',
+      id: 'teacher-development',
+      description: 'Professional development program reaching 500+ teachers',
+    },
   ]
 
   currentSlide = 0
@@ -294,6 +309,7 @@ export class SliderComponent implements OnInit, OnDestroy {
   constructor(
     private ngZone: NgZone,
     private fb: FormBuilder,
+    private router: Router,
   ) {
     this.form = this.fb.group({
       familyName: ['', [Validators.required, Validators.minLength(2)]],
@@ -308,7 +324,12 @@ export class SliderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    //   this.startSlideShow()
+    this.startSlideShow()
+  }
+
+  getVideoUrl(videoId: string | undefined): SafeResourceUrl {
+    if (!videoId) return ''
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=1&rel=0&showinfo=0&playsinline=1&enablejsapi=1&origin=${window.location.origin}`
   }
 
   onSubmit(): void {
@@ -334,11 +355,13 @@ export class SliderComponent implements OnInit, OnDestroy {
   }
 
   startSlideShow(): void {
-    // Run the interval inside Angular's zone to ensure change detection works properly
     this.ngZone.runOutsideAngular(() => {
       this.slideInterval = setInterval(() => {
+        if (this.slides[this.currentSlide].type === 'video') {
+          return
+        }
         this.ngZone.run(() => this.nextSlide())
-      }, 3000) // Slide changes every 3 seconds
+      }, 8000)
     })
   }
 
@@ -351,17 +374,77 @@ export class SliderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     console.log('SliderComponent destroyed')
     this.stopSlideShow() // Clear interval to avoid memory leaks
+
+    // Clean up intersection observer
+    if (this.observer) {
+      this.observer.disconnect()
+      this.observer = null
+    }
   }
 
   goTo(url: string): void {}
+
+  nextSlide(): void {
+    this.currentSlide =
+      this.currentSlide < this.slides.length - 1 ? this.currentSlide + 1 : 0
+  }
 
   prevSlide(): void {
     this.currentSlide =
       this.currentSlide > 0 ? this.currentSlide - 1 : this.slides.length - 1
   }
 
-  nextSlide(): void {
-    this.currentSlide =
-      this.currentSlide < this.slides.length - 1 ? this.currentSlide + 1 : 0
+  ngAfterViewInit() {
+    // Set up intersection observer
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          this.isVideoVisible = entry.isIntersecting
+          if (this.videoFrame && this.videoFrame.nativeElement) {
+            const iframe = this.videoFrame.nativeElement
+            if (this.isVideoVisible) {
+              // Resume video when in view
+              iframe.contentWindow.postMessage(
+                '{"event":"command","func":"playVideo","args":""}',
+                '*',
+              )
+            } else {
+              // Pause video when out of view
+              iframe.contentWindow.postMessage(
+                '{"event":"command","func":"pauseVideo","args":""}',
+                '*',
+              )
+            }
+          }
+        })
+      },
+      {
+        threshold: 0.5, // Trigger when 50% of the element is visible
+        rootMargin: '0px', // No margin
+      },
+    )
+
+    // Start observing the slider container
+    if (this.sliderContainer) {
+      this.observer.observe(this.sliderContainer.nativeElement)
+    }
+
+    // YouTube message listener for video end
+    window.addEventListener('message', (event) => {
+      if (event.origin === 'https://www.youtube.com') {
+        try {
+          const data = JSON.parse(event.data)
+          if (data.event === 'onStateChange' && data.info === 0) {
+            this.nextSlide()
+          }
+        } catch (error) {
+          console.error('Error parsing YouTube message:', error)
+        }
+      }
+    })
+  }
+
+  goToCaseStudy(caseStudyId: string): void {
+    this.router.navigate(['/case-study', caseStudyId])
   }
 }
