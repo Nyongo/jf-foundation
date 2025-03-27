@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { Meta, Title } from '@angular/platform-browser'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 import { CanonicalService } from '../../../services/canonical.service'
+import { SeoTestService } from '../../../utils/seo-test'
 
 @Component({
   selector: 'app-case-study-1',
@@ -17,6 +18,7 @@ export class CaseStudy1Component implements OnInit {
     private title: Title,
     private sanitizer: DomSanitizer,
     private canonicalService: CanonicalService,
+    private seoTest: SeoTestService,
   ) {
     this.structuredData = this.sanitizer.bypassSecurityTrustHtml(
       this.getStructuredData(),
@@ -29,6 +31,14 @@ export class CaseStudy1Component implements OnInit {
     this.canonicalService.setCanonicalURL(
       `${this.domain}/case-studies/data-driven-lending`,
     )
+
+    // Run SEO tests in development mode
+    if (process.env['NODE_ENV'] === 'development') {
+      setTimeout(() => {
+        const seoResults = this.seoTest.testSeoElements()
+        console.table(seoResults)
+      }, 1000) // Wait for DOM to be ready
+    }
   }
 
   private getStructuredData(): string {

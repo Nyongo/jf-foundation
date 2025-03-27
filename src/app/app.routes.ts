@@ -25,6 +25,7 @@ import { VideoPlayerComponent } from './components/video-player/video-player.com
 import { CaseStudy1Component } from './components/case-studies/case-study-1/case-study-1.component'
 import { CaseStudy2Component } from './components/case-studies/case-study-2/case-study-2.component'
 import { HomeOurImpactComponent } from './components/home/home-our-impact/home-our-impact.component'
+import { LoanCalculatorComponent } from './components/loan-calculator/loan-calculator.component'
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -68,4 +69,8 @@ export const routes: Routes = [
   { path: 'newsletter', component: NewsletterComponent },
   { path: 'newsletter/:id', component: NewsletterDetailComponent },
   { path: 'video', component: VideoPlayerComponent },
+  {
+    path: 'loan-calculator',
+    component: LoanCalculatorComponent,
+  },
 ]

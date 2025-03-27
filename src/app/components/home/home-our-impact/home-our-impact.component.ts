@@ -1,16 +1,32 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core'
+import {
+  Component,
+  inject,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Subscription } from 'rxjs'
 import { Color, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts'
+import { SchoolHeatmapComponent } from '../school-heatmap/school-heatmap.component'
+
+interface SchoolLocation {
+  name: string
+  location: string
+}
 
 @Component({
   selector: 'app-home-our-impact',
   standalone: true,
   templateUrl: './home-our-impact.component.html',
   styleUrl: './home-our-impact.component.scss',
-  imports: [NgxChartsModule],
+  imports: [NgxChartsModule, SchoolHeatmapComponent],
 })
-export class HomeOurImpactComponent implements OnInit, OnDestroy {
+export class HomeOurImpactComponent
+  implements OnInit, OnDestroy, AfterViewInit
+{
+  @ViewChild(SchoolHeatmapComponent) heatmapComponent!: SchoolHeatmapComponent
   private apiSubscription?: Subscription
   public metrics: any
 
@@ -22,6 +38,7 @@ export class HomeOurImpactComponent implements OnInit, OnDestroy {
   public femaleDirectorPercentage: number = 0
   public femaleTeacherPercentage: number = 0
   public femaleStudentPercentage: number = 0
+  public schoolLocations: SchoolLocation[] = []
 
   // Chart data
   enrolmentChartData: any[] = []
@@ -133,6 +150,12 @@ export class HomeOurImpactComponent implements OnInit, OnDestroy {
     this.loadMetrics()
   }
 
+  ngAfterViewInit() {
+    if (this.heatmapComponent) {
+      this.heatmapComponent.updateSchoolLocations(this.schoolLocations)
+    }
+  }
+
   formatXAxis(value: any): string {
     return `${value}` // Ensures the year values appear correctly
   }
@@ -144,8 +167,8 @@ export class HomeOurImpactComponent implements OnInit, OnDestroy {
   loadMetrics(): void {
     this.apiSubscription = this.http
       .get(
-        //  'https://localhost:3000/spreadsheet/read?spreadsheetId=1E5FXJjfQBEj41OzXaJJ1vzwolLnoSe-FiVjIju9UbZA',
-        'https://evzen.duckdns.org/spreadsheet/read?spreadsheetId=1E5FXJjfQBEj41OzXaJJ1vzwolLnoSe-FiVjIju9UbZA',
+        'http://localhost:3000/spreadsheet/read?spreadsheetId=1E5FXJjfQBEj41OzXaJJ1vzwolLnoSe-FiVjIju9UbZA',
+        // 'https://evzen.duckdns.org/spreadsheet/read?spreadsheetId=1E5FXJjfQBEj41OzXaJJ1vzwolLnoSe-FiVjIju9UbZA',
       )
       .subscribe({
         next: (response: any) => {
@@ -201,6 +224,8 @@ export class HomeOurImpactComponent implements OnInit, OnDestroy {
               value: response.runningWaterStats.schoolsWithoutRunningWater,
             },
           ]
+
+          this.schoolLocations = response.schoolLocations
 
           let cumulativeSchools = 0
           let cumulativeMaleStudents = 0
@@ -449,6 +474,11 @@ export class HomeOurImpactComponent implements OnInit, OnDestroy {
               })),
             },
           ]
+
+          // Update the heatmap with school locations
+          if (this.heatmapComponent) {
+            this.heatmapComponent.updateSchoolLocations(this.schoolLocations)
+          }
         },
         error: (error) => {
           console.error('Error loading data', error)
