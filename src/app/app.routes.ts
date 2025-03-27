@@ -70,7 +70,7 @@ export const routes: Routes = [
   { path: 'newsletter/:id', component: NewsletterDetailComponent },
   { path: 'video', component: VideoPlayerComponent },
   {
-    path: 'loan-calculator',
+    path: 'calculator',
     component: LoanCalculatorComponent,
   },
 ]
