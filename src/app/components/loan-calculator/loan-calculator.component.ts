@@ -25,7 +25,7 @@ interface AmortizationRow {
 })
 export class LoanCalculatorComponent implements OnInit {
   loanForm: FormGroup
-  loanTermOptions = [12, 24, 36, 48, 60]
+  loanTermOptions = [3, 6, 12, 18, 24, 36, 48, 60]
   showSchedule = false
   amortizationSchedule: any[] = []
   processingFee = 0
