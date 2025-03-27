@@ -127,7 +127,9 @@ export class LoanCalculatorComponent implements OnInit {
 
       // Calculate fees based on the actual loan amount
       this.processingFee = Math.round(actualLoanAmount * processingFeeRate)
-      this.insuranceFee = Math.round(actualLoanAmount * insuranceFeeRate)
+      this.insuranceFee = Math.round(
+        (actualLoanAmount * insuranceFeeRate * loanTerm) / 12,
+      )
       this.actualPrincipal = actualLoanAmount
 
       // Monthly payment formula: M = P * (r * (1 + r)^n) / ((1 + r)^n - 1)
