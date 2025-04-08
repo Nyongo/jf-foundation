@@ -78,36 +78,115 @@
       </span>
     </div>
     <div>
-      <div class="flex justify-between gap-4">
-        <input
-          type="text"
-          class="w-full h-8 border border-transparent rounded-3xl mb-4 bg-gray-1700 px-4 placeholder:text-xs placeholder:text-gray-1400 placeholder:tracking-tighter"
-          placeholder="Your Name *"
-        />
-        <input
-          type="text"
-          class="w-full h-8 border border-transparent rounded-3xl mb-4 bg-gray-1700 px-4 placeholder:text-xs placeholder:text-gray-1400 placeholder:tracking-tighter"
-          placeholder="Your Email *"
-        />
-      </div>
-      <input
-        type="text"
-        class="w-full h-8 border border-transparent rounded-3xl mb-4 bg-gray-1700 px-4 placeholder:text-xs placeholder:text-gray-1400 placeholder:tracking-tighter"
-        placeholder="Subject *"
-      />
-      <textarea
-        id="message"
-        class="w-full h-24 border border-transparent rounded-3xl bg-gray-1700 px-4 py-2 placeholder:text-xs placeholder:text-gray-500"
-        placeholder="Your Message *"
-        required
-      ></textarea>
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        <div class="flex justify-between gap-4">
+          <div class="w-full">
+            <input
+              type="text"
+              formControlName="name"
+              class="w-full h-8 border border-transparent rounded-3xl mb-4 bg-gray-1700 px-4 placeholder:text-xs placeholder:text-gray-1400 placeholder:tracking-tighter"
+              [ngClass]="{ 'border-red-200': isFieldInvalid('name') }"
+              placeholder="Your Name *"
+            />
+            <div
+              *ngIf="isFieldInvalid('name')"
+              class="text-red-200 text-xs -mt-3 mb-3"
+            >
+              {{ getErrorMessage('name') }}
+            </div>
+          </div>
+          <div class="w-full">
+            <input
+              type="email"
+              formControlName="email"
+              class="w-full h-8 border border-transparent rounded-3xl mb-4 bg-gray-1700 px-4 placeholder:text-xs placeholder:text-gray-1400 placeholder:tracking-tighter"
+              [ngClass]="{ 'border-red-200': isFieldInvalid('email') }"
+              placeholder="Your Email *"
+            />
+            <div
+              *ngIf="isFieldInvalid('email')"
+              class="text-red-200 text-xs -mt-3 mb-3"
+            >
+              {{ getErrorMessage('email') }}
+            </div>
+          </div>
+        </div>
+        <div>
+          <input
+            type="text"
+            formControlName="subject"
+            class="w-full h-8 border border-transparent rounded-3xl mb-4 bg-gray-1700 px-4 placeholder:text-xs placeholder:text-gray-1400 placeholder:tracking-tighter"
+            [ngClass]="{ 'border-red-200': isFieldInvalid('subject') }"
+            placeholder="Subject *"
+          />
+          <div
+            *ngIf="isFieldInvalid('subject')"
+            class="text-red-200 text-xs -mt-3 mb-3"
+          >
+            {{ getErrorMessage('subject') }}
+          </div>
+        </div>
+        <div>
+          <textarea
+            formControlName="message"
+            class="w-full h-24 border border-transparent rounded-3xl bg-gray-1700 px-4 py-2 placeholder:text-xs placeholder:text-gray-500"
+            [ngClass]="{ 'border-red-200': isFieldInvalid('message') }"
+            placeholder="Your Message *"
+          ></textarea>
+          <div
+            *ngIf="isFieldInvalid('message')"
+            class="text-red-200 text-xs mt-1"
+          >
+            {{ getErrorMessage('message') }}
+          </div>
+        </div>
+
+        <!-- Success and Error Messages -->
+        <div
+          *ngIf="submitSuccess"
+          class="mt-4 p-4 bg-green-100 text-green-700 rounded-lg"
+        >
+          Your message has been sent successfully. We'll get back to you soon!
+        </div>
+        <div
+          *ngIf="submitError"
+          class="mt-4 p-4 bg-red-100 text-red-700 rounded-lg"
+        >
+          There was an error sending your message. Please try again later.
+        </div>
+
+        <button
+          type="submit"
+          [disabled]="!contactForm.valid || isSubmitting"
+          class="w-full h-10 bg-blue hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-3xl mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <span *ngIf="!isSubmitting">Send Message</span>
+          <span *ngIf="isSubmitting" class="flex items-center justify-center">
+            <svg
+              class="w-5 h-5 mr-2 animate-spin"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+            Sending...
+          </span>
+        </button>
+      </form>
     </div>
-    <button
-      type="submit"
-      class="mt-2 mb-4 w-1/3 h-8 bg-blue text-white text-xs text-tighter px-2 rounded-3xl hover:bg-dark-blue transition"
-    >
-      Send Message
-    </button>
   </div>
 </div>
 

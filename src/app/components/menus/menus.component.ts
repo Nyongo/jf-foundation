@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { Router, RouterModule } from '@angular/router'
 import {
   FormBuilder,
@@ -7,6 +7,8 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms'
+import { EmailService, FormData } from '../../services/email.service'
+import { HttpClient, HttpClientModule } from '@angular/common/http'
 
 interface MenuItem {
   label: string
@@ -19,23 +21,30 @@ interface MenuItem {
   standalone: true,
   templateUrl: './menus.component.html',
   styleUrl: './menus.component.scss',
-  imports: [RouterModule, CommonModule, ReactiveFormsModule],
+  imports: [RouterModule, CommonModule, ReactiveFormsModule, HttpClientModule],
+  providers: [HttpClient, EmailService],
 })
-export class MenusComponent {
+export class MenusComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private fb: FormBuilder,
+    private emailService: EmailService,
+    private http: HttpClient,
   ) {}
   isMenuOpen = false
   activeDropdown: string | null = null
   isUpskillModalOpen = false
+  modalStep: 'info' | 'form' = 'info'
+  isSubmitting = false
 
-  subscriptionForm: FormGroup = this.fb.group({
-    teacherName: ['', Validators.required],
-    schoolName: ['', Validators.required],
-    teachingLevel: ['', Validators.required],
+  subscriptionForm = this.fb.group({
+    teacherName: ['', [Validators.required]],
+    schoolName: ['', [Validators.required]],
+    teachingLevel: ['', [Validators.required]],
     numberOfLearners: ['', [Validators.required, Validators.min(1)]],
     yearsOfExperience: ['', [Validators.required, Validators.min(0)]],
+    email: ['', [Validators.required, Validators.email]],
+    phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
   })
 
   menuItems: MenuItem[] = [
@@ -87,18 +96,84 @@ export class MenusComponent {
 
   openUpskillModal(): void {
     this.isUpskillModalOpen = true
+    this.modalStep = 'info'
   }
 
   closeUpskillModal(): void {
     this.isUpskillModalOpen = false
+    this.modalStep = 'info'
     this.subscriptionForm.reset()
+  }
+
+  showRegistrationForm(): void {
+    this.modalStep = 'form'
   }
 
   onSubmit(): void {
     if (this.subscriptionForm.valid) {
-      // Here you would typically send the form data to your backend
-      console.log('Form submitted:', this.subscriptionForm.value)
-      this.closeUpskillModal()
+      this.isSubmitting = true
+      const formData: FormData = {
+        teacherName: this.subscriptionForm.get('teacherName')?.value || '',
+        schoolName: this.subscriptionForm.get('schoolName')?.value || '',
+        teachingLevel: this.subscriptionForm.get('teachingLevel')?.value || '',
+        numberOfLearners:
+          Number(this.subscriptionForm.get('numberOfLearners')?.value) || 0,
+        yearsOfExperience:
+          Number(this.subscriptionForm.get('yearsOfExperience')?.value) || 0,
+        email: this.subscriptionForm.get('email')?.value || '',
+        phoneNumber: this.subscriptionForm.get('phoneNumber')?.value || '',
+        timestamp: new Date().toISOString(),
+      }
+      const payload = { ...formData, type: 'upskill-registration' }
+      this.emailService.sendEmail(payload).subscribe({
+        next: (response) => {
+          console.log('Email sent successfully:', response)
+          this.closeUpskillModal()
+          this.subscriptionForm.reset()
+          this.isSubmitting = false
+        },
+        error: (error) => {
+          console.error('Error sending email:', error)
+          this.isSubmitting = false
+        },
+      })
     }
+  }
+
+  isFieldInvalid(controlName: string): boolean {
+    const control = this.subscriptionForm.get(controlName)
+    return control
+      ? control.invalid && (control.dirty || control.touched)
+      : false
+  }
+
+  getErrorMessage(controlName: string): string {
+    const control = this.subscriptionForm.get(controlName)
+    if (!control) return ''
+
+    if (control.hasError('required')) {
+      return 'This field is required'
+    }
+    if (control.hasError('email')) {
+      return 'Please enter a valid email address'
+    }
+    if (control.hasError('pattern')) {
+      if (controlName === 'phoneNumber') {
+        return 'Please enter a valid 10-digit phone number'
+      }
+    }
+    if (control.hasError('min')) {
+      if (controlName === 'numberOfLearners') {
+        return 'Number of learners must be at least 1'
+      }
+      if (controlName === 'yearsOfExperience') {
+        return 'Years of experience must be 0 or greater'
+      }
+    }
+    return ''
+  }
+
+  ngOnInit(): void {
+    // Additional initialization logic if needed
   }
 }
