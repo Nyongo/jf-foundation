@@ -5,11 +5,15 @@ import {
   OnInit,
   ViewChild,
   AfterViewInit,
+  PLATFORM_ID,
+  Inject,
 } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Subscription } from 'rxjs'
 import { Color, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts'
 import { SchoolHeatmapComponent } from '../school-heatmap/school-heatmap.component'
+import { CommonModule, isPlatformBrowser } from '@angular/common'
+import html2canvas from 'html2canvas'
 
 interface SchoolLocation {
   name: string
@@ -21,7 +25,7 @@ interface SchoolLocation {
   standalone: true,
   templateUrl: './home-our-impact.component.html',
   styleUrl: './home-our-impact.component.scss',
-  imports: [NgxChartsModule, SchoolHeatmapComponent],
+  imports: [NgxChartsModule, SchoolHeatmapComponent, CommonModule],
 })
 export class HomeOurImpactComponent
   implements OnInit, OnDestroy, AfterViewInit
@@ -29,6 +33,8 @@ export class HomeOurImpactComponent
   @ViewChild(SchoolHeatmapComponent) heatmapComponent!: SchoolHeatmapComponent
   private apiSubscription?: Subscription
   public metrics: any
+  public isExporting = false
+  private isBrowser: boolean
 
   // Currency conversion
   public selectedCurrency: 'USD' | 'KES' = 'USD'
@@ -144,7 +150,12 @@ export class HomeOurImpactComponent
     { name: 'Total Students', value: '#CFC0BB' }, // Muted Gray
   ]
 
-  private readonly http = inject(HttpClient)
+  constructor(
+    @Inject(PLATFORM_ID) platformId: Object,
+    private http: HttpClient,
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId)
+  }
 
   ngOnInit(): void {
     this.loadMetrics()
@@ -497,6 +508,197 @@ export class HomeOurImpactComponent
     const select = event.target as HTMLSelectElement
     this.selectedCurrency = select.value as 'USD' | 'KES'
     this.updateFeeCategoryChartData()
+  }
+
+  async exportToPDF() {
+    if (!this.isBrowser) {
+      console.warn('Screenshot export is only available in browser environment')
+      return
+    }
+
+    const element = document.getElementById('impact-content')
+    if (!element) {
+      console.error('Content element not found')
+      return
+    }
+
+    this.isExporting = true
+
+    try {
+      // Force a re-render of charts by triggering change detection
+      this.updateFeeCategoryChartData()
+
+      // Wait for charts to be fully rendered with multiple checks
+      const waitForCharts = async () => {
+        for (let attempt = 0; attempt < 5; attempt++) {
+          await new Promise((resolve) => setTimeout(resolve, 1000))
+          const svgs = element.querySelectorAll('svg')
+          console.log(
+            `Attempt ${attempt + 1}: Found ${svgs.length} SVG elements`,
+          )
+
+          // Check if SVGs are properly rendered
+          const allSvgsReady = Array.from(svgs).every((svg) => {
+            const box = svg.getBoundingClientRect()
+            return box.width > 0 && box.height > 0
+          })
+
+          if (allSvgsReady && svgs.length > 0) {
+            console.log('All SVGs are ready')
+            return true
+          }
+        }
+        return false
+      }
+
+      const chartsReady = await waitForCharts()
+      if (!chartsReady) {
+        throw new Error('Charts failed to render properly')
+      }
+
+      // Process each SVG
+      const svgElements = element.querySelectorAll('svg')
+      console.log('Processing SVGs:', svgElements.length)
+
+      // Add unique identifiers to SVGs
+      svgElements.forEach((svg, index) => {
+        svg.setAttribute('data-id', `chart-${index}`)
+      })
+
+      const svgCanvasPromises = Array.from(svgElements).map(
+        async (svg, index) => {
+          // Get computed styles and ensure valid dimensions
+          const box = svg.getBoundingClientRect()
+          const width = Math.max(box.width, 1)
+          const height = Math.max(box.height, 1)
+
+          console.log(`Processing SVG ${index + 1}:`, { width, height })
+
+          // Create a new canvas with the same dimensions
+          const canvas = document.createElement('canvas')
+          const ctx = canvas.getContext('2d')
+          if (!ctx) return Promise.resolve(false)
+
+          // Set canvas dimensions
+          canvas.width = width * 2
+          canvas.height = height * 2
+          canvas.style.width = width + 'px'
+          canvas.style.height = height + 'px'
+          ctx.scale(2, 2)
+
+          // Convert SVG to data URL with foreignObject handling
+          const svgData = new XMLSerializer().serializeToString(svg)
+          const svgBlob = new Blob([svgData], {
+            type: 'image/svg+xml;charset=utf-8',
+          })
+          const url = URL.createObjectURL(svgBlob)
+
+          return new Promise((resolve) => {
+            const img = new Image()
+            img.crossOrigin = 'anonymous'
+
+            img.onload = () => {
+              ctx.drawImage(img, 0, 0, width, height)
+              const tempParent = svg.parentNode
+              if (tempParent) {
+                const tempCanvas = document.createElement('canvas')
+                tempCanvas.width = width * 2
+                tempCanvas.height = height * 2
+                tempCanvas.style.width = width + 'px'
+                tempCanvas.style.height = height + 'px'
+                const tempCtx = tempCanvas.getContext('2d')
+                if (tempCtx) {
+                  tempCtx.scale(2, 2)
+                  tempCtx.drawImage(img, 0, 0, width, height)
+                  svg.style.display = 'none' // Hide SVG instead of replacing
+                  tempParent.insertBefore(tempCanvas, svg)
+                }
+              }
+              URL.revokeObjectURL(url)
+              resolve(true)
+            }
+
+            img.onerror = () => {
+              console.error(`Failed to load SVG ${index + 1}`)
+              URL.revokeObjectURL(url)
+              resolve(false)
+            }
+
+            img.src = url
+          })
+        },
+      )
+
+      // Wait for all SVGs to be converted
+      const results = await Promise.all(svgCanvasPromises)
+      console.log('SVG processing complete:', results)
+
+      // Take screenshot with high quality settings
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        logging: true,
+        allowTaint: true,
+        backgroundColor: '#ffffff',
+        windowWidth: element.scrollWidth,
+        windowHeight: element.scrollHeight,
+        foreignObjectRendering: true,
+        removeContainer: false,
+        ignoreElements: (element) => {
+          // Ignore any temporary canvases we created
+          return (
+            element.tagName === 'CANVAS' &&
+            element.hasAttribute('data-temp-canvas')
+          )
+        },
+        onclone: (clonedDoc) => {
+          const clonedElement = clonedDoc.getElementById('impact-content')
+          if (clonedElement) {
+            // Set explicit dimensions
+            clonedElement.style.width = element.scrollWidth + 'px'
+            clonedElement.style.height = element.scrollHeight + 'px'
+
+            // Ensure SVGs are visible and properly sized in clone
+            clonedElement.querySelectorAll('svg').forEach((svg) => {
+              const original = element.querySelector(
+                `svg[data-id="${svg.getAttribute('data-id')}"]`,
+              )
+              if (original) {
+                const box = original.getBoundingClientRect()
+                svg.style.width = box.width + 'px'
+                svg.style.height = box.height + 'px'
+                svg.style.display = 'block'
+              }
+            })
+          }
+        },
+      })
+
+      // Convert to image and download
+      const image = canvas.toDataURL('image/png', 1.0)
+      const link = document.createElement('a')
+      link.href = image
+      link.download = 'jackfruit-foundation-impact.png'
+      link.click()
+
+      // Restore the page without full reload
+      element.querySelectorAll('svg').forEach((svg) => {
+        svg.style.display = '' // Restore SVG visibility
+      })
+      element.querySelectorAll('canvas').forEach((canvas) => {
+        if (
+          canvas.parentNode &&
+          (canvas.nextSibling as Element)?.tagName === 'SVG'
+        ) {
+          canvas.parentNode.removeChild(canvas)
+        }
+      })
+    } catch (error) {
+      console.error('Error generating screenshot:', error)
+      window.location.reload() // Only reload on error
+    } finally {
+      this.isExporting = false
+    }
   }
 
   ngOnDestroy(): void {

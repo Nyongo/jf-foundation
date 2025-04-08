@@ -10,4 +10,26 @@
     font-weight: bold;
     border-bottom: 2px solid #FEE200;
   }
+
+  // Dropdown styles
+  .dropdown-menu {
+    transition: all 0.3s ease;
+    transform-origin: top;
+    transform: scaleY(0);
+    opacity: 0;
+  }
+
+  .dropdown-menu.show {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+
+  // Hover effect for dropdown items
+  .dropdown-item {
+    transition: background-color 0.2s ease;
+    
+    &:hover {
+      background-color: rgba(101, 129, 254, 0.1);
+    }
+  }
   

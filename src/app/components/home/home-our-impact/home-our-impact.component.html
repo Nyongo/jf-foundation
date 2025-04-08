@@ -1,588 +1,597 @@
-<div class="w-full bg-slate-100 mb-12 mt-4 py-8 md:py-12">
-  <div
-    class="w-full md:w-10/12 lg:w-9/12 flex flex-col lg:flex-row justify-center items-start py-4 mx-auto px-4 md:px-6"
-  >
-    <div class="flex flex-col w-full lg:w-1/2">
-      <span
-        class="text-xl md:text-2xl font-semibold text-gray-1000 text-left mt-4 mb-2 tracking-wide"
-      >
-        Our Impact
-      </span>
-      <span
-        class="text-sm md:text-base text-gray-950 text-left pt-2 leading-5 tracking-normal w-full"
-      >
-        Together with our Partners <br />
-        We've managed to positively impact on the lives of many students.
-      </span>
-
-      <div class="pt-4 flex flex-col gap-2">
-        <!-- Statistics Section -->
-        <div class="w-full flex justify-start items-center">
-          <img
-            src="assets/images/svg/arrow-right-blue.png"
-            alt="Arrow"
-            class="mr-2 w-2"
-          />
-          <div class="flex flex-col justify-center items-center">
-            <div class="flex mb-1 w-full justify-center items-center">
-              <span
-                class="font-sans text-lg md:text-xl text-bright-blue font-extrabold flex items-center"
-              >
-                {{ metrics.totalNoOfSchools | number: '1.0-0' }}
-                <span class="text-sm"> - </span>&nbsp;&nbsp;
-              </span>
-              <span
-                class="text-sm md:text-base font-bold text-black tracking-tighter"
-              >
-                Schools Reached
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="w-full flex justify-start items-center">
-          <img
-            src="assets/images/svg/arrow-right-blue.png"
-            alt="Arrow"
-            class="mr-2 w-2"
-          />
-          <div class="flex flex-col justify-center items-center">
-            <div class="flex mb-1 w-full justify-center items-center">
-              <span
-                class="font-sans text-lg md:text-xl text-bright-blue font-extrabold flex items-center"
-                >{{ metrics.totalEnrolment | number: '1.0-0' }}&nbsp;&nbsp;
-              </span>
-              <span
-                class="text-xs md:text-sm font-bold text-black tracking-tighter"
-              >
-                - Students Enrolled In Jackfruit Schools
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div class="w-full flex justify-start items-center">
-          <img
-            src="assets/images/svg/arrow-right-blue.png"
-            alt="Arrow"
-            class="mr-2 w-2"
-          />
-          <div class="flex flex-col justify-center items-center">
-            <div class="flex mb-1 w-full justify-center items-center">
-              <span
-                class="font-sans text-lg md:text-xl text-bright-blue font-extrabold flex items-center"
-                >{{
-                  metrics.totalEnrolment * 1.6 | number: '1.0-0'
-                }}&nbsp;&nbsp;
-              </span>
-              <span
-                class="text-xs md:text-sm font-bold text-black tracking-tighter"
-              >
-                - Parents With Children Enrolled
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div class="w-full flex justify-start items-center">
-          <img
-            src="assets/images/svg/arrow-right-blue.png"
-            alt="Arrow"
-            class="mr-2 w-2"
-          />
-          <div class="flex flex-col justify-center items-center">
-            <div class="flex mb-1 w-full justify-center items-center">
-              <span
-                class="font-sans text-lg md:text-xl text-bright-blue font-extrabold flex items-center"
-              >
-                {{
-                  (metrics.directorsStat.female / metrics.totalNoOfSchools) *
-                    100 | number: '1.0-0'
-                }}%
-              </span>
-              <span
-                class="text-xs md:text-sm font-bold text-black tracking-tighter"
-              >
-                - Female School Directors Empowered
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div class="w-full flex justify-start items-center">
-          <img
-            src="assets/images/svg/arrow-right-blue.png"
-            alt="Arrow"
-            class="mr-2 w-2"
-          />
-          <div class="flex flex-col justify-center items-center">
-            <div class="flex mb-1 w-full justify-center items-center">
-              <span
-                class="font-sans text-lg md:text-xl text-bright-blue font-extrabold flex items-center"
-                >{{ metrics.totalTeachers | number: '1.0-0' }}&nbsp;&nbsp;
-              </span>
-              <span
-                class="text-xs md:text-sm font-bold text-black tracking-tighter"
-              >
-                - Teachers Trained
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <span
-        class="text-xs md:text-xs text-gray-950 text-left pt-2 leading-5 tracking-normal w-full md:w-11/12"
-      >
-        We know that children learn better when their physical, nutritional, and
-        social needs are met too. So we have hand-picked several organizations
-        to partner with that provide additional support to our schools.
-      </span>
-
-      <!-- Female Representation Statistics -->
-      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="bg-white p-4 rounded-lg shadow-sm">
-          <h4 class="text-sm font-semibold text-gray-700 mb-2">
-            Female Directors
-          </h4>
-          <div class="flex items-center">
-            <div class="text-xl md:text-2xl font-bold text-bright-blue">
-              {{ femaleDirectorPercentage }}%
-            </div>
-            <span class="ml-2 text-xs md:text-sm text-gray-600"
-              >of total directors</span
-            >
-          </div>
-        </div>
-        <div class="bg-white p-4 rounded-lg shadow-sm">
-          <h4 class="text-sm font-semibold text-gray-700 mb-2">
-            Female Teachers
-          </h4>
-          <div class="flex items-center">
-            <div class="text-xl md:text-2xl font-bold text-bright-blue">
-              {{ femaleTeacherPercentage }}%
-            </div>
-            <span class="ml-2 text-xs md:text-sm text-gray-600"
-              >of total teachers</span
-            >
-          </div>
-        </div>
-        <div class="bg-white p-4 rounded-lg shadow-sm">
-          <h4 class="text-sm font-semibold text-gray-700 mb-2">
-            Female Students
-          </h4>
-          <div class="flex items-center">
-            <div class="text-xl md:text-2xl font-bold text-bright-blue">
-              {{ femaleStudentPercentage }}%
-            </div>
-            <span class="ml-2 text-xs md:text-sm text-gray-600"
-              >of total students</span
-            >
-          </div>
-        </div>
-      </div>
-
-      <div class="w-full h-48 md:h-60 mt-6">
-        <div class="flex justify-between items-center mb-4">
-          <h2 class="text-lg md:text-xl font-bold">Schools By Fee Range</h2>
-          <div class="flex items-center space-x-2">
-            <label for="currency-select" class="text-sm text-gray-600"
-              >Currency:</label
-            >
-            <select
-              id="currency-select"
-              (change)="onCurrencyChange($event)"
-              class="text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-bright-blue"
-              [value]="selectedCurrency"
-            >
-              <option value="USD">USD</option>
-              <option value="KES">KES</option>
-            </select>
-          </div>
-        </div>
-        <ngx-charts-bar-vertical
-          [scheme]="colorScheme"
-          [results]="feeCategoryChartData"
-          [legend]="showLegend"
-          [xAxis]="true"
-          [yAxis]="true"
-          [showDataLabel]="true"
+<div id="impact-content">
+  <div class="w-full bg-slate-100 mb-12 mt-4 py-8 md:py-12">
+    <div
+      class="w-full md:w-10/12 lg:w-9/12 flex flex-col lg:flex-row justify-center items-start py-4 mx-auto px-4 md:px-6"
+    >
+      <div class="flex flex-col w-full lg:w-1/2">
+        <span
+          class="text-xl md:text-2xl font-semibold text-gray-1000 text-left mt-4 mb-2 tracking-wide"
         >
-        </ngx-charts-bar-vertical>
+          Our Impact
+        </span>
+        <span
+          class="text-sm md:text-base text-gray-950 text-left pt-2 leading-5 tracking-normal w-full"
+        >
+          Together with our Partners <br />
+          We've managed to positively impact on the lives of many students.
+        </span>
+
+        <div class="pt-4 flex flex-col gap-2">
+          <!-- Statistics Section -->
+          <div class="w-full flex justify-start items-center">
+            <img
+              src="assets/images/svg/arrow-right-blue.png"
+              alt="Arrow"
+              class="mr-2 w-2"
+            />
+            <div class="flex flex-col justify-center items-center">
+              <div class="flex mb-1 w-full justify-center items-center">
+                <span
+                  class="font-sans text-lg md:text-xl text-bright-blue font-extrabold flex items-center"
+                >
+                  {{ metrics.totalNoOfSchools | number: '1.0-0' }}
+                  <span class="text-sm"> - </span>&nbsp;&nbsp;
+                </span>
+                <span
+                  class="text-sm md:text-base font-bold text-black tracking-tighter"
+                >
+                  Schools Reached
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="w-full flex justify-start items-center">
+            <img
+              src="assets/images/svg/arrow-right-blue.png"
+              alt="Arrow"
+              class="mr-2 w-2"
+            />
+            <div class="flex flex-col justify-center items-center">
+              <div class="flex mb-1 w-full justify-center items-center">
+                <span
+                  class="font-sans text-lg md:text-xl text-bright-blue font-extrabold flex items-center"
+                  >{{ metrics.totalEnrolment | number: '1.0-0' }}&nbsp;&nbsp;
+                </span>
+                <span
+                  class="text-xs md:text-sm font-bold text-black tracking-tighter"
+                >
+                  - Students Enrolled In Jackfruit Schools
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full flex justify-start items-center">
+            <img
+              src="assets/images/svg/arrow-right-blue.png"
+              alt="Arrow"
+              class="mr-2 w-2"
+            />
+            <div class="flex flex-col justify-center items-center">
+              <div class="flex mb-1 w-full justify-center items-center">
+                <span
+                  class="font-sans text-lg md:text-xl text-bright-blue font-extrabold flex items-center"
+                  >{{
+                    metrics.totalEnrolment * 1.6 | number: '1.0-0'
+                  }}&nbsp;&nbsp;
+                </span>
+                <span
+                  class="text-xs md:text-sm font-bold text-black tracking-tighter"
+                >
+                  - Parents With Children Enrolled
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full flex justify-start items-center">
+            <img
+              src="assets/images/svg/arrow-right-blue.png"
+              alt="Arrow"
+              class="mr-2 w-2"
+            />
+            <div class="flex flex-col justify-center items-center">
+              <div class="flex mb-1 w-full justify-center items-center">
+                <span
+                  class="font-sans text-lg md:text-xl text-bright-blue font-extrabold flex items-center"
+                >
+                  {{
+                    (metrics.directorsStat.female / metrics.totalNoOfSchools) *
+                      100 | number: '1.0-0'
+                  }}%
+                </span>
+                <span
+                  class="text-xs md:text-sm font-bold text-black tracking-tighter"
+                >
+                  - Female School Directors Empowered
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full flex justify-start items-center">
+            <img
+              src="assets/images/svg/arrow-right-blue.png"
+              alt="Arrow"
+              class="mr-2 w-2"
+            />
+            <div class="flex flex-col justify-center items-center">
+              <div class="flex mb-1 w-full justify-center items-center">
+                <span
+                  class="font-sans text-lg md:text-xl text-bright-blue font-extrabold flex items-center"
+                  >{{ metrics.totalTeachers | number: '1.0-0' }}&nbsp;&nbsp;
+                </span>
+                <span
+                  class="text-xs md:text-sm font-bold text-black tracking-tighter"
+                >
+                  - Teachers Trained
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span
+          class="text-xs md:text-xs text-gray-950 text-left pt-2 leading-5 tracking-normal w-full md:w-11/12"
+        >
+          We know that children learn better when their physical, nutritional,
+          and social needs are met too. So we have hand-picked several
+          organizations to partner with that provide additional support to our
+          schools.
+        </span>
+
+        <!-- Female Representation Statistics -->
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="bg-white p-4 rounded-lg shadow-sm">
+            <h4 class="text-sm font-semibold text-gray-700 mb-2">
+              Female Directors
+            </h4>
+            <div class="flex items-center">
+              <div class="text-xl md:text-2xl font-bold text-bright-blue">
+                {{ femaleDirectorPercentage }}%
+              </div>
+              <span class="ml-2 text-xs md:text-sm text-gray-600"
+                >of total directors</span
+              >
+            </div>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow-sm">
+            <h4 class="text-sm font-semibold text-gray-700 mb-2">
+              Female Teachers
+            </h4>
+            <div class="flex items-center">
+              <div class="text-xl md:text-2xl font-bold text-bright-blue">
+                {{ femaleTeacherPercentage }}%
+              </div>
+              <span class="ml-2 text-xs md:text-sm text-gray-600"
+                >of total teachers</span
+              >
+            </div>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow-sm">
+            <h4 class="text-sm font-semibold text-gray-700 mb-2">
+              Female Students
+            </h4>
+            <div class="flex items-center">
+              <div class="text-xl md:text-2xl font-bold text-bright-blue">
+                {{ femaleStudentPercentage }}%
+              </div>
+              <span class="ml-2 text-xs md:text-sm text-gray-600"
+                >of total students</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full h-48 md:h-60 mt-6">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg md:text-xl font-bold">Schools By Fee Range</h2>
+            <div class="flex items-center space-x-2">
+              <label for="currency-select" class="text-sm text-gray-600"
+                >Currency:</label
+              >
+              <select
+                id="currency-select"
+                (change)="onCurrencyChange($event)"
+                class="text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-bright-blue"
+                [value]="selectedCurrency"
+              >
+                <option value="USD">USD</option>
+                <option value="KES">KES</option>
+              </select>
+            </div>
+          </div>
+          <ngx-charts-bar-vertical
+            [scheme]="colorScheme"
+            [results]="feeCategoryChartData"
+            [legend]="showLegend"
+            [xAxis]="true"
+            [yAxis]="true"
+            [showDataLabel]="true"
+          >
+          </ngx-charts-bar-vertical>
+        </div>
+      </div>
+
+      <div class="flex flex-col w-full lg:w-1/2 mt-8 lg:mt-0 lg:pl-8">
+        <div class="w-full h-48 md:h-60">
+          <h2 class="text-lg md:text-xl font-bold mb-4 text-center">
+            Schools By Grade
+          </h2>
+          <ngx-charts-bar-vertical
+            [scheme]="colorScheme"
+            [results]="pieGridDataSchoolCategories"
+            [legend]="showLegend"
+            [xAxis]="true"
+            [yAxis]="true"
+            [showDataLabel]="true"
+          >
+          </ngx-charts-bar-vertical>
+        </div>
+        <div class="mt-8">
+          <h2 class="text-lg md:text-xl text-center font-bold mb-4 mt-4">
+            Students Distribution
+          </h2>
+          <ngx-charts-pie-grid
+            [scheme]="colorSchemePieGrid"
+            [results]="pieGridDataStudents"
+          >
+          </ngx-charts-pie-grid>
+        </div>
+        <div class="mt-8">
+          <h2 class="text-lg md:text-xl text-center font-bold mb-4">
+            Teachers Distribution
+          </h2>
+          <ngx-charts-pie-grid
+            [scheme]="colorSchemePieGrid"
+            [results]="pieGridDataTeachers"
+          >
+          </ngx-charts-pie-grid>
+        </div>
       </div>
     </div>
+  </div>
 
-    <div class="flex flex-col w-full lg:w-1/2 mt-8 lg:mt-0 lg:pl-8">
-      <div class="w-full h-48 md:h-60">
-        <h2 class="text-lg md:text-xl font-bold mb-4">Schools By Grade</h2>
-        <ngx-charts-bar-vertical
-          [scheme]="colorScheme"
-          [results]="pieGridDataSchoolCategories"
-          [legend]="showLegend"
-          [xAxis]="true"
-          [yAxis]="true"
-          [showDataLabel]="true"
-        >
-        </ngx-charts-bar-vertical>
-      </div>
-      <div class="mt-8">
-        <h2 class="text-lg md:text-xl text-center font-bold mb-4">
-          Students Distribution
-        </h2>
-        <ngx-charts-pie-grid
-          [scheme]="colorSchemePieGrid"
-          [results]="pieGridDataStudents"
-        >
-        </ngx-charts-pie-grid>
-      </div>
-      <div class="mt-8">
-        <h2 class="text-lg md:text-xl text-center font-bold mb-4">
-          Teachers Distribution
-        </h2>
-        <ngx-charts-pie-grid
-          [scheme]="colorSchemePieGrid"
-          [results]="pieGridDataTeachers"
-        >
-        </ngx-charts-pie-grid>
-      </div>
+  <!-- <div class="w-full py-16 bg-gray-50">
+    <div class="w-full md:w-10/12 mx-auto px-4">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">
+        School Locations
+      </h2>
+      <p class="text-gray-600 mb-8 text-center max-w-2xl mx-auto">
+        Explore the geographical distribution of schools supported by Jackfruit
+        Foundation across Kenya.
+      </p>
+      <app-school-heatmap></app-school-heatmap>
     </div>
-  </div>
-</div>
+  </div> -->
 
-<div class="w-full py-16 bg-gray-50">
-  <div class="w-full md:w-10/12 mx-auto px-4">
-    <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">
-      School Locations
-    </h2>
-    <p class="text-gray-600 mb-8 text-center max-w-2xl mx-auto">
-      Explore the geographical distribution of schools supported by Jackfruit
-      Foundation across Kenya.
-    </p>
-    <app-school-heatmap></app-school-heatmap>
-  </div>
-</div>
+  <!-- Key Areas Accordions -->
+  <div class="w-full md:w-4/5 mx-auto px-4 md:px-6">
+    <h2 class="text-lg md:text-xl font-bold mb-6">Our Key Focus Areas</h2>
 
-<!-- Key Areas Accordions -->
-<div class="w-full md:w-4/5 mx-auto px-4 md:px-6">
-  <h2 class="text-lg md:text-xl font-bold mb-6">Our Key Focus Areas</h2>
-
-  <!-- Climate Resilience Accordion -->
-  <div class="mb-6">
-    <details class="group bg-white border rounded-lg">
-      <summary class="flex justify-between items-center p-4 cursor-pointer">
-        <h3 class="text-base md:text-lg font-semibold">
-          Climate Resilience and Green Energy
-        </h3>
-        <span class="transform group-open:rotate-180 transition-transform">
-          <svg
-            class="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
-        </span>
-      </summary>
-      <div class="p-4 border-t">
-        <p class="text-sm text-gray-700">
-          We promote sustainable practices and green energy solutions in our
-          partner schools, helping them reduce their environmental impact while
-          cutting operational costs. This includes solar power installations,
-          water conservation systems, and environmental education programs.
-        </p>
-        <b class="text-sm text-gray-700"> Key Points:</b>
-        <ol class="list-decimal list-inside ml-2">
-          <li>
-            <span class="text-sm text-gray-700"
-              >Developing climate-resilient school infrastructure.
-            </span>
-          </li>
-          <li>
-            <span class="text-sm text-gray-700"
-              >Promoting renewable energy solutions (solar power,
-              energy-efficient lighting).
-            </span>
-          </li>
-          <li>
-            <span class="text-sm text-gray-700"
-              >Supporting environmental education and green school initiatives.
-            </span>
-          </li>
-        </ol>
-        <!-- Climate & Energy Charts -->
-        <div class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div class="h-48 md:h-64">
-            <h4 class="text-sm font-semibold mb-2">Solar Power Adoption</h4>
-            <ngx-charts-bar-horizontal
-              [results]="solarPowerData"
-              [scheme]="colorScheme"
-              [xAxis]="true"
-              [yAxis]="true"
-              [legend]="true"
+    <!-- Climate Resilience Accordion -->
+    <div class="mb-6">
+      <details class="group bg-white border rounded-lg">
+        <summary class="flex justify-between items-center p-4 cursor-pointer">
+          <h3 class="text-base md:text-lg font-semibold">
+            Climate Resilience and Green Energy
+          </h3>
+          <span class="transform group-open:rotate-180 transition-transform">
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-            </ngx-charts-bar-horizontal>
-          </div>
-          <div class="h-48 md:h-64">
-            <h4 class="text-sm font-semibold mb-2">
-              Water Conservation Impact
-            </h4>
-            <ngx-charts-bar-vertical
-              [results]="waterConservationData"
-              [scheme]="colorScheme"
-              [xAxis]="true"
-              [yAxis]="true"
-              [showDataLabel]="true"
-            >
-            </ngx-charts-bar-vertical>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </span>
+        </summary>
+        <div class="p-4 border-t">
+          <p class="text-sm text-gray-700">
+            We promote sustainable practices and green energy solutions in our
+            partner schools, helping them reduce their environmental impact
+            while cutting operational costs. This includes solar power
+            installations, water conservation systems, and environmental
+            education programs.
+          </p>
+          <b class="text-sm text-gray-700"> Key Points:</b>
+          <ol class="list-decimal list-inside ml-2">
+            <li>
+              <span class="text-sm text-gray-700"
+                >Developing climate-resilient school infrastructure.
+              </span>
+            </li>
+            <li>
+              <span class="text-sm text-gray-700"
+                >Promoting renewable energy solutions (solar power,
+                energy-efficient lighting).
+              </span>
+            </li>
+            <li>
+              <span class="text-sm text-gray-700"
+                >Supporting environmental education and green school
+                initiatives.
+              </span>
+            </li>
+          </ol>
+          <!-- Climate & Energy Charts -->
+          <div class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="h-48 md:h-64">
+              <h4 class="text-sm font-semibold mb-2">Solar Power Adoption</h4>
+              <ngx-charts-bar-horizontal
+                [results]="solarPowerData"
+                [scheme]="colorScheme"
+                [xAxis]="true"
+                [yAxis]="true"
+                [legend]="true"
+              >
+              </ngx-charts-bar-horizontal>
+            </div>
+            <div class="h-48 md:h-64">
+              <h4 class="text-sm font-semibold mb-2">
+                Water Conservation Impact
+              </h4>
+              <ngx-charts-bar-vertical
+                [results]="waterConservationData"
+                [scheme]="colorScheme"
+                [xAxis]="true"
+                [yAxis]="true"
+                [showDataLabel]="true"
+              >
+              </ngx-charts-bar-vertical>
+            </div>
           </div>
         </div>
-      </div>
-    </details>
-  </div>
+      </details>
+    </div>
 
-  <!-- Education Accordion -->
-  <div class="mb-6">
-    <details class="group bg-white border rounded-lg">
-      <summary class="flex justify-between items-center p-4 cursor-pointer">
-        <h3 class="text-base md:text-lg font-semibold">
-          Education and Capacity Building
-        </h3>
-        <span class="transform group-open:rotate-180 transition-transform">
-          <svg
-            class="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
-        </span>
-      </summary>
-      <div class="p-4 border-t">
-        <p class="text-sm text-gray-700">
-          We focus on strengthening educational outcomes through teacher
-          training, curriculum development, and leadership development programs.
-          Our capacity building initiatives ensure sustainable improvement in
-          education quality.
-        </p>
-        <b class="text-sm text-gray-700"> Key Points:</b>
-        <ol class="list-decimal list-inside ml-2">
-          <li>
-            <span class="text-sm text-gray-700"
-              >Upskilling teachers through training programs.
-            </span>
-          </li>
-          <li>
-            <span class="text-sm text-gray-700"
-              >Supporting innovative learning methodologies.
-            </span>
-          </li>
-          <li>
-            <span class="text-sm text-gray-700"
-              >Providing school supplies and resources to improve literacy and
-              numeracy.
-            </span>
-          </li>
-        </ol>
-        <!-- Education Charts -->
-        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="h-64">
-            <h4 class="text-sm font-semibold mb-2">Teachers Count Progress</h4>
-            <ngx-charts-line-chart
-              [results]="yearStatsTeaschersChartData"
-              [scheme]="colorScheme"
-              [xAxis]="true"
-              [yAxis]="true"
-              [legend]="true"
-              [showXAxisLabel]="true"
-              [showYAxisLabel]="true"
+    <!-- Education Accordion -->
+    <div class="mb-6">
+      <details class="group bg-white border rounded-lg">
+        <summary class="flex justify-between items-center p-4 cursor-pointer">
+          <h3 class="text-base md:text-lg font-semibold">
+            Education and Capacity Building
+          </h3>
+          <span class="transform group-open:rotate-180 transition-transform">
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-            </ngx-charts-line-chart>
-          </div>
-          <div class="h-64">
-            <h4 class="text-sm font-semibold mb-2">Student Count Progress</h4>
-            <ngx-charts-line-chart
-              [results]="yearStatsStudentsChartData"
-              [scheme]="colorScheme"
-              [xAxis]="true"
-              [yAxis]="true"
-              [legend]="true"
-            >
-            </ngx-charts-line-chart>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </span>
+        </summary>
+        <div class="p-4 border-t">
+          <p class="text-sm text-gray-700">
+            We focus on strengthening educational outcomes through teacher
+            training, curriculum development, and leadership development
+            programs. Our capacity building initiatives ensure sustainable
+            improvement in education quality.
+          </p>
+          <b class="text-sm text-gray-700"> Key Points:</b>
+          <ol class="list-decimal list-inside ml-2">
+            <li>
+              <span class="text-sm text-gray-700"
+                >Upskilling teachers through training programs.
+              </span>
+            </li>
+            <li>
+              <span class="text-sm text-gray-700"
+                >Supporting innovative learning methodologies.
+              </span>
+            </li>
+            <li>
+              <span class="text-sm text-gray-700"
+                >Providing school supplies and resources to improve literacy and
+                numeracy.
+              </span>
+            </li>
+          </ol>
+          <!-- Education Charts -->
+          <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="h-64">
+              <h4 class="text-sm font-semibold mb-2">
+                Teachers Count Progress
+              </h4>
+              <ngx-charts-line-chart
+                [results]="yearStatsTeaschersChartData"
+                [scheme]="colorScheme"
+                [xAxis]="true"
+                [yAxis]="true"
+                [legend]="true"
+                [showXAxisLabel]="true"
+                [showYAxisLabel]="true"
+              >
+              </ngx-charts-line-chart>
+            </div>
+            <div class="h-64">
+              <h4 class="text-sm font-semibold mb-2">Student Count Progress</h4>
+              <ngx-charts-line-chart
+                [results]="yearStatsStudentsChartData"
+                [scheme]="colorScheme"
+                [xAxis]="true"
+                [yAxis]="true"
+                [legend]="true"
+              >
+              </ngx-charts-line-chart>
+            </div>
           </div>
         </div>
-      </div>
-    </details>
-  </div>
+      </details>
+    </div>
 
-  <!-- Tech & Innovation Accordion -->
-  <div class="mb-6">
-    <details class="group bg-white border rounded-lg">
-      <summary class="flex justify-between items-center p-4 cursor-pointer">
-        <h3 class="text-base md:text-lg font-semibold">
-          Tech & Innovation for Social Good
-        </h3>
-        <span class="transform group-open:rotate-180 transition-transform">
-          <svg
-            class="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
-        </span>
-      </summary>
-      <div class="p-4 border-t">
-        <p class="text-sm text-gray-700">
-          We leverage technology to create innovative solutions for educational
-          challenges. This includes digital learning platforms, data-driven
-          decision making tools, and technology integration in classrooms to
-          enhance learning outcomes.
-        </p>
-        <b class="text-sm text-gray-700"> Key Points:</b>
-        <ol class="list-decimal list-inside ml-2">
-          <li>
-            <span class="text-sm text-gray-700"
-              >Implementing AI-driven impact measurement and customized
-              interventions.
-            </span>
-          </li>
-          <li>
-            <span class="text-sm text-gray-700"
-              >Enhancing digital literacy in schools.
-            </span>
-          </li>
-          <li>
-            <span class="text-sm text-gray-700"
-              >Supporting EdTech innovations to improve school operations.
-            </span>
-          </li>
-        </ol>
-        <!-- Tech Innovation Charts -->
-        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="h-64">
-            <h4 class="text-sm font-semibold mb-2">
-              Digital Platform Adoption
-            </h4>
-            <ngx-charts-bar-vertical
-              [results]="techIntegrationData"
-              [scheme]="colorScheme"
-              [xAxis]="true"
-              [yAxis]="true"
-              [legend]="true"
+    <!-- Tech & Innovation Accordion -->
+    <div class="mb-6">
+      <details class="group bg-white border rounded-lg">
+        <summary class="flex justify-between items-center p-4 cursor-pointer">
+          <h3 class="text-base md:text-lg font-semibold">
+            Tech & Innovation for Social Good
+          </h3>
+          <span class="transform group-open:rotate-180 transition-transform">
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-            </ngx-charts-bar-vertical>
-          </div>
-          <div class="h-64">
-            <h4 class="text-sm font-semibold mb-2">
-              Technology Integration by Subject
-            </h4>
-            <ngx-charts-bar-horizontal
-              [results]="techIntegrationData"
-              [scheme]="colorScheme"
-              [xAxis]="true"
-              [yAxis]="true"
-              [showDataLabel]="true"
-            >
-            </ngx-charts-bar-horizontal>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </span>
+        </summary>
+        <div class="p-4 border-t">
+          <p class="text-sm text-gray-700">
+            We leverage technology to create innovative solutions for
+            educational challenges. This includes digital learning platforms,
+            data-driven decision making tools, and technology integration in
+            classrooms to enhance learning outcomes.
+          </p>
+          <b class="text-sm text-gray-700"> Key Points:</b>
+          <ol class="list-decimal list-inside ml-2">
+            <li>
+              <span class="text-sm text-gray-700"
+                >Implementing AI-driven impact measurement and customized
+                interventions.
+              </span>
+            </li>
+            <li>
+              <span class="text-sm text-gray-700"
+                >Enhancing digital literacy in schools.
+              </span>
+            </li>
+            <li>
+              <span class="text-sm text-gray-700"
+                >Supporting EdTech innovations to improve school operations.
+              </span>
+            </li>
+          </ol>
+          <!-- Tech Innovation Charts -->
+          <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="h-64">
+              <h4 class="text-sm font-semibold mb-2">
+                Digital Platform Adoption
+              </h4>
+              <ngx-charts-bar-vertical
+                [results]="techIntegrationData"
+                [scheme]="colorScheme"
+                [xAxis]="true"
+                [yAxis]="true"
+                [legend]="true"
+              >
+              </ngx-charts-bar-vertical>
+            </div>
+            <div class="h-64">
+              <h4 class="text-sm font-semibold mb-2">
+                Technology Integration by Subject
+              </h4>
+              <ngx-charts-bar-horizontal
+                [results]="techIntegrationData"
+                [scheme]="colorScheme"
+                [xAxis]="true"
+                [yAxis]="true"
+                [showDataLabel]="true"
+              >
+              </ngx-charts-bar-horizontal>
+            </div>
           </div>
         </div>
-      </div>
-    </details>
-  </div>
+      </details>
+    </div>
 
-  <!-- Gender Equality Accordion -->
-  <div class="mb-6">
-    <details class="group bg-white border rounded-lg">
-      <summary class="flex justify-between items-center p-4 cursor-pointer">
-        <h3 class="text-base md:text-lg font-semibold">
-          Gender Equality and Inclusion
-        </h3>
-        <span class="transform group-open:rotate-180 transition-transform">
-          <svg
-            class="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
-        </span>
-      </summary>
-      <div class="p-4 border-t">
-        <p class="text-sm text-gray-700">
-          We promote equal opportunities in education through targeted programs
-          that support girls' education, female leadership in schools, and
-          inclusive learning environments that cater to diverse needs and
-          backgrounds.
-        </p>
-        <b class="text-sm text-gray-700"> Key Points:</b>
-        <ol class="list-decimal list-inside ml-2">
-          <li>
-            <span class="text-sm text-gray-700"
-              >Promoting inclusive education for children with disabilities.
-            </span>
-          </li>
-          <li>
-            <span class="text-sm text-gray-700"
-              >Enhancing digital literacy in schools.
-            </span>
-          </li>
-          <li>
-            <span class="text-sm text-gray-700"
-              >Supporting girls' education initiatives.
-            </span>
-          </li>
-        </ol>
-        <!-- Gender Equality Charts -->
-        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="h-64">
-            <h4 class="text-sm font-semibold mb-2">
-              Gender Distribution in Leadership
-            </h4>
-            <ngx-charts-pie-chart
-              [results]="genderLeadershipData"
-              [scheme]="colorScheme"
-              [labels]="true"
-              [legend]="true"
+    <!-- Gender Equality Accordion -->
+    <div class="mb-6">
+      <details class="group bg-white border rounded-lg">
+        <summary class="flex justify-between items-center p-4 cursor-pointer">
+          <h3 class="text-base md:text-lg font-semibold">
+            Gender Equality and Inclusion
+          </h3>
+          <span class="transform group-open:rotate-180 transition-transform">
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-            </ngx-charts-pie-chart>
-          </div>
-          <div class="h-64">
-            <h4 class="text-sm font-semibold mb-2">
-              Inclusion Programs Impact
-            </h4>
-            <ngx-charts-line-chart
-              [results]="yearStatsStudentsChartData"
-              [scheme]="colorScheme"
-              [xAxis]="true"
-              [yAxis]="true"
-              [legend]="true"
-            >
-            </ngx-charts-line-chart>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </span>
+        </summary>
+        <div class="p-4 border-t">
+          <p class="text-sm text-gray-700">
+            We promote equal opportunities in education through targeted
+            programs that support girls' education, female leadership in
+            schools, and inclusive learning environments that cater to diverse
+            needs and backgrounds.
+          </p>
+          <b class="text-sm text-gray-700"> Key Points:</b>
+          <ol class="list-decimal list-inside ml-2">
+            <li>
+              <span class="text-sm text-gray-700"
+                >Promoting inclusive education for children with disabilities.
+              </span>
+            </li>
+            <li>
+              <span class="text-sm text-gray-700"
+                >Enhancing digital literacy in schools.
+              </span>
+            </li>
+            <li>
+              <span class="text-sm text-gray-700"
+                >Supporting girls' education initiatives.
+              </span>
+            </li>
+          </ol>
+          <!-- Gender Equality Charts -->
+          <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="h-64">
+              <h4 class="text-sm font-semibold mb-2">
+                Gender Distribution in Leadership
+              </h4>
+              <ngx-charts-pie-chart
+                [results]="genderLeadershipData"
+                [scheme]="colorScheme"
+                [labels]="true"
+                [legend]="true"
+              >
+              </ngx-charts-pie-chart>
+            </div>
+            <div class="h-64">
+              <h4 class="text-sm font-semibold mb-2">
+                Inclusion Programs Impact
+              </h4>
+              <ngx-charts-line-chart
+                [results]="yearStatsStudentsChartData"
+                [scheme]="colorScheme"
+                [xAxis]="true"
+                [yAxis]="true"
+                [legend]="true"
+              >
+              </ngx-charts-line-chart>
+            </div>
           </div>
         </div>
-      </div>
-    </details>
+      </details>
+    </div>
   </div>
 </div>

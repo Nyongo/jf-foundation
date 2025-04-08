@@ -5,6 +5,7 @@ import { Router, RouterModule } from '@angular/router'
 interface MenuItem {
   label: string
   route: string
+  children?: MenuItem[]
 }
 
 @Component({
@@ -17,6 +18,7 @@ interface MenuItem {
 export class MenusComponent {
   constructor(private readonly router: Router) {}
   isMenuOpen = false
+  activeDropdown: string | null = null
 
   menuItems: MenuItem[] = [
     { label: 'Home', route: '/home' },
@@ -25,10 +27,24 @@ export class MenusComponent {
     { label: 'Case Studies', route: '/case-studies' },
     { label: 'News Letter', route: '/newsletter' },
     { label: 'About Us', route: '/about-us' },
+    {
+      label: 'Programs',
+      route: '/programs',
+      children: [
+        { label: 'JF Upskill', route: '/programs/education' },
+        { label: 'Healthcare', route: '/programs/healthcare' },
+        { label: 'Environment', route: '/programs/environment' },
+        { label: 'Community Development', route: '/programs/community' },
+      ],
+    },
   ]
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen
+  }
+
+  toggleDropdown(label: string) {
+    this.activeDropdown = this.activeDropdown === label ? null : label
   }
 
   goTo(url: string) {
@@ -36,6 +52,7 @@ export class MenusComponent {
     if (this.isMenuOpen) {
       this.toggleMenu()
     }
+    this.activeDropdown = null
   }
 
   goToLogin() {

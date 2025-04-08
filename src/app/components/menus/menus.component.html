@@ -1,3 +1,31 @@
+<span
+  class="bg-yellow-900 py-1 flex justify-between items-center text-[12px] md:text-sm leading-1 md:leading-1 text-gray-600 w-full text-center px-4"
+  ><span
+    >JackFruit Foundation is registered as FigHaven Foundation in Kenya</span
+  >
+  <div class="flex gap-4">
+    <a
+      href="https://www.jackfruitfinance.com/"
+      target="_blank"
+      class="text-black hover:text-blue-200 transition-colors flex items-center gap-1 group"
+      >Jackfruit Finance
+      <i
+        class="bx bx-link-external text-xs group-hover:translate-x-0.5 transition-transform"
+      ></i>
+      <span class="sr-only">(opens in new tab)</span>
+    </a>
+    <a
+      href="https://www.jackfruithub.com"
+      target="_blank"
+      class="text-black hover:text-blue-200 transition-colors flex items-center gap-1 group"
+      >Jackfruit Hub
+      <i
+        class="bx bx-link-external text-xs group-hover:translate-x-0.5 transition-transform"
+      ></i>
+      <span class="sr-only">(opens in new tab)</span>
+    </a>
+  </div>
+</span>
 <div
   class="w-full md:w-3/4 h-16 my-8 flex items-center justify-between relative mx-auto"
 >
@@ -21,9 +49,6 @@
         >
       </div>
     </div>
-    <span class="text-[10px] md:text-xs leading-4 md:leading-6 text-gray-600"
-      >A Subsidiary of JackFruit Group</span
-    >
   </div>
 
   <!-- Mobile Menu Button -->
@@ -127,6 +152,40 @@
         [ngClass]="{ 'custom-active': isActive('/about-us') }"
       ></span>
     </span>
+    <!-- https://classroom.google.com/c/NzQ4MzU3Njk4Mzk1 -->
+
+    <!-- Programs Menu with Dropdown -->
+    <!-- <span
+      class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer md:h-16 relative group"
+      (mouseenter)="toggleDropdown('Programs')"
+      (mouseleave)="toggleDropdown('Programs')"
+    >
+      <span></span>
+      <span
+        class="text-sm font-semibold leading-5 tracking-normal flex items-center"
+      >
+        Programs
+        <i class="bx bx-chevron-down ml-1"></i>
+      </span>
+      <span
+        class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
+        [ngClass]="{ 'custom-active': isActive('/programs') }"
+      ></span>
+
+      <div
+        *ngIf="activeDropdown === 'Programs'"
+        class="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50"
+      >
+        <a
+          *ngFor="let child of menuItems[6].children"
+          class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+          [routerLink]="child.route"
+          (click)="goTo(child.route)"
+        >
+          {{ child.label }}
+        </a>
+      </div>
+    </span> -->
 
     <!-- Talk to Us Button -->
     <button
