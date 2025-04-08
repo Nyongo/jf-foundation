@@ -50,20 +50,20 @@ export class MenusComponent implements OnInit {
   menuItems: MenuItem[] = [
     { label: 'Home', route: '/home' },
     { label: 'Our Impact', route: '/our-impact' },
-    { label: 'Our Partners', route: '/our-partners' },
+    // { label: 'Our Partners', route: '/our-partners' },
     { label: 'Case Studies', route: '/case-studies' },
     { label: 'News Letter', route: '/newsletter' },
     { label: 'About Us', route: '/about-us' },
-    {
-      label: 'Programs',
-      route: '/programs',
-      children: [
-        { label: 'JF Upskill', route: '/programs/education' },
-        { label: 'Healthcare', route: '/programs/healthcare' },
-        { label: 'Environment', route: '/programs/environment' },
-        { label: 'Community Development', route: '/programs/community' },
-      ],
-    },
+    // {
+    //   label: 'Programs',
+    //   route: '/programs',
+    //   children: [
+    //     { label: 'JF Upskill', route: '/programs/education' },
+    //     { label: 'Healthcare', route: '/programs/healthcare' },
+    //     { label: 'Environment', route: '/programs/environment' },
+    //     { label: 'Community Development', route: '/programs/community' },
+    //   ],
+    // },
   ]
 
   toggleMenu() {

@@ -64,7 +64,7 @@
 
   <!-- Menu Links -->
   <div
-    class="hidden md:flex items-center gap-6 px-2"
+    class="md:flex items-center gap-6 px-2"
     [ngClass]="{ block: isMenuOpen, hidden: !isMenuOpen }"
   >
     <!-- Home Menu -->
@@ -191,7 +191,7 @@
     </span> -->
 
     <!-- JF Upskill Menu -->
-    <span
+    <!-- <span
       class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer md:h-16"
       (click)="openUpskillModal()"
     >
@@ -203,11 +203,18 @@
         class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
         [ngClass]="{ 'custom-active': isActive('/jf-upskill') }"
       ></span>
-    </span>
+    </span> -->
+
+    <button
+      class="w-40 h-10 bg-yellow-900 text-black hover:bg-blue hover:text-white text-sm py-2 px-2 ml-4 rounded hidden md:block"
+      (click)="openUpskillModal()"
+    >
+      Join Upskill Program
+    </button>
 
     <!-- Talk to Us Button -->
     <button
-      class="w-32 h-10 bg-blue hover:bg-blue-700 text-white text-sm py-2 px-4 ml-8 rounded hidden md:block"
+      class="w-32 h-10 bg-blue hover:bg-blue-700 text-white text-sm py-2 px-4 rounded hidden md:block"
       (click)="goTo('contact-us')"
     >
       Talk to us
@@ -541,8 +548,14 @@
 
       <!-- Mobile Talk to Us Button -->
       <button
+        class="w-full h-10 bg-yellow-900 text-black hover:bg-blue hover:text-white text-sm py-2 px-4rounded"
+        (click)="openUpskillModal(); toggleMenu()"
+      >
+        Join Upskill Program
+      </button>
+      <button
         class="w-full h-10 bg-blue hover:bg-blue-700 text-white text-sm py-2 px-4 rounded mt-4"
-        (click)="goTo('contact-us'); toggleMenu()"
+        (click)="toggleMenu(); goTo('contact-us')"
       >
         Talk to us
       </button>
