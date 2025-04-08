@@ -190,6 +190,21 @@
       </div>
     </span> -->
 
+    <!-- JF Upskill Menu -->
+    <span
+      class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer md:h-16"
+      (click)="openUpskillModal()"
+    >
+      <span></span>
+      <span class="text-sm font-semibold leading-5 tracking-normal"
+        >JF Upskill Program</span
+      >
+      <span
+        class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
+        [ngClass]="{ 'custom-active': isActive('/jf-upskill') }"
+      ></span>
+    </span>
+
     <!-- Talk to Us Button -->
     <button
       class="w-32 h-10 bg-blue hover:bg-blue-700 text-white text-sm py-2 px-4 ml-8 rounded hidden md:block"
@@ -197,6 +212,163 @@
     >
       Talk to us
     </button>
+  </div>
+</div>
+
+<!-- JF Upskill Modal -->
+<div
+  *ngIf="isUpskillModalOpen"
+  class="fixed inset-0 z-50 overflow-y-auto"
+  aria-labelledby="modal-title"
+  role="dialog"
+  aria-modal="true"
+>
+  <div
+    class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+  >
+    <!-- Background overlay -->
+    <div
+      class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+      (click)="closeUpskillModal()"
+    ></div>
+
+    <!-- Modal panel -->
+    <div
+      class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+    >
+      <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-2xl font-bold text-gray-900" id="modal-title">
+            JF Upskill Program
+          </h3>
+          <button
+            (click)="closeUpskillModal()"
+            class="text-gray-500 hover:text-gray-700"
+          >
+            <i class="bx bx-x text-2xl"></i>
+          </button>
+        </div>
+
+        <div class="mb-6">
+          <p class="text-gray-600 mb-4">
+            JF Upskill is the Foundation's flagship teacher training initiative
+            designed to enhance the capacity of educators across our network.
+            The program focuses on strengthening pedagogical skills, effective
+            teaching practices, and classroom management; core components that
+            directly impact student learning and overall education quality.
+          </p>
+          <p class="text-gray-600">
+            Through structured modules, expert-led workshops, and continuous
+            feedback, JF Upskill empowers teachers to deliver high-impact
+            learning experiences, adapt to diverse learner needs, and implement
+            strategies that foster inclusive and engaged classrooms.
+          </p>
+        </div>
+
+        <form
+          [formGroup]="subscriptionForm"
+          (ngSubmit)="onSubmit()"
+          class="space-y-4"
+        >
+          <div>
+            <label
+              for="teacherName"
+              class="block text-sm font-medium text-gray-700"
+            >
+              Teacher's Name
+            </label>
+            <input
+              type="text"
+              id="teacherName"
+              formControlName="teacherName"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              placeholder="Enter your full name"
+            />
+          </div>
+
+          <div>
+            <label
+              for="schoolName"
+              class="block text-sm font-medium text-gray-700"
+            >
+              School Name
+            </label>
+            <input
+              type="text"
+              id="schoolName"
+              formControlName="schoolName"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              placeholder="Enter your school name"
+            />
+          </div>
+
+          <div>
+            <label
+              for="teachingLevel"
+              class="block text-sm font-medium text-gray-700"
+            >
+              Class/Grades/Levels
+            </label>
+            <input
+              type="text"
+              id="teachingLevel"
+              formControlName="teachingLevel"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              placeholder="e.g., Grade 1-3, Primary, Secondary"
+            />
+          </div>
+
+          <div>
+            <label
+              for="numberOfLearners"
+              class="block text-sm font-medium text-gray-700"
+            >
+              Number of Learners
+            </label>
+            <input
+              type="number"
+              id="numberOfLearners"
+              formControlName="numberOfLearners"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              placeholder="Enter number of learners"
+            />
+          </div>
+
+          <div>
+            <label
+              for="yearsOfExperience"
+              class="block text-sm font-medium text-gray-700"
+            >
+              Years of Teaching Experience
+            </label>
+            <input
+              type="number"
+              id="yearsOfExperience"
+              formControlName="yearsOfExperience"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              placeholder="Enter years of experience"
+            />
+          </div>
+
+          <div class="flex justify-end space-x-3 mt-6">
+            <button
+              type="button"
+              (click)="closeUpskillModal()"
+              class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              [disabled]="!subscriptionForm.valid"
+              class="px-4 py-2 text-sm font-medium text-white bg-blue rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Subscribe
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 

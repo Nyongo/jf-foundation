@@ -1,6 +1,12 @@
 import { CommonModule } from '@angular/common'
 import { Component } from '@angular/core'
 import { Router, RouterModule } from '@angular/router'
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms'
 
 interface MenuItem {
   label: string
@@ -13,12 +19,24 @@ interface MenuItem {
   standalone: true,
   templateUrl: './menus.component.html',
   styleUrl: './menus.component.scss',
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, ReactiveFormsModule],
 })
 export class MenusComponent {
-  constructor(private readonly router: Router) {}
+  constructor(
+    private readonly router: Router,
+    private fb: FormBuilder,
+  ) {}
   isMenuOpen = false
   activeDropdown: string | null = null
+  isUpskillModalOpen = false
+
+  subscriptionForm: FormGroup = this.fb.group({
+    teacherName: ['', Validators.required],
+    schoolName: ['', Validators.required],
+    teachingLevel: ['', Validators.required],
+    numberOfLearners: ['', [Validators.required, Validators.min(1)]],
+    yearsOfExperience: ['', [Validators.required, Validators.min(0)]],
+  })
 
   menuItems: MenuItem[] = [
     { label: 'Home', route: '/home' },
@@ -65,5 +83,22 @@ export class MenusComponent {
 
   isActive(route: string): boolean {
     return this.router.url.includes(route)
+  }
+
+  openUpskillModal(): void {
+    this.isUpskillModalOpen = true
+  }
+
+  closeUpskillModal(): void {
+    this.isUpskillModalOpen = false
+    this.subscriptionForm.reset()
+  }
+
+  onSubmit(): void {
+    if (this.subscriptionForm.valid) {
+      // Here you would typically send the form data to your backend
+      console.log('Form submitted:', this.subscriptionForm.value)
+      this.closeUpskillModal()
+    }
   }
 }
