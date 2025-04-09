@@ -200,21 +200,6 @@ export class SchoolHeatmapComponent implements OnInit, OnDestroy {
           const lat = coords[0]
           const lng = coords[1]
 
-          // Add marker
-          const marker = new google.maps.Marker({
-            position: { lat, lng },
-            map: this.map,
-            title: location.name,
-            icon: {
-              path: google.maps.SymbolPath.CIRCLE,
-              scale: 4,
-              fillColor: '#4285F4',
-              fillOpacity: 0.8,
-              strokeColor: '#ffffff',
-              strokeWeight: 1,
-            },
-          })
-
           // Count nearby schools
           const nearbyCount = locations.filter((other) => {
             try {
@@ -237,20 +222,6 @@ export class SchoolHeatmapComponent implements OnInit, OnDestroy {
               return false
             }
           }).length
-
-          // Add click listener
-          marker.addListener('click', () => {
-            const infoWindow = new google.maps.InfoWindow({
-              content: `<div class="p-2">
-                <strong>${location.name}</strong>
-                <div>Schools in area: ${nearbyCount}</div>
-                <div>Density Level: ${this.getDensityLevel(nearbyCount)}</div>
-              </div>`,
-            })
-            infoWindow.open(this.map!, marker)
-          })
-
-          this.markers.push(marker)
 
           // Add heatmap point
           const weight = Math.min(nearbyCount, 10)
