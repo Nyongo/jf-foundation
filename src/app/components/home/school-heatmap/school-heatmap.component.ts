@@ -134,22 +134,12 @@ export class SchoolHeatmapComponent implements OnInit, OnDestroy {
         },
       )
 
-      // Initialize heatmap layer with density-focused configuration
+      // Initialize heatmap layer with new configuration
       this.heatmap = new google.maps.visualization.HeatmapLayer({
         map: this.map,
-        data: [], // Initialize with empty data array
-        radius: 50, // Increased radius to show broader density patterns
-        opacity: 1, // Maximum opacity for better visibility
-        gradient: [
-          'rgba(0, 255, 0, 0)', // Transparent
-          'rgba(0, 255, 0, 0.3)', // Light green (low density)
-          'rgba(255, 255, 0, 0.5)', // Yellow (medium-low density)
-          'rgba(255, 165, 0, 0.7)', // Orange (medium density)
-          'rgba(255, 69, 0, 0.8)', // Red-orange (medium-high density)
-          'rgba(255, 0, 0, 0.9)', // Red (high density)
-          'rgba(139, 0, 0, 1)', // Dark red (very high density)
-          'rgba(75, 0, 0, 1)', // Very dark red (extremely high density)
-        ],
+        data: [],
+        radius: 50,
+        opacity: 1.0,
       })
 
       // Add a control to toggle the heatmap
@@ -187,97 +177,116 @@ export class SchoolHeatmapComponent implements OnInit, OnDestroy {
     }
 
     try {
-      console.log('Received locations in heatmap component:', locations)
-
       // Clear existing markers
       this.markers.forEach((marker) => marker.setMap(null))
       this.markers = []
 
-      // Group locations by area (using a grid-based approach)
-      const gridSize = 0.05 // Reduced grid size for more precise density mapping
-      const locationGroups = new Map<
-        string,
-        { count: number; locations: SchoolLocation[] }
-      >()
+      // Create weighted data points for the heatmap
+      const heatmapData: { location: google.maps.LatLng; weight: number }[] = []
 
+      // Process each location
       locations.forEach((location) => {
-        const [lat, lng] = location.location
-          .split(',')
-          .map((coord) => parseFloat(coord.trim()))
-        // Create a grid key by rounding coordinates
-        const gridKey = `${Math.round(lat / gridSize) * gridSize},${Math.round(lng / gridSize) * gridSize}`
-
-        if (!locationGroups.has(gridKey)) {
-          locationGroups.set(gridKey, { count: 0, locations: [] })
-        }
-        const group = locationGroups.get(gridKey)!
-        group.count++
-        group.locations.push(location)
-      })
-
-      // Convert grouped locations to heatmap data
-      const heatmapData = Array.from(locationGroups.entries()).map(
-        ([gridKey, group]) => {
-          const [lat, lng] = gridKey
+        try {
+          const coords = location.location
             .split(',')
-            .map((coord) => parseFloat(coord))
+            .map((coord) => parseFloat(coord.trim()))
 
-          // Add markers for each location in the group
-          group.locations.forEach((location) => {
-            const [markerLat, markerLng] = location.location
-              .split(',')
-              .map((coord) => parseFloat(coord.trim()))
-            const marker = new google.maps.Marker({
-              position: { lat: markerLat, lng: markerLng },
-              map: this.map,
-              title: location.name,
-              icon: {
-                path: google.maps.SymbolPath.CIRCLE,
-                scale: 4,
-                fillColor: '#4285F4',
-                fillOpacity: 0.8,
-                strokeColor: '#ffffff',
-                strokeWeight: 1,
-              },
-            })
+          // Skip invalid coordinates
+          if (coords.length !== 2 || isNaN(coords[0]) || isNaN(coords[1])) {
+            console.warn('Invalid coordinates for location:', location)
+            return
+          }
 
-            marker.addListener('click', () => {
-              const infoWindow = new google.maps.InfoWindow({
-                content: `<div class="p-2">
-                <strong>${location.name}</strong>
-                <div>Schools in area: ${group.count}</div>
-                <div>Density Level: ${this.getDensityLevel(group.count)}</div>
-              </div>`,
-              })
-              infoWindow.open(this.map!, marker)
-            })
+          const lat = coords[0]
+          const lng = coords[1]
 
-            this.markers.push(marker)
+          // Add marker
+          const marker = new google.maps.Marker({
+            position: { lat, lng },
+            map: this.map,
+            title: location.name,
+            icon: {
+              path: google.maps.SymbolPath.CIRCLE,
+              scale: 4,
+              fillColor: '#4285F4',
+              fillOpacity: 0.8,
+              strokeColor: '#ffffff',
+              strokeWeight: 1,
+            },
           })
 
-          // Calculate weight based on density level
-          let weight = 1
-          if (group.count >= 10)
-            weight = 10 // Extremely High
-          else if (group.count >= 7)
-            weight = 8 // Very High
-          else if (group.count >= 5)
-            weight = 6 // High
-          else if (group.count >= 3)
-            weight = 4 // Medium-High
-          else if (group.count >= 2) weight = 2 // Medium
-          // Low density remains weight = 1
+          // Count nearby schools
+          const nearbyCount = locations.filter((other) => {
+            try {
+              const otherCoords = other.location
+                .split(',')
+                .map((coord) => parseFloat(coord.trim()))
+              if (
+                otherCoords.length !== 2 ||
+                isNaN(otherCoords[0]) ||
+                isNaN(otherCoords[1])
+              ) {
+                return false
+              }
+              const distance = Math.sqrt(
+                Math.pow(lat - otherCoords[0], 2) +
+                  Math.pow(lng - otherCoords[1], 2),
+              )
+              return distance <= 0.02
+            } catch (e) {
+              return false
+            }
+          }).length
 
-          return {
+          // Add click listener
+          marker.addListener('click', () => {
+            const infoWindow = new google.maps.InfoWindow({
+              content: `<div class="p-2">
+                <strong>${location.name}</strong>
+                <div>Schools in area: ${nearbyCount}</div>
+                <div>Density Level: ${this.getDensityLevel(nearbyCount)}</div>
+              </div>`,
+            })
+            infoWindow.open(this.map!, marker)
+          })
+
+          this.markers.push(marker)
+
+          // Add heatmap point
+          const weight = Math.min(nearbyCount, 10)
+          heatmapData.push({
             location: new google.maps.LatLng(lat, lng),
             weight: weight,
-          }
-        },
-      )
+          })
+        } catch (e) {
+          console.warn('Error processing location:', location, e)
+        }
+      })
 
-      console.log('Generated heatmap data:', heatmapData)
-      // Update heatmap data
-      this.heatmap.setData(heatmapData)
+      // Update heatmap data and options
+      if (this.heatmap) {
+        this.heatmap.setData(heatmapData)
+
+        // Update heatmap options
+        const newHeatmap = new google.maps.visualization.HeatmapLayer({
+          data: heatmapData,
+          map: this.map,
+          radius: 50,
+          opacity: 1,
+          gradient: [
+            'rgba(0, 255, 0, 0)',
+            'rgba(0, 255, 0, 1)',
+            'rgba(255, 255, 0, 1)',
+            'rgba(255, 128, 0, 1)',
+            'rgba(255, 0, 0, 1)',
+            'rgba(139, 0, 0, 1)',
+          ],
+        })
+
+        // Remove old heatmap and update reference
+        this.heatmap.setMap(null)
+        this.heatmap = newHeatmap
+      }
     } catch (error) {
       console.error('Error updating school locations:', error)
     }
