@@ -3,6 +3,13 @@ declare namespace google.maps {
     constructor(element: HTMLElement, options: MapOptions)
     setCenter(latLng: LatLng | LatLngLiteral): void
     setZoom(zoom: number): void
+    controls: {
+      [key: string]: any[]
+    }
+  }
+
+  namespace ControlPosition {
+    const TOP_RIGHT: string
   }
 
   class LatLng {
@@ -24,6 +31,7 @@ declare namespace google.maps {
     class HeatmapLayer {
       constructor(options: HeatmapLayerOptions)
       setMap(map: Map | null): void
+      getMap(): Map | null
       setData(data: WeightedLocation[]): void
     }
   }
