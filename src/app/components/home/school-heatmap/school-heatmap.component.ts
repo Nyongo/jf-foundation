@@ -24,27 +24,27 @@ interface SchoolLocation {
         <div class="text-sm font-semibold mb-2">School Density</div>
         <div class="space-y-1">
           <div class="flex items-center">
-            <div class="w-4 h-4 rounded-full bg-[#4B0000] mr-2"></div>
+            <div class="w-4 h-4 rounded-full bg-[#004d00] mr-2"></div>
             <span class="text-xs">Extremely High (10+ schools)</span>
           </div>
           <div class="flex items-center">
-            <div class="w-4 h-4 rounded-full bg-[#8B0000] mr-2"></div>
+            <div class="w-4 h-4 rounded-full bg-[#006600] mr-2"></div>
             <span class="text-xs">Very High (7-9 schools)</span>
           </div>
           <div class="flex items-center">
-            <div class="w-4 h-4 rounded-full bg-[#FF0000] mr-2"></div>
+            <div class="w-4 h-4 rounded-full bg-[#008000] mr-2"></div>
             <span class="text-xs">High (5-6 schools)</span>
           </div>
           <div class="flex items-center">
-            <div class="w-4 h-4 rounded-full bg-[#FF4500] mr-2"></div>
+            <div class="w-4 h-4 rounded-full bg-[#00b300] mr-2"></div>
             <span class="text-xs">Medium-High (3-4 schools)</span>
           </div>
           <div class="flex items-center">
-            <div class="w-4 h-4 rounded-full bg-[#FFA500] mr-2"></div>
+            <div class="w-4 h-4 rounded-full bg-[#00e600] mr-2"></div>
             <span class="text-xs">Medium (2 schools)</span>
           </div>
           <div class="flex items-center">
-            <div class="w-4 h-4 rounded-full bg-[#FFFF00] mr-2"></div>
+            <div class="w-4 h-4 rounded-full bg-[#80ff80] mr-2"></div>
             <span class="text-xs">Low (1 school)</span>
           </div>
         </div>
@@ -245,12 +245,13 @@ export class SchoolHeatmapComponent implements OnInit, OnDestroy {
           radius: 50,
           opacity: 1,
           gradient: [
-            'rgba(0, 255, 0, 0)',
-            'rgba(0, 255, 0, 1)',
-            'rgba(255, 255, 0, 1)',
-            'rgba(255, 128, 0, 1)',
-            'rgba(255, 0, 0, 1)',
-            'rgba(139, 0, 0, 1)',
+            'rgba(128, 255, 128, 0)', // Very pale green (transparent)
+            'rgba(128, 255, 128, 1)', // Very pale green
+            'rgba(0, 230, 0, 1)', // Light green
+            'rgba(0, 179, 0, 1)', // Medium green
+            'rgba(0, 128, 0, 1)', // Green
+            'rgba(0, 102, 0, 1)', // Dark green
+            'rgba(0, 77, 0, 1)', // Very dark green
           ],
         })
 
@@ -264,11 +265,11 @@ export class SchoolHeatmapComponent implements OnInit, OnDestroy {
   }
 
   private getDensityLevel(count: number): string {
-    if (count >= 10) return 'Extremely High (Dark Red)'
-    if (count >= 7) return 'Very High (Red)'
-    if (count >= 5) return 'High (Red-Orange)'
-    if (count >= 3) return 'Medium-High (Orange)'
-    if (count >= 2) return 'Medium (Yellow)'
-    return 'Low (Green)'
+    if (count >= 10) return 'Extremely High (Dark Green)'
+    if (count >= 7) return 'Very High (Dark Green)'
+    if (count >= 5) return 'High (Green)'
+    if (count >= 3) return 'Medium-High (Medium Green)'
+    if (count >= 2) return 'Medium (Light Green)'
+    return 'Low (Pale Green)'
   }
 }
