@@ -35,6 +35,7 @@ export class HomeOurImpactComponent
   public metrics: any
   public isExporting = false
   private isBrowser: boolean
+  private isDataLoaded = false
 
   // Currency conversion
   public selectedCurrency: 'USD' | 'KES' = 'USD'
@@ -162,7 +163,8 @@ export class HomeOurImpactComponent
   }
 
   ngAfterViewInit() {
-    if (this.heatmapComponent) {
+    // If data is already loaded, update the heatmap
+    if (this.isDataLoaded && this.heatmapComponent) {
       this.heatmapComponent.updateSchoolLocations(this.schoolLocations)
     }
   }
@@ -178,7 +180,6 @@ export class HomeOurImpactComponent
   loadMetrics(): void {
     this.apiSubscription = this.http
       .get(
-        // 'http://localhost:3000/spreadsheet/read?spreadsheetId=1E5FXJjfQBEj41OzXaJJ1vzwolLnoSe-FiVjIju9UbZA',
         'https://evzen.duckdns.org/spreadsheet/read?spreadsheetId=1E5FXJjfQBEj41OzXaJJ1vzwolLnoSe-FiVjIju9UbZA',
       )
       .subscribe({
@@ -237,6 +238,18 @@ export class HomeOurImpactComponent
           ]
 
           this.schoolLocations = response.schoolLocations
+          console.log('School locations from API:', this.schoolLocations)
+
+          // Mark data as loaded
+          this.isDataLoaded = true
+
+          // Update heatmap if component is available
+          if (this.heatmapComponent) {
+            console.log('Updating heatmap with school locations')
+            this.heatmapComponent.updateSchoolLocations(this.schoolLocations)
+          } else {
+            console.log('Heatmap component not available yet')
+          }
 
           let cumulativeSchools = 0
           let cumulativeMaleStudents = 0
@@ -485,11 +498,6 @@ export class HomeOurImpactComponent
               })),
             },
           ]
-
-          // Update the heatmap with school locations
-          if (this.heatmapComponent) {
-            this.heatmapComponent.updateSchoolLocations(this.schoolLocations)
-          }
         },
         error: (error) => {
           console.error('Error loading data', error)

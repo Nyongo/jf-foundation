@@ -26,6 +26,7 @@ export class SchoolHeatmapComponent implements OnInit, OnDestroy {
   private heatmap: google.maps.visualization.HeatmapLayer | null = null
   private markers: google.maps.Marker[] = []
   isMapLoaded: boolean = false
+  private pendingLocations: SchoolLocation[] | null = null
 
   constructor() {}
 
@@ -39,6 +40,11 @@ export class SchoolHeatmapComponent implements OnInit, OnDestroy {
       script.onload = () => {
         this.initializeMap()
         this.isMapLoaded = true
+        // If there are pending locations, update them now
+        if (this.pendingLocations) {
+          this.updateSchoolLocations(this.pendingLocations)
+          this.pendingLocations = null
+        }
       }
       script.onerror = () => {
         console.error('Failed to load Google Maps script')
@@ -106,21 +112,32 @@ export class SchoolHeatmapComponent implements OnInit, OnDestroy {
   }
 
   updateSchoolLocations(locations: SchoolLocation[]) {
+    if (!this.isMapLoaded) {
+      console.log('Map not loaded yet, storing locations for later')
+      this.pendingLocations = locations
+      return
+    }
+
     if (!this.map || !this.heatmap) {
       console.warn('Map or heatmap not initialized')
       return
     }
 
     try {
+      console.log('Received locations in heatmap component:', locations)
+
       // Clear existing markers
       this.markers.forEach((marker) => marker.setMap(null))
       this.markers = []
 
       // Convert locations to heatmap data
       const heatmapData = locations.map((location) => {
+        console.log('Processing location:', location)
         const [lat, lng] = location.location
           .split(',')
           .map((coord) => parseFloat(coord.trim()))
+
+        console.log('Parsed coordinates:', { lat, lng })
 
         // Add marker for each school
         const marker = new google.maps.Marker({
@@ -153,6 +170,7 @@ export class SchoolHeatmapComponent implements OnInit, OnDestroy {
         }
       })
 
+      console.log('Generated heatmap data:', heatmapData)
       // Update heatmap data
       this.heatmap.setData(heatmapData)
     } catch (error) {
