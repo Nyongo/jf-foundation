@@ -30,27 +30,27 @@
   </div>
 </div>
 <div
-  class="w-full md:w-3/4 h-16 my-8 flex items-center justify-between relative mx-auto"
+  class="w-full md:w-11/12 lg:w-10/12 h-12 md:h-14 lg:h-16 my-4 md:my-6 lg:my-8 flex items-center justify-between relative mx-auto px-4 md:px-6 lg:px-8"
 >
   <!-- Logo and Navigation Links -->
   <div
-    class="flex flex-col items-center justify-center cursor-pointer pl-2 md:pl-4"
+    class="flex flex-col items-center justify-center cursor-pointer pl-2 md:pl-2"
     [routerLink]="'/'"
   >
     <div class="flex items-center">
       <img
-        src="assets/images/logos/jf-logo.png"
+        src="assets/images/logos/jf-foundation.png"
         alt="Logo"
-        class="h-16 w-16 md:h-28 md:w-28"
+        class="w-36"
       />
-      <div class="flex flex-col items-start md:items-start ml-0 md:ml-0">
+      <!-- <div class="flex flex-col items-start md:items-start ml-0 md:ml-0">
         <span class="font-sans text-lg md:text-xl font-black text-black"
           >JACKFRUIT</span
         >
         <span class="font-sans text-xs md:text-sm font-black text-blue"
           >FOUNDATION</span
         >
-      </div>
+      </div> -->
     </div>
   </div>
 
@@ -64,17 +64,17 @@
 
   <!-- Menu Links -->
   <div
-    class="md:flex items-center gap-6 px-2"
+    class="md:flex items-center gap-8 px-2"
     [ngClass]="{ block: isMenuOpen, hidden: !isMenuOpen }"
   >
     <!-- Home Menu -->
     <span
-      class="flex flex-col justify-between text-dark-blue text-base tracking-normal cursor-pointer md:h-16"
+      class="flex flex-col justify-between text-gray-1900 text-base tracking-normal cursor-pointer md:h-16"
       (click)="goTo('home')"
     >
       <span></span>
       <span
-        class="text-sm font-semibold leading-5 tracking-normal"
+        class="text-xs font-semibold leading-5 tracking-normal uppercase"
         [ngClass]="{ 'text-black': isActive('/home') }"
         >Home</span
       >
@@ -90,7 +90,7 @@
       (click)="goTo('our-impact')"
     >
       <span></span>
-      <span class="text-sm font-semibold leading-5 tracking-normal"
+      <span class="text-xs font-semibold leading-5 tracking-normal uppercase"
         >Our Impact</span
       >
       <span
@@ -118,7 +118,7 @@
       (click)="goTo('case-studies')"
     >
       <span></span>
-      <span class="text-sm font-semibold leading-5 tracking-normal"
+      <span class="text-xs font-semibold leading-5 tracking-normal uppercase"
         >Case Studies</span
       >
       <span
@@ -132,7 +132,7 @@
       (click)="goTo('newsletter')"
     >
       <span></span>
-      <span class="text-sm font-semibold leading-5 tracking-normal"
+      <span class="text-xs font-semibold leading-5 tracking-normal uppercase"
         >News Letters</span
       >
       <span
@@ -147,7 +147,7 @@
       (click)="goTo('about-us')"
     >
       <span></span>
-      <span class="text-sm font-semibold leading-5 tracking-normal"
+      <span class="text-xs font-semibold leading-5 tracking-normal uppercase"
         >About Us</span
       >
       <span
@@ -155,58 +155,8 @@
         [ngClass]="{ 'custom-active': isActive('/about-us') }"
       ></span>
     </span>
-    <!-- https://classroom.google.com/c/NzQ4MzU3Njk4Mzk1 -->
-
-    <!-- Programs Menu with Dropdown -->
-    <!-- <span
-      class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer md:h-16 relative group"
-      (mouseenter)="toggleDropdown('Programs')"
-      (mouseleave)="toggleDropdown('Programs')"
-    >
-      <span></span>
-      <span
-        class="text-sm font-semibold leading-5 tracking-normal flex items-center"
-      >
-        Programs
-        <i class="bx bx-chevron-down ml-1"></i>
-      </span>
-      <span
-        class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
-        [ngClass]="{ 'custom-active': isActive('/programs') }"
-      ></span>
-
-      <div
-        *ngIf="activeDropdown === 'Programs'"
-        class="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50"
-      >
-        <a
-          *ngFor="let child of menuItems[6].children"
-          class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-          [routerLink]="child.route"
-          (click)="goTo(child.route)"
-        >
-          {{ child.label }}
-        </a>
-      </div>
-    </span> -->
-
-    <!-- JF Upskill Menu -->
-    <!-- <span
-      class="flex flex-col justify-between text-base text-dark-blue tracking-normal cursor-pointer md:h-16"
-      (click)="openUpskillModal()"
-    >
-      <span></span>
-      <span class="text-sm font-semibold leading-5 tracking-normal"
-        >JF Upskill Program</span
-      >
-      <span
-        class="self-stretch border-b-2 rounded-r rounded-l border-transparent w-2/5 group-hover:border-dark-blue"
-        [ngClass]="{ 'custom-active': isActive('/jf-upskill') }"
-      ></span>
-    </span> -->
-
     <button
-      class="w-40 h-10 bg-yellow-900 text-black hover:bg-blue hover:text-white text-sm py-2 px-2 ml-4 rounded hidden md:block"
+      class="w-40 h-10 bg-yellow-900 text-black hover:bg-blue hover:text-white text-xs py-2 px-2 ml-4 rounded hidden md:block"
       (click)="openUpskillModal()"
     >
       Join Upskill Program
@@ -214,7 +164,7 @@
 
     <!-- Talk to Us Button -->
     <button
-      class="w-32 h-10 bg-blue hover:bg-blue-700 text-white text-sm py-2 px-4 rounded hidden md:block"
+      class="w-32 h-10 bg-blue hover:bg-blue-700 text-white text-xs py-2 px-4 rounded hidden md:block"
       (click)="goTo('contact-us')"
     >
       Talk to us

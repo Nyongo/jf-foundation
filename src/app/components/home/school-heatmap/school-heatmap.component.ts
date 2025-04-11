@@ -19,33 +19,51 @@ interface SchoolLocation {
       </div>
       <div
         id="legend"
-        class="absolute bottom-4 right-4 bg-white p-3 rounded-lg shadow-lg border border-gray-200"
+        class="absolute bottom-4 right-4 bg-white p-2 md:p-3 rounded-lg shadow-lg border border-gray-200 max-w-[200px] md:max-w-none"
       >
-        <div class="text-sm font-semibold mb-2">School Density</div>
-        <div class="space-y-1">
+        <div class="text-xs md:text-sm font-semibold mb-1 md:mb-2">
+          School Density
+        </div>
+        <div class="space-y-0.5 md:space-y-1">
           <div class="flex items-center">
-            <div class="w-4 h-4 rounded-full bg-[#004d00] mr-2"></div>
-            <span class="text-xs">Extremely High (10+ schools)</span>
+            <div
+              class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-[#004d00] mr-1 md:mr-2"
+            ></div>
+            <span class="text-[10px] md:text-xs"
+              >Extremely High (10+ schools)</span
+            >
           </div>
           <div class="flex items-center">
-            <div class="w-4 h-4 rounded-full bg-[#006600] mr-2"></div>
-            <span class="text-xs">Very High (7-9 schools)</span>
+            <div
+              class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-[#006600] mr-1 md:mr-2"
+            ></div>
+            <span class="text-[10px] md:text-xs">Very High (7-9 schools)</span>
           </div>
           <div class="flex items-center">
-            <div class="w-4 h-4 rounded-full bg-[#008000] mr-2"></div>
-            <span class="text-xs">High (5-6 schools)</span>
+            <div
+              class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-[#008000] mr-1 md:mr-2"
+            ></div>
+            <span class="text-[10px] md:text-xs">High (5-6 schools)</span>
           </div>
           <div class="flex items-center">
-            <div class="w-4 h-4 rounded-full bg-[#00b300] mr-2"></div>
-            <span class="text-xs">Medium-High (3-4 schools)</span>
+            <div
+              class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-[#00b300] mr-1 md:mr-2"
+            ></div>
+            <span class="text-[10px] md:text-xs"
+              >Medium-High (3-4 schools)</span
+            >
           </div>
           <div class="flex items-center">
-            <div class="w-4 h-4 rounded-full bg-[#00e600] mr-2"></div>
-            <span class="text-xs">Medium (2 schools)</span>
+            <div
+              class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-[#00e600] mr-1 md:mr-2"
+            ></div>
+            <span class="text-[10px] md:text-xs">Medium (2 schools)</span>
           </div>
           <div class="flex items-center">
-            <div class="w-4 h-4 rounded-full bg-[#80ff80] mr-2"></div>
-            <span class="text-xs">Low (1 school)</span>
+            <div
+              class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-[#80ff80] mr-1 md:mr-2"
+            ></div>
+            <span class="text-[10px] md:text-xs">Low (1 school)</span>
           </div>
         </div>
       </div>
