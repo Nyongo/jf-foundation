@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { environment } from '../../../../environments/environment'
+import { CommonModule } from '@angular/common'
 
 interface SchoolLocation {
   name: string
@@ -8,6 +9,8 @@ interface SchoolLocation {
 
 @Component({
   selector: 'app-school-heatmap',
+  standalone: true,
+  imports: [CommonModule],
   template: `
     <div class="w-full h-[500px] relative">
       <div id="map" class="w-full h-full"></div>

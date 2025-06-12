@@ -1,0 +1,75 @@
+<div class="relative w-screen mb-[100px]">
+  <div #sliderContainer class="relative w-screen h-[600px] md:h-[700px] overflow-hidden">
+		<!-- Slides -->
+		<ng-container *ngFor="let s of slides; let i = index">
+			<div
+				class="absolute inset-0 transition-opacity duration-1000"
+				[class.opacity-100]="i === currentSlide"
+				[class.opacity-0]="i !== currentSlide"
+			>
+				<!-- Image -->
+				<img
+					*ngIf="s.type === 'image'"
+					[src]="s.image"
+					[alt]="s.title"
+					class="w-full h-full object-cover"
+				/>
+
+				<!-- Video -->
+				<iframe
+					*ngIf="s.type === 'video'"
+					#videoFrame
+					[src]="getVideoUrl(s.videoId)"
+					frameborder="0"
+					allow="autoplay; encrypted-media"
+					allowfullscreen
+					class="w-full h-full object-cover"
+				></iframe>
+
+				<!-- Overlay Text -->
+				<div class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-center px-4 font-montserrat text-white">
+					<h1 class="mt-[40px] md:mt-[150px] lg:mt-[220px] text-3xl md:text-5xl font-bold">{{ s.title }}</h1>
+					<p class="mt-2 text-lg md:text-2xl">{{ s.subTitle }}</p>
+					<p class="mt-4 max-w-2xl">{{ s.description }}</p>
+				</div>
+			</div>
+		</ng-container>
+
+		<!-- Prev/Next -->
+		<button
+			class="absolute top-1/2 left-4 -translate-y-1/2  text-white w-10 h-10 rounded-full flex items-center justify-center"
+			(click)="prevSlide()"
+			aria-label="Previous slide"
+		>
+			‹
+		</button>
+		<button
+			class="absolute top-1/2 right-4 -translate-y-1/2 text-white w-10 h-10 rounded-full flex items-center justify-center"
+			(click)="nextSlide()"
+			aria-label="Next slide"
+		>
+			›
+		</button>
+  </div>
+
+	<!-- Stats Bar Half-Overlay -->
+	<div class="absolute bottom-[-95px] left-1/2 -translate-x-1/2 bg-white text-[#4EABBA] w-[80%]">
+		<div class="pt-[40px] pb-[50px] flex justify-around items-center font-montserrat">
+			<div class="text-center">
+				<img src="assets/images/hero/director.svg" alt="Directors" class="mx-auto w-12 h-12" />
+				<div class="mt-3 font-bold text-3xl md:text-5xl leading-[45px]"> {{ directorsPercent }}%</div>
+				<div class="mt-3 text-sm font-bold">Total Female Directors</div>
+			</div>
+			<div class="text-center">
+				<img src="assets/images/hero/teacher.svg" alt="Teachers" class="mx-auto w-12 h-12" />
+				<div class="mt-3 font-bold text-3xl md:text-5xl leading-[45px]">{{ teachersPercent }}%</div>
+				<div class="mt-3 text-sm font-bold">Total Female Teachers</div>
+			</div>
+			<div class="text-center">
+				<img src="assets/images/hero/student.svg" alt="Students" class="mx-auto w-12 h-12" />
+				<div class="mt-3 font-bold text-3xl md:text-5xl leading-[45px]">{{ studentsPercent }}%</div>
+				<div class="mt-3 text-sm font-bold">Total Female Students</div>
+			</div>
+  	</div>
+	</div>
+</div>
