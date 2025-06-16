@@ -5,7 +5,8 @@ import { BrowserModule } from '@angular/platform-browser'
 import { NgxChartsModule } from '@swimlane/ngx-charts'
 import { RouterModule } from '@angular/router'
 import { routes } from './app.routes'
-import { SharedModule } from './shared.module'
+import { SharedModule } from './shared.module';
+import { HomeNewModule } from './components/home-new/home-new.module'
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SharedModule } from './shared.module'
     NgxChartsModule,
     ReactiveFormsModule,
     FormsModule,
+    HomeNewModule,
   ],
   providers: [DecimalPipe],
   bootstrap: [], // Only for root modules

@@ -26,6 +26,7 @@ import { CaseStudy1Component } from './components/case-studies/case-study-1/case
 import { CaseStudy2Component } from './components/case-studies/case-study-2/case-study-2.component'
 import { HomeOurImpactComponent } from './components/home/home-our-impact/home-our-impact.component'
 import { LoanCalculatorComponent } from './components/loan-calculator/loan-calculator.component'
+import { HomeNewComponent } from './components/home-new/home-new/home-new.component'
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -73,4 +74,5 @@ export const routes: Routes = [
     path: 'calculator',
     component: LoanCalculatorComponent,
   },
+  { path: 'home-new', component: HomeNewComponent },
 ]

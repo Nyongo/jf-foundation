@@ -1,0 +1,23 @@
+<section class="bg-[#F6F6F6] text-[#1A363A] font-montserrat py-[65px]">
+  <div class="text-center mb-8">
+	<h2 class="text-2xl font-semibold text-[#EEB100]">Our Impact</h2>
+	<p class="mt-2 mx-auto text-4xl w-[85%] lg:w-[60%] font-bold">We are positively impacting the lives of many students</p>
+  </div>
+
+  <div class="container w-[98%] lg:w-[70%] mx-auto px-4 grid grid-cols-2 xs:grid-cols-2 lg:grid-cols-3 gap-8">
+		<div *ngFor="let stat of stats" class="text-center">
+	  	<div class="text-4xl font-bold">{{ stat.value }}</div>
+	  	<div class="mt-1 text-sm font-bold">{{ stat.label }}</div>
+		</div>
+
+		<div class="text-center mt-2">
+			<a
+				(click)="goTo('our-impact')"
+		 		class="border-2 cursor-pointer text-md font-bold border-[#1A363A] text-[#1A363A] px-6 py-2 rounded-none inline-block"
+			>
+	  		View More Stats
+			</a>
+  	</div>
+  </div>
+
+</section>
