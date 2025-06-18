@@ -33,7 +33,7 @@ export const routes: Routes = [
   {
     path: 'home',
     children: [
-      { path: '', component: HomeComponent },
+      { path: '', component: HomeNewComponent },
       { path: 'ussd-services', component: UssdServicesComponent },
       { path: 'paytv-services', component: PaytvServicesComponent },
       { path: 'internet-services', component: InternetServicesComponent },
@@ -74,5 +74,5 @@ export const routes: Routes = [
     path: 'calculator',
     component: LoanCalculatorComponent,
   },
-  { path: 'home-new', component: HomeNewComponent },
+  // { path: 'home-new', component: HomeNewComponent },
 ]

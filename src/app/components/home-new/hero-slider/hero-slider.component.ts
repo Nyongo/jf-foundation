@@ -31,40 +31,48 @@ export interface Slide {
   styleUrls: ['./hero-slider.component.scss']
 })
 export class HeroSliderComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('videoFrame') videoFrame!: ElementRef<HTMLIFrameElement>;
-  @ViewChild('sliderContainer') sliderContainer!: ElementRef<HTMLDivElement>;
-
   @Input() directorsPercent!: number;
   @Input() teachersPercent!: number;
   @Input() studentsPercent!: number;
+
+  @ViewChild('videoFrame') videoFrame?: ElementRef<HTMLIFrameElement>;
+  @ViewChild('sliderContainer') sliderContainer!: ElementRef<HTMLDivElement>;
 
   private platformId = inject(PLATFORM_ID);
   private isBrowser = isPlatformBrowser(this.platformId);
 
   slides: Slide[] = [
+    // {
+    //   type: 'image',
+    //   image: 'assets/images/carousel/slider1.jpg',
+    //   title: 'Case Study: Education Access Initiative',
+    //   subTitle: 'Improving Access to Quality Education',
+    //   id: 'education-access',
+    //   description: 'How we helped increase student enrollment by 45%',
+    // },
+    // {
+    //   type: 'video',
+    //   videoId: 'I0iGNUXRLS4',
+    //   title: 'Case Study: School Infrastructure',
+    //   subTitle: 'Building Better Learning Environments',
+    //   id: 'infrastructure',
+    //   description: 'Modernizing facilities across 50+ schools',
+    // },
+    // {
+    //   type: 'image',
+    //   image: 'assets/images/carousel/classroom.jpg',
+    //   title: 'Case Study: Teacher Development',
+    //   subTitle: 'Empowering Educators',
+    //   id: 'teacher-development',
+    //   description: 'Professional development program reaching 500+ teachers',
+    // },
     {
       type: 'image',
-      image: 'assets/images/carousel/slider1.jpg',
-      title: 'Case Study: Education Access Initiative',
-      subTitle: 'Improving Access to Quality Education',
-      id: 'education-access',
-      description: 'How we helped increase student enrollment by 45%',
-    },
-    {
-      type: 'video',
-      videoId: 'I0iGNUXRLS4',
-      title: 'Case Study: School Infrastructure',
-      subTitle: 'Building Better Learning Environments',
-      id: 'infrastructure',
-      description: 'Modernizing facilities across 50+ schools',
-    },
-    {
-      type: 'image',
-      image: 'assets/images/carousel/classroom.jpg',
-      title: 'Case Study: Teacher Development',
-      subTitle: 'Empowering Educators',
-      id: 'teacher-development',
-      description: 'Professional development program reaching 500+ teachers',
+      image: 'assets/images/hero/first-hero-banner.svg',
+      title: 'Empowering Futures:<br/>Finance Education For All',
+      subTitle: '',
+      id: 'empowering-futures',
+      description: "We've built a supportive learning environment, enriching the lives of students — especially young women — and strengthening the leadership of women educators.",
     },
   ];
 
@@ -78,36 +86,42 @@ export class HeroSliderComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    if (this.isBrowser) {
+    if (this.isBrowser && this.slides.length > 1) {
       this.startAutoPlay();
     }
   }
 
   ngAfterViewInit(): void {
-    if (!this.isBrowser) return;
+    // Only observe if there's at least one video slide
+    if (!this.isBrowser || !this.slides.some(s => s.type === 'video')) {
+      return;
+    }
 
     this.observer = new IntersectionObserver(
       entries => {
         entries.forEach(entry => {
-          const cmd = entry.isIntersecting ? 'playVideo' : 'pauseVideo';
-          this.videoFrame.nativeElement.contentWindow?.postMessage(
-            JSON.stringify({ event: 'command', func: cmd, args: [] }), '*'
-          );
+          // Only attempt to pause/play if we have a videoFrame
+          if (this.videoFrame?.nativeElement) {
+            const cmd = entry.isIntersecting ? 'playVideo' : 'pauseVideo';
+            this.videoFrame.nativeElement.contentWindow?.postMessage(
+              JSON.stringify({ event: 'command', func: cmd, args: [] }),
+              '*'
+            );
+          }
         });
       },
       { threshold: 0.5 }
     );
-    this.observer.observe(this.sliderContainer.nativeElement);
 
+    this.observer.observe(this.sliderContainer.nativeElement);
     window.addEventListener('message', this.onYouTubeMessage);
   }
 
   ngOnDestroy(): void {
-    if (this.isBrowser) {
-      clearInterval(this.slideInterval);
-      this.observer?.disconnect();
-      window.removeEventListener('message', this.onYouTubeMessage);
-    }
+    if (!this.isBrowser) return;
+    clearInterval(this.slideInterval);
+    this.observer?.disconnect();
+    window.removeEventListener('message', this.onYouTubeMessage);
   }
 
   private startAutoPlay(): void {
@@ -128,10 +142,6 @@ export class HeroSliderComponent implements OnInit, AfterViewInit, OnDestroy {
   nextSlide(): void {
     this.currentSlide =
       this.currentSlide < this.slides.length - 1 ? this.currentSlide + 1 : 0;
-  }
-
-  goToSlide(index: number): void {
-    this.currentSlide = index;
   }
 
   getVideoUrl(id?: string): SafeResourceUrl {
