@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-footer',
@@ -7,4 +8,16 @@ import { Component } from '@angular/core'
   styleUrl: './footer.component.scss',
   
 })
-export class FooterComponent {}
+export class FooterComponent {
+  currentYear: number;
+  
+  constructor(
+      private readonly router: Router,
+    ){
+      this.currentYear = new Date().getFullYear();
+    }
+
+  goTo(url: string) {
+    this.router.navigate([url])
+  }
+}

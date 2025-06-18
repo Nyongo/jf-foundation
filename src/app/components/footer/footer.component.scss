@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+:host {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Ensure headings and hover colors */
+.text-\[\#EEB100\] {
+  color: #EEB100;
+}
+.hover\:text-\[\#EEB100\]:hover {
+  color: #EEB100;
+}
+
+/* Remove default link underline */
+a {
+  text-decoration: none;
+}

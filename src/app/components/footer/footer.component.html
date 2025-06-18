@@ -1,90 +1,49 @@
-<div>
-  <!-- Footer Section -->
-  <div class="w-full bg-black-2 mt-12 px-4 md:px-0">
-    <div
-      class="hidden md:flex flex-col md:flex-row justify-between items-start w-full md:w-10/12 lg:w-3/5 mx-auto pt-8 pb-2 text-slate-200 gap-8"
-    >
-      <div class="flex flex-col items-center justify-start gap-1">
-        <img
-          src="assets/images/logos/jf-logo.png"
-          alt="JackFruit Foundation"
-          class="h-20 bg-white rounded-lg"
-        />
-        <span class="text-xs cursor-pointer mt-2" routerLink="/company"
-          >About JackFruit Foundation</span
-        >
-        <span class="text-xs cursor-pointer" routerLink="/company">FAQs</span>
-        <span class="text-xs mt-12 cursor-pointer" routerLink="/"
-          >Discover More</span
-        >
-      </div>
-
-      <div class="flex flex-col items-start justify-start gap-1 pt-4">
-        <span class="text-lg mb-2">JackFruit Foundation</span>
-        <span class="text-xs cursor-pointer" routerLink="/"
-          >Our Impact Metrics</span
-        >
-        <span class="text-xs cursor-pointer" routerLink="/"
-          >Become a Partner</span
-        >
-        <span class="text-xs cursor-pointer" routerLink="/">
-          Invest With Us
-        </span>
-      </div>
-
-      <div class="flex flex-col items-start justify-start gap-1 pt-4">
-        <span class="text-lg mb-2">Quick Links</span>
-        <span class="text-xs cursor-pointer" routerLink="/">Home</span>
-        <span class="text-xs cursor-pointer" routerLink="/home/sms-services"
-          >About Us</span
-        >
-        <span class="text-xs cursor-pointer" routerLink="/home/ussd-services"
-          >FAQs</span
-        >
-        <span class="text-xs cursor-pointer" routerLink="/home/ussd-services"
-          >Talk To Us</span
-        >
-      </div>
-
-      <div
-        class="flex flex-col items-start justify-start gap-1 w-full md:w-64 pt-4"
-      >
-        <span class="text-lg mb-2">Quick Contact</span>
-        <span class="text-xs"
-          >If you have any questions or need help, feel free to contact us
-          on.</span
-        >
-        <span class="flex items-center gap-2">
-          <i class="bx bx-phone-call bx-md bx-tada"></i>
-          <span class="text-lg text-white">+254 110 701 174</span>
-        </span>
-        <!-- <span class="text-xs flex">
+<footer class="bg-[#1A363A] text-white font-montserrat">
+  <div class="container mx-auto px-4 py-12 grid grid-cols-2 lg:grid-cols-10 gap-1 lg:gap-8">
+    <!-- Column 1: Logo -->
+     <div class="space-y-2 col-span-1 lg:col-span-2">
+        <div class="flex flex-col items-center md:items-start space-y-4">
           <img
-            src="assets/images/svg/location-pin.svg"
-            alt="phone"
-            class="inline-block mr-2"
+            src="assets/images/footer/footer-logo.svg"
+            alt="JackFruit Foundation"
+            class="h-20 p-2"
           />
-          <span
-            >3rd Floor, Utumishi Co-op House, Mamlaka Road, Nairobi Kenya</span
-          >
-        </span> -->
+          <p class="text-xs">
+            <span>© {{ currentYear }} <span class="font-bold">JackFruit Foundation</span>.</span><br/>
+            <span>All Rights Reserved</span>
+          </p>
+        </div>
+     </div>
+    
+    <!-- Column 2: Quick Links -->
+    <div class="space-y-1 grid grid-cols-1 lg:grid-cols-10 col-span-1 lg:col-span-8">
+      <!-- Desktop view -->
+      <div class="hidden lg:grid grid-cols-1 col-span-3 ml-[45px]">
+        <a (click)="goTo('our-impact')" class="block text-xs hover:text-[#EEB100] cursor-pointer">Our Impact Metrics</a>
+        <a routerLink="/home" class="block text-xs hover:text-[#EEB100] cursor-pointer">Become a partner</a>
+        <a routerLink="/home" class="block text-xs hover:text-[#EEB100] cursor-pointer">Invest with us</a>
       </div>
-    </div>
-    <hr
-      class="w-full md:w-10/12 lg:w-3/5 mx-auto border-t border-grey-200 border-t-[.1px] border-0 mb-6"
-    />
-    <div
-      class="w-full md:w-10/12 lg:w-3/5 mx-auto flex flex-col md:flex-row justify-between pb-8 items-center text-center"
-    >
-      <span class="text-xs text-gray-1100 mb-4 md:mb-0"
-        >© 2025 JackFruit Foundation. All Rights Reserved.</span
-      >
-      <div class="flex gap-4">
-        <img src="assets/images/svg/facebook.svg" alt="facebook" />
-        <img src="assets/images/svg/twitter.svg" alt="twitter" />
-        <img src="assets/images/svg/youtube.svg" alt="youtube" />
-        <img src="assets/images/svg/instagram.svg" alt="instagram" />
+      <div class="hidden lg:grid  grid-cols-5 col-span-7">
+        <a (click)="goTo('about-us')" class="block text-xs hover:text-[#EEB100] cursor-pointer">About Us</a>
+        <a routerLink="/home" class="block text-xs hover:text-[#EEB100] cursor-pointer">Privacy policy</a>
+        <a routerLink="/home" class="block text-xs hover:text-[#EEB100] cursor-pointer">Terms and Conditions</a>
+        <a routerLink="/home" class="block text-xs text-center hover:text-[#EEB100] cursor-pointer">FAQs</a>
+        <a (click)="goTo('contact-us')" class="block text-xs hover:text-[#EEB100] cursor-pointer">Talk To Us</a>
+      </div>
+
+      <!-- Mobile view -->
+       <div class="block lg:hidden">
+        <a (click)="goTo('home')" class="block text-xs text-right hover:text-[#EEB100] cursor-pointer">Home</a>
+        <a (click)="goTo('our-impact')" class="block mt-4 text-xs text-right hover:text-[#EEB100] cursor-pointer">Our Impact</a>
+        <a routerLink="/home" class="block mt-4 text-xs text-right hover:text-[#EEB100] cursor-pointer">Terms and Conditions</a>
+        <a routerLink="/home" class="block mt-4 text-xs text-right hover:text-[#EEB100] cursor-pointer">Privacy Policy</a>
+        <a routerLink="/home" class="block mt-4 text-xs text-right hover:text-[#EEB100] cursor-pointer">FAQs</a>
+        <a (click)="goTo('contact-us')" class="block mt-4 text-xs text-right hover:text-[#EEB100] cursor-pointer">Countact Us</a>
       </div>
     </div>
   </div>
-</div>
+
+  <div class="border-t border-gray-700 mt-8 py-4 text-center text-xs text-gray-400">
+    © {{ currentYear }} <span class="font-bold">JackFruit Foundation</span>. All Rights Reserved.
+  </div>
+</footer>
