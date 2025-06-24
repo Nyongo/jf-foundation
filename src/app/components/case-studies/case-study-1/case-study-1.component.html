@@ -1,284 +1,126 @@
-<div class="w-full bg-white">
-  <!-- Hero Section -->
+<section class="cs2-banner font-montserrat relative w-full h-[300px] md:h-[400px] overflow-hidden">
+  <img
+    src="assets/images/case-studies/case-study-2-banner.svg"
+    alt="Case Study Banner"
+    class="absolute inset-0 w-full h-full object-cover"
+  />
   <div
-    class="w-full bg-blue py-16 relative bg-cover bg-center"
-    [style.backgroundImage]="'url(assets/images/case-studies/1.jpg)'"
+    class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-center px-4 font-montserrat text-white"
   >
-    <div class="absolute inset-0 bg-blue bg-opacity-80"></div>
-    <div class="w-full md:w-10/12 mx-auto px-4 relative">
-      <div class="flex flex-col items-start">
-        <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
-          Data-Driven Lending: Transforming Early Childhood Education in Kenya
-        </h1>
-        <p class="text-white text-xl mb-2">Nairobi, Kenya</p>
-        <!-- <p class="text-white text-lg max-w-full">
-          Access to finance is a critical barrier for Early Childhood
-          Development (ECD) providers in Kenya. Many struggle with financial
-          instability due to irregular payment structures, limited enrollment,
-          and lack of formal financial records making it difficult to secure
-          loans from traditional lenders. Jackfruit Finance, a pioneering
-          education finance company, has leveraged data and AI-powered credit
-          scoring to refine lending criteria, ensuring that ECD centers can
-          access the funding they need to improve learning environments for
-          Kenya’s youngest learners. Through participation in the GSF Impact at
-          Scale Labs - Early Years Programme, Jackfruit Finance systematically
-          assessed the viability of lending to ECD providers, making data-based
-          decisions to mitigate risk while expanding financial inclusion.
-        </p> -->
-      </div>
-    </div>
+    <h1 class="w-[80%] text-3xl md:text-4xl font-semibold">{{ title }}</h1>
+    <span class="mt-2 text-sm text-[#EEB100] font-bold">{{ location }}</span>
   </div>
+</section>
 
-  <!-- Content Section -->
-  <div class="w-full md:w-10/12 mx-auto px-4 py-16">
-    <!-- Impact Metrics -->
-    <!-- <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-      <div
-        *ngFor="let item of caseStudy.impact | keyvalue"
-        class="bg-white rounded-lg shadow-lg p-6 text-center"
-      >
-        <div class="text-3xl font-bold text-blue mb-2">
-          {{ item.value }}
-        </div>
-        <div class="text-gray-600 capitalize">{{ item.key }}</div>
-      </div>
-    </div> -->
+<main class="font-montserrat container mx-auto px-4">
+  <!-- Introduction -->
+  <section class="py-12 space-y-4">
+    <h2 class="text-xl md:text-2xl font-semibold">Introduction</h2>
+    <p *ngFor="let p of introduction" class="text-gray-700">{{ p }}</p>
+  </section>
 
-    <!-- Project Description -->
-    <div class="mb-16">
-      <h2 class="text-2xl font-bold text-gray-900 mb-6">Introduction</h2>
-      <div class="prose max-w-none">
-        <p class="text-gray-600 whitespace-pre-line">
-          Access to finance is a critical barrier for Early Childhood
-          Development (ECD) providers in Kenya. Many struggle with financial
-          instability due to irregular payment structures, limited enrollment,
-          and lack of formal financial records making it difficult to secure
-          loans from traditional lenders. Jackfruit Finance, a pioneering
-          education finance company, has leveraged data and AI-powered credit
-          scoring to refine lending criteria, ensuring that ECD centers can
-          access the funding they need to improve learning environments for
-          Kenya’s youngest learners.
-        </p>
-
-        <p class="text-gray-600 whitespace-pre-line">
-          Through participation in the GSF Impact at Scale Labs - Early Years
-          Programme, Jackfruit Finance systematically assessed the viability of
-          lending to ECD providers, making data-based decisions to mitigate risk
-          while expanding financial inclusion.
-        </p>
+  <!-- The Challenge -->
+  <section class="py-6 space-y-6">
+    <h2 class="text-xl md:text-2xl font-semibold">The Challenge</h2>
+    <div class="flex flex-col md:flex-row items-start gap-8">
+      <img
+        src="assets/images/case-studies/chalk-board.svg"
+        alt="The Challenge"
+        class="md:w-1/2 rounded-lg shadow-lg object-cover"
+      />
+      <div class="md:w-1/2">
+        <ng-container *ngFor="let b of challengeBullets">
+          <p class="mb-4 text-[#EEB100] font-bold">{{ b.text }}</p>
+          <ol
+            *ngIf="b.list && b.listType === 'decimal'"
+            class="list-decimal list-inside ml-4 space-y-2 text-gray-700"
+          >
+            <li *ngFor="let item of b.list">
+              {{ item.text }}
+              <ul
+                *ngIf="item.sublist"
+                class="list-disc list-inside ml-6 space-y-1 text-gray-700"
+              >
+                <li *ngFor="let sub of item.sublist">{{ sub }}</li>
+              </ul>
+            </li>
+          </ol>
+        </ng-container>
       </div>
     </div>
+  </section>
 
-    <!-- The Challenge -->
-    <div class="mb-16">
-      <h2 class="text-2xl font-bold text-gray-900 mb-6">The Challenge</h2>
-      <div class="prose max-w-none">
-        <p class="text-gray-600 whitespace-pre-line">
-          Jackfruit identified three broad categories of ECD providers:
-        </p>
+  <!-- The Solution -->
+  <section class="py-12 space-y-4">
+    <h2 class="text-xl md:text-2xl font-semibold">
+      The Solution: Refining Credit Scoring and Lending Criteria
+    </h2>
+    <p class="text-[#EEB100] font-bold">{{ solutionIntro }}</p>
+    <ul class="list-decimal list-inside ml-4 space-y-2 text-gray-700">
+      <li *ngFor="let b of solutionBullets">{{ b.text }}</li>
+    </ul>
+    <img
+      src="assets/images/case-studies/classroom-computer.svg"
+      alt="Solution"
+      class="w-full rounded-lg shadow-lg object-cover mt-6"
+    />
+  </section>
 
-        <ol class="list-decimal list-inside ml-8">
-          <li>
-            Informal home-based daycares ("Mamapreneurs") – Operated by female
-            entrepreneurs caring for children in their homes, these lacked the
-            financial capacity to take on sustainable credit.
-          </li>
-          <li>
-            ECD centers attached to primary schools – These benefited from
-            stable revenue streams from older students and already qualified for
-            Jackfruit loans.
-          </li>
-          <li>
-            Stand-alone ECD centers – These faced financial sustainability
-            issues, including:
-            <ul class="list-disc list-inside ml-8">
-              <li>Low enrollment numbers affecting revenue.</li>
-              <li>
-                Irregular payment structures (daily/weekly/monthly instead of
-                termly).
-              </li>
-              <li>
-                Heavy reliance on cash payments, making financial tracking
-                difficult.
-              </li>
-            </ul>
-          </li>
-        </ol>
-      </div>
+  <!-- Leveraging Data -->
+  <section class="py-6 space-y-4">
+    <h2 class="text-xl md:text-2xl font-semibold">
+      Leveraging Data to Enhance Impact
+    </h2>
+    <p class="text-[#EEB100] font-bold">{{ leverageIntro }}</p>
+    <ul class="list-disc list-inside ml-4 space-y-2 text-gray-700">
+      <li *ngFor="let b of leverageBullets">{{ b.text }}</li>
+    </ul>
+  </section>
+
+  <!-- Beyond Financing -->
+  <section class="py-12 space-y-4">
+    <h2 class="text-xl md:text-2xl font-semibold">
+      Beyond Financing: Ensuring Children Are Developmentally On Track
+    </h2>
+    <p class="text-[#EEB100] font-bold">{{ beyondIntro }}</p>
+
+    <div class="relative flex flex-col md:flex-row items-start md:items-center gap-6">
+      <!-- Left List -->
+      <ul class="list-disc list-inside ml-4 space-y-2 text-gray-700 md:flex-1">
+        <li *ngFor="let b of beyondBulletsLeft">{{ b.text }}</li>
+      </ul>
+
+      <!-- Divider (desktop only) -->
+      <div class="hidden md:block w-px h-48 bg-gray-300"></div>
+
+      <!-- Right List -->
+      <ul class="list-disc list-inside ml-4 space-y-2 text-gray-700 md:flex-1">
+        <li *ngFor="let b of beyondBulletsRight">{{ b.text }}</li>
+      </ul>
     </div>
+  </section>
 
-    <!-- The Solution -->
-    <div class="mb-16">
-      <h2 class="text-2xl font-bold text-gray-900 mb-6">
-        The Solution: Refining Credit Scoring and Lending Criteria
-      </h2>
-      <div class="prose max-w-none">
-        <p class="text-gray-600 whitespace-pre-line">
-          Jackfruit Finance through recommendation from Jackfruit Foundation
-          adapted its lending model based on data-driven insights, making key
-          refinements to support ECD providers effectively
-        </p>
+  <!-- Impact & Path Forward -->
+  <section class="py-6 space-y-4">
+    <h2 class="text-xl md:text-2xl font-semibold">
+      Impact & The Path Forward
+    </h2>
+    <p *ngFor="let p of pathForward" class="text-gray-700">{{ p }}</p>
+  </section>
+</main>
 
-        <ol class="list-disc list-inside ml-8">
-          <li>
-            Payment Structure Adaptation – Transitioning ECD providers from cash
-            transactions to mobile money and bank payments, improving financial
-            tracking and risk assessment.
-          </li>
-          <li>
-            Experience & Longevity Consideration – Adjusting eligibility from a
-            minimum of three years of operation to one year, balancing stability
-            with early-stage financial needs.
-          </li>
-          <li>
-            Enrollment-Based Eligibility – Reducing the minimum required student
-            count from 100 to 50, making loans more accessible to smaller ECD
-            centers.
-          </li>
-        </ol>
-      </div>
-    </div>
-
-    <!--  Leveraging Data to Enhance Impact -->
-    <div class="mb-16">
-      <h2 class="text-2xl font-bold text-gray-900 mb-6">
-        Leveraging Data to Enhance Impact
-      </h2>
-      <div class="prose max-w-none">
-        <p class="text-gray-600 whitespace-pre-line">
-          Jackfruit Finance has integrated data-driven strategies to ensure
-          lending remains sustainable:
-        </p>
-
-        <ol class="list-disc list-inside ml-8">
-          <li>
-            Baseline and Endline Data Collection – Tracking school growth and
-            learning outcomes to measure the impact of financing.
-          </li>
-          <li>
-            School Management Software Integration – Exploring financial
-            tracking applications to assist ECD centers in managing revenue and
-            forecasting financial needs.
-          </li>
-          <li>
-            Incentive-Based Rewards & Social Emotional Learning Support –
-            Encouraging financial literacy and business training by offering
-            additional benefits for schools with strong repayment histories.
-          </li>
-        </ol>
-      </div>
-    </div>
-
-    <!--  Beyond Financing: Ensuring Children Are Developmentally On Track -->
-    <div class="mb-16">
-      <h2 class="text-2xl font-bold text-gray-900 mb-6">
-        Beyond Financing: Ensuring Children Are Developmentally On Track
-      </h2>
-      <div class="prose max-w-none">
-        <p class="text-gray-600 whitespace-pre-line">
-          While financial support is key to ensuring the sustainability of ECD
-          providers, Jackfruit Foundation complements this with holistic
-          interventions, such as Social Emotional Learning (SEL) programs, to
-          ensure children are developmentally on track.
-        </p>
-
-        <ol class="list-disc list-inside ml-8">
-          <li>
-            SEL Curriculum Integration – Through Jackfruit Foundation, eligible
-            ECD centers gain access to structured Social Emotional Learning
-            programs that help children develop self-awareness, emotional
-            regulation, and social skills—essential for their overall cognitive
-            and behavioral development.
-          </li>
-          <li>
-            Capacity Building for Educators – Teachers receive training in
-            child-centered learning techniques, equipping them to support young
-            learners in developing resilience, confidence, and problem-solving
-            abilities.
-          </li>
-          <li>
-            Community Engagement & Parenting Support – Parents and caregivers
-            are involved in SEL initiatives, ensuring that learning extends
-            beyond the classroom and is reinforced at home.
-          </li>
-        </ol>
-
-        <p class="text-gray-600 whitespace-pre-line">
-          By integrating financial sustainability with child development
-          support, Jackfruit Finance ensures that ECD providers are not just
-          financially stable, but also delivering high-quality, developmentally
-          appropriate education to Kenya’s youngest learners.
-        </p>
-      </div>
-    </div>
-
-    <!--  Impact & The Path Forward
- -->
-    <div class="mb-16">
-      <h2 class="text-2xl font-bold text-gray-900 mb-6">
-        Impact & The Path Forward
-      </h2>
-      <div class="prose max-w-none">
-        <p class="text-gray-600 whitespace-pre-line">
-          Jackfruit Finance’s approach has successfully expanded lending to
-          viable ECD providers, ensuring that more schools receive the financial
-          support they need to improve infrastructure, teaching quality, and
-          student outcomes. To scale inclusively, Jackfruit Finance is exploring
-          blended financing models, including grants, concessional loans, and
-          impact investments to lower the cost of credit for under-resourced ECD
-          centers.
-        </p>
-
-        <p class="text-gray-600 whitespace-pre-line">
-          With Jackfruit Foundation’s SEL programs ensuring children’s
-          developmental needs are met, and Jackfruit Finance’s tailored lending
-          models supporting schools’ financial sustainability, this holistic
-          approach is reshaping early education finance in Kenya. By
-          continuously analyzing market data and adapting lending models,
-          Jackfruit Finance is enabling more children to learn in
-          well-supported, high-quality environments.
-        </p>
-      </div>
-    </div>
-
-    <!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div class="bg-white rounded-lg shadow-lg p-6">
-        <h3 class="text-xl font-bold text-gray-900 mb-4">Student Progress</h3>
-        <canvas id="studentProgressChart"></canvas>
-      </div>
-      =
-      <div class="bg-white rounded-lg shadow-lg p-6">
-        <h3 class="text-xl font-bold text-gray-900 mb-4">
-          Teacher Training Status
-        </h3>
-        <canvas id="teacherTrainingChart"></canvas>
-      </div>
-
-      <div class="bg-white rounded-lg shadow-lg p-6">
-        <h3 class="text-xl font-bold text-gray-900 mb-4">
-          Resource Allocation
-        </h3>
-        <canvas id="resourceAllocationChart"></canvas>
-      </div>
-    </div> -->
-  </div>
-
-  <!-- Call to Action -->
-  <div class="w-full bg-gray-50 py-16">
-    <div class="w-full md:w-10/12 mx-auto px-4 text-center">
-      <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-        Want to Support Similar Projects?
-      </h2>
-      <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
-        Join us in transforming education across Sub-Saharan Africa. Your
-        support can help create more success stories like this one.
-      </p>
-      <button
-        class="bg-blue text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-300"
-        routerLink="/contact-us"
-      >
-        Get Involved
-      </button>
-    </div>
-  </div>
-</div>
+<!-- CTA -->
+<section class="bg-gray-50 text-center py-16 space-y-12 font-montserrat">
+  <h3 class="text-2xl font-semibold text-[#1A363A] w-[80%] mx-auto">
+    Want to Support Similar Projects?
+  </h3>
+  <p class="text-gray-600 w-[80%] mx-auto text-xl">
+    Join us in transforming education across Sub-Saharan Africa. Your support can help create more success stories like this one.
+  </p>
+  <a
+    routerLink="/get-involved"
+    class="bg-[#4EABBA] text-white px-8 py-3 font-semibold inline-block"
+  >
+    Get Involved
+  </a>
+</section>

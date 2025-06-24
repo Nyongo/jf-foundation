@@ -1,245 +1,92 @@
-import { Component, OnInit } from '@angular/core'
-import { Meta, Title } from '@angular/platform-browser'
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
-import { CanonicalService } from '../../../services/canonical.service'
-import { SeoTestService } from '../../../utils/seo-test'
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+
+type ListType = 'disc' | 'decimal';
+
+interface BulletListItem {
+  text: string;
+  sublist?: string[];
+}
+
+interface Bullet {
+  text: string;
+  list?: BulletListItem[];
+  listType?: ListType;
+}
 
 @Component({
   selector: 'app-case-study-1',
+  imports: [ CommonModule],
   templateUrl: './case-study-1.component.html',
-  styleUrls: ['./case-study-1.component.scss'],
+  styleUrls: ['./case-study-1.component.scss']
 })
 export class CaseStudy1Component implements OnInit {
-  structuredData: SafeHtml
-  private readonly domain = 'https://www.jackfruit-foundation.org'
+  title = 'Data-Driven Lending: Transforming Early Childhood Education in Kenya';
+  location = 'Nairobi, Kenya';
 
-  constructor(
-    private meta: Meta,
-    private title: Title,
-    private sanitizer: DomSanitizer,
-    private canonicalService: CanonicalService,
-    private seoTest: SeoTestService,
-  ) {
-    this.structuredData = this.sanitizer.bypassSecurityTrustHtml(
-      this.getStructuredData(),
-    )
-  }
+  introduction: string[] = [
+    `Access to finance is a critical barrier for Early Childhood Development (ECD) providers in Kenya. Many struggle with financial instability due to irregular payment structures, limited enrollment, and lack of formal financial records making it difficult to secure loans from traditional lenders. Jackfruit Finance, a pioneering education finance company, has leveraged data and AI-powered credit scoring to refine lending criteria, ensuring that ECD centers can access the funding they need to improve learning environments for Kenya’s youngest learners.`,
+    `Through participation in the GSF Impact at Scale Labs – Early Years Programme, Jackfruit Finance systematically assessed the viability of lending to ECD providers, making data-based decisions to mitigate risk while expanding financial inclusion.`
+  ];
 
-  ngOnInit() {
-    this.setMetaTags()
-    this.addStructuredData()
-    this.canonicalService.setCanonicalURL(
-      `${this.domain}/case-studies/data-driven-lending`,
-    )
-
-    // Run SEO tests in development mode
-    if (process.env['NODE_ENV'] === 'development') {
-      setTimeout(() => {
-        const seoResults = this.seoTest.testSeoElements()
-        console.table(seoResults)
-      }, 1000) // Wait for DOM to be ready
+  challengeBullets: Bullet[] = [
+    {
+      text: 'Jackfruit identified three broad categories of ECD providers:',
+      listType: 'decimal',
+      list: [
+        {
+          text: `Informal home-based daycares (“Mamapreneurs”) – Operated by female entrepreneurs caring for children in their homes, these lacked the financial capacity to take on sustainable credit.`
+        },
+        {
+          text: `ECD centers attached to primary schools – These benefited from stable revenue streams from older students and already qualified for Jackfruit loans.`,
+        },
+        {
+          text: `Stand-alone ECD centers – These faced financial sustainability issues, including:`,
+          sublist: [
+            'Low enrollment numbers affecting revenue.',
+            'Irregular payment structures (daily/weekly/monthly instead of termly).',
+            'Heavy reliance on cash payments, making financial tracking difficult.'
+          ]
+        }
+      ]
     }
-  }
+  ];
 
-  private getStructuredData(): string {
-    const articleData = {
-      '@context': 'https://schema.org',
-      '@type': 'Article',
-      headline:
-        'Data-Driven Lending: Transforming Early Childhood Education in Kenya',
-      description:
-        'Learn how Jackfruit Finance is revolutionizing early childhood education in Kenya through data-driven lending and innovative financial solutions.',
-      image: `${this.domain}/assets/images/case-studies/1.jpg`,
-      datePublished: '2024-03-20',
-      dateModified: '2024-03-20',
-      author: {
-        '@type': 'Organization',
-        name: 'Jackfruit Foundation',
-        url: this.domain,
-      },
-      publisher: {
-        '@type': 'Organization',
-        name: 'Jackfruit Foundation',
-        logo: {
-          '@type': 'ImageObject',
-          url: `${this.domain}/assets/images/logos/jf-logo.png`,
-        },
-      },
-      mainEntityOfPage: {
-        '@type': 'WebPage',
-        '@id': `${this.domain}/case-studies/data-driven-lending`,
-      },
-      keywords:
-        'ECD providers, Kenya education, education finance, early childhood development, financial inclusion',
-      articleSection: 'Case Studies',
-      wordCount: '1500',
-      inLanguage: 'en-US',
-    }
+  solutionIntro = `Jackfruit Finance, through recommendation from Jackfruit Foundation, adapted its lending model based on data-driven insights, making key refinements to support ECD providers effectively.`;
 
-    const breadcrumbData = {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: 'Home',
-          item: this.domain,
-        },
-        {
-          '@type': 'ListItem',
-          position: 2,
-          name: 'Case Studies',
-          item: `${this.domain}/case-studies`,
-        },
-        {
-          '@type': 'ListItem',
-          position: 3,
-          name: 'Data-Driven Lending',
-          item: `${this.domain}/case-studies/data-driven-lending`,
-        },
-      ],
-    }
+  solutionBullets: BulletListItem[] = [
+    { text: `Payment Structure Adaptation – Transitioning ECD providers from cash transactions to mobile money and bank payments, improving financial tracking and risk assessment.` },
+    { text: `Experience & Longevity Consideration – Adjusting eligibility from a minimum of three years of operation to one year, balancing stability with early-stage financial needs.` },
+    { text: `Enrolment-Based Eligibility – Reducing the minimum required student count from 100 to 50, making loans more accessible to smaller ECD centers.` }
+  ];
 
-    const organizationData = {
-      '@context': 'https://schema.org',
-      '@type': 'Organization',
-      name: 'Jackfruit Foundation',
-      url: this.domain,
-      logo: `${this.domain}/assets/images/logos/jf-logo.png`,
-      sameAs: [
-        'https://twitter.com/JackfruitFdn',
-        'https://www.linkedin.com/company/jackfruit-foundation',
-      ],
-      contactPoint: {
-        '@type': 'ContactPoint',
-        telephone: '+254-XXX-XXX-XXX',
-        contactType: 'customer service',
-        areaServed: 'KE',
-        availableLanguage: ['en', 'sw'],
-      },
-    }
+  leverageIntro = `Jackfruit Finance has integrated data-driven strategies to ensure lending remains sustainable:`;
 
-    const faqData = {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: [
-        {
-          '@type': 'Question',
-          name: 'How does Jackfruit Finance support ECD providers?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Jackfruit Finance provides data-driven lending solutions and financial support to Early Childhood Development (ECD) providers in Kenya, helping them improve infrastructure, teaching quality, and student outcomes.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'What are the eligibility criteria for ECD centers?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'ECD centers need to have been operating for at least one year and have a minimum of 50 students. They should also demonstrate proper financial tracking through mobile money or bank payments.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'What additional support does Jackfruit Foundation provide?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Beyond financing, Jackfruit Foundation provides Social Emotional Learning (SEL) programs, teacher training, and community engagement initiatives to ensure comprehensive development support.',
-          },
-        },
-      ],
-    }
+  leverageBullets: BulletListItem[] = [
+    { text: `Baseline and Endline Data Collection – Tracking school growth and learning outcomes to measure the impact of financing.` },
+    { text: `School Management Software Integration – Exploring financial tracking applications to assist ECD centers in managing revenue and forecasting financial needs.` },
+    { text: `Incentive-Based Rewards & Social Emotional Learning Support – Encouraging financial literacy and business training by offering additional benefits for schools with strong repayment histories.` }
+  ];
 
-    return `<script type="application/ld+json">${JSON.stringify([
-      articleData,
-      breadcrumbData,
-      organizationData,
-      faqData,
-    ])}</script>`
-  }
+  beyondIntro = `While financial support is key to ensuring the sustainability of ECD providers, Jackfruit Foundation complements this with holistic interventions, such as Social Emotional Learning (SEL) programs, to ensure children are developmentally on track.`;
 
-  private addStructuredData() {
-    const script = document.createElement('script')
-    script.type = 'application/ld+json'
-    script.text = JSON.stringify(this.getStructuredData())
-    document.head.appendChild(script)
-  }
+  beyondBulletsLeft: BulletListItem[] = [
+    { text: `SEL Curriculum Integration – Through Jackfruit Foundation, eligible ECD centers gain access to structured Social Emotional Learning programs that help children develop self-awareness, emotional regulation, and social skills—essential for their overall cognitive and behavioral development.` },
+    { text: `Capacity Building for Educators – Teachers receive training in child-centered learning techniques, equipping them to support young learners in developing resilience, confidence, and problem-solving abilities.` }
+  ];
 
-  private setMetaTags() {
-    const title =
-      'Data-Driven Lending: Transforming Early Childhood Education in Kenya | Jackfruit Foundation'
-    const description =
-      'Learn how Jackfruit Finance is revolutionizing early childhood education in Kenya through data-driven lending and innovative financial solutions.'
+  beyondBulletsRight: BulletListItem[] = [
+    { text: `Community Engagement & Parenting Support – Parents and caregivers are involved in SEL initiatives, ensuring that learning extends beyond the classroom and is reinforced at home.` },
+    { text: `Integrated Sustainability Model – By integrating financial sustainability with child development support, Jackfruit Finance ensures that ECD providers are not just financially stable, but also delivering high-quality, developmentally appropriate education to Kenya’s youngest learners.` }
+  ];
 
-    this.title.setTitle(title)
+  pathForward: string[] = [
+    `Jackfruit Finance’s approach has successfully expanded lending to viable ECD providers, ensuring that more schools receive the financial support they need to improve infrastructure, teaching quality, and student outcomes.`,
+    `To scale inclusively, Jackfruit Finance is exploring blended financing models, including grants, concessional loans, and impact investments to lower the cost of credit for under-resourced ECD centers.`,
+    `With Jackfruit Foundation’s SEL programs ensuring children’s developmental needs are met, and Jackfruit Finance’s tailored lending models supporting schools’ financial sustainability, this holistic approach is reshaping early education finance in Kenya. By continuously analyzing market data and adapting lending models, Jackfruit Finance is enabling more children to learn in well-supported, high-quality environments.`
+  ];
 
-    // Basic SEO
-    this.meta.updateTag({ name: 'description', content: description })
-    this.meta.updateTag({
-      name: 'keywords',
-      content:
-        'ECD providers, Kenya education, education finance, early childhood development, financial inclusion, school funding, data-driven lending, social emotional learning, SEL programs',
-    })
-    this.meta.updateTag({ name: 'author', content: 'Jackfruit Foundation' })
-    this.meta.updateTag({
-      name: 'robots',
-      content: 'index, follow, max-image-preview:large',
-    })
-    this.meta.updateTag({ name: 'language', content: 'en-US' })
-    this.meta.updateTag({ name: 'geo.region', content: 'KE' })
-    this.meta.updateTag({ name: 'geo.placename', content: 'Nairobi' })
+  constructor() {}
 
-    // Open Graph
-    this.meta.updateTag({ property: 'og:title', content: title })
-    this.meta.updateTag({ property: 'og:description', content: description })
-    this.meta.updateTag({
-      property: 'og:image',
-      content: `${this.domain}/assets/images/case-studies/1.jpg`,
-    })
-    this.meta.updateTag({
-      property: 'og:image:alt',
-      content: 'Early Childhood Education in Kenya Case Study',
-    })
-    this.meta.updateTag({
-      property: 'og:url',
-      content: `${this.domain}/case-studies/data-driven-lending`,
-    })
-    this.meta.updateTag({ property: 'og:type', content: 'article' })
-    this.meta.updateTag({
-      property: 'og:site_name',
-      content: 'Jackfruit Foundation',
-    })
-    this.meta.updateTag({ property: 'og:locale', content: 'en_US' })
-    this.meta.updateTag({
-      property: 'article:published_time',
-      content: '2024-03-20',
-    })
-    this.meta.updateTag({
-      property: 'article:modified_time',
-      content: '2024-03-20',
-    })
-    this.meta.updateTag({
-      property: 'article:section',
-      content: 'Case Studies',
-    })
-
-    // Twitter
-    this.meta.updateTag({
-      name: 'twitter:card',
-      content: 'summary_large_image',
-    })
-    this.meta.updateTag({ name: 'twitter:site', content: '@JackfruitFdn' })
-    this.meta.updateTag({ name: 'twitter:creator', content: '@JackfruitFdn' })
-    this.meta.updateTag({ name: 'twitter:title', content: title })
-    this.meta.updateTag({ name: 'twitter:description', content: description })
-    this.meta.updateTag({
-      name: 'twitter:image',
-      content: `${this.domain}/assets/images/case-studies/1.jpg`,
-    })
-    this.meta.updateTag({
-      name: 'twitter:image:alt',
-      content: 'Early Childhood Education in Kenya Case Study',
-    })
-  }
+  ngOnInit(): void {}
 }
