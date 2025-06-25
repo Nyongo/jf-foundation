@@ -1,86 +1,66 @@
-<div class="w-full bg-white">
-  <!-- Hero Section -->
-  <div class="w-full bg-blue py-16">
-    <div class="w-full md:w-10/12 mx-auto px-4">
-      <div class="flex flex-col items-center text-center">
-        <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
-          Our Case Studies
-        </h1>
-        <p class="text-white text-lg md:text-xl max-w-2xl">
-          Explore how we're making a difference in education across Sub-Saharan
-          Africa through our various initiatives and programs.
-        </p>
-      </div>
-    </div>
+<section class="case-banner relative w-full h-[300px] md:h-[400px] overflow-hidden">
+  <img
+    [src]="banner.imageUrl"
+    alt="Case Study Banner"
+    class="absolute inset-0 w-full h-full object-cover"
+  />
+  <div
+    class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-center px-4 font-montserrat text-white"
+  >
+    <span class="text-sm uppercase text-[#EEB100] tracking-wider">{{ banner.eyebrow }}</span>
+    <h1 class="mt-2 text-2xl md:text-4xl font-bold">{{ banner.headline }}</h1>
   </div>
+</section>
 
-  <!-- Case Studies Grid -->
-  <div class="w-full md:w-10/12 mx-auto px-4 py-16">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-      <div
-        *ngFor="let study of caseStudies"
-        class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
-        (click)="viewCaseStudy(study.id)"
-      >
-        <!-- Image Container -->
-        <div class="relative h-48 overflow-hidden">
-          <img
-            [src]="study.image"
-            [alt]="study.title"
-            class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
-          />
-        </div>
-
-        <!-- Content Container -->
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-gray-900 mb-2">
-            {{ study.title }}
-          </h3>
-          <p class="text-blue font-medium mb-4">{{ study.location }}</p>
-          <p class="text-gray-600 mb-6">{{ study.description }}</p>
-
-          <!-- Impact Metrics -->
-          <div class="grid grid-cols-3 gap-4 border-t pt-4">
-            <div class="text-center">
-              <div class="text-2xl font-bold text-blue">
-                {{ study.impact.students }}
-              </div>
-              <div class="text-sm text-gray-600">Students</div>
-            </div>
-            <div class="text-center">
-              <div class="text-2xl font-bold text-blue">
-                {{ study.impact.schools }}
-              </div>
-              <div class="text-sm text-gray-600">Schools</div>
-            </div>
-            <div class="text-center">
-              <div class="text-2xl font-bold text-blue">
-                {{ study.impact.teachers }}
-              </div>
-              <div class="text-sm text-gray-600">Teachers</div>
-            </div>
+<main class="font-montserrat">
+  <div *ngFor="let cs of studies; let i = index" class="pt-16">
+    <div
+      class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-8"
+      [ngClass]="{ 'md:flex-row-reverse': i % 2 === 1 }"
+    >
+      <!-- Text Column -->
+      <div class="md:flex-1 space-y-4">
+        <h2 class="text-2xl md:text-3xl font-bold">{{ cs.title }}</h2>
+        <p class="text-gray-700">{{ cs.description }}</p>
+        <div class="flex flex-wrap gap-6 mt-4">
+          <div *ngFor="let st of cs.stats" class="text-center">
+            <div class="text-3xl font-bold text-[#1A363A]">{{ st.value }}</div>
+            <div class="text-sm text-gray-600">{{ st.label }}</div>
           </div>
         </div>
+        <a
+          (click)="goTo(cs.link)"
+          class="inline-block cursor-pointer mt-6 px-6 py-2 border-2 border-[#1A363A] text-[#1A363A] font-semibold"
+        >
+          Read More
+        </a>
+      </div>
+
+      <!-- Image Column -->
+      <div class="md:flex-1">
+        <img
+          [src]="cs.imageUrl"
+          [alt]="cs.title"
+          class="w-full rounded-lg shadow-lg object-cover"
+        />
       </div>
     </div>
+    <hr class="border-t border-gray-200 mt-16" />
   </div>
 
-  <!-- Call to Action -->
-  <div class="w-full bg-gray-50 py-16">
-    <div class="w-full md:w-10/12 mx-auto px-4 text-center">
-      <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-        Want to Learn More?
-      </h2>
-      <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
-        Discover how we can help transform education in your community through
-        our proven programs and initiatives.
-      </p>
-      <button
-        class="bg-blue text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-300"
-        routerLink="/contact-us"
-      >
-        Get in Touch
-      </button>
-    </div>
-  </div>
-</div>
+  <!-- Learn More CTA -->
+  <section class="bg-gray-50 py-16 text-center">
+    <h3 class="text-2xl font-semibold text-[#1A363A] mb-4">
+      Want to Learn More?
+    </h3>
+    <p class="text-gray-600 mb-6">
+      Discover how we can help transform education in your community through our proven programs and initiatives.
+    </p>
+    <a
+      routerLink="/contact"
+      class="inline-block bg-[#4EABBA] text-white px-8 py-3 font-semibold"
+    >
+      Talk To Us
+    </a>
+  </section>
+</main>

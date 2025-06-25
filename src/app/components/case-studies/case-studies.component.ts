@@ -1,53 +1,63 @@
-import { Component } from '@angular/core'
-import { CommonModule } from '@angular/common'
-import { RouterModule, Router } from '@angular/router'
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+interface CaseStudy {
+  imageUrl: string;
+  title: string;
+  description: string;
+  stats: { value: string; label: string }[];
+  link: string;
+}
 
 @Component({
   selector: 'app-case-studies',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [ CommonModule],
   templateUrl: './case-studies.component.html',
-  styleUrl: './case-studies.component.scss',
+  styleUrls: ['./case-studies.component.scss']
 })
-export class CaseStudiesComponent {
+export class CaseStudiesComponent implements OnInit {
+  banner = {
+    imageUrl: 'assets/images/case-studies/data-driven.svg',
+    eyebrow: 'Case Study',
+    headline:
+      "Explore how we're making a difference in education across Sub‑Saharan Africa through our various initiatives and programs."
+  };
+
+  studies: CaseStudy[] = [
+    {
+      imageUrl: 'assets/images/case-studies/1.jpg',
+      title: 'Data‑Driven Lending: Transforming Early Childhood Education in Kenya',
+      description:
+        'Through participation in the GSF Impact at Scale Labs – Early Years Programme, Jackfruit Finance systematically assessed the viability of lending to ECD providers, making data‑based decisions to mitigate risk while expanding financial inclusion.',
+      stats: [
+        { value: '573+', label: 'Students' },
+        { value: '15',   label: 'Schools'  },
+        { value: '719',  label: 'Teachers' }
+      ],
+      link: '/case-studies/case-study-1'
+    },
+    {
+      imageUrl: 'assets/images/case-studies/2.jpg',
+      title: 'Driving Education Outcomes Through Results‑Linked Loans',
+      description:
+        'Across Kenya, low‑cost private schools face significant challenges in accessing financing to improve infrastructure, teaching quality, and overall learning outcomes.',
+      stats: [
+        { value: '75k+', label: 'Students' },
+        { value: '200',  label: 'Schools'  },
+        { value: '2k+',  label: 'Teachers' }
+      ],
+      link: '/case-studies/case-study-2'
+    }
+    // Case studies can be added here
+  ];
+
   constructor(private router: Router) {}
 
-  caseStudies = [
-    {
-      id: '1',
-      title:
-        'Data-Driven Lending: Transforming Early Childhood Education in Kenya',
-      location: 'Nairobi, Kenya',
-      description:
-        'Through participation in the GSF Impact at Scale Labs - Early Years Programme, Jackfruit Finance systematically assessed the viability of lending to ECD providers, making data-based decisions to mitigate risk while expanding financial inclusion.',
-      image: 'assets/images/case-studies/1.jpg',
-      impact: {
-        students: '719',
-        schools: '15',
-        teachers: '41',
-      },
-    },
-    {
-      id: '2',
-      title: 'Driving Education Outcomes Through Results-Linked Loans',
-      location: 'Nakuru, Kenya',
-      description:
-        'Across Kenya, low-cost private schools face significant challenges in accessing financing to improve infrastructure, teaching quality, and overall learning outcomes. Jackfruit Finance developed a data-driven, results-linked loan model, which offers financial support to schools that meet specific education improvement milestones',
-      image: 'assets/images/case-studies/2.jpg',
-      impact: {
-        teachers: '2,000+',
-        schools: '200',
-        students: '75,000+',
-      },
-    },
-  ]
+  ngOnInit(): void {}
 
-  viewCaseStudy(id: string) {
-    //this.router.navigate(['/case-studies', id])
-    if (id === '1') {
-      this.router.navigate(['/case-studies/case-study-1'])
-    } else if (id === '2') {
-      this.router.navigate(['/case-studies/case-study-2'])
-    }
+  goTo(link: string) {
+    this.router.navigate([link])
   }
 }

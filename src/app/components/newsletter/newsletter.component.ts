@@ -13,7 +13,7 @@ import {
   standalone: true,
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   templateUrl: './newsletter.component.html',
-  styleUrl: './newsletter.component.scss',
+  styleUrls: ['./newsletter.component.scss'],
 })
 export class NewsletterComponent {
   newsletterForm: FormGroup
@@ -39,7 +39,6 @@ export class NewsletterComponent {
   onSubmit() {
     this.submitted = true
     if (this.newsletterForm.valid) {
-      // Here you would typically send the form data to your backend
       console.log(this.newsletterForm.value)
       this.success = true
     }

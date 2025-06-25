@@ -1,175 +1,133 @@
-<div class="w-full bg-white">
-  <!-- Hero Section -->
-  <div class="w-full bg-blue py-16">
-    <div class="w-full md:w-10/12 mx-auto px-4">
-      <div class="flex flex-col items-center text-center">
-        <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
-          Newsletter
-        </h1>
-        <p class="text-white text-lg md:text-xl max-w-2xl">
-          Stay updated with our latest initiatives, success stories, and impact
-          in education across Sub-Saharan Africa.
-        </p>
+<div class="newsletter-page">
+
+  <!-- Hero Cover Image -->
+  <section class="newsletter-hero">
+    <img
+      src="assets/images/newsletter/newsletter-hero.svg"
+      alt="Newsletter Hero"
+      class="w-full h-[300px] md:h-[400px] object-cover"
+    />
+  </section>
+
+  <!-- News Cards Grid -->
+  <section class="newsletter-cards container mx-auto px-8 py-16">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div
+        *ngFor="let item of newsletters"
+        class="card flex flex-col overflow-hidden shadow-md hover:shadow-lg transition"
+      >
+        <div class="h-48 overflow-hidden">
+          <img
+            [src]="item.image"
+            [alt]="item.title"
+            class="w-full h-full object-cover transition-transform hover:scale-105"
+          />
+        </div>
+        <div class="p-6 flex-1 flex flex-col">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-sm font-semibold text-[#EEB100]">{{ item.category }}</span>
+            <span class="text-sm font-semibold text-[#EEB100]">{{ item.date }}</span>
+          </div>
+          <h3 class="text-xl font-bold text-[#1A363A] mb-2">{{ item.title }}</h3>
+          <p class="text-gray-600 flex-1 mb-4">{{ item.description }}</p>
+          <a
+            (click)="viewNewsletter(item.id)"
+            class="inline-block cursor-pointer mt-6 px-6 py-2 border-2 border-[#1A363A] text-[#1A363A] font-semibold w-fit"
+          >
+            Read More
+          </a>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Newsletter Grid -->
-  <div class="w-full md:w-10/12 mx-auto px-4 py-16">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div
-        *ngFor="let newsletter of newsletters"
-        class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
-        (click)="viewNewsletter(newsletter.id)"
-      >
-        <!-- Image Container -->
-        <div class="relative h-48 overflow-hidden">
-          <img
-            [src]="newsletter.image"
-            [alt]="newsletter.title"
-            class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
+  <!-- Subscribe Form -->
+  <section class="newsletter-subscribe bg-gray-50 py-16">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl md:text-3xl mb-10 font-bold text-[#1A363A]">Subscribe to Our Newsletter</h2>
+      <p class="text-gray-600 text-xl mx-auto w-[90%]">
+        Get the latest updates and stories about our impact in education across Africa.
+      </p>
+    </div>
+
+    <div class="form-card bg-white rounded-xl shadow p-8 mx-auto w-full md:w-3/4 lg:w-2/3">
+      <h3 class="text-xl font-semibold mb-6">Send a message</h3>
+
+      <form [formGroup]="newsletterForm" (ngSubmit)="onSubmit()" class="space-y-6">
+        <!-- Name: full width -->
+        <div>
+          <input
+            type="text"
+            formControlName="name"
+            placeholder="Name"
+            class="input-field w-full"
+          />
+          <div *ngIf="submitted && f['name'].errors" class="error-text">
+            <div *ngIf="f['name'].errors?.['required']">Name is required</div>
+            <div *ngIf="f['name'].errors?.['minlength']">Min 2 characters</div>
+          </div>
+        </div>
+
+        <!-- Email + Phone: two columns -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <input
+              type="email"
+              formControlName="email"
+              placeholder="Email"
+              class="input-field w-full"
+            />
+            <div *ngIf="submitted && f['email'].errors" class="error-text">
+              <div *ngIf="f['email'].errors?.['required']">Email is required</div>
+              <div *ngIf="f['email'].errors?.['email']">Invalid email</div>
+            </div>
+          </div>
+          <div>
+            <input
+              type="text"
+              formControlName="organization"
+              placeholder="Phone Number (Optional)"
+              class="input-field w-full"
+            />
+          </div>
+        </div>
+
+        <!-- Organization: full width -->
+        <div>
+          <input
+            type="text"
+            formControlName="organization"
+            placeholder="Organization (Optional)"
+            class="input-field w-full"
           />
         </div>
 
-        <!-- Content Container -->
-        <div class="p-6">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-sm text-blue font-medium">{{
-              newsletter.category
-            }}</span>
-            <span class="text-sm text-gray-500">{{ newsletter.date }}</span>
+        <!-- Interests: full width -->
+        <div>
+          <select formControlName="interests" class="input-field w-full">
+            <option value="" disabled selected>Areas of Interest</option>
+            <option value="impact">Impact Stories</option>
+            <option value="programs">Education Programs</option>
+            <option value="partnerships">Partnerships</option>
+            <option value="all">All Updates</option>
+          </select>
+          <div *ngIf="submitted && f['interests'].errors" class="error-text">
+            <div *ngIf="f['interests'].errors?.['required']">Select an interest</div>
           </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-2">
-            {{ newsletter.title }}
-          </h3>
-          <p class="text-gray-600">{{ newsletter.description }}</p>
         </div>
-      </div>
+
+        <!-- Subscribe Button -->
+        <div class="text-left">
+          <button type="submit" class="btn-black px-10 py-3">
+            Subscribe
+          </button>
+        </div>
+
+        <!-- Success Message -->
+        <div *ngIf="success" class="success-text text-center">
+          Thank you for subscribing!
+        </div>
+      </form>
     </div>
-  </div>
-
-  <!-- Newsletter Signup Form -->
-  <div class="w-full bg-gray-50 py-16">
-    <div class="w-full md:w-10/12 mx-auto px-4">
-      <div class="max-w-2xl mx-auto">
-        <h2
-          class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 text-center"
-        >
-          Subscribe to Our Newsletter
-        </h2>
-        <p class="text-gray-600 mb-8 text-center">
-          Get the latest updates and stories about our impact in education
-          across Africa.
-        </p>
-
-        <form
-          [formGroup]="newsletterForm"
-          (ngSubmit)="onSubmit()"
-          class="space-y-6"
-        >
-          <!-- Name Field -->
-          <div>
-            <label for="name" class="block text-sm font-medium text-gray-700"
-              >Name</label
-            >
-            <input
-              type="text"
-              id="name"
-              formControlName="name"
-              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring-blue"
-            />
-            <div
-              *ngIf="submitted && f['name'].errors"
-              class="text-red-500 text-sm mt-1"
-            >
-              <div *ngIf="f['name'].errors['required']">Name is required</div>
-              <div *ngIf="f['name'].errors['minlength']">
-                Name must be at least 2 characters
-              </div>
-            </div>
-          </div>
-
-          <!-- Email Field -->
-          <div>
-            <label for="email" class="block text-sm font-medium text-gray-700"
-              >Email</label
-            >
-            <input
-              type="email"
-              id="email"
-              formControlName="email"
-              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring-blue"
-            />
-            <div
-              *ngIf="submitted && f['email'].errors"
-              class="text-red-500 text-sm mt-1"
-            >
-              <div *ngIf="f['email'].errors['required']">Email is required</div>
-              <div *ngIf="f['email'].errors['email']">
-                Please enter a valid email
-              </div>
-            </div>
-          </div>
-
-          <!-- Organization Field -->
-          <div>
-            <label
-              for="organization"
-              class="block text-sm font-medium text-gray-700"
-              >Organization (Optional)</label
-            >
-            <input
-              type="text"
-              id="organization"
-              formControlName="organization"
-              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring-blue"
-            />
-          </div>
-
-          <!-- Interests Field -->
-          <div>
-            <label
-              for="interests"
-              class="block text-sm font-medium text-gray-700"
-              >Areas of Interest</label
-            >
-            <select
-              id="interests"
-              formControlName="interests"
-              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue focus:ring-blue"
-            >
-              <option value="">Select an option</option>
-              <option value="impact">Impact Stories</option>
-              <option value="programs">Education Programs</option>
-              <option value="partnerships">Partnerships</option>
-              <option value="all">All Updates</option>
-            </select>
-            <div
-              *ngIf="submitted && f['interests'].errors"
-              class="text-red-500 text-sm mt-1"
-            >
-              <div *ngIf="f['interests'].errors['required']">
-                Please select an area of interest
-              </div>
-            </div>
-          </div>
-
-          <!-- Submit Button -->
-          <div>
-            <button
-              type="submit"
-              class="w-full bg-blue text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-300"
-            >
-              Subscribe
-            </button>
-          </div>
-
-          <!-- Success Message -->
-          <div *ngIf="success" class="text-green-600 text-center">
-            Thank you for subscribing to our newsletter!
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+  </section>
 </div>

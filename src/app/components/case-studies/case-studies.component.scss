@@ -1,2 +1,23 @@
-// Add any custom styles here if needed
-// The component is primarily styled using Tailwind CSS classes 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+:host {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Banner */
+.case-banner {
+  position: relative;
+  width: 100%;
+  height: 300px;
+
+  @media (min-width: 768px) {
+    height: 400px;
+  }
+}
+
+/* Divider */
+hr {
+  border: none;
+  border-top: 1px solid #E5E7EB; /* Tailwind gray-200 */
+}

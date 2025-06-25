@@ -5,9 +5,11 @@ import {
   ViewChildren,
   QueryList,
   ElementRef,
-  NgZone
+  NgZone,
+  inject,
+  PLATFORM_ID
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 
 interface FocusArea {
@@ -29,11 +31,15 @@ interface FocusArea {
 export class KeyFocusComponent implements OnInit, AfterViewInit {
   @ViewChildren('areaSection') sections!: QueryList<ElementRef<HTMLElement>>;
 
+  // Determine at runtime whether we're in the browser
+  private platformId = inject(PLATFORM_ID);
+  private isBrowser = isPlatformBrowser(this.platformId);
+
   areas: FocusArea[] = [
     {
-      title: 'Gender Equality and Inclusion',
+      title: `Gender Equality and Inclusion`,
       description:
-        'We promote equal opportunities in education through targeted programs that support girls’ education, female leadership in schools, and inclusive learning environments that cater to diverse needs and backgrounds.',
+        `We promote equal opportunities in education through targeted programs that support girls' education, female leadership in schools, and inclusive learning environments that cater to diverse needs and backgrounds.`,
       points: [
         'Promoting inclusive education for children with disabilities.',
         'Enhancing digital literacy in schools.',
@@ -46,11 +52,11 @@ export class KeyFocusComponent implements OnInit, AfterViewInit {
     {
       title: 'Climate Resilience & Green Energy',
       description:
-        'Empowering communities to adapt to climate change by investing in sustainable energy projects and training local leaders in environmental stewardship.',
+        'We promote sustainable practices and green energy solutions in our partner schools, helping them reduce their environmental impact while cutting operational costs. This includes solar power installations, water conservation systems, and environmental education programs.',
       points: [
-        'Solar power installations in off-grid areas.',
-        'Training on sustainable farming practices.',
-        'Community-driven clean water solutions.'
+        'Developing climate-resilient school infrastructure.',
+        'Promoting renewable energy solutions (solar power, energy-efficient lighting).',
+        'Supporting environmental education and green school initiatives.'
       ],
       imageUrl: 'assets/images/focus/climate-resilience.svg',
       buttonUrl: 'contact-us',
@@ -59,11 +65,11 @@ export class KeyFocusComponent implements OnInit, AfterViewInit {
     {
       title: 'Tech & Innovation for Social Good',
       description:
-        'Leveraging technology and innovation to bridge educational gaps and create scalable solutions for remote learning and digital inclusion.',
+        'We leverage technology to create innovative solutions for educational challenges. This includes digital learning platforms, data-driven decision making tools, and technology integration in classrooms to enhance learning outcomes.',
       points: [
-        'E-learning platforms for rural schools.',
-        'Coding bootcamps for underserved youth.',
-        'Open-source toolkits for educators.'
+        'Implementing AI-driven impact measurement and customized interventions.',
+        'Enhancing digital literacy in schools.',
+        'Supporting EdTech innovations to improve school operations.'
       ],
       imageUrl: 'assets/images/focus/tech-innovation.svg',
       buttonUrl: 'contact-us',
@@ -92,7 +98,11 @@ export class KeyFocusComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
-    // Reveal sections one by one as they enter
+    // Only create the observer in a browser context
+    if (!this.isBrowser) {
+      return;
+    }
+
     this.ngZone.runOutsideAngular(() => {
       const observer = new IntersectionObserver(
         (entries, obs) => {
@@ -105,11 +115,14 @@ export class KeyFocusComponent implements OnInit, AfterViewInit {
         },
         { threshold: 0.2 }
       );
-      this.sections.forEach(sec => observer.observe(sec.nativeElement));
+
+      this.sections.forEach(sec => {
+        observer.observe(sec.nativeElement);
+      });
     });
   }
 
   goTo(url: string) {
-    this.router.navigate([url])
+    this.router.navigate([url]);
   }
 }

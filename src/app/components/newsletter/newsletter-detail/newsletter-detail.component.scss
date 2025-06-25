@@ -1,2 +1,22 @@
-// Add any custom styles here if needed
-// The component is primarily styled using Tailwind CSS classes 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+:host {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  color: #1A363A;
+}
+
+// Banner
+.nd-banner {
+  position: relative;
+  width: 100%;
+  height: 300px;
+
+  @media (min-width: 768px) {
+    height: 400px;
+  }
+}
+
+// Utility overrides
+.text-\[\#EEB100\] { color: #EEB100; }
+.bg-gray-50 { background-color: #F6F6F6; }
