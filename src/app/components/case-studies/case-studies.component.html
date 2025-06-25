@@ -5,9 +5,9 @@
     class="absolute inset-0 w-full h-full object-cover"
   />
   <div
-    class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-center px-4 font-montserrat text-white"
+    class="absolute inset-0 bg-black/10 flex flex-col items-center justify-center text-center px-4 font-montserrat text-white"
   >
-    <span class="text-sm uppercase text-[#EEB100] tracking-wider">{{ banner.eyebrow }}</span>
+    <span class="text-sm uppercase font-bold text-[#EEB100] tracking-wider">{{ banner.eyebrow }}</span>
     <h1 class="mt-2 text-2xl md:text-4xl font-bold">{{ banner.headline }}</h1>
   </div>
 </section>
@@ -57,8 +57,8 @@
       Discover how we can help transform education in your community through our proven programs and initiatives.
     </p>
     <a
-      routerLink="/contact"
-      class="inline-block bg-[#4EABBA] text-white px-8 py-3 font-semibold"
+      (click)="goTo('contact-us')"
+      class="cursor-pointer inline-block bg-[#4EABBA] text-white px-8 py-3 font-semibold"
     >
       Talk To Us
     </a>

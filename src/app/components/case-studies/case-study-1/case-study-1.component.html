@@ -5,7 +5,7 @@
     class="absolute inset-0 w-full h-full object-cover"
   />
   <div
-    class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-center px-4 font-montserrat text-white"
+    class="absolute inset-0 bg-black/10 flex flex-col items-center justify-center text-center px-4 font-montserrat text-white"
   >
     <h1 class="w-[80%] text-3xl md:text-4xl font-semibold">{{ title }}</h1>
     <span class="mt-2 text-sm text-[#EEB100] font-bold">{{ location }}</span>
@@ -118,8 +118,8 @@
     Join us in transforming education across Sub-Saharan Africa. Your support can help create more success stories like this one.
   </p>
   <a
-    routerLink="/get-involved"
-    class="bg-[#4EABBA] text-white px-8 py-3 font-semibold inline-block"
+    (click)="goTo('contact-us')"
+    class=" cursor-pointer bg-[#4EABBA] text-white px-8 py-3 font-semibold inline-block"
   >
     Get Involved
   </a>

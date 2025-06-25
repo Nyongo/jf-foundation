@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 type ListType = 'disc' | 'decimal';
 
@@ -86,7 +87,11 @@ export class CaseStudy1Component implements OnInit {
     `With Jackfruit Foundation’s SEL programs ensuring children’s developmental needs are met, and Jackfruit Finance’s tailored lending models supporting schools’ financial sustainability, this holistic approach is reshaping early education finance in Kenya. By continuously analyzing market data and adapting lending models, Jackfruit Finance is enabling more children to learn in well-supported, high-quality environments.`
   ];
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  goTo(link: string) {
+    this.router.navigate([link])
+  }
 }

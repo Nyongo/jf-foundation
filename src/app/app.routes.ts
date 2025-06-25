@@ -60,7 +60,7 @@ export const routes: Routes = [
     ],
   },
   { path: 'our-impact', component: HomeOurImpactComponent },
-  { path: 'about-us', component: OurCompanyComponent },
+  { path: 'about-us', component: AboutUsComponent },
   { path: 'security', component: SecurityComponent },
   { path: 'contact-us', component: ContactUsComponent },
   // { path: 'case-studies', component: CaseStudiesComponent },
