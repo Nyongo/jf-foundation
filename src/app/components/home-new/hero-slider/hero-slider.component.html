@@ -1,7 +1,7 @@
-<div class="relative w-screen mb-[100px]">
+<div class="relative w-[100%] mb-[100px]">
   <div
     #sliderContainer
-    class="relative w-screen h-[600px] md:h-[700px] overflow-hidden"
+    class="relative w-[100%] h-[600px] md:h-[700px] overflow-hidden"
   >
     <!-- Slides -->
     <ng-container *ngFor="let s of slides; let i = index">
@@ -15,7 +15,7 @@
           *ngIf="s.type === 'image'"
           [src]="s.image"
           [alt]="s.title"
-          class="w-full h-full object-cover"
+          class="w-[100%] h-full object-cover"
         />
 
         <!-- Video -->
@@ -26,12 +26,12 @@
           frameborder="0"
           allow="autoplay; encrypted-media"
           allowfullscreen
-          class="w-full h-full object-cover"
+          class="w-[100%] h-full object-cover"
         ></iframe>
 
         <!-- Overlay Text -->
         <div
-          class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-center px-4 font-montserrat text-white"
+          class="absolute inset-0 bg-black/10 flex flex-col items-center justify-center text-center px-4 font-montserrat text-white"
         >
           <h1
             class="mt-[40px] md:mt-[150px] lg:mt-[220px] text-3xl md:text-5xl font-bold"

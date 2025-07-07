@@ -1,12 +1,13 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
 :host {
+  // Remove the 100vw & negative margin hack entirely
   display: block;
-  position: relative;
-  width: 100vw;
-  left: 50%;
-  margin-left: -50vw;
   font-family: 'Montserrat', sans-serif;
+  position: relative;
+  // Ensure no horizontal scrollbar ever appears
+  overflow-x: hidden;
 }
 
 .opacity-0 {

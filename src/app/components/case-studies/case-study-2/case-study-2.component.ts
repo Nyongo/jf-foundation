@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-case-study-2',
@@ -56,6 +57,10 @@ export class CaseStudy2Component implements OnInit {
 
   lookingAheadOutro = `By ensuring that finance and education improvement go hand in hand, Jackfruit Finance and Jackfruit Foundation are reshaping the future of school lending—proving that smart, results-driven investment can transform learning for thousands of students in Kenya.`;
 
-  constructor() {}
+  constructor(private router: Router) {}
   ngOnInit(): void {}
+
+  goTo(link: string) {
+    this.router.navigate([link])
+  }
 }

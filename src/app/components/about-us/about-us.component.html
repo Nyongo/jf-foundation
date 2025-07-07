@@ -1,127 +1,41 @@
-<!-- Hero Section -->
-<section class="py-8 sm:py-16 px-4 sm:px-6 bg-gray-50">
-  <div class="w-full max-w-7xl mx-auto text-center">
-    <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-      About Us
-    </h1>
-    <p class="text-lg sm:text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto">
-      Empowering businesses through innovative technology solutions
-    </p>
-  </div>
-</section>
+<div class="font-montserrat text-[#1A363A]">
+  <!-- Banner -->
+  <section class="relative w-full h-72 md:h-[450px] overflow-hidden">
+    <img
+      src="assets/images/about/about-hero.svg"
+      alt="About Us Banner"
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+  </section>
 
-<!-- Mission & Vision Section -->
-<section class="py-8 sm:py-16 px-4 sm:px-6">
-  <div class="w-full max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-      <!-- Mission Card -->
-      <div
-        class="bg-white rounded-lg shadow-lg p-6 sm:p-8 hover:shadow-xl transition-shadow duration-300"
-      >
-        <div class="flex flex-col items-center text-center">
-          <img
-            [src]="mission.icon"
-            [alt]="mission.title"
-            class="hidden sm:block w-12 sm:w-16 h-12 sm:h-16 mb-4 sm:mb-6"
-          />
-          <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">
-            {{ mission.title }}
-          </h2>
-          <p class="text-sm sm:text-base text-gray-600">
-            {{ mission.description }}
-          </p>
-        </div>
+  <!-- Intro + Image -->
+  <section class="flex flex-col md:flex-row items-center gap-16 px-8 md:px-16 py-12 md:py-16 bg-white">
+    <!-- Text -->
+    <div class="md:w-1/2 space-y-6">
+      <h1 class="text-3xl md:text-4xl font-semibold text-[#1A363A]">About Us</h1>
+      <div class="space-y-4 text-gray-700">
+        <p *ngFor="let p of introParagraphs">{{ p }}</p>
       </div>
+    </div>
+    <!-- Image -->
+    <div class="md:w-1/2">
+      <img
+        src="assets/images/case-studies/chalk-board.svg"
+        alt="Chalk Board"
+        class="w-full rounded-lg shadow-lg object-cover"
+      />
+    </div>
+  </section>
 
-      <!-- Vision Card -->
-      <div
-        class="bg-white rounded-lg shadow-lg p-6 sm:p-8 hover:shadow-xl transition-shadow duration-300"
-      >
-        <div class="flex flex-col items-center text-center">
-          <img
-            [src]="vision.icon"
-            [alt]="vision.title"
-            class="hidden sm:block w-12 sm:w-16 h-12 sm:h-16 mb-4 sm:mb-6"
-          />
-          <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">
-            {{ vision.title }}
-          </h2>
-          <p class="text-sm sm:text-base text-gray-600">
-            {{ vision.description }}
-          </p>
+  <!-- Stats -->
+  <section class="bg-gray-50 py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex flex-wrap justify-around gap-8">
+        <div *ngFor="let s of stats" class="w-36 text-center">
+          <div class="text-2xl font-extrabold text-[#1A363A]">{{ s.value }}</div>
+          <div class="mt-1 text-gray-600 text-sm font-bold">{{ s.label }}</div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- Stats Section -->
-<section class="py-8 sm:py-16 px-4 sm:px-6 bg-gray-50">
-  <div class="w-full max-w-7xl mx-auto">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
-      <div *ngFor="let stat of stats" class="text-center">
-        <div
-          class="bg-white rounded-lg shadow-md p-4 sm:p-6 hover:shadow-lg transition-shadow duration-300"
-        >
-          <h3
-            class="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-2"
-          >
-            {{ stat.number }}
-          </h3>
-          <p class="text-sm sm:text-base text-gray-600">{{ stat.label }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Values Section -->
-<section class="py-8 sm:py-16 px-4 sm:px-6">
-  <div class="w-full max-w-7xl mx-auto">
-    <h2
-      class="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-gray-900 mb-8 sm:mb-12"
-    >
-      Our Core Values
-    </h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
-      <div
-        *ngFor="let value of values"
-        class="bg-white rounded-lg shadow-md p-4 sm:p-6 hover:shadow-lg transition-shadow duration-300"
-      >
-        <div class="flex flex-col items-center text-center">
-          <img
-            [src]="value.icon"
-            [alt]="value.title"
-            class="hidden sm:block w-10 sm:w-12 h-10 sm:h-12 mb-3 sm:mb-4"
-          />
-          <h3 class="text-lg sm:text-xl font-semibold text-gray-900 mb-2">
-            {{ value.title }}
-          </h3>
-          <p class="text-sm sm:text-base text-gray-600">
-            {{ value.description }}
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Call to Action -->
-<section class="py-8 sm:py-16 px-4 sm:px-6 bg-blue-600">
-  <div class="w-full max-w-7xl mx-auto text-center">
-    <h2
-      class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4"
-    >
-      Ready to Transform Your Business?
-    </h2>
-    <p class="text-lg sm:text-xl text-blue-100 mb-6 sm:mb-8">
-      Join hundreds of satisfied clients who have partnered with us
-    </p>
-    <a
-      routerLink="/contact-us"
-      class="inline-block bg-white text-blue-600 px-6 sm:px-8 py-2 sm:py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors duration-300"
-    >
-      Get in Touch
-    </a>
-  </div>
-</section>
+  </section>
+</div>
