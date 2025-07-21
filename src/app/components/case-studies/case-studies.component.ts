@@ -1,63 +1,86 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { CaseStudiesPageService } from '../../services/case-studies-page.service';
+import { Banner, CaseStudy, Cta } from '../../models/case-study.model';
 import { Router } from '@angular/router';
-
-interface CaseStudy {
-  imageUrl: string;
-  title: string;
-  description: string;
-  stats: { value: string; label: string }[];
-  link: string;
-}
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-case-studies',
+  imports: [CommonModule],
   standalone: true,
-  imports: [ CommonModule],
   templateUrl: './case-studies.component.html',
-  styleUrls: ['./case-studies.component.scss']
+  styleUrls: ['./case-studies.component.scss'],
 })
 export class CaseStudiesComponent implements OnInit {
-  banner = {
-    imageUrl: 'assets/images/case-studies/data-driven.svg',
-    eyebrow: 'Case Study',
-    headline:
-      "Explore how we're making a difference in education across Sub‑Saharan Africa through our various initiatives and programs."
-  };
+  banner?: Banner;
+  studies: CaseStudy[] = [];
+  cta?: Cta;
 
-  studies: CaseStudy[] = [
-    {
-      imageUrl: 'assets/images/case-studies/1.jpg',
-      title: 'Data‑Driven Lending: Transforming Early Childhood Education in Kenya',
-      description:
-        'Through participation in the GSF Impact at Scale Labs – Early Years Programme, Jackfruit Finance systematically assessed the viability of lending to ECD providers, making data‑based decisions to mitigate risk while expanding financial inclusion.',
-      stats: [
-        { value: '573+', label: 'Students' },
-        { value: '15',   label: 'Schools'  },
-        { value: '719',  label: 'Teachers' }
-      ],
-      link: '/case-studies/case-study-1'
-    },
-    {
-      imageUrl: 'assets/images/case-studies/2.jpg',
-      title: 'Driving Education Outcomes Through Results‑Linked Loans',
-      description:
-        'Across Kenya, low‑cost private schools face significant challenges in accessing financing to improve infrastructure, teaching quality, and overall learning outcomes.',
-      stats: [
-        { value: '75k+', label: 'Students' },
-        { value: '200',  label: 'Schools'  },
-        { value: '2k+',  label: 'Teachers' }
-      ],
-      link: '/case-studies/case-study-2'
+  loadingBanner = true;
+  loadingStudies = true;
+  loadingNext = false;
+  error = false;
+
+  // pagination state
+  pageSize = 5;
+  currentPage = 1;
+  total = 0;
+
+  constructor(
+    private pageSvc: CaseStudiesPageService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    // Load banner & CTA
+    this.pageSvc.getBanner().subscribe(b => {
+      this.banner = b;
+      this.loadingBanner = false;
+    });
+    this.pageSvc.getCta().subscribe(c => (this.cta = c));
+
+    // load first page
+    this.loadPage(1);
+  }
+
+  private loadPage(page: number) {
+    this.loadingStudies = page === 1;
+    this.loadingNext = page !== 1;
+    this.pageSvc.getPage(page, this.pageSize).subscribe({
+      next: ({ items, total }) => {
+        this.total = total;
+        if (page === 1) {
+          this.studies = items;
+        } else {
+          this.studies = [...this.studies, ...items];
+        }
+        console.log(this.studies);
+        this.currentPage = page;
+        this.loadingStudies = false;
+        this.loadingNext = false;
+      },
+      error: () => {
+        this.error = true;
+        this.loadingStudies = false;
+        this.loadingNext = false;
+      },
+    });
+  }
+
+  @HostListener('window:scroll')
+  onWindowScroll() {
+    if (this.loadingNext || this.studies.length >= this.total) return;
+
+    const threshold = 200; // px from bottom
+    const pos = window.pageYOffset + window.innerHeight;
+    const height = document.documentElement.scrollHeight;
+
+    if (pos >= height - threshold) {
+      this.loadPage(this.currentPage + 1);
     }
-    // Case studies can be added here
-  ];
+  }
 
-  constructor(private router: Router) {}
-
-  ngOnInit(): void {}
-
-  goTo(link: string) {
-    this.router.navigate([link])
+  goTo(link: any) {
+    this.router.navigate([link]);
   }
 }

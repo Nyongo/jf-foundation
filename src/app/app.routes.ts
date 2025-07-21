@@ -27,6 +27,12 @@ import { CaseStudy2Component } from './components/case-studies/case-study-2/case
 import { HomeOurImpactComponent } from './components/home/home-our-impact/home-our-impact.component'
 import { LoanCalculatorComponent } from './components/loan-calculator/loan-calculator.component'
 import { HomeNewComponent } from './components/home-new/home-new/home-new.component'
+import { CaseStudiesAdminPageComponent } from './components/admin/case-study/case-studies-admin-page/case-studies-admin-page.component'
+import { CaseStudySectionsAdminComponent } from './components/admin/case-study/case-study-sections-admin/case-study-sections-admin.component'
+import { NewsletterAdminPageComponent } from './components/admin/newsletter/newsletter-admin/newsletter-admin-page.component'
+import { NewsletterSectionsAdminComponent } from './components/admin/newsletter/newsletter-sections-admin/newsletter-sections-admin.component'
+import { AuthGuard } from './services/auth.guard'
+import { LoginComponent } from './components/login/login.component'
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -51,24 +57,35 @@ export const routes: Routes = [
       { path: 'cards', component: CardPaymentsComponent },
     ],
   },
+  { path: 'login', component: LoginComponent },
+  {
+    path: 'admin',
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'case-studies', component: CaseStudiesAdminPageComponent },
+      { path: 'case-studies/:caseStudyId/sections', component: CaseStudySectionsAdminComponent },
+      { path: 'newsletters', component: NewsletterAdminPageComponent },
+      { path: 'newsletters/:newsletterId/sections', component: NewsletterSectionsAdminComponent },
+    ],
+  },
   {
     path: 'case-studies',
     children: [
       { path: '', component: CaseStudiesComponent },
-      { path: 'case-study-1', component: CaseStudy1Component },
-      { path: 'case-study-2', component: CaseStudy2Component },
+      { path: ':id', component: CaseStudyDetailComponent },  
+    ],
+  },
+  {
+    path: 'newsletters',
+    children: [
+      { path: '', component: NewsletterComponent },
+      { path: ':id', component: NewsletterDetailComponent },  
     ],
   },
   { path: 'our-impact', component: HomeOurImpactComponent },
-  { path: 'about-us', component: AboutUsComponent },
+  { path: 'about-us', component: OurCompanyComponent },
   { path: 'security', component: SecurityComponent },
   { path: 'contact-us', component: ContactUsComponent },
-  // { path: 'case-studies', component: CaseStudiesComponent },
-  // { path: 'case-study-1', component: CaseStudy1Component },
-  // { path: 'case-study-2', component: CaseStudy2Component },
-  // { path: 'case-studies/:id', component: CaseStudyDetailComponent },
-  { path: 'newsletter', component: NewsletterComponent },
-  { path: 'newsletter/:id', component: NewsletterDetailComponent },
   { path: 'video', component: VideoPlayerComponent },
   {
     path: 'calculator',

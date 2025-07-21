@@ -1,0 +1,38 @@
+<div class="login-container font-montserrat flex items-center justify-center min-h-screen bg-gray-50">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()"
+        class="bg-white p-8 rounded shadow-md w-full max-w-sm space-y-6">
+    <h2 class="text-2xl font-semibold text-center">Admin Login</h2>
+
+    <div>
+      <label class="block mb-1">Username</label>
+      <input formControlName="username"
+             class="input-field w-full"
+             [ngClass]="{'border-red-500 shadow': form.get('username')!.invalid && form.get('username')!.touched}"
+             placeholder="admin" />
+      <div *ngIf="form.get('username')!.invalid && form.get('username')!.touched"
+           class="text-red-600 text-sm mt-1">
+        Username is required
+      </div>
+    </div>
+
+    <div>
+      <label class="block mb-1">Password</label>
+      <input type="password" formControlName="password"
+             class="input-field w-full"
+             [ngClass]="{'border-red-500 shadow': form.get('password')!.invalid && form.get('password')!.touched}"
+             placeholder="password" />
+      <div *ngIf="form.get('password')!.invalid && form.get('password')!.touched"
+           class="text-red-600 text-sm mt-1">
+        Password is required
+      </div>
+    </div>
+
+    <div *ngIf="error" class="text-red-600 text-center">{{ error }}</div>
+
+    <button type="submit"
+            class="btn-black w-full py-2"
+            [disabled]="form.invalid">
+      Login
+    </button>
+  </form>
+</div>

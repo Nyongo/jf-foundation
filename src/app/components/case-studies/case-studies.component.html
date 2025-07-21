@@ -1,66 +1,103 @@
-<section class="case-banner relative w-full h-[300px] md:h-[400px] overflow-hidden">
+<!-- Banner -->
+<section
+  class="case-banner relative w-full h-[300px] md:h-[400px] overflow-hidden"
+  *ngIf="banner"
+>
   <img
+    *ngIf="banner.imageUrl; else grayBg"
     [src]="banner.imageUrl"
-    alt="Case Study Banner"
     class="absolute inset-0 w-full h-full object-cover"
   />
+  <ng-template #grayBg>
+    <div class="absolute inset-0 bg-gray-400"></div>
+  </ng-template>
   <div
-    class="absolute inset-0 bg-black/10 flex flex-col items-center justify-center text-center px-4 font-montserrat text-white"
+    class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-center px-4 font-montserrat text-white"
   >
-    <span class="text-sm uppercase font-bold text-[#EEB100] tracking-wider">{{ banner.eyebrow }}</span>
-    <h1 class="mt-2 text-2xl md:text-4xl font-bold">{{ banner.headline }}</h1>
+    <span class="text-sm uppercase text-[#EEB100] tracking-wider"
+      >{{ banner.eyebrow }}</span
+    >
+    <h1 class="mt-2 text-2xl md:text-4xl font-bold">
+      {{ banner.headline }}
+    </h1>
+    <p *ngIf="banner.subtitle" class="mt-2 text-lg">{{ banner.subtitle }}</p>
   </div>
 </section>
 
-<main class="font-montserrat">
-  <div *ngFor="let cs of studies; let i = index" class="pt-16">
-    <div
-      class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-8"
-      [ngClass]="{ 'md:flex-row-reverse': i % 2 === 1 }"
-    >
-      <!-- Text Column -->
-      <div class="md:flex-1 space-y-4">
-        <h2 class="text-2xl md:text-3xl font-bold">{{ cs.title }}</h2>
-        <p class="text-gray-700">{{ cs.description }}</p>
-        <div class="flex flex-wrap gap-6 mt-4">
-          <div *ngFor="let st of cs.stats" class="text-center">
-            <div class="text-3xl font-bold text-[#1A363A]">{{ st.value }}</div>
-            <div class="text-sm text-gray-600">{{ st.label }}</div>
-          </div>
-        </div>
-        <a
-          (click)="goTo(cs.link)"
-          class="inline-block cursor-pointer mt-6 px-6 py-2 border-2 border-[#1A363A] text-[#1A363A] font-semibold"
-        >
-          Read More
-        </a>
-      </div>
+<!-- Loading Overlay -->
+<div
+  *ngIf="loadingStudies"
+  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+>
+  <span class="text-white text-xl">Loading case studies…</span>
+</div>
 
-      <!-- Image Column -->
-      <div class="md:flex-1">
-        <img
-          [src]="cs.imageUrl"
-          [alt]="cs.title"
-          class="w-full rounded-lg shadow-lg object-cover"
-        />
+<!-- Error -->
+<div *ngIf="error" class="py-16 text-center text-red-500">
+  Unable to load case studies.
+</div>
+
+<!-- No Results Message -->
+<div
+  *ngIf="!loadingStudies && !error && studies.length === 0"
+  class="py-32 text-center text-gray-700"
+>
+  <h2 class="text-2xl font-semibold">Case studies not found</h2>
+  <p class="mt-2 text-gray-500">Try again later.</p>
+</div>
+
+<!-- Studies List -->
+<main
+  *ngIf="!loadingStudies && !error && studies.length"
+  class="font-montserrat space-y-16 px-4 md:px-8"
+>
+  <div
+    *ngFor="let cs of studies; let i = index"
+    class="pt-16 flex flex-col md:flex-row items-center gap-8"
+    [ngClass]="{ 'md:flex-row-reverse': i % 2 === 1 }"
+  >
+    <!-- Text -->
+    <div class="md:flex-1 space-y-4">
+      <h2 class="text-2xl md:text-3xl font-bold">{{ cs.title }}</h2>
+      <p class="text-gray-700">{{ cs.description }}</p>
+      <div class="flex flex-wrap gap-6 mt-4">
+        <div *ngFor="let st of cs.stats" class="text-center">
+          <div class="text-3xl font-bold text-[#1A363A]">{{ st.value }}</div>
+          <div class="text-sm text-gray-600">{{ st.label }}</div>
+        </div>
       </div>
+      <button
+        (click)="goTo(cs.link)"
+        class="inline-block mt-6 px-6 py-2 border-2 border-[#1A363A] text-[#1A363A] font-semibold"
+      >
+        Read More
+      </button>
     </div>
-    <hr class="border-t border-gray-200 mt-16" />
+
+    <!-- Image -->
+    <div class="md:flex-1">
+      <img
+        [src]="cs.imageUrl"
+        [alt]="cs.title"
+        class="w-full rounded-lg shadow-lg object-cover"
+      />
+    </div>
   </div>
 
-  <!-- Learn More CTA -->
-  <section class="bg-gray-50 py-16 text-center">
-    <h3 class="text-2xl font-semibold text-[#1A363A] mb-4">
-      Want to Learn More?
-    </h3>
-    <p class="text-gray-600 mb-6">
-      Discover how we can help transform education in your community through our proven programs and initiatives.
-    </p>
-    <a
-      (click)="goTo('contact-us')"
-      class="cursor-pointer inline-block bg-[#4EABBA] text-white px-8 py-3 font-semibold"
+  <!-- Loading Next Indicator -->
+  <div *ngIf="loadingNext" class="py-8 text-center text-gray-500">
+    Loading more…
+  </div>
+
+  <!-- CTA Section -->
+  <section class="bg-gray-50 py-16 text-center" *ngIf="cta">
+    <h3 class="text-2xl font-semibold text-[#1A363A] mb-4">{{ cta.title }}</h3>
+    <p class="text-gray-600 mb-6">{{ cta.description }}</p>
+    <button
+      (click)="goTo(cta.buttonRoute)"
+      class="inline-block bg-[#4EABBA] text-white px-8 py-3 font-semibold"
     >
-      Talk To Us
-    </a>
+      {{ cta.buttonText }}
+    </button>
   </section>
 </main>

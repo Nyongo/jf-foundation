@@ -1,68 +1,135 @@
-<section class="nd-banner font-montserrat relative w-full h-[300px] md:h-[400px] overflow-hidden">
-  <img
-    [src]="newsletter.image"
-    [alt]="newsletter.title"
-    class="absolute inset-0 w-full h-full object-cover"
-  />
-  <div
-    class="absolute inset-0 bg-black/10 flex flex-col items-center justify-center text-center text-white px-4"
-  >
-    <h1 class="text-3xl md:text-4xl font-semibold">{{ newsletter.title }}</h1>
-    <span class="mt-2 text-sm text-[#EEB100] font-bold">
-      {{ newsletter.category }} • {{ newsletter.date }}
-    </span>
-  </div>
-</section>
+<div class="font-montserrat">
 
-<main class="container mx-auto px-4 py-12 font-montserrat text-[#1A363A]">
-  <!-- Stats Bar -->
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-    <div class="text-center p-4 bg-gray-50 rounded-lg">
-      <p class="text-3xl font-bold text-[#4EABBA]">{{ newsletter.impact.students }}</p>
-      <p class="text-gray-700">Students Impacted</p>
-    </div>
-    <div class="text-center p-4 bg-gray-50 rounded-lg">
-      <p class="text-3xl font-bold text-[#4EABBA]">{{ newsletter.impact.schools }}</p>
-      <p class="text-gray-700">Schools Involved</p>
-    </div>
-    <div class="text-center p-4 bg-gray-50 rounded-lg">
-      <p class="text-3xl font-bold text-[#4EABBA]">{{ newsletter.impact.teachers }}</p>
-      <p class="text-gray-700">Teachers Trained</p>
-    </div>
-    <div class="text-center p-4 bg-gray-50 rounded-lg">
-      <p class="text-3xl font-bold text-[#4EABBA]">{{ newsletter.impact.communities }}</p>
-      <p class="text-gray-700">Communities Reached</p>
-    </div>
-  </div>
+  <ng-container *ngFor="let sec of sections">
 
-  <!-- Overview -->
-  <section class="space-y-4 mb-12">
-    <h2 class="text-xl md:text-2xl font-semibold">Overview</h2>
-    <p class="text-gray-700 whitespace-pre-line">{{ newsletter.description }}</p>
-  </section>
-
-  <!-- Illustrative Images (from CaseStudy1) -->
-  <section class="pb-12 space-y-4">
-    <img
-      src="assets/images/case-studies/classroom-computer.svg"
-      alt="Classroom Computer"
-      class="w-full rounded-lg shadow-lg object-cover mt-6"
-    />
-  </section>
-
-  <!-- Detailed Impact -->
-  <section class="space-y-4 mb-12">
-    <h2 class="text-xl md:text-2xl font-semibold">Detailed Impact</h2>
-    <p class="text-gray-700 whitespace-pre-line">{{ newsletter.fullContent }}</p>
-  </section>
-
-  <!-- Back CTA -->
-  <div class="mt-12 text-center">
-    <button
-      (click)="goBack()"
-      class="inline-flex items-center px-6 py-3 bg-[#4EABBA] text-white rounded-lg hover:bg-[#3a8c9d] transition"
+    <!-- Banner section -->
+    <section
+      *ngIf="sec.type === 'banner'"
+      class="relative h-[300px] md:h-[400px] flex items-center justify-center text-center text-white mb-12"
+      [ngStyle]="{
+        'background-image': $any(sec.data).imageUrl
+          ? 'url(' + $any(sec.data).imageUrl + ')'
+          : 'none',
+        'background-color': !$any(sec.data).imageUrl ? 'gray' : 'transparent',
+        'background-size': 'cover'
+      }"
     >
-      ← Back to Newsletters
-    </button>
-  </div>
-</main>
+      <div class="absolute inset-0 bg-black/40"></div>
+      <div class="relative space-y-2 px-4">
+        <div class="text-sm uppercase text-[#EEB100] tracking-wider">
+          {{ $any(sec.data).eyebrow }}
+        </div>
+        <h2 class="text-2xl md:text-4xl font-bold">
+          {{ $any(sec.data).headline }}
+        </h2>
+        <p class="md:text-lg">
+          {{ $any(sec.data).subtitle }}
+        </p>
+      </div>
+    </section>
+
+    <!-- Content section -->
+    <div *ngIf="sec.type === 'content'" class="max-w-[90%] mx-auto px-4 py-12 space-y-6">
+
+      <!-- Title -->
+      <h3 class="text-2xl font-bold">
+        {{ $any(sec.data).title }}
+      </h3>
+
+      <!-- Intro -->
+      <p *ngIf="$any(sec.data).intro" class="text-[#EEB100] font-semibold">
+        {{ $any(sec.data).intro }}
+      </p>
+
+      <!-- Divider: two text columns + image at bottom -->
+      <ng-container *ngIf="$any(sec.data).divider">
+        <div class="md:grid md:grid-cols-2 md:divide-x md:gap-8">
+          <div class="md:pr-8">
+            <p class="text-gray-700">{{ $any(sec.data).description }}</p>
+          </div>
+          <div class="md:pl-8">
+            <p class="text-gray-700">{{ $any(sec.data).column2Description }}</p>
+          </div>
+        </div>
+        <img
+          *ngIf="$any(sec.data).imageUrl"
+          [src]="$any(sec.data).imageUrl"
+          alt=""
+          class="w-full object-cover rounded shadow pt-8"
+        />
+      </ng-container>
+
+      <!-- No divider: layout by imagePosition -->
+      <ng-container *ngIf="!$any(sec.data).divider">
+        <div
+          *ngIf="$any(sec.data).imageUrl && $any(sec.data).imagePosition==='left'"
+          class="md:grid md:grid-cols-2 md:gap-8 items-center"
+        >
+          <img
+            [src]="$any(sec.data).imageUrl"
+            alt=""
+            class="w-full object-cover rounded shadow"
+          />
+          <p class="text-gray-700">{{ $any(sec.data).description }}</p>
+        </div>
+        <div
+          *ngIf="$any(sec.data).imageUrl && $any(sec.data).imagePosition==='right'"
+          class="md:grid md:grid-cols-2 md:gap-8 items-center"
+        >
+          <p class="text-gray-700">{{ $any(sec.data).description }}</p>
+          <img
+            [src]="$any(sec.data).imageUrl"
+            alt=""
+            class="w-full object-cover rounded shadow"
+          />
+        </div>
+        <div
+          *ngIf="!$any(sec.data).imageUrl || $any(sec.data).imagePosition==='none'"
+          class="space-y-4"
+        >
+          <p class="text-gray-700">{{ $any(sec.data).description }}</p>
+          <img
+            *ngIf="$any(sec.data).imageUrl"
+            [src]="$any(sec.data).imageUrl"
+            alt=""
+            class="w-full object-cover rounded shadow"
+          />
+        </div>
+      </ng-container>
+
+      <!-- Outro -->
+      <p *ngIf="$any(sec.data).outro" class="text-[#EEB100] font-semibold">
+        {{ $any(sec.data).outro }}
+      </p>
+
+    </div>
+
+    <!-- Media‑only fallback -->
+    <div
+      *ngIf="sec.type !== 'banner' && sec.type !== 'content'"
+      class="max-w-[90%] mx-auto px-4 py-12"
+    >
+      <img
+        [src]="$any(sec.data).imageUrl"
+        alt=""
+        class="w-full object-cover rounded shadow"
+      />
+    </div>
+
+  </ng-container>
+
+  <!-- CTA -->
+  <section
+    *ngIf="pageCta"
+    class="bg-gray-50 text-center py-16 px-4 font-montserrat space-y-4"
+  >
+    <h3 class="text-2xl font-semibold text-[#1A363A]">{{ pageCta.title }}</h3>
+    <p class="text-gray-600">{{ pageCta.description }}</p>
+    <a
+      class="inline-block bg-[#4EABBA] text-white px-8 py-3 font-semibold rounded"
+    >
+      {{ pageCta.buttonText }}
+    </a>
+  </section>
+
+</div>

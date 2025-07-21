@@ -52,7 +52,7 @@ export class MenusComponent implements OnInit {
     { label: 'Our Impact', route: '/our-impact' },
     // { label: 'Our Partners', route: '/our-partners' },
     { label: 'Case Studies', route: '/case-studies' },
-    { label: 'News Letter', route: '/newsletter' },
+    { label: 'News Letter', route: '/newsletters' },
     { label: 'About Us', route: '/about-us' },
     // {
     //   label: 'Programs',
