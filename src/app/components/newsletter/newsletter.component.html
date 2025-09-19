@@ -1,12 +1,14 @@
 <div class="newsletter-page">
-
+    <app-header [pageName] = "'Newsletters'"></app-header>
   <!-- Hero Cover Image -->
   <section class="newsletter-hero">
     <img
       src="assets/images/newsletter/newsletter-hero.svg"
-      alt="Newsletter Hero"
+      [alt]="'Newsletter Hero' | translate"
       class="w-full h-[300px] md:h-[400px] object-cover"
     />
+    <!-- dark overlay -->
+    <div class="absolute w-full h-[300px] md:h-[400px] inset-0 bg-black/60 pointer-events-none"></div>
   </section>
 
   <!-- News Cards Grid -->
@@ -19,22 +21,22 @@
         <div class="h-48 overflow-hidden">
           <img
             [src]="item.image"
-            [alt]="item.title"
+            [alt]="item.title | translate"
             class="w-full h-full object-cover transition-transform hover:scale-105"
           />
         </div>
         <div class="p-6 flex-1 flex flex-col">
           <div class="flex justify-between items-center mb-2">
-            <span class="text-sm font-semibold text-[#EEB100]">{{ item.category }}</span>
-            <span class="text-sm font-semibold text-[#EEB100]">{{ item.date }}</span>
+            <span class="text-sm font-semibold text-[#48A225]">{{ item.category | translate}}</span>
+            <span class="text-sm font-semibold text-[#48A225]">{{ item.date | translate}}</span>
           </div>
-          <h3 class="text-xl font-bold text-[#1A363A] mb-2">{{ item.title }}</h3>
-          <p class="text-gray-600 flex-1 mb-4">{{ item.description }}</p>
+          <h3 class="text-xl font-bold text-[#1A363A] mb-2">{{ item.title | translate }}</h3>
+          <p class="text-gray-600 flex-1 mb-4">{{ item.description | translate }}</p>
           <a
             (click)="viewNewsletter(item.id)"
-            class="inline-block cursor-pointer mt-6 px-6 py-2 border-2 border-[#1A363A] text-[#1A363A] font-semibold w-fit"
+            class="inline-block cursor-pointer mt-6 px-6 py-2 border-2 border-[#48A225] text-[#48A225] font-semibold w-fit"
           >
-            Read More
+            {{"Read More" | translate }}
           </a>
         </div>
       </div>
@@ -44,14 +46,14 @@
   <!-- Subscribe Form -->
   <section class="newsletter-subscribe bg-gray-50 py-16">
     <div class="text-center mb-8">
-      <h2 class="text-2xl md:text-3xl mb-10 font-bold text-[#1A363A]">Subscribe to Our Newsletter</h2>
+      <h2 class="text-2xl md:text-3xl mb-10 font-bold text-[#1A363A]">{{"Subscribe to Our Newsletter" | translate }}</h2>
       <p class="text-gray-600 text-xl mx-auto w-[90%]">
-        Get the latest updates and stories about our impact in education across Africa.
+        {{"Get the latest updates and stories about our impact in education across Africa." | translate }}
       </p>
     </div>
 
     <div class="form-card bg-white rounded-xl shadow p-8 mx-auto w-full md:w-3/4 lg:w-2/3">
-      <h3 class="text-xl font-semibold mb-6">Send a message</h3>
+      <h3 class="text-xl font-semibold mb-6">{{"Send a message" | translate }} </h3>
 
       <form [formGroup]="newsletterForm" (ngSubmit)="onSubmit()" class="space-y-6">
         <!-- Name: full width -->
@@ -59,12 +61,12 @@
           <input
             type="text"
             formControlName="name"
-            placeholder="Name"
+            [placeholder]="'Name' | translate"
             class="input-field w-full"
           />
           <div *ngIf="submitted && f['name'].errors" class="error-text">
-            <div *ngIf="f['name'].errors?.['required']">Name is required</div>
-            <div *ngIf="f['name'].errors?.['minlength']">Min 2 characters</div>
+            <div *ngIf="f['name'].errors?.['required']">{{"Name is required" | translate }}</div>
+            <div *ngIf="f['name'].errors?.['minlength']">{{"Min 2 characters" | translate }}</div>
           </div>
         </div>
 
@@ -74,19 +76,19 @@
             <input
               type="email"
               formControlName="email"
-              placeholder="Email"
+              [placeholder]="'Email' | translate"
               class="input-field w-full"
             />
             <div *ngIf="submitted && f['email'].errors" class="error-text">
-              <div *ngIf="f['email'].errors?.['required']">Email is required</div>
-              <div *ngIf="f['email'].errors?.['email']">Invalid email</div>
+              <div *ngIf="f['email'].errors?.['required']">{{"Email is required" | translate }}</div>
+              <div *ngIf="f['email'].errors?.['email']">{{"Invalid email" | translate }}</div>
             </div>
           </div>
           <div>
             <input
               type="text"
               formControlName="organization"
-              placeholder="Phone Number (Optional)"
+              [placeholder]="'Phone Number (Optional)' | translate"
               class="input-field w-full"
             />
           </div>
@@ -97,7 +99,7 @@
           <input
             type="text"
             formControlName="organization"
-            placeholder="Organization (Optional)"
+            [placeholder]="'Organization (Optional)' | translate"
             class="input-field w-full"
           />
         </div>
@@ -105,28 +107,30 @@
         <!-- Interests: full width -->
         <div>
           <select formControlName="interests" class="input-field w-full">
-            <option value="" disabled selected>Areas of Interest</option>
-            <option value="impact">Impact Stories</option>
-            <option value="programs">Education Programs</option>
-            <option value="partnerships">Partnerships</option>
-            <option value="all">All Updates</option>
+            <option value="" disabled selected>{{"Areas of Interest" | translate}}</option>
+            <option value="impact">{{"Impact Stories" | translate }}</option>
+            <option value="programs">{{"Education Programs" | translate }}</option>
+            <option value="partnerships">{{"Partnerships" | translate }}</option>
+            <option value="all">{{"All Updates" | translate }}</option>
           </select>
           <div *ngIf="submitted && f['interests'].errors" class="error-text">
-            <div *ngIf="f['interests'].errors?.['required']">Select an interest</div>
+            <div *ngIf="f['interests'].errors?.['required']">{{"Select an interest" | translate }}</div>
           </div>
         </div>
 
         <!-- Subscribe Button -->
         <div class="text-left">
-          <button type="submit" class="btn-black px-10 py-3">
-            Subscribe
+          <button 
+            type="submit"
+            [disabled]="loading"
+            class="btn-black px-10 py-3 disabled:opacity-50"
+          >
+            {{(loading ? "Sending..." : "Subscribe") | translate}}
           </button>
         </div>
 
-        <!-- Success Message -->
-        <div *ngIf="success" class="success-text text-center">
-          Thank you for subscribing!
-        </div>
+        <div *ngIf="success" class="text-[#48A225] font-semibold mt-4 text-center">{{"Thank you for subscribing!" | translate}}</div>
+        <div *ngIf="errorOccurred" class="text-[#f31010] font-semibold mt-4 text-center">{{"An error has occured while sending the message. Please try again later" | translate }}</div>
       </form>
     </div>
   </section>

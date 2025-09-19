@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 interface Partner {
   src: string;
@@ -9,7 +10,7 @@ interface Partner {
 @Component({
   selector: 'app-partners',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './partners.component.html',
   styleUrls: ['./partners.component.scss']
 })

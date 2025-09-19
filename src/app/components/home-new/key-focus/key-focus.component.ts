@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 interface FocusArea {
   title: string;
@@ -24,7 +25,7 @@ interface FocusArea {
 @Component({
   selector: 'app-key-focus',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TranslateModule],
   templateUrl: './key-focus.component.html',
   styleUrls: ['./key-focus.component.scss']
 })

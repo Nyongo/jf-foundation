@@ -1,10 +1,11 @@
 import { Component } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { HeaderComponent } from '../header/header.component'
 
 @Component({
   selector: 'app-video-player',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HeaderComponent],
   templateUrl: './video-player.component.html',
   styleUrl: './video-player.component.scss',
 })

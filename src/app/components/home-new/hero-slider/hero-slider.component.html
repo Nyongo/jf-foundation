@@ -31,15 +31,15 @@
 
         <!-- Overlay Text -->
         <div
-          class="absolute inset-0 bg-black/10 flex flex-col items-center justify-center text-center px-4 font-montserrat text-white"
+          class="absolute inset-0 bg-black/20 flex flex-col items-center justify-center text-center px-4 font-montserrat text-white"
         >
           <h1
             class="mt-[40px] md:mt-[150px] lg:mt-[220px] text-3xl md:text-5xl font-bold"
-			[innerHTML]="s.title"
+			[innerHTML]="s.title | translate"
           >
           </h1>
-          <p  *ngIf="s.subTitle != ''" class="mt-2 text-lg md:text-2xl">{{ s.subTitle }}</p>
-          <p  *ngIf="s.description != ''" class="mt-4 max-w-2xl">{{ s.description }}</p>
+          <p  *ngIf="s.subTitle != ''" class="mt-2 text-lg md:text-2xl">{{ s.subTitle | translate}}</p>
+          <p  *ngIf="s.description != ''" class="mt-4 max-w-2xl">{{ s.description | translate}}</p>
         </div>
       </div>
     </ng-container>
@@ -65,7 +65,7 @@
 
   <!-- Stats Bar Half-Overlay -->
   <div
-    class="absolute bottom-[-95px] left-1/2 -translate-x-1/2 bg-white text-[#4EABBA] w-[80%]"
+    class="absolute bottom-[-95px] left-1/2 -translate-x-1/2 bg-white text-[#48A225] w-[80%]"
   >
     <div class="pt-[40px] pb-[50px] flex justify-around items-center font-montserrat">
       <div class="text-center">
@@ -77,7 +77,7 @@
         <div class="mt-3 font-bold text-3xl md:text-5xl leading-[45px]">
           {{ directorsPercent }}%
         </div>
-        <div class="mt-3 text-sm font-bold">Total Female Directors</div>
+        <div class="mt-3 text-sm font-bold">{{ "Total Female Directors" | translate }}</div>
       </div>
       <div class="text-center">
         <img
@@ -88,7 +88,7 @@
         <div class="mt-3 font-bold text-3xl md:text-5xl leading-[45px]">
           {{ teachersPercent }}%
         </div>
-        <div class="mt-3 text-sm font-bold">Total Female Teachers</div>
+        <div class="mt-3 text-sm font-bold">{{"Total Female Teachers" | translate}}</div>
       </div>
       <div class="text-center">
         <img
@@ -99,7 +99,7 @@
         <div class="mt-3 font-bold text-3xl md:text-5xl leading-[45px]">
           {{ studentsPercent }}%
         </div>
-        <div class="mt-3 text-sm font-bold">Total Female Students</div>
+        <div class="mt-3 text-sm font-bold">{{"Total Female Students" | translate}}</div>
       </div>
     </div>
   </div>

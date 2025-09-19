@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HeaderComponent } from '../../header/header.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-case-study-2',
-  imports: [CommonModule],
+  imports: [CommonModule, HeaderComponent, TranslateModule],
   templateUrl: './case-study-2.component.html',
   styleUrls: ['./case-study-2.component.scss']
 })
@@ -16,7 +18,7 @@ export class CaseStudy2Component implements OnInit {
   // Introduction
   introduction = [
     `Across Kenya, low-cost private schools face significant challenges in accessing financing to improve infrastructure, teaching quality, and overall learning outcomes. Many financial institutions perceive these schools as high-risk due to inconsistent cash flows and limited financial tracking, making it difficult for them to access capital for development.`,
-    `Without adequate investment, schools struggle to provide quality education, leading to poor student outcomes. Jackfruit has pioneered an innovative results-linked loan model, which ties financing to measurable improvements in school performance. This approach ensures that schools not only access affordable loans but also commit to improving education quality, teacher training, and student learning outcomes. In parallel, Jackfruit Foundation’s JF Upskill program provides essential capacity-building for teachers, equipping them with skills to enhance student achievement.`
+    `Without adequate investment, schools struggle to provide quality education, leading to poor student outcomes. Jackfruit has pioneered an innovative results-linked loan model, which ties financing to measurable improvements in school performance. This approach ensures that schools not only access affordable loans but also commit to improving education quality, teacher training, and student learning outcomes. In parallel, Jackfruit Foundation's JF Upskill program provides essential capacity-building for teachers, equipping them with skills to enhance student achievement.`
   ];
 
   // --- Challenge Section ---
@@ -42,7 +44,7 @@ export class CaseStudy2Component implements OnInit {
   impactList = [
     `Enhanced School Infrastructure: Schools have built modern classrooms, sanitation facilities, and digital learning spaces, improving the learning environment.`,
     `Teacher Training & Development: Over 70% of teachers in funded schools have completed JF Upskill training, leading to more effective lesson delivery and improved student comprehension.`,
-    `Higher Student Performance: Schools that accessed these loans saw a 10–15% improvement in literacy and numeracy scores, as tracked through baseline and endline assessments.`,
+    `Higher Student Performance: Schools that accessed these loans saw a 10-15% improvement in literacy and numeracy scores, as tracked through baseline and endline assessments.`,
     `Increased Student Enrollment & Retention: Schools offering a better learning experience reported an average 20% increase in student enrollment, as parents recognized the value of quality education.`
   ];
   // No outro here

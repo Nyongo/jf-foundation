@@ -1,3 +1,5 @@
+<app-header [pageName] = "'Case Studies'"></app-header>
+
 <section class="cs2-banner font-montserrat relative w-full h-[300px] md:h-[400px] overflow-hidden">
   <img
     src="assets/images/case-studies/case-study-2-banner.svg"
@@ -7,21 +9,21 @@
   <div
     class="absolute inset-0 bg-black/10 flex flex-col items-center justify-center text-center px-4 font-montserrat text-white"
   >
-    <h1 class="w-[80%] text-3xl md:text-4xl font-semibold">{{ title }}</h1>
-    <span class="mt-2 text-sm text-[#EEB100] font-bold">{{ location }}</span>
+    <h1 class="w-[80%] text-3xl md:text-4xl font-semibold">{{ title | translate}}</h1>
+    <span class="mt-2 text-sm text-[#EEB100] font-bold">{{ location | translate}}</span>
   </div>
 </section>
 
 <main class="font-montserrat container mx-auto px-4">
   <!-- Introduction -->
   <section class="py-12 space-y-4">
-    <h2 class="text-xl md:text-2xl font-semibold">Introduction</h2>
-    <p *ngFor="let p of introduction" class="text-gray-700">{{ p }}</p>
+    <h2 class="text-xl md:text-2xl font-semibold">{{"Introduction" | translate }}</h2>
+    <p *ngFor="let p of introduction" class="text-gray-700">{{ p | translate }}</p>
   </section>
 
   <!-- The Challenge -->
   <section class="py-6 space-y-6">
-    <h2 class="text-xl md:text-2xl font-semibold">The Challenge</h2>
+    <h2 class="text-xl md:text-2xl font-semibold">{{"The Challenge" | translate }}</h2>
     <div class="flex flex-col md:flex-row items-start gap-8">
       <img
         src="assets/images/case-studies/chalk-board.svg"
@@ -30,18 +32,18 @@
       />
       <div class="md:w-1/2">
         <ng-container *ngFor="let b of challengeBullets">
-          <p class="mb-4 text-[#EEB100] font-bold">{{ b.text }}</p>
+          <p class="mb-4 text-[#EEB100] font-bold">{{ b.text | translate }}</p>
           <ol
             *ngIf="b.list && b.listType === 'decimal'"
             class="list-decimal list-inside ml-4 space-y-2 text-gray-700"
           >
             <li *ngFor="let item of b.list">
-              {{ item.text }}
+              {{ item.text | translate }}
               <ul
                 *ngIf="item.sublist"
                 class="list-disc list-inside ml-6 space-y-1 text-gray-700"
               >
-                <li *ngFor="let sub of item.sublist">{{ sub }}</li>
+                <li *ngFor="let sub of item.sublist">{{ sub | translate }}</li>
               </ul>
             </li>
           </ol>
@@ -53,11 +55,11 @@
   <!-- The Solution -->
   <section class="py-12 space-y-4">
     <h2 class="text-xl md:text-2xl font-semibold">
-      The Solution: Refining Credit Scoring and Lending Criteria
+      {{"The Solution: Refining Credit Scoring and Lending Criteria" | translate }}
     </h2>
-    <p class="text-[#EEB100] font-bold">{{ solutionIntro }}</p>
+    <p class="text-[#EEB100] font-bold">{{ solutionIntro | translate }}</p>
     <ul class="list-decimal list-inside ml-4 space-y-2 text-gray-700">
-      <li *ngFor="let b of solutionBullets">{{ b.text }}</li>
+      <li *ngFor="let b of solutionBullets">{{ b.text | translate }}</li>
     </ul>
     <img
       src="assets/images/case-studies/classroom-computer.svg"
@@ -69,25 +71,25 @@
   <!-- Leveraging Data -->
   <section class="py-6 space-y-4">
     <h2 class="text-xl md:text-2xl font-semibold">
-      Leveraging Data to Enhance Impact
+      {{"Leveraging Data to Enhance Impact" | translate }}
     </h2>
-    <p class="text-[#EEB100] font-bold">{{ leverageIntro }}</p>
+    <p class="text-[#EEB100] font-bold">{{ leverageIntro | translate }}</p>
     <ul class="list-disc list-inside ml-4 space-y-2 text-gray-700">
-      <li *ngFor="let b of leverageBullets">{{ b.text }}</li>
+      <li *ngFor="let b of leverageBullets">{{ b.text | translate}}</li>
     </ul>
   </section>
 
   <!-- Beyond Financing -->
   <section class="py-12 space-y-4">
     <h2 class="text-xl md:text-2xl font-semibold">
-      Beyond Financing: Ensuring Children Are Developmentally On Track
+      {{"Beyond Financing: Ensuring Children Are Developmentally On Track" | translate }}
     </h2>
-    <p class="text-[#EEB100] font-bold">{{ beyondIntro }}</p>
+    <p class="text-[#EEB100] font-bold">{{ beyondIntro | translate}}</p>
 
     <div class="relative flex flex-col md:flex-row items-start md:items-center gap-6">
       <!-- Left List -->
       <ul class="list-disc list-inside ml-4 space-y-2 text-gray-700 md:flex-1">
-        <li *ngFor="let b of beyondBulletsLeft">{{ b.text }}</li>
+        <li *ngFor="let b of beyondBulletsLeft">{{ b.text | translate }}</li>
       </ul>
 
       <!-- Divider (desktop only) -->
@@ -95,7 +97,7 @@
 
       <!-- Right List -->
       <ul class="list-disc list-inside ml-4 space-y-2 text-gray-700 md:flex-1">
-        <li *ngFor="let b of beyondBulletsRight">{{ b.text }}</li>
+        <li *ngFor="let b of beyondBulletsRight">{{ b.text | translate  }}</li>
       </ul>
     </div>
   </section>
@@ -103,24 +105,24 @@
   <!-- Impact & Path Forward -->
   <section class="py-6 space-y-4">
     <h2 class="text-xl md:text-2xl font-semibold">
-      Impact & The Path Forward
+      {{"Impact & The Path Forward" | translate }}
     </h2>
-    <p *ngFor="let p of pathForward" class="text-gray-700">{{ p }}</p>
+    <p *ngFor="let p of pathForward" class="text-gray-700">{{ p | translate }}</p>
   </section>
 </main>
 
 <!-- CTA -->
 <section class="bg-gray-50 text-center py-16 space-y-12 font-montserrat">
   <h3 class="text-2xl font-semibold text-[#1A363A] w-[80%] mx-auto">
-    Want to Support Similar Projects?
+    {{"Want to Support Similar Projects?" | translate }}
   </h3>
   <p class="text-gray-600 w-[80%] mx-auto text-xl">
-    Join us in transforming education across Sub-Saharan Africa. Your support can help create more success stories like this one.
+    {{"Join us in transforming education across Sub-Saharan Africa. Your support can help create more success stories like this one." | translate }}
   </p>
   <a
     (click)="goTo('contact-us')"
-    class=" cursor-pointer bg-[#4EABBA] text-white px-8 py-3 font-semibold inline-block"
+    class=" cursor-pointer bg-[#48A225] text-white px-8 py-3 font-semibold inline-block"
   >
-    Get Involved
+    {{"Get Involved" | translate }}
   </a>
 </section>

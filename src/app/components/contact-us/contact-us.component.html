@@ -1,194 +1,150 @@
-<app-service-header
-  [serviceTitle]="'Talk to us'"
-  [headingText]="'Contact Us'"
-  [showBlueYellowDiv]="true"
-  [bannerText]="'Check how our clients and partners are saying about us…'"
-  [descriptionText]="
-    'Want to fund us or partner with us? Use the form below and we will get in touch.'
-  "
->
-</app-service-header>
+<div class="font-montserrat text-[#1A363A]">
+  <app-header [pageName]="'Contact Us'"></app-header>
+</div>
+<!-- BANNER SECTION-->
+<section class="case-banner relative w-full h-[300px] md:h-[400px] overflow-hidden">
+  <img
+    src="assets/images/case-studies/classroom-computer.svg"
+    alt="Jackfruit Foundation"
+    class="absolute inset-0 w-full h-full object-cover"
+  />
+  <!-- dark overlay -->
+  <div class="absolute inset-0 bg-black/50 pointer-events-none"></div>
 
-<div class="flex flex-col lg:flex-row justify-center gap-8 w-full py-8 px-4">
-  <!-- Contact Details Section -->
-  <div class="contact-details w-full lg:w-1/3">
-    <div class="flex flex-col my-8">
-      <span class="text-sm uppercase text-black-3">Our Contacts</span>
-      <span class="text-xl text-black-2">Get in Touch</span>
+  <div class="relative z-20 flex items-center justify-center h-[480px] px-4">
+    <div class="text-center max-w-3xl mx-auto">
+        <div class="relative inline-block">
+        <span class="absolute -top-4 -left-4 w-7 h-7 border-t-4 border-l-4 border-[#48A225] md:w-8 md:h-8 md:border-t-8 md:border-l-8"></span>
+        <h1 class="text-white text-3xl md:text-5xl font-extrabold leading-tight px-4">
+          {{"Contact Us" | translate }}
+        </h1>
+        <span class="absolute -bottom-4 -right-4 w-7 h-7 border-b-4 border-r-4 border-[#48A225] md:w-8 md:h-8 md:border-b-8 md:border-r-8"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About JF Finance Split Section -->
+<section class="py-16 bg-white">
+  <div class="app-container grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+    <!-- Left Section -->
+  <div class="relative z-10 pl-5 pt-10">
+    <p class="text-xs sm:text-sm font-bold uppercase tracking-wide mb-2 text-[#48A225]">
+      {{"Our Contacts" | translate }}
+    </p>
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight mb-2 relative">
+      {{"Get in Touch" | translate }}
+      <!-- Corner accent: spaced from edge on mobile, further out on desktop -->
       <span
-        class="text-lg font-semibold text-black flex items-center pb-8 pt-4"
-      >
-        <span class="dot-line mr-2"></span>
-        <span class="dot mr-1"></span>
-      </span>
-
-      <!-- Address -->
+        class="absolute w-8 h-8 md:w-10 md:h-10 top-[-2rem] right-2 md:right-[-2rem] border-t-[16px] border-r-[16px] border-[#48A225] opacity-100"
+      ></span>
+    </h2>
+    <!-- Split line only on desktop -->
+    <div class="hidden md:flex items-center mt-4 mb-6">
+      <div class="h-4 w-32 bg-[#48A225]"></div>
+      <div class="h-1 w-64 bg-[#48A225]"></div>
+    </div>
+    
+    <!-- Address -->
       <div class="flex items-start gap-4">
         <img
           src="assets/images/svg/address.png"
           alt="Address"
-          class="w-6 h-6"
+          class="w-10 h-10"
         />
         <div class="flex flex-col">
-          <span class="text-sm font-semibold text-black-2">Address</span>
-          <span class="text-xs font-thin text-gray-1400"
+          <span class="text-xl font-semibold text-black-2">{{"Address" | translate }}</span>
+          <span class="text-sm font-light text-gray-1400"
             >Rhapta Heights Building, 3rd Floor, Rhapta Road, Nairobi</span
           >
         </div>
       </div>
 
-      <!-- Phone -->
-      <div class="flex items-start gap-4 mt-4">
-        <img src="assets/images/svg/support.png" alt="Phone" class="w-6 h-6" />
+    <!-- Phone -->
+      <div class="flex items-start gap-4 mt-8">
+        <img src="assets/images/svg/support.png" [alt]="'Phone' | translate" class="w-10 h-10" />
         <div class="flex flex-col">
-          <span class="text-sm font-semibold text-black-2">Phone</span>
-          <span class="text-xs font-thin text-gray-1400"
-            >Phone: +254 110 701 174</span
+          <span class="text-xl font-semibold text-black-2">{{"Phone" | translate }}</span>
+          <span class="text-sm font-light text-gray-1400"
+            >{{"Phone" | translate }}: +254 110 701 174</span
           >
         </div>
       </div>
 
-      <!-- Email -->
-      <div class="flex items-start gap-4 mt-4">
+    <!-- Email -->
+      <div class="flex items-start gap-4 mt-8">
         <img
           src="assets/images/svg/newsletter.jpg"
           alt="Email"
-          class="w-6 h-6"
+          class="w-10 h-10"
         />
         <div class="flex flex-col">
-          <span class="text-sm font-semibold text-black-2">Email</span>
-          <span class="text-xs font-thin text-gray-1400"
-            >Email: info&#64;jackfruitfoundation.com</span
+          <span class="text-xl font-semibold text-black-2">{{"Email" | translate }}</span>
+          <span class="text-sm font-light text-gray-1400"
+            >{{"Email" | translate }}: info&#64;jackfruitfoundation.com</span
           >
         </div>
       </div>
+
+  </div>
+    <!-- Right: Contact Form -->
+    <div class="flex justify-center w-full h-full">
+      <!-- Contact Us Form Section -->
+        <section class="bg-white w-[90%]">
+            <div class="form-card bg-[#fdf6ef] rounded-xl shadow-lg p-4 mx-auto w-full">
+                <h2 class="text-xl font-semibold mb-6">{{ title | translate}}</h2>
+                <form class="space-y-6" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+                    <div class="mb-4">
+                        <label class="block mb-1 text-xs font-semibold">{{"Name" | translate }}<span class="text-red-600">*</span></label>
+                        <input 
+                            formControlName="name"
+                            [class.invalid]="submitted && form.get('name')?.invalid"
+                            [placeholder]="'Name' | translate"
+                            class="input-field w-full"
+                        />
+                    </div>
+                    <div class="mb-4">
+                        <label class="block mb-1 text-xs font-semibold">{{"Email" | translate }}<span class="text-red-600">*</span></label>
+                        <input 
+                            formControlName="email"
+                            [class.invalid]="submitted && form.get('email')?.invalid"
+                            [placeholder]="'Email' | translate"
+                            class="input-field w-full" 
+                        />
+                    </div>
+                    <div class="mb-4">
+                        <label class="block mb-1 text-xs font-semibold">{{"Subject" | translate }}<span class="text-red-600">*</span></label>
+                        <input 
+                            formControlName="subject" 
+                            [class.invalid]="submitted && form.get('subject')?.invalid"
+                            [placeholder]="'Subject' | translate"
+                            class="input-field w-full"
+                        />
+                    </div>
+                    <div class="mb-4">
+                        <label class="block mb-1 text-xs font-semibold">{{"Message" | translate }}<span class="text-red-600">*</span></label>
+                        <textarea 
+                            formControlName="message"
+                            rows="5"
+                            [class.invalid]="submitted && form.get('message')?.invalid"
+                            [placeholder]="'Message' | translate"
+                            class="input-field w-full"
+                        ></textarea>
+                    </div>
+                    <button 
+                      type="submit"
+                      [disabled]="loading"
+                      class="inline-block px-6 py-3 md:px-10 md:py-4 bg-black text-white font-semibold text-base md:text-lg shadow hover:bg-gray-900 transition">
+                        {{(loading ? "Sending..." : "Send Message") | translate}}
+                    </button>
+                    <div *ngIf="success" class="text-[#48A225] font-semibold mt-4 text-center">{{"Thank you! Your message has been sent." | translate}}</div>
+                    <div *ngIf="errorOccurred" class="text-[#f31010] font-semibold mt-4 text-center">{{"An error has occured while sending the message. Please try again later" | translate }}</div>
+                </form>
+            </div>
+        </section>
     </div>
   </div>
-
-  <!-- Contact Form Section -->
-  <div class="contact-form w-full lg:w-1/3">
-    <div class="flex flex-col mt-8">
-      <span class="text-sm uppercase text-black-3">Send a Message</span>
-      <span class="text-xl text-black-2">Get in Touch</span>
-      <span
-        class="text-lg font-semibold text-black flex items-center pb-8 pt-4"
-      >
-        <span class="dot-line mr-2"></span>
-        <span class="dot mr-1"></span>
-      </span>
-    </div>
-    <div>
-      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-        <div class="flex justify-between gap-4">
-          <div class="w-full">
-            <input
-              type="text"
-              formControlName="name"
-              class="w-full h-8 border border-transparent rounded-3xl mb-4 bg-gray-1700 px-4 placeholder:text-xs placeholder:text-gray-1400 placeholder:tracking-tighter"
-              [ngClass]="{ 'border-red-200': isFieldInvalid('name') }"
-              placeholder="Your Name *"
-            />
-            <div
-              *ngIf="isFieldInvalid('name')"
-              class="text-red-200 text-xs -mt-3 mb-3"
-            >
-              {{ getErrorMessage('name') }}
-            </div>
-          </div>
-          <div class="w-full">
-            <input
-              type="email"
-              formControlName="email"
-              class="w-full h-8 border border-transparent rounded-3xl mb-4 bg-gray-1700 px-4 placeholder:text-xs placeholder:text-gray-1400 placeholder:tracking-tighter"
-              [ngClass]="{ 'border-red-200': isFieldInvalid('email') }"
-              placeholder="Your Email *"
-            />
-            <div
-              *ngIf="isFieldInvalid('email')"
-              class="text-red-200 text-xs -mt-3 mb-3"
-            >
-              {{ getErrorMessage('email') }}
-            </div>
-          </div>
-        </div>
-        <div>
-          <input
-            type="text"
-            formControlName="subject"
-            class="w-full h-8 border border-transparent rounded-3xl mb-4 bg-gray-1700 px-4 placeholder:text-xs placeholder:text-gray-1400 placeholder:tracking-tighter"
-            [ngClass]="{ 'border-red-200': isFieldInvalid('subject') }"
-            placeholder="Subject *"
-          />
-          <div
-            *ngIf="isFieldInvalid('subject')"
-            class="text-red-200 text-xs -mt-3 mb-3"
-          >
-            {{ getErrorMessage('subject') }}
-          </div>
-        </div>
-        <div>
-          <textarea
-            formControlName="message"
-            class="w-full h-24 border border-transparent rounded-3xl bg-gray-1700 px-4 py-2 placeholder:text-xs placeholder:text-gray-500"
-            [ngClass]="{ 'border-red-200': isFieldInvalid('message') }"
-            placeholder="Your Message *"
-          ></textarea>
-          <div
-            *ngIf="isFieldInvalid('message')"
-            class="text-red-200 text-xs mt-1"
-          >
-            {{ getErrorMessage('message') }}
-          </div>
-        </div>
-
-        <!-- Success and Error Messages -->
-        <div
-          *ngIf="submitSuccess"
-          class="mt-4 p-4 bg-green-100 text-green-700 rounded-lg"
-        >
-          Your message has been sent successfully. We'll get back to you soon!
-        </div>
-        <div
-          *ngIf="submitError"
-          class="mt-4 p-4 bg-red-100 text-red-700 rounded-lg"
-        >
-          There was an error sending your message. Please try again later.
-        </div>
-
-        <button
-          type="submit"
-          [disabled]="!contactForm.valid || isSubmitting"
-          class="w-full h-10 bg-blue hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-3xl mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          <span *ngIf="!isSubmitting">Send Message</span>
-          <span *ngIf="isSubmitting" class="flex items-center justify-center">
-            <svg
-              class="w-5 h-5 mr-2 animate-spin"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <circle
-                class="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                stroke-width="4"
-              ></circle>
-              <path
-                class="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-              ></path>
-            </svg>
-            Sending...
-          </span>
-        </button>
-      </form>
-    </div>
-  </div>
-</div>
+</section>
 
 <!-- Map View Section -->
 <div class="map-view w-full h-80">
@@ -202,3 +158,4 @@
     referrerpolicy="no-referrer-when-downgrade"
   ></iframe>
 </div>
+

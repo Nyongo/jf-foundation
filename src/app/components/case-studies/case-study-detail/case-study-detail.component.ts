@@ -2,13 +2,14 @@ import { Component, OnInit, AfterViewInit } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { ActivatedRoute } from '@angular/router'
 import { Chart, registerables } from 'chart.js'
+import { HeaderComponent } from '../../header/header.component'
 
 Chart.register(...registerables)
 
 @Component({
   selector: 'app-case-study-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HeaderComponent],
   templateUrl: './case-study-detail.component.html',
   styleUrl: './case-study-detail.component.scss',
 })

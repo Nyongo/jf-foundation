@@ -1,20 +1,23 @@
 <div class="font-montserrat text-[#1A363A]">
+  <app-header [pageName] = "'About Us'"></app-header>
   <!-- Banner -->
   <section class="relative w-full h-72 md:h-[450px] overflow-hidden">
     <img
-      src="assets/images/about/about-hero.svg"
+      src="assets/images/about/about-hero1.svg"
       alt="About Us Banner"
       class="absolute inset-0 w-full h-full object-cover"
     />
+    <!-- dark overlay -->
+    <div class="absolute w-full h-full inset-0 bg-black/30 pointer-events-none"></div>
   </section>
 
   <!-- Intro + Image -->
   <section class="flex flex-col md:flex-row items-center gap-16 px-8 md:px-16 py-12 md:py-16 bg-white">
     <!-- Text -->
     <div class="md:w-1/2 space-y-6">
-      <h1 class="text-3xl md:text-4xl font-semibold text-[#1A363A]">About Us</h1>
+      <h1 class="text-3xl md:text-4xl font-semibold text-[#1A363A]">{{"About Us" | translate }}</h1>
       <div class="space-y-4 text-gray-700">
-        <p *ngFor="let p of introParagraphs">{{ p }}</p>
+        <p *ngFor="let p of introParagraphs">{{ p | translate }}</p>
       </div>
     </div>
     <!-- Image -->
@@ -33,7 +36,7 @@
       <div class="flex flex-wrap justify-around gap-8">
         <div *ngFor="let s of stats" class="w-36 text-center">
           <div class="text-2xl font-extrabold text-[#1A363A]">{{ s.value }}</div>
-          <div class="mt-1 text-gray-600 text-sm font-bold">{{ s.label }}</div>
+          <div class="mt-1 text-gray-600 text-sm font-bold">{{ s.label | translate }}</div>
         </div>
       </div>
     </div>

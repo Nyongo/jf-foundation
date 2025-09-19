@@ -14,10 +14,64 @@ import { Color, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts'
 import { SchoolHeatmapComponent } from '../school-heatmap/school-heatmap.component'
 import { CommonModule, isPlatformBrowser } from '@angular/common'
 import html2canvas from 'html2canvas'
+import { HeaderComponent } from '../../header/header.component'
+import { TranslateModule, TranslateService } from '@ngx-translate/core'
 
 interface SchoolLocation {
   name: string
   location: string
+}
+
+interface Metrics {
+  totalNoOfSchools: number
+  totalEnrolment: number
+  totalMaleStudents: number
+  totalFemaleStudents: number
+  totalTeachers: number
+  totalMaleTeachers: number
+  totalFemaleTeachers: number
+  runningWaterStats: { schoolsWithRunningWater: number; schoolsWithoutRunningWater: number }
+  powerConnectivityStats: {
+    schoolsWithKPLC: number
+    schoolsWithSolar: number
+    schoolsWithBoth: number
+    schoolsWithoutPowerSupply: number
+  }
+  directorsStat: { female: number; male: number; total: number }
+  feeCategoryStats: Record<string, number>
+  statsGradeServed: { Primary: number; Secondary: number; Tertiary: number }
+  computerLabStats: { schoolsWithComputerLab: number; schoolsWithoutComputerLab: number }
+  yearStats: Record<string, any>
+  schoolLocations: SchoolLocation[]
+  [key: string]: any
+}
+
+const defaultMetrics: Metrics = {
+  totalNoOfSchools: 0,
+  totalEnrolment: 0,
+  totalMaleStudents: 0,
+  totalFemaleStudents: 0,
+  totalTeachers: 0,
+  totalMaleTeachers: 0,
+  totalFemaleTeachers: 0,
+  runningWaterStats: { schoolsWithRunningWater: 0, schoolsWithoutRunningWater: 0 },
+  powerConnectivityStats: {
+    schoolsWithKPLC: 0,
+    schoolsWithSolar: 0,
+    schoolsWithBoth: 0,
+    schoolsWithoutPowerSupply: 0,
+  },
+  directorsStat: { female: 0, male: 0, total: 0 },
+  feeCategoryStats: {
+    '0-5000': 0,
+    '5001-10000': 0,
+    '10001-20000': 0,
+    '>20000': 0,
+  },
+  statsGradeServed: { Primary: 0, Secondary: 0, Tertiary: 0 },
+  computerLabStats: { schoolsWithComputerLab: 0, schoolsWithoutComputerLab: 0 },
+  yearStats: {},
+  schoolLocations: [],
 }
 
 @Component({
@@ -25,17 +79,23 @@ interface SchoolLocation {
   standalone: true,
   templateUrl: './home-our-impact.component.html',
   styleUrl: './home-our-impact.component.scss',
-  imports: [NgxChartsModule, SchoolHeatmapComponent, CommonModule],
+  imports: [NgxChartsModule, SchoolHeatmapComponent, CommonModule, HeaderComponent, TranslateModule],
 })
-export class HomeOurImpactComponent
-  implements OnInit, OnDestroy, AfterViewInit
-{
+export class HomeOurImpactComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(SchoolHeatmapComponent) heatmapComponent!: SchoolHeatmapComponent
   private apiSubscription?: Subscription
-  public metrics: any
+  public metrics: Metrics = { ...defaultMetrics } // initialize with defaults
   public isExporting = false
   private isBrowser: boolean
   private isDataLoaded = false
+
+  constructor(
+    @Inject(PLATFORM_ID) platformId: Object,
+    private http: HttpClient,
+    private translate: TranslateService
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId)
+  }
 
   // Currency conversion
   public selectedCurrency: 'USD' | 'KES' = 'USD'
@@ -61,22 +121,22 @@ export class HomeOurImpactComponent
   feeCategoryChartDataKES: any[] = []
   pieGridDataSchoolCategories: any[] = []
 
-  // Key Areas Chart Data
+  // Key Areas Chart Data (initial defaults)
   solarPowerData: any[] = [
-    { name: 'Solar Powered Schools', value: 45 },
-    { name: 'In Progress', value: 25 },
-    { name: 'Planned', value: 30 },
+    { name: this.translate.instant('Solar Powered Schools'), value: 45 },
+    { name: this.translate.instant('In Progress'), value: 25 },
+    { name: this.translate.instant('Planned'), value: 30 },
   ]
 
   waterConservationData: any[] = [
-    { name: 'Water Harvesting', value: 38 },
-    { name: 'Efficient Systems', value: 42 },
-    { name: 'Conservation Programs', value: 28 },
+    { name: this.translate.instant('Water Harvesting'), value: 38 },
+    { name: this.translate.instant('Efficient Systems'), value: 42 },
+    { name: this.translate.instant('Conservation Programs'), value: 28 },
   ]
 
   teacherTrainingData: any[] = [
     {
-      name: 'Trained Teachers',
+      name: this.translate.instant('Trained Teachers'),
       series: [
         { name: '2021', value: 200 },
         { name: '2022', value: 350 },
@@ -86,15 +146,15 @@ export class HomeOurImpactComponent
   ]
 
   studentPerformanceData: any[] = [
-    { name: 'Mathematics', value: 78 },
-    { name: 'Science', value: 82 },
-    { name: 'Languages', value: 85 },
-    { name: 'Technology', value: 76 },
+    { name: this.translate.instant('Mathematics'), value: 78 },
+    { name: this.translate.instant('Science'), value: 82 },
+    { name: this.translate.instant('Languages'), value: 85 },
+    { name: this.translate.instant('Technology'), value: 76 },
   ]
 
   digitalAdoptionData: any[] = [
     {
-      name: 'Digital Tools Usage',
+      name: this.translate.instant('Digital Tools Usage'),
       series: [
         { name: 'Q1', value: 45 },
         { name: 'Q2', value: 52 },
@@ -105,20 +165,20 @@ export class HomeOurImpactComponent
   ]
 
   techIntegrationData: any[] = [
-    { name: 'Science Labs', value: 85 },
-    { name: 'Computer Labs', value: 92 },
-    { name: 'Smart Classrooms', value: 78 },
-    { name: 'Digital Library', value: 65 },
+    { name: this.translate.instant('Science Labs'), value: 85 },
+    { name: this.translate.instant('Computer Labs'), value: 92 },
+    { name: this.translate.instant('Smart Classrooms'), value: 78 },
+    { name: this.translate.instant('Digital Library'), value: 65 },
   ]
 
   genderLeadershipData: any[] = [
-    { name: 'Female Leaders', value: 48 },
-    { name: 'Male Leaders', value: 52 },
+    { name: this.translate.instant('Female Leaders'), value: 48 },
+    { name: this.translate.instant('Male Leaders'), value: 52 },
   ]
 
   inclusionImpactData: any[] = [
     {
-      name: 'Program Participation',
+      name: this.translate.instant('Program Participation'),
       series: [
         { name: '2021', value: 320 },
         { name: '2022', value: 480 },
@@ -136,27 +196,20 @@ export class HomeOurImpactComponent
     name: 'custom',
     selectable: true,
     group: ScaleType.Ordinal,
-    domain: ['#5EB0BE', '#FEE200', '#CFC0BB', '#7AA3E5'],
+    domain: ['#48A225', '#FEE200', '#CFC0BB', '#7AA3E5'],
   }
   colorSchemePieGrid: Color = {
     name: 'custom',
     selectable: true,
     group: ScaleType.Ordinal,
-    domain: ['#5EB0BE', '#FEE200', '#CFC0BB', '#7AA3E5'],
+    domain: ['#48A225', '#FEE200', '#CFC0BB', '#7AA3E5'],
   }
 
   lineChartCustomColors = [
-    { name: 'Male Students', value: '#5EB0BE' }, // Lighter Blue
-    { name: 'Female Students', value: '#FF4081' }, // Bright Pink (Highlighted)
-    { name: 'Total Students', value: '#CFC0BB' }, // Muted Gray
+    { name: this.translate.instant('Male Students'), value: '#48A225' },
+    { name: this.translate.instant('Female Students'), value: '#FF4081' },
+    { name: this.translate.instant('Total Students'), value: '#CFC0BB' },
   ]
-
-  constructor(
-    @Inject(PLATFORM_ID) platformId: Object,
-    private http: HttpClient,
-  ) {
-    this.isBrowser = isPlatformBrowser(platformId)
-  }
 
   ngOnInit(): void {
     this.loadMetrics()
@@ -170,11 +223,11 @@ export class HomeOurImpactComponent
   }
 
   formatXAxis(value: any): string {
-    return `${value}` // Ensures the year values appear correctly
+    return `${value}`
   }
 
   formatYAxis(value: any): string {
-    return `${value}` // Formats Y-axis values (optional customization)
+    return `${value}`
   }
 
   loadMetrics(): void {
@@ -185,66 +238,80 @@ export class HomeOurImpactComponent
       )
       .subscribe({
         next: (response: any) => {
-          this.metrics = response
-          console.log('Data loaded successfully', response)
+          // Merge response into defaults to ensure all expected keys exist
+          const merged: Metrics = {
+            ...defaultMetrics,
+            ...(response || {}),
+            runningWaterStats: {
+              ...defaultMetrics.runningWaterStats,
+              ...(response?.runningWaterStats || {}),
+            },
+            powerConnectivityStats: {
+              ...defaultMetrics.powerConnectivityStats,
+              ...(response?.powerConnectivityStats || {}),
+            },
+            directorsStat: {
+              ...defaultMetrics.directorsStat,
+              ...(response?.directorsStat || {}),
+            },
+            feeCategoryStats: {
+              ...defaultMetrics.feeCategoryStats,
+              ...(response?.feeCategoryStats || {}),
+            },
+            statsGradeServed: {
+              ...defaultMetrics.statsGradeServed,
+              ...(response?.statsGradeServed || {}),
+            },
+            computerLabStats: {
+              ...defaultMetrics.computerLabStats,
+              ...(response?.computerLabStats || {}),
+            },
+            yearStats: response?.yearStats || {},
+            schoolLocations: response?.schoolLocations || [],
+          }
 
+          this.metrics = merged
+          console.log('Data loaded successfully', merged)
+
+          // Build chart data using merged metrics (safe access)
           this.enrolmentChartData = [
-            { name: 'Male Students', value: response.totalMaleStudents },
-            { name: 'Female Students', value: response.totalFemaleStudents },
+            { name: this.translate.instant('Male Students'), value: merged.totalMaleStudents },
+            { name: this.translate.instant('Female Students'), value: merged.totalFemaleStudents },
           ]
 
           this.powerConnectivityChartData = [
-            {
-              name: 'KPLC',
-              value: response.powerConnectivityStats.schoolsWithKPLC,
-            },
-            {
-              name: 'Solar',
-              value: response.powerConnectivityStats.schoolsWithSolar,
-            },
-            {
-              name: 'Both',
-              value: response.powerConnectivityStats.schoolsWithBoth,
-            },
-            {
-              name: 'No Power',
-              value: response.powerConnectivityStats.schoolsWithoutPowerSupply,
-            },
+            { name: 'KPLC', value: merged.powerConnectivityStats.schoolsWithKPLC },
+            { name: this.translate.instant('Solar'), value: merged.powerConnectivityStats.schoolsWithSolar },
+            { name: this.translate.instant('Both'), value: merged.powerConnectivityStats.schoolsWithBoth },
+            { name: this.translate.instant('No Power'), value: merged.powerConnectivityStats.schoolsWithoutPowerSupply },
           ]
 
-          // Prepare Pie Grid Data
           this.pieGridDataStudents = [
-            { name: 'Male Students', value: response.totalMaleStudents },
-            { name: 'Female Students', value: response.totalFemaleStudents },
+            { name: this.translate.instant('Male Students'), value: merged.totalMaleStudents },
+            { name: this.translate.instant('Female Students'), value: merged.totalFemaleStudents },
           ]
           this.pieGridDataTeachers = [
-            { name: 'Male Teachers', value: response.totalMaleTeachers },
-            { name: 'Female Teachers', value: response.totalFemaleTeachers },
+            { name: this.translate.instant('Male Teachers'), value: merged.totalMaleTeachers },
+            { name: this.translate.instant('Female Teachers'), value: merged.totalFemaleTeachers },
           ]
 
           this.pieGridDataSchoolCategories = [
-            { name: 'Primary', value: response.statsGradeServed.Primary },
-            { name: 'Secondary', value: response.statsGradeServed.Secondary },
-            { name: 'Tertiary', value: response.statsGradeServed.Tertiary + 1 },
-          ]
-          this.runningWaterChartData = [
-            {
-              name: 'With Running Water',
-              value: response.runningWaterStats.schoolsWithRunningWater,
-            },
-            {
-              name: 'Without Running Water',
-              value: response.runningWaterStats.schoolsWithoutRunningWater,
-            },
+            { name: this.translate.instant('Primary'), value: merged.statsGradeServed.Primary },
+            { name: this.translate.instant('Secondary'), value: merged.statsGradeServed.Secondary },
+            // keep Tertiary non-zero (original added +1) - preserve original behavior if desired
+            { name: this.translate.instant('Tertiary'), value: (merged.statsGradeServed.Tertiary || 0) + 1 },
           ]
 
-          this.schoolLocations = response.schoolLocations
+          this.runningWaterChartData = [
+            { name: this.translate.instant('With Running Water'), value: merged.runningWaterStats.schoolsWithRunningWater },
+            { name: this.translate.instant('Without Running Water'), value: merged.runningWaterStats.schoolsWithoutRunningWater },
+          ]
+
+          this.schoolLocations = merged.schoolLocations || []
           console.log('School locations from API:', this.schoolLocations)
 
-          // Mark data as loaded
-          this.isDataLoaded = true
-
           // Update heatmap if component is available
+          this.isDataLoaded = true
           if (this.heatmapComponent) {
             console.log('Updating heatmap with school locations')
             this.heatmapComponent.updateSchoolLocations(this.schoolLocations)
@@ -252,6 +319,7 @@ export class HomeOurImpactComponent
             console.log('Heatmap component not available yet')
           }
 
+          // Cumulative series for year-based charts (safe guards)
           let cumulativeSchools = 0
           let cumulativeMaleStudents = 0
           let cumulativeFemaleStudents = 0
@@ -263,59 +331,55 @@ export class HomeOurImpactComponent
           let cumulativeFemaleDirectors = 0
           let cumulativeTotalDirectors = 0
 
+          const years = Object.keys(merged.yearStats || {})
+
           this.yearStatsTeaschersChartData = [
             {
-              name: 'Male Teachers',
-              series: Object.keys(response.yearStats).map((year) => {
-                cumulativeMaleTeachers +=
-                  response.yearStats[year].totalMaleTeachers
+              name: this.translate.instant('Male Teachers'),
+              series: years.map((year) => {
+                cumulativeMaleTeachers += merged.yearStats[year].totalMaleTeachers || 0
                 return { name: year, value: cumulativeMaleTeachers }
               }),
             },
             {
-              name: 'Female Teachers',
-              series: Object.keys(response.yearStats).map((year) => {
-                cumulativeFemaleTeachers +=
-                  response.yearStats[year].totalFemaleTeachers
+              name: this.translate.instant('Female Teachers'),
+              series: years.map((year) => {
+                cumulativeFemaleTeachers += merged.yearStats[year].totalFemaleTeachers || 0
                 return { name: year, value: cumulativeFemaleTeachers }
               }),
             },
             {
-              name: 'Total Teachers',
-              series: Object.keys(response.yearStats).map((year) => {
+              name: this.translate.instant('Total Teachers'),
+              series: years.map((year) => {
                 cumulativeTotalTeachers +=
-                  response.yearStats[year].totalMaleTeachers +
-                  response.yearStats[year].totalFemaleTeachers
+                  (merged.yearStats[year].totalMaleTeachers || 0) +
+                  (merged.yearStats[year].totalFemaleTeachers || 0)
                 return { name: year, value: cumulativeTotalTeachers }
               }),
             },
           ]
 
-          // 📌 Cumulative calculation for Students (Male, Female & Total)
-
           this.yearStatsStudentsChartData = [
             {
-              name: 'Male Students',
-              series: Object.keys(response.yearStats).map((year) => {
-                cumulativeMaleStudents +=
-                  response.yearStats[year].totalMaleStudents
+              name: this.translate.instant('Male Students'),
+              series: years.map((year) => {
+                cumulativeMaleStudents += merged.yearStats[year].totalMaleStudents || 0
                 return { name: year, value: cumulativeMaleStudents }
               }),
             },
             {
-              name: 'Female Students',
-              series: Object.keys(response.yearStats).map((year) => {
-                cumulativeFemaleStudents +=
-                  response.yearStats[year].totalFemaleStudents
+              name: this.translate.instant('Female Students'),
+              series: years.map((year) => {
+                cumulativeFemaleStudents += merged.yearStats[year].totalFemaleStudents || 0
                 return { name: year, value: cumulativeFemaleStudents }
               }),
             },
             {
-              name: 'Total Students',
-              series: Object.keys(response.yearStats).map((year) => {
+              name: this.translate.instant('Total Students'),
+              series: years.map((year) => {
                 cumulativeTotalStudents +=
-                  response.yearStats[year].totalMaleStudents +
-                  response.yearStats[year].totalFemaleStudents
+                  (merged.yearStats[year].totalMaleStudents || 0) +
+                  (merged.yearStats[year].totalFemaleStudents || 0)
                 return { name: year, value: cumulativeTotalStudents }
               }),
             },
@@ -323,179 +387,142 @@ export class HomeOurImpactComponent
 
           this.yearStatsDirectorsChartData = [
             {
-              name: 'Male Directors',
-              series: Object.keys(response.yearStats).map((year) => {
-                cumulativeMaleDirectors +=
-                  response.yearStats[year].totalMaleDirectors
+              name: this.translate.instant('Male Directors'),
+              series: years.map((year) => {
+                cumulativeMaleDirectors += merged.yearStats[year].totalMaleDirectors || 0
                 return { name: year, value: cumulativeMaleDirectors }
               }),
             },
             {
-              name: 'Female Directors',
-              series: Object.keys(response.yearStats).map((year) => {
-                cumulativeFemaleDirectors +=
-                  response.yearStats[year].totalFemaleDirectors
+              name: this.translate.instant('Female Directors'),
+              series: years.map((year) => {
+                cumulativeFemaleDirectors += merged.yearStats[year].totalFemaleDirectors || 0
                 return { name: year, value: cumulativeFemaleDirectors }
               }),
             },
             {
-              name: 'Total Directors',
-              series: Object.keys(response.yearStats).map((year) => {
+              name: this.translate.instant('Total Directors'),
+              series: years.map((year) => {
                 cumulativeTotalDirectors +=
-                  response.yearStats[year].totalMaleDirectors +
-                  response.yearStats[year].totalFemaleDirectors
+                  (merged.yearStats[year].totalMaleDirectors || 0) +
+                  (merged.yearStats[year].totalFemaleDirectors || 0)
                 return { name: year, value: cumulativeTotalDirectors }
               }),
             },
           ]
 
-          // Prepare fee category data in both currencies
+          // Prepare fee category data in both currencies using merged metrics
           this.feeCategoryChartDataKES = [
-            { name: '0-5k KES', value: response.feeCategoryStats['0-5000'] },
-            {
-              name: '5k-10k KES',
-              value: response.feeCategoryStats['5001-10000'],
-            },
-            {
-              name: '10k-20k KES',
-              value: response.feeCategoryStats['10001-20000'],
-            },
-            { name: '>20k KES', value: response.feeCategoryStats['>20000'] },
+            { name: '0-5k KES', value: merged.feeCategoryStats['0-5000'] || 0 },
+            { name: '5k-10k KES', value: merged.feeCategoryStats['5001-10000'] || 0 },
+            { name: '10k-20k KES', value: merged.feeCategoryStats['10001-20000'] || 0 },
+            { name: '>20k KES', value: merged.feeCategoryStats['>20000'] || 0 },
           ]
 
           this.feeCategoryChartDataUSD = [
-            { name: '0-38 USD', value: response.feeCategoryStats['0-5000'] },
-            {
-              name: '38-77 USD',
-              value: response.feeCategoryStats['5001-10000'],
-            },
-            {
-              name: '77-154 USD',
-              value: response.feeCategoryStats['10001-20000'],
-            },
-            { name: '>154 USD', value: response.feeCategoryStats['>20000'] },
+            { name: '0-38 USD', value: merged.feeCategoryStats['0-5000'] || 0 },
+            { name: '38-77 USD', value: merged.feeCategoryStats['5001-10000'] || 0 },
+            { name: '77-154 USD', value: merged.feeCategoryStats['10001-20000'] || 0 },
+            { name: '>154 USD', value: merged.feeCategoryStats['>20000'] || 0 },
           ]
 
           // Set initial chart data based on selected currency
           this.updateFeeCategoryChartData()
 
-          // Calculate percentages
-          this.femaleDirectorPercentage = Math.round(
-            (response.directorsStat.female / response.directorsStat.total) *
-              100,
-          )
-          this.femaleTeacherPercentage = Math.round(
-            (response.totalFemaleTeachers / response.totalTeachers) * 100,
-          )
-          this.femaleStudentPercentage = Math.round(
-            (response.totalFemaleStudents / response.totalEnrolment) * 100,
-          )
+          // Calculate percentages with divide-by-zero guards
+          const totalDirectors = merged.directorsStat?.total || 0
+          this.femaleDirectorPercentage =
+            totalDirectors === 0 ? 0 : Math.round((merged.directorsStat?.female || 0) / totalDirectors * 100)
 
-          // Update Key Areas Chart Data
+          const totalTeachers = merged.totalTeachers || 0
+          this.femaleTeacherPercentage =
+            totalTeachers === 0 ? 0 : Math.round((merged.totalFemaleTeachers || 0) / totalTeachers * 100)
+
+          const totalEnrol = merged.totalEnrolment || 0
+          this.femaleStudentPercentage =
+            totalEnrol === 0 ? 0 : Math.round((merged.totalFemaleStudents || 0) / totalEnrol * 100)
+
+          // Update Key Areas Chart Data using merged metrics
           this.solarPowerData = [
-            {
-              name: 'KPLC Only',
-              value: response.powerConnectivityStats.schoolsWithKPLC,
-            },
-            {
-              name: 'Solar Only',
-              value: response.powerConnectivityStats.schoolsWithSolar,
-            },
-            {
-              name: 'Both Sources',
-              value: response.powerConnectivityStats.schoolsWithBoth,
-            },
-            {
-              name: 'No Power',
-              value: response.powerConnectivityStats.schoolsWithoutPowerSupply,
-            },
+            { name: 'KPLC Only', value: merged.powerConnectivityStats.schoolsWithKPLC },
+            { name: this.translate.instant('Solar Only'), value: merged.powerConnectivityStats.schoolsWithSolar },
+            { name: this.translate.instant('Both Sources'), value: merged.powerConnectivityStats.schoolsWithBoth },
+            { name: this.translate.instant('No Power'), value: merged.powerConnectivityStats.schoolsWithoutPowerSupply },
           ]
 
           this.waterConservationData = [
-            {
-              name: 'With Running Water',
-              value: response.runningWaterStats.schoolsWithRunningWater,
-            },
-            {
-              name: 'Without Running Water',
-              value: response.runningWaterStats.schoolsWithoutRunningWater,
-            },
+            { name: this.translate.instant('With Running Water'), value: merged.runningWaterStats.schoolsWithRunningWater },
+            { name: this.translate.instant('Without Running Water'), value: merged.runningWaterStats.schoolsWithoutRunningWater },
           ]
 
           this.teacherTrainingData = [
             {
-              name: 'Male Teachers',
-              series: Object.keys(response.yearStats).map((year) => ({
+              name: this.translate.instant('Male Teachers'),
+              series: years.map((year) => ({
                 name: year,
-                value: response.yearStats[year].totalMaleTeachers,
+                value: merged.yearStats[year].totalMaleTeachers || 0,
               })),
             },
             {
-              name: 'Female Teachers',
-              series: Object.keys(response.yearStats).map((year) => ({
+              name: this.translate.instant('Female Teachers'),
+              series: years.map((year) => ({
                 name: year,
-                value: response.yearStats[year].totalFemaleTeachers,
+                value: merged.yearStats[year].totalFemaleTeachers || 0,
               })),
             },
           ]
 
           this.studentPerformanceData = [
             {
-              name: 'Students Growth',
-              series: Object.keys(response.yearStats).map((year) => ({
+              name: this.translate.instant('Students Growth'),
+              series: years.map((year) => ({
                 name: year,
                 value:
-                  response.yearStats[year].totalMaleStudents +
-                  response.yearStats[year].totalFemaleStudents,
+                  (merged.yearStats[year].totalMaleStudents || 0) +
+                  (merged.yearStats[year].totalFemaleStudents || 0),
               })),
             },
           ]
 
           this.digitalAdoptionData = [
             {
-              name: 'Computer Lab Access',
+              name: this.translate.instant('Computer Lab Access'),
               series: [
                 {
-                  name: 'With Computer Lab',
-                  value: response.computerLabStats.schoolsWithComputerLab,
+                  name: this.translate.instant('With Computer Lab'),
+                  value: merged.computerLabStats.schoolsWithComputerLab,
                 },
                 {
-                  name: 'Without Computer Lab',
-                  value: response.computerLabStats.schoolsWithoutComputerLab,
+                  name: this.translate.instant('Without Computer Lab'),
+                  value: merged.computerLabStats.schoolsWithoutComputerLab,
                 },
               ],
             },
           ]
 
           this.techIntegrationData = [
-            {
-              name: 'With Computer Lab',
-              value: response.computerLabStats.schoolsWithComputerLab,
-            },
-            {
-              name: 'Without Computer Lab',
-              value: response.computerLabStats.schoolsWithoutComputerLab,
-            },
+            { name: this.translate.instant('With Computer Lab'), value: merged.computerLabStats.schoolsWithComputerLab },
+            { name: this.translate.instant('Without Computer Lab'), value: merged.computerLabStats.schoolsWithoutComputerLab },
           ]
 
           this.genderLeadershipData = [
-            { name: 'Female Directors', value: response.directorsStat.female },
-            { name: 'Male Directors', value: response.directorsStat.male },
+            { name: this.translate.instant('Female Directors'), value: merged.directorsStat.female || 0 },
+            { name: this.translate.instant('Male Directors'), value: merged.directorsStat.male || 0 },
           ]
 
           this.inclusionImpactData = [
             {
-              name: 'Male Students',
-              series: Object.keys(response.yearStats).map((year) => ({
+              name: this.translate.instant('Male Students'),
+              series: years.map((year) => ({
                 name: year,
-                value: response.yearStats[year].totalMaleStudents,
+                value: merged.yearStats[year].totalMaleStudents || 0,
               })),
             },
             {
-              name: 'Female Students',
-              series: Object.keys(response.yearStats).map((year) => ({
+              name: this.translate.instant('Female Students'),
+              series: years.map((year) => ({
                 name: year,
-                value: response.yearStats[year].totalFemaleStudents,
+                value: merged.yearStats[year].totalFemaleStudents || 0,
               })),
             },
           ]
@@ -508,9 +535,7 @@ export class HomeOurImpactComponent
 
   updateFeeCategoryChartData(): void {
     this.feeCategoryChartData =
-      this.selectedCurrency === 'USD'
-        ? this.feeCategoryChartDataUSD
-        : this.feeCategoryChartDataKES
+      this.selectedCurrency === 'USD' ? this.feeCategoryChartDataUSD : this.feeCategoryChartDataKES
   }
 
   onCurrencyChange(event: Event): void {

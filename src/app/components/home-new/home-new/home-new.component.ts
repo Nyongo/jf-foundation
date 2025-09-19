@@ -5,6 +5,7 @@ import { HeroSliderComponent } from '../hero-slider/hero-slider.component';
 import { ImpactStatsComponent } from '../impact-stats/impact-stats.component';
 import { KeyFocusComponent } from '../key-focus/key-focus.component';
 import { PartnersComponent } from '../partners/partners.component';
+import { HeaderComponent } from '../../header/header.component';
 
 interface ImpactStat { value: string; label: string; }
 
@@ -16,6 +17,7 @@ interface ImpactStat { value: string; label: string; }
     CommonModule,
     HeroSliderComponent,
     ImpactStatsComponent,
+    HeaderComponent,
     KeyFocusComponent,
     PartnersComponent,
     HttpClientModule

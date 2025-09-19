@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+:host {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  color: #1A363A;
+}
+
+// Form card wrapper
+.form-card {
+  margin-top: 2rem;
+}
+
+// Input / select fields
+.input-field {
+  padding: 0.75rem 1rem;
+  border: 1px solid #C7C7C7;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  color: #1A363A;
+  &::placeholder {
+    color: #C7C7C7;
+  }
+  &:focus {
+    outline: none;
+    border-color: #C7C7C7;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Buttons
+.btn-outline-blue {
+  border: 1px solid #1A363A;
+  color: #1A363A;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: background 0.2s, color 0.2s;
+  &:hover {
+    background: #1A363A;
+    color: white;
+  }
+}
+
+.btn-black {
+  background: #000;
+  color: #fff;
+  border-radius: 12px;
+  transition: background 0.2s;
+  &:hover {
+    background: #333;
+  }
+}
+
+// Error & Success
+.error-text {
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  color: #dc2626;
+  text-align: left;
+}
+
+.success-text {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #16a34a;
+}
+.invalid {
+  border-color: #dc2626 !important;
+}
