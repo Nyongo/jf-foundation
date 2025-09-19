@@ -7,7 +7,7 @@ import { FooterComponent } from './components/footer/footer.component'
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  imports: [HeaderComponent, FooterComponent, RouterModule]
+  imports: [ FooterComponent, RouterModule]
 })
 export class AppComponent {
   title = 'JackFruit Foundation'

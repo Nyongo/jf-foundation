@@ -7,6 +7,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms'
+import { HeaderComponent } from '../header/header.component'
 
 interface AmortizationRow {
   month: number
@@ -21,7 +22,7 @@ interface AmortizationRow {
   templateUrl: './loan-calculator.component.html',
   styleUrls: ['./loan-calculator.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, HeaderComponent],
 })
 export class LoanCalculatorComponent implements OnInit {
   loanForm: FormGroup

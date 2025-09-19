@@ -1,1 +1,557 @@
-<app-menus></app-menus>
+<header [class.scrolled]="isScrolled" class="w-full site-header">
+  <!-- Responsive grid: 2 columns on mobile, 4 on desktop -->
+  <div class="w-full grid grid-cols-2 md:grid-cols-4">
+    <!-- Column 1: Blue rectangle + Logo (left 50% on mobile, 1/4 on desktop) -->
+    <div
+      class="relative flex flex-col items-center justify-around h-[64px] md:h-[110px]"
+    >
+      <div
+        [class]="
+          isScrolled ? '' : 'hidden md:flex bg-[#48A225] w-full py-4 mb-6'
+        "
+      ></div>
+      <div class="relative flex items-center justify-center w-full h-full">
+        <img
+          [src]="
+            isScrolled
+              ? 'assets/images/logos/JF-foundation-logo-black.svg'
+              : 'assets/images/logos/JF-foundation-logo-white.svg'
+          "
+          alt="Jackfruit Network"
+          class="h-8 md:h-10 z-10 transition-all"
+          onerror="this.style.display='none'"
+        />
+      </div>
+
+      <div
+        *ngIf="pageName && pageName != 'Home'"
+        class="w-full py-2 px-4 flex md:hidden justify-center"
+      >
+        <nav
+          [class]="
+            !isScrolled
+              ? 'text-white text-xs font-semibold'
+              : 'text-black text-xs font-semibold'
+          "
+        >
+          <a href="/" class="hover:underline">Home</a>
+          <span class="mx-2">/</span>
+          <span>{{ pageName }}</span>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Column 2: Desktop nav/socials, Mobile hamburger -->
+    <div
+      class="col-span-1 md:col-span-3 flex flex-col justify-between bg-transparent mr-0 md:mr-8"
+    >
+      <!-- Desktop: Social icons & Language switcher -->
+      <div
+        class="hidden md:flex justify-end items-center w-full pt-3 pr-6 gap-4"
+      >
+        <div class="flex items-center gap-4">
+          <a
+            target="_blank"
+            href="https://www.facebook.com/jackfruitfinance/"
+            aria-label="Facebook"
+            ><img src="assets/images/icons/facebook.svg" class="h-5"
+          /></a>
+          <a
+            target="_blank"
+            href="https://www.linkedin.com/company/jackfruit-network"
+            aria-label="LinkedIn"
+          ><img src="assets/images/icons/linkedinIcon.png" class="h-6"
+            /></a>
+          <a
+            target="_blank"
+            href="https://www.youtube.com/channel/UCA002cRnUk2jFyz4TMGQxvg"
+            aria-label="YouTube"
+            ><img src="assets/images/icons/youtube.svg" class="h-5"
+          /></a>
+          <a
+            [href]="getWhatsAppUrl()"
+            [target]="isMobileDevice() ? '_self' : '_blank'"
+            aria-label="WhatsApp"
+            ><img src="assets/images/icons/whatsapp.svg" class="h-5"
+          /></a>
+          <a
+            target="_blank"
+            href="https://www.tiktok.com/@jackfruitnetwork?lang=en"
+            aria-label="TikTok"
+            ><img src="assets/images/icons/tiktok.svg" class="h-5"
+          /></a>
+          <a
+            target="_blank"
+            href="https://www.instagram.com/jackfruitnetwork/"
+            aria-label="Instagram"
+            ><img src="assets/images/icons/instagram.svg" class="h-5"
+          /></a>
+        </div>
+        <div class="flex items-center gap-1 ml-4">
+          <button
+            class="bg-[#0e2206] text-white text-xs px-2 py-1 rounded font-bold"
+            [class.opacity-60]="appTranslate.currentLang !== 'en'"
+            (click)="appTranslate.switchLang('en')"
+          >
+            ENG
+          </button>
+          <span class="text-white text-xs">|</span>
+          <button
+            class="bg-[#0e2206] text-white text-xs px-2 py-1 rounded font-bold"
+            [class.opacity-60]="appTranslate.currentLang !== 'kis'"
+            (click)="appTranslate.switchLang('kis')"
+          >
+            KIS
+          </button>
+        </div>
+      </div>
+      <!-- Desktop: Navigation bar -->
+      <div class="hidden md:flex justify-end items-center w-full mt-2">
+        <nav class="flex items-center h-12">
+          <ng-container *ngFor="let l of nav; let idx = index">
+            <a
+              [routerLink]="l.href"
+              class="nav-link flex items-center px-3 h-full text-white font-medium text-base relative"
+              [class.selected]="selectedNav === idx"
+              (click)="selectNav(idx)"
+            >
+              <span>{{ l.label | translate }}</span>
+              <!-- Underline (always visible) -->
+              <span
+                class="absolute left-0 bottom-0 w-full"
+                [ngClass]="{
+                  'border-b-4 border-white': selectedNav === idx,
+                  'border-b border-white/80': selectedNav !== idx
+                }"
+              ></span>
+            </a>
+          </ng-container>
+          <!-- Join Upskill Program button button with underline -->
+          <div class="relative flex items-center h-full">
+            <button
+              class="btn-signin ml-2 px-6 py-1 border border-white text-white font-semibold bg-transparent transition-colors duration-150"
+              [class.active]="joinUpskillProgramActive"
+              (mousedown)="joinUpskillProgramActive = true"
+              (mouseup)="joinUpskillProgramActive = false"
+              (mouseleave)="joinUpskillProgramActive = false"
+              (click)="openUpskillModal()"
+            >
+              {{ "Join Upskill Program" | translate }}
+            </button>
+             <!-- White underline under Sign In button  -->
+            <span
+              class="absolute left-0 bottom-0 w-full"
+              [ngClass]="{
+                'border-b-4 border-white': false,
+                'border-b border-white/80': true
+              }"
+            ></span>
+          </div>
+        </nav>
+      </div>
+      <!-- Mobile: Hamburger menu only -->
+      <div class="flex md:hidden justify-end items-center w-full h-full">
+        <button
+          aria-label="Open menu"
+          class="hamburger text-white text-3xl pr-4"
+          (click)="openMenu()"
+        >
+          ☰
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile popup menu (unchanged) -->
+  <div
+    *ngIf="menuOpen"
+    class="fixed inset-0 z-50 bg-black bg-opacity-95 flex flex-col items-start px-8 py-8 animate-fade-in"
+  >
+    <button
+      aria-label="Close menu"
+      class="absolute top-6 right-6 text-white text-2xl"
+      (click)="closeMenu()"
+    >
+      ✕
+    </button>
+    <nav class="flex flex-col gap-6 mt-8 w-full">
+      <ng-container *ngFor="let l of nav">
+        <a [href]="l.href" class="text-white text-lg font-medium">{{
+          l.label | translate
+        }}</a>
+      </ng-container>
+
+      <!-- Social Media Links for Mobile -->
+      <div class="flex flex-col gap-4 mt-4">
+        <h3 class="text-white text-sm font-semibold uppercase tracking-wide">
+          Follow Us
+        </h3>
+        <div class="flex gap-4">
+          <a
+            target="_blank"
+            href="https://www.facebook.com/jackfruitfinance/"
+            aria-label="Facebook"
+            class="text-white hover:text-gray-300 transition-colors"
+          >
+            <img
+              src="assets/images/icons/facebook.svg"
+              class="h-6 w-6"
+              alt="Facebook"
+            />
+          </a>
+          <a
+            target="_blank"
+            href="https://www.linkedin.com/company/jackfruit-network"
+            aria-label="LinkedIn"
+          ><img src="assets/images/icons/linkedinIcon.png" class="h-6"
+            /></a>
+          <a
+            target="_blank"
+            href="https://www.youtube.com/channel/UCA002cRnUk2jFyz4TMGQxvg"
+            aria-label="YouTube"
+            class="text-white hover:text-gray-300 transition-colors"
+          >
+            <img
+              src="assets/images/icons/youtube.svg"
+              class="h-6 w-6"
+              alt="YouTube"
+            />
+          </a>
+          <a
+            [href]="getWhatsAppUrl()"
+            [target]="isMobileDevice() ? '_self' : '_blank'"
+            aria-label="WhatsApp"
+            class="text-white hover:text-gray-300 transition-colors"
+          >
+            <img
+              src="assets/images/icons/whatsapp.svg"
+              class="h-6 w-6"
+              alt="WhatsApp"
+            />
+          </a>
+          <a
+            target="_blank"
+            href="https://www.tiktok.com/@jackfruitnetwork?lang=en"
+            aria-label="TikTok"
+            class="text-white hover:text-gray-300 transition-colors"
+          >
+            <img
+              src="assets/images/icons/tiktok.svg"
+              class="h-6 w-6"
+              alt="TikTok"
+            />
+          </a>
+          <a
+            target="_blank"
+            href="https://www.instagram.com/jackfruitnetwork/"
+            aria-label="Instagram"
+            class="text-white hover:text-gray-300 transition-colors"
+          >
+            <img
+              src="assets/images/icons/instagram.svg"
+              class="h-6 w-6"
+              alt="Instagram"
+            />
+          </a>
+        </div>
+      </div>
+
+      <button
+        class="border border-white text-white font-bold px-4 py-2 mt-4 bg-transparent"
+        [class.active]="joinUpskillProgramActive"
+        (mousedown)="joinUpskillProgramActive = true"
+        (mouseup)="joinUpskillProgramActive = false"
+        (mouseleave)="joinUpskillProgramActive = false"
+        (click)="openUpskillModal()"
+      >
+        {{ "Join Upskill Program" | translate }}
+      </button>
+    </nav>
+  </div>
+</header>
+
+<!-- JF Upskill Modal -->
+<div
+  *ngIf="isUpskillModalOpen"
+  class="fixed inset-0 z-50 mt-20 overflow-y-auto"
+  aria-labelledby="modal-title"
+  role="dialog"
+  aria-modal="true"
+>
+  <div
+    class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+  >
+    <!-- Background overlay -->
+    <div
+      class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+      (click)="closeUpskillModal()"
+    ></div>
+
+    <!-- Modal panel -->
+    <div
+      class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+    >
+      <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-2xl font-bold text-gray-900" id="modal-title">
+            {{"JF Upskill Program" | translate }}
+          </h3>
+          <button
+            (click)="closeUpskillModal()"
+            class="text-gray-500 hover:text-gray-700"
+          >
+            <i class="bx bx-x text-2xl"></i>
+          </button>
+        </div>
+
+        <!-- Program Info Step -->
+        <div *ngIf="modalStep === 'info'" class="space-y-6">
+          <div class="aspect-w-16 aspect-h-9 mb-6">
+            <img
+              src="assets/images/newsletter/3.jpg"
+              alt="JF Upskill Program"
+              class="w-full h-48 object-cover"
+            />
+          </div>
+
+          <div class="space-y-4">
+            <p class="text-gray-600">
+              {{"JF Upskill is the Foundation's flagship teacher training initiative designed to enhance the capacity of educators across our network. The program focuses on strengthening pedagogical skills, effective teaching practices, and classroom management; core components that directly impact student learning and overall education quality." | translate }}
+            </p>
+            <p class="text-gray-600">
+              {{"Through structured modules, expert-led workshops, and continuous feedback, JF Upskill empowers teachers to deliver high-impact learning experiences, adapt to diverse learner needs, and implement strategies that foster inclusive and engaged classrooms." | translate }}
+            </p>
+          </div>
+
+          <div class="flex justify-end">
+            <button
+              (click)="showRegistrationForm()"
+              class="px-6 py-3 text-sm font-medium text-white bg-[#48A225] hover:bg-[#6bfc32] transition-colors"
+            >
+              {{"Subscribe to Upskill Program" | translate }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Registration Form Step -->
+        <form
+          *ngIf="modalStep === 'form'"
+          [formGroup]="subscriptionForm"
+          (ngSubmit)="onSubmit()"
+          class="space-y-6"
+        >
+          <div>
+            <label
+              for="teacherName"
+              class="block text-sm font-medium text-gray-700 mb-1"
+            >
+              {{"Teacher's Name" | translate }}
+            </label>
+            <input
+              type="text"
+              id="teacherName"
+              formControlName="teacherName"
+              class="mt-1 block w-full px-4 py-2 rounded-md border shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              [ngClass]="{
+                'border-red-200': isFieldInvalid('teacherName'),
+                'border-gray-300': !isFieldInvalid('teacherName'),
+              }"
+              [placeholder]="'Enter your full name' | translate"
+            />
+            <div
+              *ngIf="isFieldInvalid('teacherName')"
+              class="text-red-200 text-xs mt-1 font-medium"
+            >
+              {{ getErrorMessage('teacherName') | translate }}
+            </div>
+          </div>
+
+          <div>
+            <label
+              for="schoolName"
+              class="block text-sm font-medium text-gray-700 mb-1"
+            >
+              {{"School Name" | translate }}
+            </label>
+            <input
+              type="text"
+              id="schoolName"
+              formControlName="schoolName"
+              class="mt-1 block w-full px-4 py-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              [ngClass]="{ 'border-red-200': isFieldInvalid('schoolName') }"
+              [placeholder]="'Enter your school name' | translate"
+            />
+            <div
+              *ngIf="isFieldInvalid('schoolName')"
+              class="text-red-200 text-xs mt-1 font-medium"
+            >
+              {{ getErrorMessage('schoolName') | translate}}
+            </div>
+          </div>
+
+          <div>
+            <label
+              for="teachingLevel"
+              class="block text-sm font-medium text-gray-700 mb-1"
+            >
+              {{"Class/Grades/Levels" | translate }}
+            </label>
+            <input
+              type="text"
+              id="teachingLevel"
+              formControlName="teachingLevel"
+              class="mt-1 block w-full px-4 py-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              [ngClass]="{ 'border-red-200': isFieldInvalid('teachingLevel') }"
+              [placeholder]="'e.g., Grade 1-3, Primary, Secondary' | translate"
+            />
+            <div
+              *ngIf="isFieldInvalid('teachingLevel')"
+              class="text-red-200 text-xs mt-1 font-medium"
+            >
+              {{ getErrorMessage('teachingLevel') | translate }}
+            </div>
+          </div>
+
+          <div>
+            <label
+              for="numberOfLearners"
+              class="block text-sm font-medium text-gray-700 mb-1"
+            >
+              {{"Number of Learners" | translate }}
+            </label>
+            <input
+              type="number"
+              id="numberOfLearners"
+              formControlName="numberOfLearners"
+              class="mt-1 block w-full px-4 py-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              [ngClass]="{
+                'border-red-200': isFieldInvalid('numberOfLearners'),
+              }"
+              [placeholder]="'Enter number of learners' | translate"
+            />
+            <div
+              *ngIf="isFieldInvalid('numberOfLearners')"
+              class="text-red-200 text-xs mt-1 font-medium"
+            >
+              {{ getErrorMessage('numberOfLearners') | translate }}
+            </div>
+          </div>
+
+          <div>
+            <label
+              for="yearsOfExperience"
+              class="block text-sm font-medium text-gray-700 mb-1"
+            >
+              {{"Years of Teaching Experience" | translate }}
+            </label>
+            <input
+              type="number"
+              id="yearsOfExperience"
+              formControlName="yearsOfExperience"
+              class="mt-1 block w-full px-4 py-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              [ngClass]="{
+                'border-red-200': isFieldInvalid('yearsOfExperience'),
+              }"
+              [placeholder]="'Enter years of experience' | translate"
+            />
+            <div
+              *ngIf="isFieldInvalid('yearsOfExperience')"
+              class="text-red-200 text-xs mt-1 font-medium"
+            >
+              {{ getErrorMessage('yearsOfExperience') | translate }}
+            </div>
+          </div>
+
+          <div>
+            <label
+              for="email"
+              class="block text-sm font-medium text-gray-700 mb-1"
+            >
+              {{"Email Address" | translate }}
+            </label>
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              class="mt-1 block w-full px-4 py-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              [ngClass]="{ 'border-red-200': isFieldInvalid('email') }"
+              [placeholder]="'Enter your email address' | translate"
+            />
+            <div
+              *ngIf="isFieldInvalid('email')"
+              class="text-red-200 text-xs mt-1 font-medium"
+            >
+              {{ getErrorMessage('email') |translate}}
+            </div>
+          </div>
+
+          <div>
+            <label
+              for="phoneNumber"
+              class="block text-sm font-medium text-gray-700 mb-1"
+            >
+              {{"Phone Number" | translate }}
+            </label>
+            <input
+              type="tel"
+              id="phoneNumber"
+              formControlName="phoneNumber"
+              class="mt-1 block w-full px-4 py-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              [ngClass]="{ 'border-red-200': isFieldInvalid('phoneNumber') }"
+              [placeholder]="'Enter your 10-digit phone number' | translate"
+            />
+            <div
+              *ngIf="isFieldInvalid('phoneNumber')"
+              class="text-red-200 text-xs mt-1 font-medium"
+            >
+              {{ getErrorMessage('phoneNumber') | translate }}
+            </div>
+          </div>
+
+          <div class="flex justify-end gap-4 mt-6">
+            <button
+              type="button"
+              (click)="closeUpskillModal()"
+              class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              {{"Cancel" | translate }}
+            </button>
+            <button
+              type="submit"
+              [disabled]="!subscriptionForm.valid || isSubmitting"
+              class="px-4 py-2 text-sm font-medium text-white bg-[#48A225] border border-transparent hover:bg-[#6bfc32] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <span *ngIf="!isSubmitting">{{"Subscribe" | translate }}</span>
+              <span *ngIf="isSubmitting" class="flex items-center">
+                <svg
+                  class="w-5 h-5 mr-2 animate-spin"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    class="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    stroke-width="4"
+                  ></circle>
+                  <path
+                    class="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+                {{"Submitting..." | translate }}
+              </span>
+            </button>
+          </div>
+
+          <div *ngIf="success" class="text-[#48A225] font-semibold mt-4 text-center">{{"Thank you! Your message has been sent." | translate}}</div>
+          <div *ngIf="errorOccurred" class="text-[#f31010] font-semibold mt-4 text-center">{{"An error has occured while sending the message. Please try again later" | translate }}</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

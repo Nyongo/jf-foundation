@@ -1,97 +1,80 @@
-import { Component } from '@angular/core'
-import { ServiceHeaderComponent } from '../service-header/service-header.component'
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  ReactiveFormsModule,
-} from '@angular/forms'
-import { HttpClient, HttpClientModule } from '@angular/common/http'
-import { CommonModule } from '@angular/common'
-import { EmailService } from '../../services/email.service'
-
-interface ContactFormData {
-  name: string
-  email: string
-  subject: string
-  message: string
-}
+import { CommonModule } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ContactUsService } from '../../services/jf-network-contact-page.service';
+import { HttpClientModule } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
+import { SEOService } from '../../services/seo.service';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-contact-us',
-  standalone: true,
+  imports: [CommonModule, HeaderComponent, ReactiveFormsModule, TranslateModule, HttpClientModule],
   templateUrl: './contact-us.component.html',
-  styleUrl: './contact-us.component.scss',
-  imports: [
-    ServiceHeaderComponent,
-    ReactiveFormsModule,
-    CommonModule,
-    HttpClientModule,
-  ],
-  providers: [HttpClient],
+  styleUrl: './contact-us.component.scss'
 })
-export class ContactUsComponent {
-  contactForm: FormGroup
-  isSubmitting = false
-  submitSuccess = false
-  submitError = false
+export class ContactUsComponent implements OnInit {
+  @Input() messageType: 'PARTNER' | 'ENQUIRY' | 'NORMAL' = 'NORMAL';
+  @Input() platform: 'JF_NETWORK' | 'JF_FOUNDATION' | 'JF_FINANCE' | 'JF_HUB' = 'JF_FOUNDATION';
+  pageName = 'Contact Us';
+
+  form!: FormGroup;
+  submitted = false;
+  
+  success = false;
+  errorOccurred = false;
+
+  loading = false;
+  
 
   constructor(
-    private fb: FormBuilder,
-    private http: HttpClient,
-    private emailService: EmailService,
-  ) {
-    this.contactForm = this.fb.group({
-      name: ['', [Validators.required]],
+    private fb: FormBuilder, 
+    private contactUsService: ContactUsService,
+    private seoService: SEOService
+  ) {}
+
+  ngOnInit() {
+    this.form = this.fb.group({
+      name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      subject: ['', [Validators.required]],
-      message: ['', [Validators.required]],
-    })
+      subject: ['', Validators.required],
+      message: ['', Validators.required],
+    });
+    this.success = false;
+    this.errorOccurred = false;
+
+    
+    this.seoService.updateSEO(this.seoService.getContactPageSEO());
   }
 
-  onSubmit(): void {
-    if (this.contactForm.valid) {
-      this.isSubmitting = true
-      const formData: ContactFormData = {
-        name: this.contactForm.get('name')?.value || '',
-        email: this.contactForm.get('email')?.value || '',
-        subject: this.contactForm.get('subject')?.value || '',
-        message: this.contactForm.get('message')?.value || '',
+  get title() {
+    return this.messageType === 'PARTNER' ? 'Partner With Us' : 'Contact Us';
+  }
+
+  submit() {
+    this.submitted = true;
+    if (this.form.invalid) return;
+
+    const payload = {
+      ...this.form.value,
+      messageType: this.messageType,
+      platform: this.platform,
+    };
+    this.loading = true;
+
+    this.contactUsService.sendMessage(payload).subscribe({
+      next: () => {
+        this.success = true;
+        this.loading = false;
+        this.form.reset();
+        this.submitted = false;
+      },
+      error: (err) => {
+        this.success = false;
+        this.loading = false;
+        this.errorOccurred = true;
+        console.error('Error sending message', err);
       }
-
-      const payload = { ...formData, type: 'contact-us' }
-      this.emailService.sendEmail(payload).subscribe({
-        next: (response) => {
-          console.log('Email sent successfully:', response)
-          this.submitSuccess = true
-          this.contactForm.reset()
-          this.isSubmitting = false
-        },
-        error: (error) => {
-          console.error('Error sending email:', error)
-          this.isSubmitting = false
-        },
-      })
-    }
-  }
-
-  isFieldInvalid(fieldName: string): boolean {
-    const control = this.contactForm.get(fieldName)
-    return control
-      ? control.invalid && (control.dirty || control.touched)
-      : false
-  }
-
-  getErrorMessage(fieldName: string): string {
-    const control = this.contactForm.get(fieldName)
-    if (!control) return ''
-
-    if (control.hasError('required')) {
-      return 'This field is required'
-    }
-    if (control.hasError('email')) {
-      return 'Please enter a valid email address'
-    }
-    return ''
+    });
   }
 }

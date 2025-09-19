@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { RouterModule, Router } from '@angular/router'
 import {
@@ -7,46 +7,23 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms'
+import { HeaderComponent } from '../header/header.component'
+import { TranslateModule } from '@ngx-translate/core'
+import { ContactUsService } from '../../services/jf-network-contact-page.service'
 
 @Component({
   selector: 'app-newsletter',
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, HeaderComponent, TranslateModule],
   templateUrl: './newsletter.component.html',
   styleUrls: ['./newsletter.component.scss'],
 })
-export class NewsletterComponent {
-  newsletterForm: FormGroup
-  submitted = false
-  success = false
-
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-  ) {
-    this.newsletterForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
-      email: ['', [Validators.required, Validators.email]],
-      organization: [''],
-      interests: ['', Validators.required],
-    })
-  }
-
-  get f() {
-    return this.newsletterForm.controls
-  }
-
-  onSubmit() {
-    this.submitted = true
-    if (this.newsletterForm.valid) {
-      console.log(this.newsletterForm.value)
-      this.success = true
-    }
-  }
-
-  viewNewsletter(id: string) {
-    this.router.navigate(['/newsletter', id])
-  }
+export class NewsletterComponent implements OnInit{
+  newsletterForm!: FormGroup
+  submitted = false;
+  success = false;
+  errorOccurred = false;
+  loading = false;
 
   newsletters = [
     {
@@ -77,4 +54,58 @@ export class NewsletterComponent {
       category: 'Partnerships',
     },
   ]
+
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private contactUsService: ContactUsService
+  ) {}
+
+  ngOnInit(): void {
+    this.newsletterForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      organization: [''],
+      interests: ['', Validators.required],
+    });
+
+    this.success = false;
+    this.errorOccurred = false;
+  }
+
+  get f() {
+    return this.newsletterForm.controls
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    if (this.newsletterForm.invalid) return;
+
+    const payload = {
+      ...this.newsletterForm.value,
+      platform: 'JF_FOUNDATION'
+    };
+    this.loading = true;
+
+    this.contactUsService.sendNewsletterSubscription(payload).subscribe({
+      next: () => {
+        this.success = true;
+        this.loading = false;
+        this.newsletterForm.reset();
+        this.submitted = false;
+        this.errorOccurred = false;
+      },
+      error: (err) => {
+        this.success = false;
+        this.loading = false;
+        this.errorOccurred = true;
+        console.error('Error sending message', err);
+      }
+    })
+  }
+
+  viewNewsletter(id: string) {
+    this.router.navigate(['/newsletter', id])
+  }
+
 }

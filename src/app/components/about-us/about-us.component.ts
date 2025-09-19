@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HeaderComponent } from '../header/header.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 interface AboutStats {
   label: string;
@@ -9,7 +11,7 @@ interface AboutStats {
 @Component({
   selector: 'app-about-us',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HeaderComponent, TranslateModule],
   templateUrl: './about-us.component.html',
 })
 export class AboutUsComponent implements OnInit {

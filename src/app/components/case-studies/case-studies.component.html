@@ -1,3 +1,5 @@
+<app-header [pageName] = "'Case Studies'"></app-header>
+
 <section class="case-banner relative w-full h-[300px] md:h-[400px] overflow-hidden">
   <img
     [src]="banner.imageUrl"
@@ -7,8 +9,8 @@
   <div
     class="absolute inset-0 bg-black/10 flex flex-col items-center justify-center text-center px-4 font-montserrat text-white"
   >
-    <span class="text-sm uppercase font-bold text-[#EEB100] tracking-wider">{{ banner.eyebrow }}</span>
-    <h1 class="mt-2 text-2xl md:text-4xl font-bold">{{ banner.headline }}</h1>
+    <span class="text-sm uppercase font-bold text-[#EEB100] tracking-wider">{{ banner.eyebrow | translate }}</span>
+    <h1 class="mt-2 text-2xl md:text-4xl font-bold">{{ banner.headline | translate }}</h1>
   </div>
 </section>
 
@@ -20,19 +22,19 @@
     >
       <!-- Text Column -->
       <div class="md:flex-1 space-y-4">
-        <h2 class="text-2xl md:text-3xl font-bold">{{ cs.title }}</h2>
-        <p class="text-gray-700">{{ cs.description }}</p>
+        <h2 class="text-2xl md:text-3xl font-bold">{{ cs.title | translate }}</h2>
+        <p class="text-gray-700">{{ cs.description | translate}}</p>
         <div class="flex flex-wrap gap-6 mt-4">
           <div *ngFor="let st of cs.stats" class="text-center">
-            <div class="text-3xl font-bold text-[#1A363A]">{{ st.value }}</div>
-            <div class="text-sm text-gray-600">{{ st.label }}</div>
+            <div class="text-3xl font-bold text-[#48A225]">{{ st.value }}</div>
+            <div class="text-sm text-gray-600">{{ st.label | translate}}</div>
           </div>
         </div>
         <a
           (click)="goTo(cs.link)"
-          class="inline-block cursor-pointer mt-6 px-6 py-2 border-2 border-[#1A363A] text-[#1A363A] font-semibold"
+          class="inline-block cursor-pointer mt-6 px-6 py-2 border-2 border-[#48A225] text-[#48A225] font-semibold"
         >
-          Read More
+          {{"Read More" | translate }}
         </a>
       </div>
 
@@ -40,7 +42,7 @@
       <div class="md:flex-1">
         <img
           [src]="cs.imageUrl"
-          [alt]="cs.title"
+          [alt]="cs.title | translate"
           class="w-full rounded-lg shadow-lg object-cover"
         />
       </div>
@@ -51,16 +53,16 @@
   <!-- Learn More CTA -->
   <section class="bg-gray-50 py-16 text-center">
     <h3 class="text-2xl font-semibold text-[#1A363A] mb-4">
-      Want to Learn More?
+      {{"Want to Learn More?" | translate }}
     </h3>
     <p class="text-gray-600 mb-6">
-      Discover how we can help transform education in your community through our proven programs and initiatives.
+      {{"Discover how we can help transform education in your community through our proven programs and initiatives." | translate }}
     </p>
     <a
       (click)="goTo('contact-us')"
-      class="cursor-pointer inline-block bg-[#4EABBA] text-white px-8 py-3 font-semibold"
+      class="cursor-pointer inline-block bg-[#48A225] text-white px-8 py-3 font-semibold"
     >
-      Talk To Us
+      {{"Talk To Us" | translate }}
     </a>
   </section>
 </main>

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 export interface ImpactStat {
   value: string;
@@ -11,7 +12,7 @@ export interface ImpactStat {
   selector: 'app-impact-stats',
   standalone: true,
   templateUrl: './impact-stats.component.html',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TranslateModule],
   styleUrls: ['./impact-stats.component.scss']
 })
 export class ImpactStatsComponent {
