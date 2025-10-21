@@ -62,19 +62,18 @@ export class ContactUsComponent implements OnInit {
     };
     this.loading = true;
 
-    this.contactUsService.sendMessage(payload).subscribe({
-      next: () => {
+    this.contactUsService.sendMessageAndEmail(payload)
+      .then((response) => {
         this.success = true;
         this.loading = false;
         this.form.reset();
         this.submitted = false;
-      },
-      error: (err) => {
+      })
+      .catch((error) => {
         this.success = false;
         this.loading = false;
         this.errorOccurred = true;
-        console.error('Error sending message', err);
-      }
-    });
+        console.error('Error sending message', error);
+      });
   }
 }

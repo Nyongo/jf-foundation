@@ -173,22 +173,22 @@ export class HeaderComponent implements OnInit {
           timestamp: new Date().toISOString(),
         }
         const payload = { ...formData, type: 'upskill-registration', platform: 'JF_FOUNDATION' }
-        this.contactUsService.sendJoinUpskillApplication(payload).subscribe({
-          next: (response) => {
+
+        this.contactUsService.sendJoinUpskillAndEmail(payload)
+          .then((response) => {
             console.log('Email sent successfully:', response)
             this.closeUpskillModal()
             this.subscriptionForm.reset()
             this.isSubmitting = false;
             this.success = true;
             this.errorOccurred = false;
-          },
-          error: (error) => {
+          })
+          .catch((error => {
             this.success = false;
             this.errorOccurred = true;
             this.isSubmitting = false;
             console.error('Error sending email:', error)
-          },
-        })
+          }))
       }
     }
   
